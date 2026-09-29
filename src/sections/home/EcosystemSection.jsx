@@ -189,3 +189,9 @@ const EcosystemSection = () => {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+};
+
+export default EcosystemSection;
