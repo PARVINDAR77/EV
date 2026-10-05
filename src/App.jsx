@@ -18,6 +18,8 @@ import ACChargers from './pages/products/ACChargers';
 import DCChargers from './pages/products/DCChargers';
 import Software from './pages/products/Software';
 import Accessories from './pages/products/Accessories';
+import Calculator from './pages/Calculator';
+import ProductPage from './pages/ProductPage';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -45,6 +47,8 @@ const AnimatedRoutes = () => {
         <Route path="/products/dc-chargers" element={<DCChargers />} />
         <Route path="/products/software" element={<Software />} />
         <Route path="/products/accessories" element={<Accessories />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/calculator" element={<Calculator />} />
         {/* Other routes will go here */}
       </Routes>
     </AnimatePresence>

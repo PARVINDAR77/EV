@@ -7,7 +7,13 @@ import resImg from '../../assets/images/residential.jpg';
 import workImg from '../../assets/images/workplace.jpg';
 import commImg from '../../assets/images/commercial.jpg';
 import fleetImg from '../../assets/images/fleet.jpg';
-import highImg from '../../assets/images/highway.jpg';
+import highImg from '../../assets/images/WhatsApp Image 2026-10-05 at 4.24.45 PM (1).jpeg';
+
+const Watermark = () => (
+  <div className="absolute top-6 right-6 z-[30] flex flex-col items-end opacity-80 transition-opacity duration-500 pointer-events-none">
+    <img src="/logo.png" alt="Axion Charge Logo" className="h-6 sm:h-8 w-auto object-contain mix-blend-screen drop-shadow-lg" />
+  </div>
+);
 
 const solutions = [
   {
@@ -48,7 +54,9 @@ const solutions = [
     subtitle: 'Long Distance Corridors',
     description: 'High-power infrastructure enabling cross-country travel with reliable, rapid charging at strategic highway nodes.',
     icon: Map,
-    image: highImg
+    image: highImg,
+    imageClass: 'w-full h-full object-cover object-center brightness-150 contrast-110',
+    hideWatermark: true
   }
 ];
 
@@ -88,8 +96,9 @@ const ChargingSolutionsSection = () => {
         <div className="flex flex-col gap-6">
           {solutions.map((sol) => (
             <div key={sol.id} className="relative rounded-xl overflow-hidden h-[260px] border border-white/5">
-              <img src={sol.image} alt={sol.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708] via-[#050708]/40 to-transparent" />
+              <img src={sol.image} alt={sol.title} className={`absolute inset-0 ${sol.imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}`} />
+              {!sol.hideWatermark && <Watermark />}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5">
                 <span className="block font-mono text-[0.6rem] text-[#00E32C] uppercase tracking-widest mb-1">{sol.subtitle}</span>
                 <h3 className="text-white font-display font-bold text-[1.2rem]">{sol.title}</h3>
@@ -162,7 +171,7 @@ const ChargingSolutionsSection = () => {
           </div>
 
           {/* Right Column: Large Cinematic Visual */}
-          <div className="w-full lg:w-7/12 relative rounded-xl overflow-hidden bg-[#0B0F12] border border-white/5 h-[40vh] md:h-[60vh] lg:h-[80vh]">
+          <div className="w-full lg:w-7/12 relative rounded-xl overflow-hidden bg-[#0B0F12] border border-white/5 aspect-video flex-shrink-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -175,12 +184,14 @@ const ChargingSolutionsSection = () => {
                 <img 
                   src={solutions[activeTab].image} 
                   alt={solutions[activeTab].title} 
-                  className="w-full h-full object-cover opacity-80"
+                  className={solutions[activeTab].imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}
                 />
                 
+                {!solutions[activeTab].hideWatermark && <Watermark />}
+                
                 {/* Gradients for depth and legibility */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050708] via-[#050708]/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#050708]/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/50 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#050708]/50 via-transparent to-transparent" />
                 
                 {/* HUD Overlay Elements */}
                 <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 flex flex-col">

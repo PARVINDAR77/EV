@@ -85,12 +85,12 @@ const Card = ({ image, badge, icon: Icon, title, desc, delay, span, height }) =>
     <img
       src={image}
       alt={title}
-      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110 opacity-50 group-hover:opacity-70"
+      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110 opacity-80 group-hover:opacity-100 group-hover:brightness-110"
     />
 
-    {/* Dark gradient overlays */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-[#020403]/70 to-[#020403]/20" />
-    <div className="absolute inset-0 bg-gradient-to-r from-[#020403]/60 to-transparent" />
+    {/* Dark gradient overlays - reduced to let image shine through */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-[#020403]/50 to-transparent" />
+    <div className="absolute inset-0 bg-gradient-to-r from-[#020403]/40 to-transparent" />
 
     {/* Neon border glow on hover */}
     <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 group-hover:ring-[#00FF3C]/40 transition-all duration-500" />
@@ -155,22 +155,31 @@ const WhyAxionSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-[2.5rem] sm:text-[4rem] md:text-[5.5rem] font-display font-bold text-white uppercase tracking-tighter leading-[0.9]"
+              className="text-[clamp(2.5rem,8vw,5.5rem)] font-display font-bold text-white uppercase tracking-tighter leading-[0.9]"
             >
-              WHY <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-white/40">AXION.</span>
+              WHY
+              <div className="mt-0 md:mt-2 flex justify-start -ml-2 md:-ml-4">
+                <img 
+                  src="/logo.png" 
+                  alt="Axion Logo" 
+                  className="h-28 sm:h-36 md:h-52 lg:h-[300px] w-auto object-contain mix-blend-screen drop-shadow-[0_0_20px_rgba(0,255,60,0.4)]"
+                  style={{ clipPath: 'inset(20% 0 46% 0)', marginBottom: '-22%', marginTop: '-12%' }}
+                />
+              </div>
             </motion.h2>
           </div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[1rem] text-[#9CA3AF] font-sans max-w-[420px] leading-relaxed lg:text-right"
+            className="lg:max-w-[480px]"
           >
-            Technology, trust, and industrial-grade experience — built for the uncompromising future of mobility.
-          </motion.p>
+            <p className="text-[1.05rem] md:text-[1.15rem] text-[#B0B0B0] font-sans leading-relaxed border-l-2 border-[#00FF3C]/50 pl-6">
+              Technology, trust, and industrial-grade experience — built for the uncompromising future of mobility.
+            </p>
+          </motion.div>
         </div>
 
         {/* 6-Card Grid — all with unique images */}

@@ -102,7 +102,7 @@ const EcosystemSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-display font-bold uppercase tracking-tight mb-6 leading-[1.1]"
+            className="text-[clamp(2rem,6vw,4.5rem)] font-display font-bold uppercase tracking-tight mb-6 leading-[1.1]"
           >
             <span className="text-white">ONE ENERGY</span><br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-[#00FF3C]/60 drop-shadow-[0_0_20px_rgba(0,255,60,0.3)]">ECOSYSTEM.</span>
@@ -171,7 +171,7 @@ const EcosystemSection = () => {
         </div>
 
         {/* Mobile fallback grid */}
-        <div className="grid grid-cols-2 gap-6 md:hidden mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:hidden mt-4">
           {[
             { icon: Home, title: 'HOME', description: 'Charging at your home' },
             { icon: Truck, title: 'FLEET', description: 'Keeping fleets moving' },

@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { MapPin, Zap, ShieldCheck } from 'lucide-react';
 import { ComposableMap, Geographies, Geography, Marker, Line } from 'react-simple-maps';
+import createGlobe from 'cobe';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -26,38 +27,38 @@ const FeatureItem = ({ icon: Icon, title, description, delay }) => (
 );
 
 const cities = [
-  { name: "DELHI", coordinates: [77.2090, 28.6139], isHub: true },
-  { name: "MUMBAI", coordinates: [72.8777, 19.0760], isHub: true },
-  { name: "BENGALURU", coordinates: [77.5946, 12.9716], isHub: true },
-  { name: "CHENNAI", coordinates: [80.2707, 13.0827], isHub: false },
-  { name: "KOLKATA", coordinates: [88.3639, 22.5726], isHub: false },
-  { name: "AHMEDABAD", coordinates: [72.5714, 23.0225], isHub: false },
-  { name: "HYDERABAD", coordinates: [78.4867, 17.3850], isHub: false },
-  { name: "PUNE", coordinates: [73.8567, 18.5204], isHub: false }
+  { name: "DELHI", coordinates: [77.2090, 28.6139], isHub: true, delay: 0.5 },
+  { name: "AHMEDABAD", coordinates: [72.5714, 23.0225], isHub: false, delay: 1.0 },
+  { name: "MUMBAI", coordinates: [72.8777, 19.0760], isHub: true, delay: 1.5 },
+  { name: "PUNE", coordinates: [73.8567, 18.5204], isHub: false, delay: 2.0 },
+  { name: "BENGALURU", coordinates: [77.5946, 12.9716], isHub: true, delay: 2.5 },
+  { name: "CHENNAI", coordinates: [80.2707, 13.0827], isHub: false, delay: 3.0 },
+  { name: "HYDERABAD", coordinates: [78.4867, 17.3850], isHub: false, delay: 3.0 },
+  { name: "KOLKATA", coordinates: [88.3639, 22.5726], isHub: false, delay: 3.5 }
 ];
 
 const lines = [
-  { from: "DELHI", to: "AHMEDABAD" },
-  { from: "AHMEDABAD", to: "MUMBAI" },
-  { from: "MUMBAI", to: "PUNE" },
-  { from: "PUNE", to: "BENGALURU" },
-  { from: "BENGALURU", to: "CHENNAI" },
-  { from: "BENGALURU", to: "HYDERABAD" },
-  { from: "HYDERABAD", to: "DELHI" },
-  { from: "HYDERABAD", to: "KOLKATA" }
+  { from: "DELHI", to: "AHMEDABAD", delay: 0.5 },
+  { from: "AHMEDABAD", to: "MUMBAI", delay: 1.0 },
+  { from: "MUMBAI", to: "PUNE", delay: 1.5 },
+  { from: "PUNE", to: "BENGALURU", delay: 2.0 },
+  { from: "BENGALURU", to: "CHENNAI", delay: 2.5 },
+  { from: "BENGALURU", to: "HYDERABAD", delay: 2.5 },
+  { from: "HYDERABAD", to: "DELHI", delay: 3.0 },
+  { from: "HYDERABAD", to: "KOLKATA", delay: 3.0 }
 ];
 
 const AccurateIndiaMap = () => {
   return (
-    <div className="relative w-full h-[600px] md:h-[700px] flex items-center justify-center">
+    <div className="relative w-full h-[400px] md:h-[700px] flex items-center justify-center">
       
       {/* Intense Core Glow behind map */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,227,44,0.08)_0%,transparent_60%)] pointer-events-none" />
 
       {/* Map Container */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="w-full h-full relative"
@@ -70,8 +71,20 @@ const AccurateIndiaMap = () => {
           }}
           className="w-full h-full filter drop-shadow-[0_0_20px_rgba(0,227,44,0.3)]"
         >
-          {/* SVG Definitions for Map Fill Pattern */}
+          {/* SVG Definitions for Map Fill Pattern and Animations */}
           <defs>
+            <style>
+              {`
+                @keyframes drawLine {
+                  0% { stroke-dasharray: 0 1000; }
+                  100% { stroke-dasharray: 1000 1000; }
+                }
+                @keyframes fadeLine {
+                  0% { stroke-opacity: 0; }
+                  100% { stroke-opacity: 0.15; }
+                }
+              `}
+            </style>
             <pattern id="techGrid" width="6" height="6" patternUnits="userSpaceOnUse">
               <path d="M 6 0 L 0 0 0 6" fill="none" stroke="rgba(0,227,44,0.15)" strokeWidth="0.5" />
             </pattern>
@@ -111,37 +124,41 @@ const AccurateIndiaMap = () => {
             const fromCity = cities.find(c => c.name === line.from);
             const toCity = cities.find(c => c.name === line.to);
             return (
-              <motion.g key={`line-${i}`} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 1 + (i * 0.1), duration: 1 }}>
+              <g key={`line-${i}`}>
                 {/* Thick glow line behind */}
                 <Line
                   from={fromCity.coordinates}
                   to={toCity.coordinates}
                   stroke="#00E32C"
                   strokeWidth={4}
-                  strokeOpacity={0.1}
+                  strokeOpacity={0} // Start hidden
                   className="filter blur-[2px]"
+                  style={{
+                    animation: `fadeLine 1s ease-out ${line.delay + 0.5}s forwards`
+                  }}
                 />
-                {/* Dashed tech line */}
+                {/* Solid Tracing Line */}
                 <Line
                   from={fromCity.coordinates}
                   to={toCity.coordinates}
                   stroke="url(#lineGradient)"
                   strokeWidth={1.5}
-                  strokeDasharray="4 6"
-                  className="animate-[dash_20s_linear_infinite]"
+                  strokeDasharray="0 1000" // Start with 0 visible length
+                  style={{
+                    animation: `drawLine 1.2s ease-out ${line.delay}s forwards`
+                  }}
                 />
-              </motion.g>
+              </g>
             );
           })}
 
           {/* City Nodes */}
-          {cities.map(({ name, coordinates, isHub }, i) => (
+          {cities.map(({ name, coordinates, isHub, delay }, i) => (
             <Marker key={name} coordinates={coordinates}>
               <motion.g
                 initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + (i * 0.1), type: "spring", bounce: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: delay, type: "spring", bounce: 0.5, duration: 0.8 }}
               >
                 {/* Radar Pulse for Hubs */}
                 {isHub && (
@@ -173,6 +190,106 @@ const AccurateIndiaMap = () => {
           ))}
         </ComposableMap>
       </motion.div>
+    </div>
+  );
+};
+
+import { Sphere, Graticule } from 'react-simple-maps';
+
+const GlobeToMapSequence = () => {
+  const containerRef = useRef(null);
+  const inView = useInView(containerRef, { once: true, amount: 0.4 });
+  
+  const [phase, setPhase] = useState('idle'); // idle -> spinning -> zooming -> map
+  const [rotation, setRotation] = useState(-50); // Start rotation
+  
+  useEffect(() => {
+    if (inView && phase === 'idle') {
+      setPhase('spinning');
+      // Spin for 2 seconds
+      setTimeout(() => setPhase('zooming'), 2000);
+      // Zoom takes exactly 2.5 seconds. Switch to map at exactly 4.5 seconds.
+      setTimeout(() => setPhase('map'), 4500); 
+    }
+  }, [inView, phase]);
+
+  // Handle the robust SVG Globe rotation
+  useEffect(() => {
+    let r = rotation;
+    let animationFrame;
+
+    const animate = () => {
+      if (phase === 'idle' || phase === 'spinning') {
+        r -= 0.5; // Spin slowly
+        setRotation(r);
+        animationFrame = requestAnimationFrame(animate);
+      } else if (phase === 'zooming') {
+        // India's precise longitude for centering the orthographic projection
+        r += (-79 - r) * 0.04; 
+        setRotation(r);
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [phase]);
+
+  return (
+    <div ref={containerRef} className="relative w-full h-[400px] md:h-[700px] flex items-center justify-center">
+      
+      {/* 100% Robust SVG Globe Layer */}
+      <motion.div
+        initial={{ scale: 1, opacity: 1 }}
+        animate={{
+          scale: phase === 'map' ? 12 : (phase === 'zooming' ? 12 : 1),
+          opacity: phase === 'map' ? 0 : 1,
+        }}
+        transition={{
+          scale: { duration: 2.5, ease: "easeInOut" },
+          opacity: { duration: 1.5 } // Smooth, lingering fade out
+        }}
+        className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
+      >
+        <div className="w-full max-w-[500px] aspect-square drop-shadow-[0_0_30px_rgba(0,227,44,0.3)]">
+          <ComposableMap
+            projection="geoOrthographic"
+            projectionConfig={{
+              rotate: [rotation, -22, 0], // Latitude roughly 22 for India center
+              scale: 240
+            }}
+            className="w-full h-full"
+          >
+            <Sphere stroke="#00E32C" strokeWidth={1} fill="rgba(0,227,44,0.02)" />
+            <Graticule stroke="#00E32C" strokeWidth={0.5} strokeOpacity={0.2} />
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill="#1F2937"
+                    stroke="#00E32C"
+                    strokeWidth={0.5}
+                    style={{ default: { outline: "none" } }}
+                  />
+                ))
+              }
+            </Geographies>
+          </ComposableMap>
+        </div>
+      </motion.div>
+
+      {/* 2D Map Layer - Pre-mounts but stays hidden until phase === 'map' */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase === 'map' ? 1 : 0 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute inset-0 z-10"
+      >
+        {(phase === 'zooming' || phase === 'map') && <AccurateIndiaMap />}
+      </motion.div>
+
     </div>
   );
 };
@@ -238,7 +355,7 @@ const ConnectedIndiaSection = () => {
 
         {/* Right Column - Accurate India Map Visual */}
         <div className="w-full lg:w-7/12 relative flex items-center justify-center mt-10 lg:mt-0">
-          <AccurateIndiaMap />
+          <GlobeToMapSequence />
         </div>
 
       </div>

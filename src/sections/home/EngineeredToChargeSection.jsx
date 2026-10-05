@@ -5,6 +5,12 @@ import dcChargerImg from '../../assets/images/product_render.jpg';
 import acChargerImg from '../../assets/images/ac_charger.jpg';
 import softwareImg from '../../assets/images/software_dashboard.jpg';
 
+const Watermark = () => (
+  <div className="absolute top-6 right-6 z-10 flex flex-col items-end opacity-20 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none">
+    <img src="/logo.png" alt="Axion Charge Logo" className="h-6 sm:h-8 w-auto object-contain mix-blend-screen opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+  </div>
+);
+
 const EngineeredToChargeSection = () => {
   return (
     <section className="relative w-full bg-[#050708] py-24 md:py-32 z-20 overflow-hidden border-t border-white/5">
@@ -51,12 +57,14 @@ const EngineeredToChargeSection = () => {
             <img 
               src={dcChargerImg} 
               alt="DC Fast Charger" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-80"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-100"
             />
             
+            <Watermark />
+            
             {/* Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050708] via-[#050708]/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050708]/90 via-[#050708]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#050708]/80 via-transparent to-transparent" />
 
             {/* Content */}
             <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -84,14 +92,15 @@ const EngineeredToChargeSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group h-[300px] lg:h-auto cursor-pointer"
+              className="relative min-h-[300px] lg:min-h-0 lg:flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group cursor-pointer"
             >
               <img 
                 src={acChargerImg} 
                 alt="AC Wallbox Charger" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-70"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-100"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708] to-transparent" />
+              <Watermark />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 to-transparent" />
               
               <div className="absolute bottom-0 left-0 p-8 w-full">
                 <div className="flex items-center gap-2 mb-2">
@@ -108,14 +117,15 @@ const EngineeredToChargeSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group h-[300px] lg:h-auto cursor-pointer"
+              className="relative min-h-[300px] lg:min-h-0 lg:flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group cursor-pointer"
             >
               <img 
                 src={softwareImg} 
                 alt="Smart Charging Software" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-60"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-100"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708] to-transparent" />
+              <Watermark />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 to-transparent" />
               
               <div className="absolute bottom-0 left-0 p-8 w-full">
                 <div className="flex items-center gap-2 mb-2">

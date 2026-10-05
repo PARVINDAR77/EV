@@ -20,9 +20,9 @@ const ProcessStep = ({ step, index, total }) => {
       <motion.div 
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 0.5, delay: 0.1 * index }}
-        className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-[#00FF3C] bg-[#030405] flex items-center justify-center mb-6 relative shadow-[0_0_20px_rgba(0,255,60,0.1)] group-hover:shadow-[0_0_30px_rgba(0,255,60,0.4)] transition-all duration-300"
+        className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-[#00FF3C] bg-[#030405] flex items-center justify-center mb-6 relative shadow-[0_0_20px_rgba(0,255,60,0.1)] group-hover:shadow-[0_0_30px_rgba(0,255,60,0.4)] transition-all duration-300 flex-shrink-0"
       >
         <Icon className="text-[#00FF3C] w-7 h-7 md:w-8 md:h-8" strokeWidth={1.5} />
         {/* Number Badge */}
@@ -35,7 +35,7 @@ const ProcessStep = ({ step, index, total }) => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 0.5, delay: 0.1 * index + 0.3 }}
         className="text-center"
       >
@@ -53,7 +53,7 @@ const DeploymentProcessSection = () => {
       
       {/* Background abstract waves */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <svg className="w-full h-full" viewBox="0 0 1000 300" preserveAspectRatio="none">
+        <svg className="w-full h-full" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid slice">
           <path d="M0,150 C200,50 300,250 500,150 C700,50 800,250 1000,150" fill="none" stroke="#00FF3C" strokeWidth="1" />
           <path d="M0,180 C200,80 300,280 500,180 C700,80 800,280 1000,180" fill="none" stroke="#00FF3C" strokeWidth="0.5" />
         </svg>
@@ -84,7 +84,7 @@ const DeploymentProcessSection = () => {
         </div>
 
         {/* Process Steps */}
-        <div className="relative w-full flex flex-col sm:flex-row items-start justify-between gap-8 sm:gap-0">
+        <div className="relative w-full flex flex-col sm:flex-row items-center sm:items-start justify-between gap-12 sm:gap-0">
           
           {/* Horizontal Connecting Line */}
           <div className="hidden sm:block absolute top-8 md:top-10 left-10 right-10 h-[2px] bg-white/10 z-0">

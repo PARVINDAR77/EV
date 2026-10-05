@@ -9,7 +9,7 @@ import imgResidential from '../../assets/images/residential.jpg';
 import imgWorkplace   from '../../assets/images/workplace.jpg';
 import imgCommercial  from '../../assets/images/commercial.jpg';
 import imgFleet       from '../../assets/images/fleet.jpg';
-import imgHighway     from '../../assets/images/highway.jpg';
+import imgHighway     from '../../assets/images/WhatsApp Image 2026-10-05 at 4.24.45 PM (1).jpeg';
 
 // Maps each solution to its dedicated intro video (served from /public)
 const videoMap = {

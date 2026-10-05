@@ -38,6 +38,9 @@ const AnimatedCounter = ({ from = 0, to, duration = 2 }) => {
 
 // Subcomponent: StatCard
 const StatCard = ({ stat, index }) => {
+  const percentage = stat.goal ? Math.min((stat.value / stat.goal) * 100, 100) : 0;
+  const remaining = stat.goal ? stat.goal - stat.value : 0;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -52,9 +55,26 @@ const StatCard = ({ stat, index }) => {
           <span className="text-[1.5rem]">{stat.suffix}</span>
         </span>
       </div>
-      <span className="text-[0.55rem] font-sans font-bold text-gray-300 uppercase tracking-widest leading-snug text-center">
+      <span className="text-[0.55rem] font-sans font-bold text-gray-300 uppercase tracking-widest leading-snug text-center mb-4">
         {stat.label.split(' ').map((word, i) => <React.Fragment key={i}>{word}<br/></React.Fragment>)}
       </span>
+      
+      {stat.goal && (
+        <div className="w-full px-2">
+          <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden mb-1.5">
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: `${percentage}%` }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+              className="h-full bg-[#00FF3C] shadow-[0_0_10px_rgba(0,255,60,0.8)]" 
+            />
+          </div>
+          <div className="text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-[0.1em] uppercase text-center mt-1.5 font-medium">
+            <span className="text-white font-bold">{remaining}</span> TO GOAL ({stat.goal})
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };
@@ -74,7 +94,7 @@ const ElectricShiftSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="text-[2rem] sm:text-[2.8rem] md:text-[4rem] font-display font-bold leading-[1.05] tracking-tight text-white mb-6 uppercase"
+            className="text-[clamp(1.8rem,5vw,4rem)] font-display font-bold leading-[1.05] tracking-tight text-white mb-6 uppercase"
           >
             THE WAY INDIA MOVES<br/>
             <span className="text-[#00FF3C] drop-shadow-[0_0_15px_rgba(0,255,60,0.4)]">IS CHANGING.</span>
@@ -99,11 +119,10 @@ const ElectricShiftSection = () => {
              transition={{ duration: 0.8, delay: 0.4 }}
              className="grid grid-cols-2 md:grid-cols-4 gap-4"
           >
-            {/* We map fixed XX data to match the screenshot EXACTLY */}
-            <StatCard index={0} stat={{ value: 'XX', suffix: '+', label: 'CHARGING SOLUTIONS' }} />
-            <StatCard index={1} stat={{ value: 'XX', suffix: '+', label: 'PROJECTS' }} />
-            <StatCard index={2} stat={{ value: 'XX', suffix: '+', label: 'PARTNERS' }} />
-            <StatCard index={3} stat={{ value: 'XX', suffix: '+', label: 'CITIES' }} />
+            <StatCard index={0} stat={{ value: 5, suffix: '+', label: 'CHARGING SOLUTIONS', goal: 100 }} />
+            <StatCard index={1} stat={{ value: 150, suffix: '+', label: 'PROJECTS', goal: 500 }} />
+            <StatCard index={2} stat={{ value: 45, suffix: '+', label: 'PARTNERS', goal: 200 }} />
+            <StatCard index={3} stat={{ value: 28, suffix: '+', label: 'CITIES', goal: 100 }} />
           </motion.div>
 
         </div>

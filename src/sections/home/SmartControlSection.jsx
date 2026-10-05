@@ -43,7 +43,7 @@ const SmartControlSection = () => {
               <span className="text-[#00E32C] font-mono text-[0.7rem] uppercase tracking-[0.3em] font-bold">OS Architecture</span>
             </div>
             
-            <h2 className="text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] font-display font-bold text-white uppercase tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[clamp(1.8rem,5vw,3.5rem)] font-display font-bold text-white uppercase tracking-tight mb-6 leading-[1.1]">
               SMARTER CHARGING.<br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E32C] to-[#00B523]">GREATER CONTROL.</span>
             </h2>
@@ -101,7 +101,7 @@ const SmartControlSection = () => {
           <img 
             src={softwareImg} 
             alt="Axion Charging Dashboard" 
-            className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-[2s] group-hover:opacity-100"
+            className="w-full h-full object-cover opacity-100 brightness-[1.4] contrast-125 group-hover:scale-105 transition-transform duration-[2s]"
           />
 
           {/* Floating UI Element (HUD) */}

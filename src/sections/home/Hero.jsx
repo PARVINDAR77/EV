@@ -87,17 +87,46 @@ const AnimatedNumber = ({ value, duration = 2000 }) => {
   return <>{count}</>;
 };
 
+const StatItem = ({ value, goal, duration, label, isActive = false }) => {
+  const percentage = Math.min((value / goal) * 100, 100);
+  const remaining = goal - value;
+  
+  return (
+    <div className={`flex flex-col border-l ${isActive ? 'border-[#00FF3C]' : 'border-[#00FF3C]/40'} pl-3 md:pl-4`}>
+      <div className="text-[#00FF3C] font-mono text-3xl font-bold leading-none mb-1">
+        <AnimatedNumber value={value} duration={duration} />+
+      </div>
+      <div className="text-[0.55rem] text-gray-400 font-sans tracking-widest uppercase font-bold mt-1 max-w-[120px] leading-tight mb-2">
+        {label}
+      </div>
+      <div className="w-full max-w-[100px]">
+        <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden mb-1">
+          <div 
+            className="h-full bg-[#00FF3C] transition-all duration-1000 ease-out" 
+            style={{ width: `${percentage}%` }}
+          />
+        </div>
+        <div className="text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-[0.1em] uppercase mt-1.5 font-medium">
+          <span className="text-white font-bold">{remaining}</span> TO GOAL ({goal})
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Hero = () => {
   return (
     <>
-      {/* Hero Section Container */}
-      <section className="relative w-full h-screen min-h-[900px] bg-[#000] overflow-hidden flex flex-col pt-24">
+      <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-12 md:pb-8">
 
         {/* Background Image (Using the provided image as the base layer) */}
         <div
           className="absolute inset-0 z-0 opacity-100 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${bgImage})`, backgroundPosition: 'center' }}
         />
+        
+        {/* Gradient Overlay for text readability */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/40 to-black/10" />
 
         {/* Content Wrapper */}
         <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 md:px-10 flex flex-col justify-between h-full pb-8">
@@ -113,12 +142,12 @@ const Hero = () => {
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-[2.2rem] sm:text-[3rem] md:text-[4.5rem] lg:text-[5rem] font-display font-bold leading-[1.05] mb-4 md:mb-5 tracking-[-0.02em] text-white flex flex-col">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-4 md:mb-5 tracking-[-0.02em] text-white flex flex-col" style={{ textShadow: "0px 4px 15px rgba(0, 0, 0, 0.9)" }}>
                 <span className="block">POWERING INDIA'S</span>
                 <LoopingTypewriterText 
                   texts={["ELECTRIC JOURNEY.", "SUSTAINABLE FUTURE.", "GREEN MOBILITY."]} 
                   delay={500} 
-                  className="text-[#00FF3C]" 
+                  className="text-[#00FF3C] mt-1 md:mt-2" 
                 />
               </h1>
 
@@ -149,35 +178,12 @@ const Hero = () => {
                 <h3 className="text-white font-sans font-bold tracking-[0.1em] text-[0.7rem] md:text-[0.85rem] mb-4 md:mb-5 uppercase">
                   THE WAY INDIA MOVES IS CHANGING.
                 </h3>
-                <div className="flex gap-5 sm:gap-10 md:gap-14">
+                <div className="grid grid-cols-2 gap-y-8 gap-x-4 sm:flex sm:gap-10 md:gap-14">
 
-                  <div className="flex flex-col border-l border-[#00FF3C] pl-4">
-                    <div className="text-[#00FF3C] font-mono text-3xl font-bold leading-none mb-1">
-                      <AnimatedNumber value={5} duration={1500} />+
-                    </div>
-                    <div className="text-[0.55rem] text-gray-400 font-sans tracking-widest uppercase font-bold mt-1">CHARGING SOLUTIONS</div>
-                  </div>
-
-                  <div className="flex flex-col border-l border-[#00FF3C]/40 pl-4">
-                    <div className="text-[#00FF3C] font-mono text-3xl font-bold leading-none mb-1">
-                      <AnimatedNumber value={150} duration={2500} />+
-                    </div>
-                    <div className="text-[0.55rem] text-gray-400 font-sans tracking-widest uppercase font-bold mt-1">PROJECTS</div>
-                  </div>
-
-                  <div className="flex flex-col border-l border-[#00FF3C]/40 pl-4">
-                    <div className="text-[#00FF3C] font-mono text-3xl font-bold leading-none mb-1">
-                      <AnimatedNumber value={45} duration={2000} />+
-                    </div>
-                    <div className="text-[0.55rem] text-gray-400 font-sans tracking-widest uppercase font-bold mt-1">PARTNERS</div>
-                  </div>
-
-                  <div className="flex flex-col border-l border-[#00FF3C]/40 pl-4">
-                    <div className="text-[#00FF3C] font-mono text-3xl font-bold leading-none mb-1">
-                      <AnimatedNumber value={28} duration={2000} />+
-                    </div>
-                    <div className="text-[0.55rem] text-gray-400 font-sans tracking-widest uppercase font-bold mt-1">CITIES</div>
-                  </div>
+                  <StatItem value={5} goal={100} duration={1500} label="CHARGING SOLUTIONS" isActive={true} />
+                  <StatItem value={150} goal={500} duration={2500} label="PROJECTS" />
+                  <StatItem value={45} goal={200} duration={2000} label="PARTNERS" />
+                  <StatItem value={28} goal={100} duration={2000} label="CITIES" />
 
                 </div>
               </div>
