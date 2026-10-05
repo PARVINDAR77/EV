@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import loadingVideo from '../../videos/Charger_charges_electric_vehicle_20261005120626.mp4';
+import loadingVideo from '../../assets/images/Axion_charger_loading_animation_20261005181352.mp4';
 
 const Loader = ({ onComplete }) => {
   return (
