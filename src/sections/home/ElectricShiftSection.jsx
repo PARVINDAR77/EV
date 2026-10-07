@@ -47,10 +47,10 @@ const StatCard = ({ stat, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-      className="flex flex-col items-center justify-center p-4 py-8 rounded-lg border border-white/10 bg-transparent hover:border-[#00FF3C]/50 hover:bg-[#00FF3C]/5 transition-all duration-300 w-full"
+      className="flex flex-col items-center justify-center p-4 py-8 rounded-lg border border-white/10 bg-transparent hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 w-full"
     >
       <div className="flex items-baseline gap-0.5 mb-2">
-        <span className="text-[2rem] font-display font-bold text-[#00FF3C] leading-none tracking-tight drop-shadow-[0_0_8px_rgba(0,255,60,0.5)]">
+        <span className="text-[2rem] font-display font-bold text-accent leading-none tracking-tight drop-shadow-[0_0_8px_rgba(var(--color-accent-rgb),0.5)]">
           {stat.value === 'XX' || isNaN(stat.value) ? stat.value : <AnimatedCounter to={stat.value} />}
           <span className="text-[1.5rem]">{stat.suffix}</span>
         </span>
@@ -67,7 +67,7 @@ const StatCard = ({ stat, index }) => {
               whileInView={{ width: `${percentage}%` }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: 0.8 + index * 0.1, ease: "easeOut" }}
-              className="h-full bg-[#00FF3C] shadow-[0_0_10px_rgba(0,255,60,0.8)]" 
+              className="h-full bg-accent shadow-[0_0_10px_rgba(var(--color-accent-rgb),0.8)]" 
             />
           </div>
           <div className="text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-[0.1em] uppercase text-center mt-1.5 font-medium">
@@ -97,7 +97,7 @@ const ElectricShiftSection = () => {
             className="text-[clamp(1.8rem,5vw,4rem)] font-display font-bold leading-[1.05] tracking-tight text-white mb-6 uppercase"
           >
             THE WAY INDIA MOVES<br/>
-            <span className="text-[#00FF3C] drop-shadow-[0_0_15px_rgba(0,255,60,0.4)]">IS CHANGING.</span>
+            <span className="text-accent drop-shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.4)]">IS CHANGING.</span>
           </motion.h2>
 
           {/* Description */}
@@ -137,13 +137,13 @@ const ElectricShiftSection = () => {
         >
           {/* Glowing Green Backdrop shape */}
           <div 
-             className="absolute w-[85%] h-[90%] bg-[#00FF3C] right-0 opacity-20 blur-[20px]"
+             className="absolute w-[85%] h-[90%] bg-accent right-0 opacity-20 blur-[20px]"
              style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           />
 
           {/* The Actual Image Container with thick green border */}
           <div 
-             className="relative w-[85%] h-[90%] z-10 p-[2px] right-0 bg-[#00FF3C] shadow-[0_0_30px_rgba(0,255,60,0.6)]"
+             className="relative w-[85%] h-[90%] z-10 p-[2px] right-0 bg-accent shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.6)]"
              style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           >
             <div 

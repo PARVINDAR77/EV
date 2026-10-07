@@ -103,7 +103,7 @@ const ChargingSolutionsSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#050708] via-[#050708]/60 to-transparent" />
               
               <div className="absolute bottom-0 left-0 p-5 w-full">
-                <span className="block font-mono font-bold text-[0.7rem] text-[#00FF3C] uppercase tracking-widest mb-1 drop-shadow-[0_0_8px_rgba(0,255,60,0.6)]">{sol.subtitle}</span>
+                <span className="block font-mono font-bold text-[0.7rem] text-accent uppercase tracking-widest mb-1 drop-shadow-[0_0_8px_rgba(var(--color-accent-rgb),0.6)]">{sol.subtitle}</span>
                 <h3 className="text-white font-display font-bold text-[1.2rem]">{sol.title}</h3>
                 <p className="text-white font-semibold text-[0.85rem] mt-2 max-w-[280px] leading-relaxed drop-shadow-md">{sol.description}</p>
               </div>

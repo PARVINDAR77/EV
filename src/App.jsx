@@ -19,7 +19,12 @@ import DCChargers from './pages/products/DCChargers';
 import Software from './pages/products/Software';
 import Accessories from './pages/products/Accessories';
 import Calculator from './pages/Calculator';
-import ProductPage from './pages/ProductPage';
+import ProductPage from './pages/products/ProductPage';
+import Installation from './pages/services/Installation';
+import Maintenance from './pages/services/Maintenance';
+import ChargeApp from './pages/software/ChargeApp';
+import CMS from './pages/software/CMS';
+import EnterpriseAPI from './pages/software/EnterpriseAPI';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -49,9 +54,17 @@ const AnimatedRoutes = () => {
         <Route path="/solutions/highway" element={<Highway />} />
         <Route path="/products/ac-chargers" element={<ACChargers />} />
         <Route path="/products/dc-chargers" element={<DCChargers />} />
-        <Route path="/products/software" element={<Software />} />
         <Route path="/products/accessories" element={<Accessories />} />
+        
+        <Route path="/product/charge-app" element={<ChargeApp />} />
+        <Route path="/product/cms" element={<CMS />} />
+        <Route path="/product/enterprise-api" element={<EnterpriseAPI />} />
+
         <Route path="/product/:id" element={<ProductPage />} />
+        
+        <Route path="/services/installation" element={<Installation />} />
+        <Route path="/services/maintenance" element={<Maintenance />} />
+
         <Route path="/calculator" element={<Calculator />} />
         {/* Other routes will go here */}
       </Routes>

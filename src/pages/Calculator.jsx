@@ -101,8 +101,8 @@ const Calculator = () => {
       <main className="w-full min-h-screen bg-[#020403] pt-32 overflow-hidden relative font-sans">
         
         {/* Background Ambience */}
-        <div className="absolute top-0 right-[-10%] w-[800px] h-[800px] bg-[#00FF3C]/5 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute top-1/2 left-[-10%] w-[600px] h-[600px] bg-[#00FF3C]/5 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-0 right-[-10%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-1/2 left-[-10%] w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 pb-32">
           
@@ -111,7 +111,7 @@ const Calculator = () => {
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00FF3C]/10 border border-[#00FF3C]/30 text-[#00FF3C] text-xs font-mono tracking-widest font-bold mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-mono tracking-widest font-bold mb-6"
             >
               <CalcIcon size={14} />
               ROI CALCULATOR
@@ -122,7 +122,7 @@ const Calculator = () => {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white uppercase tracking-tight mb-4"
             >
-              Calculate Your <span className="text-[#00FF3C]">Revenue.</span>
+              Calculate Your <span className="text-accent">Revenue.</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -154,13 +154,13 @@ const Calculator = () => {
                     <select 
                       value={selectedCharger.id}
                       onChange={(e) => setSelectedCharger(CHARGER_MODELS.find(c => c.id === e.target.value))}
-                      className="w-full bg-[#050A07] border border-white/20 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-[#00FF3C]/50 transition-colors cursor-pointer"
+                      className="w-full bg-[#050A07] border border-white/20 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-accent/50 transition-colors cursor-pointer"
                     >
                       {CHARGER_MODELS.map(model => (
                         <option key={model.id} value={model.id}>{model.name}</option>
                       ))}
                     </select>
-                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-[#00FF3C]">
+                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-accent">
                       ▼
                     </div>
                   </div>
@@ -169,7 +169,7 @@ const Calculator = () => {
                 <div className="mb-4">
                   <div className="flex justify-between items-end mb-4">
                     <label className="block text-white/70 text-sm font-bold uppercase tracking-wider">How busy is your location?</label>
-                    <span className="text-[#00FF3C] font-bold text-xl">{vehiclesPerDay} <span className="text-sm text-[#00FF3C]/70">vehicles/day</span></span>
+                    <span className="text-accent font-bold text-xl">{vehiclesPerDay} <span className="text-sm text-accent/70">vehicles/day</span></span>
                   </div>
                   
                   <input 
@@ -178,9 +178,9 @@ const Calculator = () => {
                     max="100" 
                     value={vehiclesPerDay}
                     onChange={(e) => setVehiclesPerDay(Number(e.target.value))}
-                    className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00FF3C]"
+                    className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[var(--color-accent)]"
                     style={{
-                      background: `linear-gradient(to right, #00FF3C ${vehiclesPerDay}%, rgba(255,255,255,0.1) ${vehiclesPerDay}%)`
+                      background: `linear-gradient(to right, var(--color-accent) ${vehiclesPerDay}%, rgba(255,255,255,0.1) ${vehiclesPerDay}%)`
                     }}
                   />
                   <div className="flex justify-between mt-3 text-xs text-[#666] font-mono uppercase tracking-widest">
@@ -233,12 +233,12 @@ const Calculator = () => {
                         onClick={() => setSelectedPlan(plan)}
                         className={`cursor-pointer rounded-xl p-4 transition-all duration-300 border ${
                           selectedPlan.id === plan.id 
-                            ? 'bg-[#00FF3C]/10 border-[#00FF3C]' 
+                            ? 'bg-accent/10 border-accent' 
                             : 'bg-white/5 border-white/10 hover:border-white/30'
                         }`}
                       >
                         <div className="text-sm font-bold text-white mb-1">{plan.name}</div>
-                        <div className={`text-xl font-bold mb-1 ${selectedPlan.id === plan.id ? 'text-[#00FF3C]' : 'text-white/80'}`}>
+                        <div className={`text-xl font-bold mb-1 ${selectedPlan.id === plan.id ? 'text-accent' : 'text-white/80'}`}>
                           {plan.commission}%
                         </div>
                         <div className="text-[0.65rem] text-white/50">{plan.desc}</div>
@@ -250,7 +250,7 @@ const Calculator = () => {
                 {/* Net Margin */}
                 <div className="pt-6 border-t border-white/10 flex justify-between items-center">
                   <span className="text-sm text-white/50">Net margin per kWh, after power & commission</span>
-                  <span className="text-xl font-bold text-[#00FF3C]">₹{netMarginPerKwh.toFixed(1)}</span>
+                  <span className="text-xl font-bold text-accent">₹{netMarginPerKwh.toFixed(1)}</span>
                 </div>
 
               </div>
@@ -264,21 +264,21 @@ const Calculator = () => {
               className="lg:col-span-5 relative flex flex-col gap-6"
             >
               {/* Main Results */}
-              <div className="w-full bg-gradient-to-br from-[#00FF3C]/20 to-[#00FF3C]/5 border border-[#00FF3C]/30 rounded-[2rem] p-8 lg:p-10 shadow-[0_0_50px_rgba(0,255,60,0.1)] overflow-hidden relative">
-                <Zap className="absolute -right-10 -bottom-10 w-64 h-64 text-[#00FF3C]/10 rotate-12 pointer-events-none" />
+              <div className="w-full bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/30 rounded-[2rem] p-8 lg:p-10 shadow-[0_0_50px_rgba(var(--color-accent-rgb),0.1)] overflow-hidden relative">
+                <Zap className="absolute -right-10 -bottom-10 w-64 h-64 text-accent/10 rotate-12 pointer-events-none" />
 
                 <h4 className="text-white/80 text-sm font-bold uppercase tracking-wider mb-2">Estimated Monthly Earnings</h4>
                 <div className="text-5xl lg:text-6xl font-display font-bold text-white mb-2 tracking-tight">
                   {formatCurrency(grossRevenueMonthly)}
                 </div>
-                <p className="text-[#00FF3C] text-sm font-mono mb-8 border-b border-[#00FF3C]/20 pb-8">
+                <p className="text-accent text-sm font-mono mb-8 border-b border-accent/20 pb-8">
                   ≈ {formatCurrency(grossRevenueYearly)} a year in gross revenue
                 </p>
 
                 <div className="flex flex-col gap-4 mb-8">
                   <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col">
                     <span className="text-white/60 text-xs font-bold uppercase tracking-wider mb-1">Net profit per charger</span>
-                    <span className="text-2xl font-bold text-[#00FF3C] mb-1">{formatCurrency(netProfitMonthly)}</span>
+                    <span className="text-2xl font-bold text-accent mb-1">{formatCurrency(netProfitMonthly)}</span>
                     <span className="text-white/40 text-[0.65rem] uppercase">per month</span>
                   </div>
                   
@@ -289,9 +289,9 @@ const Calculator = () => {
                       <span className="text-white/40 text-[0.65rem] uppercase">{selectedPlan.name} - {selectedPlan.commission}%</span>
                     </div>
 
-                    <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-[#00FF3C]/30 flex flex-col shadow-[0_0_15px_rgba(0,255,60,0.1)]">
+                    <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-accent/30 flex flex-col shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.1)]">
                       <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider mb-1">Break-even</span>
-                      <span className="text-xl font-bold text-[#00FF3C] mb-1">
+                      <span className="text-xl font-bold text-accent mb-1">
                         {breakEvenMonths < 1 ? '< 1 Month' : `${breakEvenMonths.toFixed(1)} Months`}
                       </span>
                       <span className="text-white/40 text-[0.65rem] uppercase">on charger price</span>
@@ -300,10 +300,10 @@ const Calculator = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="flex-1 bg-[#00FF3C] text-black font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-white hover:shadow-[0_0_20px_rgba(0,255,60,0.5)] transition-all duration-300">
+                  <button className="flex-1 bg-accent text-black font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.5)] transition-all duration-300">
                     Buy Now
                   </button>
-                  <button className="flex-1 bg-transparent border border-[#00FF3C] text-[#00FF3C] font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-[#00FF3C]/10 transition-all duration-300 flex items-center justify-center gap-2">
+                  <button className="flex-1 bg-transparent border border-accent text-accent font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-accent/10 transition-all duration-300 flex items-center justify-center gap-2">
                     Talk to an Expert
                   </button>
                 </div>
@@ -319,7 +319,7 @@ const Calculator = () => {
                   <div className="flex flex-col items-center flex-1 h-full justify-end group">
                     <span className="text-sm font-bold text-white mb-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">{formatShortCurrency(quietProfit)}</span>
                     <div 
-                      className="w-full bg-[#00FF3C]/30 rounded-t-lg transition-all duration-500 ease-out hover:bg-[#00FF3C]/50"
+                      className="w-full bg-accent/30 rounded-t-lg transition-all duration-500 ease-out hover:bg-accent/50"
                       style={{ height: `${quietHeight}%` }}
                     />
                   </div>
@@ -328,7 +328,7 @@ const Calculator = () => {
                   <div className="flex flex-col items-center flex-1 h-full justify-end group">
                     <span className="text-sm font-bold text-white mb-2 opacity-100 transition-opacity">{formatShortCurrency(netProfitMonthly)}</span>
                     <div 
-                      className="w-full bg-[#00FF3C]/70 rounded-t-lg transition-all duration-500 ease-out shadow-[0_0_20px_rgba(0,255,60,0.2)]"
+                      className="w-full bg-accent/70 rounded-t-lg transition-all duration-500 ease-out shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.2)]"
                       style={{ height: `${likelyHeight}%` }}
                     />
                   </div>
@@ -337,7 +337,7 @@ const Calculator = () => {
                   <div className="flex flex-col items-center flex-1 h-full justify-end group">
                     <span className="text-sm font-bold text-white mb-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">{formatShortCurrency(busyProfit)}</span>
                     <div 
-                      className="w-full bg-[#00FF3C] rounded-t-lg transition-all duration-500 ease-out hover:shadow-[0_0_20px_rgba(0,255,60,0.4)]"
+                      className="w-full bg-accent rounded-t-lg transition-all duration-500 ease-out hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)]"
                       style={{ height: `${busyHeight}%` }}
                     />
                   </div>
@@ -345,7 +345,7 @@ const Calculator = () => {
                 
                 <div className="flex justify-between mt-4 text-xs font-mono uppercase tracking-widest text-[#888]">
                   <span className="flex-1 text-center">Quiet</span>
-                  <span className="flex-1 text-center text-[#00FF3C]">Likely</span>
+                  <span className="flex-1 text-center text-accent">Likely</span>
                   <span className="flex-1 text-center">Busy</span>
                 </div>
               </div>
@@ -367,14 +367,14 @@ const InputStepper = ({ label, value, onAdjust }) => (
     <div className="flex items-center justify-between bg-[#050A07] border border-white/10 rounded-xl p-2 h-14">
       <button 
         onClick={() => onAdjust(-1)}
-        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-[#00FF3C] transition-colors"
+        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-accent transition-colors"
       >
         <Minus size={16} />
       </button>
       <span className="font-mono text-white font-bold">{value}</span>
       <button 
         onClick={() => onAdjust(1)}
-        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-[#00FF3C] transition-colors"
+        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-accent transition-colors"
       >
         <Plus size={16} />
       </button>

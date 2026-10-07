@@ -93,22 +93,22 @@ const Card = ({ image, badge, icon: Icon, title, desc, delay, span, height }) =>
     <div className="absolute inset-0 bg-gradient-to-r from-[#020403]/40 to-transparent" />
 
     {/* Neon border glow on hover */}
-    <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 group-hover:ring-[#00FF3C]/40 transition-all duration-500" />
+    <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 group-hover:ring-[var(--color-accent)]/40 transition-all duration-500" />
     {/* Green ambient glow */}
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,255,60,0.12),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(var(--color-accent-rgb),0.12),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
     {/* Content */}
     <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
       {/* Badge + icon */}
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-full bg-black/60 border border-[#00FF3C]/30 flex items-center justify-center backdrop-blur-md group-hover:border-[#00FF3C]/80 group-hover:bg-[#00FF3C]/10 group-hover:shadow-[0_0_20px_rgba(0,255,60,0.3)] transition-all duration-500 flex-shrink-0">
-          <Icon className="text-[#00FF3C] w-4 h-4" strokeWidth={1.5} />
+        <div className="w-10 h-10 rounded-full bg-black/60 border border-accent/30 flex items-center justify-center backdrop-blur-md group-hover:border-accent/80 group-hover:bg-accent/10 group-hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] transition-all duration-500 flex-shrink-0">
+          <Icon className="text-accent w-4 h-4" strokeWidth={1.5} />
         </div>
-        <span className="text-[#00FF3C] font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold">{badge}</span>
+        <span className="text-accent font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold">{badge}</span>
       </div>
 
       {/* Title */}
-      <h4 className="text-white font-display font-bold text-2xl md:text-3xl uppercase tracking-tight mb-3 group-hover:text-[#00FF3C] transition-colors duration-500 leading-tight drop-shadow-lg">
+      <h4 className="text-white font-display font-bold text-2xl md:text-3xl uppercase tracking-tight mb-3 group-hover:text-accent transition-colors duration-500 leading-tight drop-shadow-lg">
         {title}
       </h4>
 
@@ -125,7 +125,7 @@ const WhyAxionSection = () => {
     <section className="relative w-full bg-[#020403] py-32 z-20 overflow-hidden border-t border-white/5">
 
       {/* Ambient background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#00FF3C]/[0.03] rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/[0.03] rounded-full blur-[160px] pointer-events-none" />
 
       {/* Giant watermark text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-0">
@@ -146,8 +146,8 @@ const WhyAxionSection = () => {
               transition={{ duration: 0.7 }}
               className="flex items-center gap-3 mb-6"
             >
-              <div className="w-8 h-[1px] bg-[#00FF3C]" />
-              <span className="text-[#00FF3C] font-mono text-[0.7rem] uppercase tracking-[0.3em] font-bold">The Axion Advantage</span>
+              <div className="w-8 h-[1px] bg-accent" />
+              <span className="text-accent font-mono text-[0.7rem] uppercase tracking-[0.3em] font-bold">The Axion Advantage</span>
             </motion.div>
 
             <motion.h2
@@ -162,7 +162,7 @@ const WhyAxionSection = () => {
                 <img 
                   src="/logo.png" 
                   alt="Axion Logo" 
-                  className="h-28 sm:h-36 md:h-52 lg:h-[300px] w-auto object-contain mix-blend-screen drop-shadow-[0_0_20px_rgba(0,255,60,0.4)]"
+                  className="h-28 sm:h-36 md:h-52 lg:h-[300px] w-auto object-contain mix-blend-screen drop-shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)]"
                   style={{ clipPath: 'inset(20% 0 46% 0)' }}
                 />
               </div>
@@ -176,7 +176,7 @@ const WhyAxionSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:max-w-[480px]"
           >
-            <p className="text-[1.05rem] md:text-[1.15rem] text-[#B0B0B0] font-sans leading-relaxed border-l-2 border-[#00FF3C]/50 pl-6">
+            <p className="text-[1.05rem] md:text-[1.15rem] text-[#B0B0B0] font-sans leading-relaxed border-l-2 border-accent/50 pl-6">
               Technology, trust, and industrial-grade experience — built for the uncompromising future of mobility.
             </p>
           </motion.div>

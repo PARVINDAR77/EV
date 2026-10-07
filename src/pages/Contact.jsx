@@ -18,8 +18,8 @@ const Contact = () => {
       <main className="w-full min-h-screen bg-[#020403] pt-32 overflow-hidden relative font-sans">
         
         {/* Massive Ambient Backgrounds */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#00FF3C]/5 rounded-full blur-[200px] pointer-events-none" />
-        <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] bg-[#00FF3C]/10 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[200px] pointer-events-none" />
+        <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-24 relative z-10">
           
@@ -31,10 +31,10 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="flex items-center gap-3 mb-8 px-4 py-2 rounded-full bg-white/5 border border-[#00FF3C]/30 backdrop-blur-md"
+                className="flex items-center gap-3 mb-8 px-4 py-2 rounded-full bg-white/5 border border-accent/30 backdrop-blur-md"
               >
-                <MessageSquare className="text-[#00FF3C] w-4 h-4" />
-                <span className="text-[#00FF3C] font-mono text-xs uppercase tracking-[0.2em] font-bold">24/7 SUPPORT</span>
+                <MessageSquare className="text-accent w-4 h-4" />
+                <span className="text-accent font-mono text-xs uppercase tracking-[0.2em] font-bold">24/7 SUPPORT</span>
               </motion.div>
 
               <motion.h1 
@@ -44,14 +44,14 @@ const Contact = () => {
                 className="text-6xl lg:text-[6rem] font-display font-bold text-white uppercase tracking-tighter mb-8 leading-[0.9]"
               >
                 LET'S <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-white/70 drop-shadow-sm">CONNECT.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white/70 drop-shadow-sm">CONNECT.</span>
               </motion.h1>
 
               <motion.p 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-lg lg:text-xl text-[#B0B0B0] max-w-xl leading-relaxed mb-16 border-l-2 border-[#00FF3C]/50 pl-6"
+                className="text-lg lg:text-xl text-[#B0B0B0] max-w-xl leading-relaxed mb-16 border-l-2 border-accent/50 pl-6"
               >
                 Whether you have a question about our hardware, need technical support, or want to explore partnership opportunities, our global team is ready to help.
               </motion.p>
@@ -64,9 +64,9 @@ const Contact = () => {
                 className="flex flex-col gap-6 w-full"
               >
                 {/* Global HQ */}
-                <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-start gap-5 hover:border-[#00FF3C]/30 transition-colors group">
-                  <div className="w-12 h-12 rounded-full bg-[#020403] border border-[#00FF3C]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#00FF3C]/10 transition-colors">
-                    <MapPin className="text-[#00FF3C] w-5 h-5" />
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-start gap-5 hover:border-accent/30 transition-colors group">
+                  <div className="w-12 h-12 rounded-full bg-[#020403] border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-colors">
+                    <MapPin className="text-accent w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-white font-display font-bold text-xl mb-1">Global Headquarters</h4>
@@ -75,9 +75,9 @@ const Contact = () => {
                 </div>
 
                 {/* Direct Lines */}
-                <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-start gap-5 hover:border-[#00FF3C]/30 transition-colors group">
-                  <div className="w-12 h-12 rounded-full bg-[#020403] border border-[#00FF3C]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#00FF3C]/10 transition-colors">
-                    <Phone className="text-[#00FF3C] w-5 h-5" />
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-start gap-5 hover:border-accent/30 transition-colors group">
+                  <div className="w-12 h-12 rounded-full bg-[#020403] border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-colors">
+                    <Phone className="text-accent w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-white font-display font-bold text-xl mb-1">Direct Lines</h4>
@@ -87,9 +87,9 @@ const Contact = () => {
                 </div>
 
                 {/* Email */}
-                <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-start gap-5 hover:border-[#00FF3C]/30 transition-colors group">
-                  <div className="w-12 h-12 rounded-full bg-[#020403] border border-[#00FF3C]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#00FF3C]/10 transition-colors">
-                    <Mail className="text-[#00FF3C] w-5 h-5" />
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-start gap-5 hover:border-accent/30 transition-colors group">
+                  <div className="w-12 h-12 rounded-full bg-[#020403] border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-colors">
+                    <Mail className="text-accent w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-white font-display font-bold text-xl mb-1">Electronic Mail</h4>
@@ -106,9 +106,9 @@ const Contact = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.4 }}
-                className="w-full bg-gradient-to-br from-[#050A07] to-[#020403] rounded-3xl md:rounded-[3rem] p-6 md:p-10 lg:p-16 border border-[#00FF3C]/20 shadow-[0_0_80px_rgba(0,255,60,0.05)] relative overflow-hidden"
+                className="w-full bg-gradient-to-br from-[#050A07] to-[#020403] rounded-3xl md:rounded-[3rem] p-6 md:p-10 lg:p-16 border border-accent/20 shadow-[0_0_80px_rgba(var(--color-accent-rgb),0.05)] relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#00FF3C]/10 rounded-full blur-[80px]" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px]" />
                 
                 <h3 className="text-3xl font-display font-bold text-white mb-8 relative z-10">SEND A MESSAGE</h3>
                 
@@ -119,7 +119,7 @@ const Contact = () => {
                       <input 
                         type="text" required
                         value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})}
-                        className="w-full bg-[#020403] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#00FF3C]/50 transition-colors shadow-inner"
+                        className="w-full bg-[#020403] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors shadow-inner"
                         placeholder="John Doe"
                       />
                     </div>
@@ -128,7 +128,7 @@ const Contact = () => {
                       <input 
                         type="email" required
                         value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})}
-                        className="w-full bg-[#020403] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#00FF3C]/50 transition-colors shadow-inner"
+                        className="w-full bg-[#020403] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors shadow-inner"
                         placeholder="john@company.com"
                       />
                     </div>
@@ -143,7 +143,7 @@ const Contact = () => {
                           onClick={() => setFormState({...formState, subject: sub})}
                           className={`cursor-pointer px-4 py-3 rounded-xl border text-center text-sm font-bold transition-all duration-300 ${
                             formState.subject === sub 
-                            ? 'bg-[#00FF3C]/10 border-[#00FF3C] text-[#00FF3C]' 
+                            ? 'bg-accent/10 border-accent text-accent' 
                             : 'bg-[#020403] border-white/10 text-white/50 hover:border-white/30'
                           }`}
                         >
@@ -158,14 +158,14 @@ const Contact = () => {
                     <textarea 
                       required rows="6"
                       value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})}
-                      className="w-full bg-[#020403] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#00FF3C]/50 transition-colors shadow-inner resize-none"
+                      className="w-full bg-[#020403] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors shadow-inner resize-none"
                       placeholder="How can we help you today?"
                     />
                   </div>
 
                   <button 
                     type="submit"
-                    className="w-full mt-4 flex justify-center items-center gap-3 bg-[#00FF3C] text-black font-bold uppercase tracking-widest py-5 rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(0,255,60,0.4)] transition-all duration-300 group"
+                    className="w-full mt-4 flex justify-center items-center gap-3 bg-accent text-black font-bold uppercase tracking-widest py-5 rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300 group"
                   >
                     SEND MESSAGE
                     <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

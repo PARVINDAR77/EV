@@ -33,7 +33,7 @@ const imageMap = {
 const sectionData = {
   residential: {
     badge: "Home Charging",
-    color: "#00FF3C",
+    color: "var(--color-accent)",
     tagline: "CHARGE WHERE YOU LIVE.",
     features: [
       { title: "Smart Home Integration", desc: "Works seamlessly with solar panels and home energy management systems." },
@@ -144,8 +144,8 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 transition={{ delay: 0.5, duration: 0.8 }}
                 className="flex items-center gap-3 mb-4"
               >
-                <div className="w-2 h-2 rounded-full bg-[#00FF3C] animate-pulse" />
-                <span className="text-[#00FF3C] font-mono text-xs uppercase tracking-[0.25em]">{data.badge}</span>
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="text-accent font-mono text-xs uppercase tracking-[0.25em]">{data.badge}</span>
               </motion.div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, width: 0 }}
                 animate={{ opacity: 1, width: '100px' }}
                 transition={{ delay: 1.2, duration: 1 }}
-                className="h-[2px] bg-[#00FF3C] mt-4"
+                className="h-[2px] bg-accent mt-4"
               />
             </div>
 
@@ -178,8 +178,8 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
       <main className="w-full min-h-screen bg-[#020403] pt-24 md:pt-32 overflow-hidden relative">
 
         {/* Ambient glow */}
-        <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#00FF3C]/5 rounded-full blur-[180px] pointer-events-none" />
-        <div className="absolute bottom-0 left-[-10%] w-[500px] h-[500px] bg-[#00FF3C]/8 rounded-full blur-[130px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-accent/5 rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute bottom-0 left-[-10%] w-[500px] h-[500px] bg-accent/8 rounded-full blur-[130px] pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 pt-10 pb-24 relative z-10">
 
@@ -192,10 +192,10 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 rounded-full bg-white/5 border border-[#00FF3C]/30 backdrop-blur-md"
+                className="flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 rounded-full bg-white/5 border border-accent/30 backdrop-blur-md"
               >
-                <div className="w-2 h-2 rounded-full bg-[#00FF3C] animate-pulse shadow-[0_0_8px_#00FF3C]" />
-                <span className="text-[#00FF3C] font-mono text-[0.65rem] md:text-xs uppercase tracking-[0.2em] font-bold">{data.badge}</span>
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--color-accent)]" />
+                <span className="text-accent font-mono text-[0.65rem] md:text-xs uppercase tracking-[0.2em] font-bold">{data.badge}</span>
               </motion.div>
 
               <motion.h1
@@ -211,7 +211,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.15 }}
-                className="text-[#00FF3C] font-mono text-[0.7rem] md:text-sm uppercase tracking-widest mb-4"
+                className="text-accent font-mono text-[0.7rem] md:text-sm uppercase tracking-widest mb-4"
               >
                 {subtitle}
               </motion.p>
@@ -220,7 +220,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-base sm:text-lg lg:text-xl text-[#B0B0B0] font-sans max-w-xl leading-relaxed mb-8 md:mb-10 border-l-2 border-[#00FF3C]/40 pl-4 md:pl-6"
+                className="text-base sm:text-lg lg:text-xl text-[#B0B0B0] font-sans max-w-xl leading-relaxed mb-8 md:mb-10 border-l-2 border-accent/40 pl-4 md:pl-6"
               >
                 {description}
               </motion.p>
@@ -229,7 +229,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="relative overflow-hidden flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-[#00FF3C] text-black font-sans text-xs md:text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,60,0.5)] group"
+                className="relative overflow-hidden flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-accent text-black font-sans text-xs md:text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.5)] group"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   GET A QUOTE
@@ -245,7 +245,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(0,255,60,0.15)] z-10"
+                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(var(--color-accent-rgb),0.15)] z-10"
               >
                 <img src={heroImage} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#020403]/80 via-transparent to-transparent" />
@@ -255,12 +255,12 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                className="absolute -top-16 -right-16 w-[380px] h-[380px] border border-dashed border-[#00FF3C]/15 rounded-full z-0 pointer-events-none"
+                className="absolute -top-16 -right-16 w-[380px] h-[380px] border border-dashed border-accent/15 rounded-full z-0 pointer-events-none"
               />
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 55, repeat: Infinity, ease: 'linear' }}
-                className="absolute -bottom-8 -left-8 w-[260px] h-[260px] border border-[#00FF3C]/10 rounded-full z-0 pointer-events-none"
+                className="absolute -bottom-8 -left-8 w-[260px] h-[260px] border border-accent/10 rounded-full z-0 pointer-events-none"
               />
             </div>
           </div>
@@ -283,14 +283,14 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                   hidden: { opacity: 0, y: 40 },
                   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
                 }}
-                className="group flex items-start gap-4 p-6 bg-gradient-to-br from-white/[0.04] to-transparent border border-white/5 hover:border-[#00FF3C]/30 rounded-2xl backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_0_20px_rgba(0,255,60,0.08)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group flex items-start gap-4 p-6 bg-gradient-to-br from-white/[0.04] to-transparent border border-white/5 hover:border-accent/30 rounded-2xl backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.08)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00FF3C]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                <div className="w-10 h-10 rounded-full bg-[#020403] border border-[#00FF3C]/20 flex items-center justify-center flex-shrink-0 group-hover:border-[#00FF3C]/60 group-hover:shadow-[0_0_15px_rgba(0,255,60,0.3)] transition-all duration-300 z-10">
-                  <Zap className="text-[#00FF3C] w-4 h-4" />
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="w-10 h-10 rounded-full bg-[#020403] border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:border-accent/60 group-hover:shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.3)] transition-all duration-300 z-10">
+                  <Zap className="text-accent w-4 h-4" />
                 </div>
                 <div className="z-10">
-                  <h4 className="text-white font-display font-bold text-[0.95rem] tracking-wide mb-1.5 group-hover:text-[#00FF3C] transition-colors duration-300">{feature.title}</h4>
+                  <h4 className="text-white font-display font-bold text-[0.95rem] tracking-wide mb-1.5 group-hover:text-accent transition-colors duration-300">{feature.title}</h4>
                   <p className="text-[#888888] text-[0.82rem] leading-relaxed font-sans">{feature.desc}</p>
                 </div>
               </motion.div>

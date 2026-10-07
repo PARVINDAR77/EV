@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPage from './ProductPage';
-import dcImage from '../../assets/images/commercial.jpg';
+import dcImage from '../../assets/images/AXION charger with matte black cables-3.png';
 
 const DCChargers = () => (
   <ProductPage 
@@ -9,10 +9,10 @@ const DCChargers = () => (
     description="Ultra-fast DC charging solutions engineered for rapid turnaround times, perfect for highway corridors and high-demand commercial fleets."
     image={dcImage}
     features={[
-      { title: "Ultra-Fast Charging", desc: "Deliver up to 360kW of power for 80% charge in 15 minutes." },
-      { title: "Liquid Cooled Cables", desc: "Advanced thermal management for continuous high-power delivery." },
-      { title: "Dynamic Power Sharing", desc: "Distribute power intelligently across multiple connected vehicles." },
-      { title: "Credit Card Integration", desc: "Built-in POS terminal for seamless ad-hoc payments." }
+      { title: "Axion DC 30kW", desc: "Compact DC charging for car dealerships, quick-service retail, and urban fleet depots.", link: "/product/dc-30kw" },
+      { title: "Axion DC 60kW", desc: "Versatile fast charging for commercial parking, hospitality, and longer stops.", link: "/product/dc-60kw" },
+      { title: "Axion DC 120kW", desc: "High-power dual-charging solution engineered for highway corridors and rapid transit.", link: "/product/dc-120kw" },
+      { title: "Axion DC 240kW", desc: "Ultra-fast hyper-charging for heavy-duty fleets and next-generation EVs.", link: "/product/dc-240kw" }
     ]}
   />
 );

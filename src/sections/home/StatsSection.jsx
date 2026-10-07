@@ -39,7 +39,7 @@ const StatsSection = () => (
   <section className="relative w-full bg-[#020403] py-28 z-20 border-t border-white/5 overflow-hidden">
 
     {/* Ambient glow */}
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#00FF3C]/[0.04] rounded-full blur-[120px] pointer-events-none" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
     <div className="max-w-[1440px] mx-auto px-6 md:px-10 w-full relative z-10">
 
@@ -52,9 +52,9 @@ const StatsSection = () => (
           transition={{ duration: 0.7 }}
           className="flex items-center gap-3 mb-6"
         >
-          <div className="w-8 h-[1px] bg-[#00FF3C]" />
-          <span className="text-[#00FF3C] font-mono text-[0.7rem] uppercase tracking-[0.3em] font-bold">By The Numbers</span>
-          <div className="w-8 h-[1px] bg-[#00FF3C]" />
+          <div className="w-8 h-[1px] bg-accent" />
+          <span className="text-accent font-mono text-[0.7rem] uppercase tracking-[0.3em] font-bold">By The Numbers</span>
+          <div className="w-8 h-[1px] bg-accent" />
         </motion.div>
 
         <motion.h2
@@ -65,7 +65,7 @@ const StatsSection = () => (
           className="text-[2rem] sm:text-[3.5rem] md:text-[5rem] font-display font-bold text-white uppercase tracking-tighter leading-[0.9]"
         >
           INDIA'S EV FUTURE,<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-white/40">IN NUMBERS.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white/40">IN NUMBERS.</span>
         </motion.h2>
       </div>
 
@@ -78,9 +78,9 @@ const StatsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: i * 0.1 }}
-            className="group flex flex-col items-center justify-center py-10 md:py-14 px-4 md:px-6 bg-[#020403] hover:bg-[#00FF3C]/5 transition-colors duration-500 text-center"
+            className="group flex flex-col items-center justify-center py-10 md:py-14 px-4 md:px-6 bg-[#020403] hover:bg-accent/5 transition-colors duration-500 text-center"
           >
-            <span className="text-[2.2rem] sm:text-[3rem] md:text-[3.5rem] font-display font-bold text-[#00FF3C] leading-none tracking-tight drop-shadow-[0_0_20px_rgba(0,255,60,0.4)] mb-3 md:mb-4">
+            <span className="text-[2.2rem] sm:text-[3rem] md:text-[3.5rem] font-display font-bold text-accent leading-none tracking-tight drop-shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] mb-3 md:mb-4">
               <Counter to={s.value} suffix={s.suffix} decimal={s.decimal} />
             </span>
             <span className="text-[0.6rem] md:text-[0.65rem] font-mono font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed whitespace-pre-line group-hover:text-gray-200 transition-colors duration-500">

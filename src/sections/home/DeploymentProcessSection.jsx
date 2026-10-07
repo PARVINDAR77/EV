@@ -22,11 +22,11 @@ const ProcessStep = ({ step, index, total }) => {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 0.5, delay: 0.1 * index }}
-        className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-[#00FF3C] bg-[#030405] flex items-center justify-center mb-6 relative shadow-[0_0_20px_rgba(0,255,60,0.1)] group-hover:shadow-[0_0_30px_rgba(0,255,60,0.4)] transition-all duration-300 flex-shrink-0"
+        className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-accent bg-[#030405] flex items-center justify-center mb-6 relative shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.1)] group-hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300 flex-shrink-0"
       >
-        <Icon className="text-[#00FF3C] w-7 h-7 md:w-8 md:h-8" strokeWidth={1.5} />
+        <Icon className="text-accent w-7 h-7 md:w-8 md:h-8" strokeWidth={1.5} />
         {/* Number Badge */}
-        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#030405] px-2 text-[#00FF3C] font-mono font-bold text-[0.8rem]">
+        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#030405] px-2 text-accent font-mono font-bold text-[0.8rem]">
           {step.id}
         </div>
       </motion.div>
@@ -54,8 +54,8 @@ const DeploymentProcessSection = () => {
       {/* Background abstract waves */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg className="w-full h-full" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid slice">
-          <path d="M0,150 C200,50 300,250 500,150 C700,50 800,250 1000,150" fill="none" stroke="#00FF3C" strokeWidth="1" />
-          <path d="M0,180 C200,80 300,280 500,180 C700,80 800,280 1000,180" fill="none" stroke="#00FF3C" strokeWidth="0.5" />
+          <path d="M0,150 C200,50 300,250 500,150 C700,50 800,250 1000,150" fill="none" stroke="var(--color-accent)" strokeWidth="1" />
+          <path d="M0,180 C200,80 300,280 500,180 C700,80 800,280 1000,180" fill="none" stroke="var(--color-accent)" strokeWidth="0.5" />
         </svg>
       </div>
 
@@ -79,7 +79,7 @@ const DeploymentProcessSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-[1rem] md:text-[1.1rem] text-gray-400 font-sans"
           >
-            A <span className="text-[#00FF3C]">seamless process</span>, designed for speed and reliability.
+            A <span className="text-accent">seamless process</span>, designed for speed and reliability.
           </motion.p>
         </div>
 
@@ -93,7 +93,7 @@ const DeploymentProcessSection = () => {
               whileInView={{ width: "100%" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="h-full bg-[#00FF3C] shadow-[0_0_10px_#00FF3C]"
+              className="h-full bg-accent shadow-[0_0_10px_var(--color-accent)]"
             />
           </div>
 
