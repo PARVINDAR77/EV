@@ -70,7 +70,7 @@ const ChargingSolutionsSection = () => {
   });
 
   useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
+    return scrollYProgress.on("change", (latest) => {
       let index = Math.floor(latest * 5);
       if (index >= 5) index = 4;
       if (index < 0) index = 0;
@@ -82,7 +82,7 @@ const ChargingSolutionsSection = () => {
     <section ref={containerRef} className="relative w-full bg-[#050708] z-20">
 
       {/* Mobile: simple stacked cards */}
-      <div className="md:hidden px-4 py-20 border-t border-white/5">
+      <div className="md:hidden px-4 pt-32 pb-20 border-t border-white/5">
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-[1px] bg-[#00E32C]" />
@@ -98,11 +98,14 @@ const ChargingSolutionsSection = () => {
             <div key={sol.id} className="relative rounded-xl overflow-hidden h-[260px] border border-white/5">
               <img src={sol.image} alt={sol.title} className={`absolute inset-0 ${sol.imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}`} />
               {!sol.hideWatermark && <Watermark />}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/50 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-5">
-                <span className="block font-mono text-[0.6rem] text-[#00E32C] uppercase tracking-widest mb-1">{sol.subtitle}</span>
+              
+              {/* Darker gradient for better text legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708] via-[#050708]/60 to-transparent" />
+              
+              <div className="absolute bottom-0 left-0 p-5 w-full">
+                <span className="block font-mono font-bold text-[0.7rem] text-[#00FF3C] uppercase tracking-widest mb-1 drop-shadow-[0_0_8px_rgba(0,255,60,0.6)]">{sol.subtitle}</span>
                 <h3 className="text-white font-display font-bold text-[1.2rem]">{sol.title}</h3>
-                <p className="text-gray-400 text-[0.75rem] mt-1 max-w-[280px]">{sol.description}</p>
+                <p className="text-white font-semibold text-[0.85rem] mt-2 max-w-[280px] leading-relaxed drop-shadow-md">{sol.description}</p>
               </div>
             </div>
           ))}

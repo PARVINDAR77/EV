@@ -317,7 +317,7 @@ const Calculator = () => {
                 <div className="flex items-end justify-between h-48 gap-4 pb-8 border-b border-white/10">
                   {/* Quiet Bar */}
                   <div className="flex flex-col items-center flex-1 h-full justify-end group">
-                    <span className="text-sm font-bold text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">{formatShortCurrency(quietProfit)}</span>
+                    <span className="text-sm font-bold text-white mb-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">{formatShortCurrency(quietProfit)}</span>
                     <div 
                       className="w-full bg-[#00FF3C]/30 rounded-t-lg transition-all duration-500 ease-out hover:bg-[#00FF3C]/50"
                       style={{ height: `${quietHeight}%` }}
@@ -335,7 +335,7 @@ const Calculator = () => {
                   
                   {/* Busy Bar */}
                   <div className="flex flex-col items-center flex-1 h-full justify-end group">
-                    <span className="text-sm font-bold text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">{formatShortCurrency(busyProfit)}</span>
+                    <span className="text-sm font-bold text-white mb-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">{formatShortCurrency(busyProfit)}</span>
                     <div 
                       className="w-full bg-[#00FF3C] rounded-t-lg transition-all duration-500 ease-out hover:shadow-[0_0_20px_rgba(0,255,60,0.4)]"
                       style={{ height: `${busyHeight}%` }}

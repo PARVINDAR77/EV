@@ -21,7 +21,7 @@ const Footer = () => {
 
       {/* Huge Background Watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-0">
-        <span className="text-[25vw] font-display font-black text-white/[0.015] tracking-tighter uppercase whitespace-nowrap select-none">
+        <span className="text-[25vw] font-display font-black text-white/[0.04] tracking-tighter uppercase whitespace-nowrap select-none">
           AXION
         </span>
       </div>
@@ -33,9 +33,9 @@ const Footer = () => {
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 w-full relative z-10 flex flex-col">
         
         {/* Top Section: Newsletter & Brand */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 mb-20 border-b border-white/10 pb-16">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-12 mb-20 border-b border-white/10 pb-16">
           
-          <div className="flex flex-col max-w-lg">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:max-w-lg">
             <h3 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4">
               Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-[#00A020] pr-2">Evolution.</span>
             </h3>
@@ -43,34 +43,36 @@ const Footer = () => {
               Subscribe to our newsletter for the latest updates on EV infrastructure, product launches, and industry insights.
             </p>
             
-            <form className="relative flex items-center w-full max-w-md" onSubmit={(e) => e.preventDefault()}>
-              <Mail className="absolute left-4 text-white/40 w-5 h-5" />
-              <input 
-                type="email" 
-                placeholder="Enter your email address" 
-                className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-12 pr-32 text-white font-sans text-sm focus:outline-none focus:border-[#00FF3C]/50 transition-colors"
-                required
-              />
+            <form className="flex flex-col sm:relative sm:items-center w-full max-w-md gap-3 sm:gap-0" onSubmit={(e) => e.preventDefault()}>
+              <div className="relative w-full">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5" />
+                <input 
+                  type="email" 
+                  placeholder="Enter your email address" 
+                  className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-12 pr-4 sm:pr-32 text-white font-sans text-sm focus:outline-none focus:border-[#00FF3C]/50 transition-colors"
+                  required
+                />
+              </div>
               <button 
                 type="submit"
-                className="absolute right-2 px-6 py-2 bg-[#00FF3C] text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(0,255,60,0.4)] transition-all duration-300"
+                className="w-full sm:w-auto sm:absolute sm:right-2 px-6 py-4 sm:py-2 bg-[#00FF3C] text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(0,255,60,0.4)] transition-all duration-300"
               >
                 Subscribe
               </button>
             </form>
           </div>
 
-          <div className="flex flex-col items-start lg:items-end text-left lg:text-right">
-            <div className="flex flex-col items-center mb-6 group cursor-pointer transition-all duration-300 hover:brightness-125 lg:ml-auto">
+          <div className="flex flex-col items-center lg:items-end text-center lg:text-right w-full lg:w-auto mt-4 lg:mt-0">
+            <div className="flex flex-col items-center mb-6 group cursor-pointer transition-all duration-300 hover:brightness-125">
               <img 
                 src="/logo.png" 
                 alt="Axion Charge Logo" 
-                className="h-20 sm:h-24 md:h-28 w-auto object-contain transition-all duration-300" 
+                className="h-28 sm:h-32 md:h-36 lg:h-32 w-auto object-contain transition-all duration-300" 
                 style={{ filter: 'url(#footer-remove-black)' }} 
               />
             </div>
             
-            <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-center justify-center lg:justify-end gap-4 mt-2">
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-[#00FF3C] hover:border-[#00FF3C]/50 hover:bg-[#00FF3C]/10 hover:shadow-[0_0_15px_rgba(0,255,60,0.2)] transition-all duration-300">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -94,7 +96,7 @@ const Footer = () => {
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 lg:gap-8 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 lg:gap-8 mb-20">
           
           <div className="flex flex-col">
             <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-[#00FF3C] pl-3">Company</h5>

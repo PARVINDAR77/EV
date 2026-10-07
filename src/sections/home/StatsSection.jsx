@@ -70,7 +70,7 @@ const StatsSection = () => (
       </div>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-white/5 rounded-2xl overflow-hidden">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-white/5 rounded-2xl overflow-hidden mt-6 md:mt-0">
         {stats.map((s, i) => (
           <motion.div
             key={i}
@@ -78,12 +78,12 @@ const StatsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: i * 0.1 }}
-            className="group flex flex-col items-center justify-center py-14 px-6 bg-[#020403] hover:bg-[#00FF3C]/5 transition-colors duration-500 text-center"
+            className="group flex flex-col items-center justify-center py-10 md:py-14 px-4 md:px-6 bg-[#020403] hover:bg-[#00FF3C]/5 transition-colors duration-500 text-center"
           >
-            <span className="text-[3rem] md:text-[3.5rem] font-display font-bold text-[#00FF3C] leading-none tracking-tight drop-shadow-[0_0_20px_rgba(0,255,60,0.4)] mb-4">
+            <span className="text-[2.2rem] sm:text-[3rem] md:text-[3.5rem] font-display font-bold text-[#00FF3C] leading-none tracking-tight drop-shadow-[0_0_20px_rgba(0,255,60,0.4)] mb-3 md:mb-4">
               <Counter to={s.value} suffix={s.suffix} decimal={s.decimal} />
             </span>
-            <span className="text-[0.65rem] font-mono font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed whitespace-pre-line group-hover:text-gray-200 transition-colors duration-500">
+            <span className="text-[0.6rem] md:text-[0.65rem] font-mono font-bold text-gray-400 uppercase tracking-[0.2em] leading-relaxed whitespace-pre-line group-hover:text-gray-200 transition-colors duration-500">
               {s.label}
             </span>
           </motion.div>

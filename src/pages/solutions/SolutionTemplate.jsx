@@ -137,7 +137,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50 pointer-events-none" />
 
             {/* Bottom-left title overlay */}
-            <div className="absolute bottom-16 left-10 md:left-20 z-10">
+            <div className="absolute bottom-12 md:bottom-16 left-6 md:left-20 z-10">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 1 }}
-                className="text-4xl md:text-6xl font-display font-bold text-white tracking-widest uppercase"
+                className="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-white tracking-widest uppercase"
               >
                 {title}
               </motion.h2>
@@ -166,7 +166,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
             {/* Skip button */}
             <button
               onClick={handleVideoEnd}
-              className="absolute top-8 right-8 z-20 flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white/80 hover:text-white transition-all text-sm font-mono tracking-widest border border-white/10"
+              className="absolute top-8 right-4 md:right-8 z-20 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white/80 hover:text-white transition-all text-[0.7rem] md:text-sm font-mono tracking-widest border border-white/10"
             >
               SKIP <SkipForward size={14} />
             </button>
@@ -175,16 +175,16 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
       </AnimatePresence>
 
       {/* ── Main Page Content ── */}
-      <main className="w-full min-h-screen bg-[#020403] pt-32 overflow-hidden relative">
+      <main className="w-full min-h-screen bg-[#020403] pt-24 md:pt-32 overflow-hidden relative">
 
         {/* Ambient glow */}
         <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#00FF3C]/5 rounded-full blur-[180px] pointer-events-none" />
         <div className="absolute bottom-0 left-[-10%] w-[500px] h-[500px] bg-[#00FF3C]/8 rounded-full blur-[130px] pointer-events-none" />
 
-        <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-10 pb-24 relative z-10">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 pt-10 pb-24 relative z-10">
 
           {/* ── Hero Split Layout ── */}
-          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20 mb-32">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-20 md:mb-32">
 
             {/* Left – Text */}
             <div className="w-full lg:w-1/2 flex flex-col items-start">
@@ -192,17 +192,17 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="flex items-center gap-3 mb-8 px-4 py-2 rounded-full bg-white/5 border border-[#00FF3C]/30 backdrop-blur-md"
+                className="flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 rounded-full bg-white/5 border border-[#00FF3C]/30 backdrop-blur-md"
               >
                 <div className="w-2 h-2 rounded-full bg-[#00FF3C] animate-pulse shadow-[0_0_8px_#00FF3C]" />
-                <span className="text-[#00FF3C] font-mono text-xs uppercase tracking-[0.2em] font-bold">{data.badge}</span>
+                <span className="text-[#00FF3C] font-mono text-[0.65rem] md:text-xs uppercase tracking-[0.2em] font-bold">{data.badge}</span>
               </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-5xl lg:text-7xl font-display font-bold text-white uppercase tracking-tighter mb-6 leading-[0.95]"
+                className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold text-white uppercase tracking-tighter mb-4 md:mb-6 leading-[0.95]"
               >
                 {title}
               </motion.h1>
@@ -211,7 +211,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.15 }}
-                className="text-[#00FF3C] font-mono text-sm uppercase tracking-widest mb-4"
+                className="text-[#00FF3C] font-mono text-[0.7rem] md:text-sm uppercase tracking-widest mb-4"
               >
                 {subtitle}
               </motion.p>
@@ -220,7 +220,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-lg lg:text-xl text-[#B0B0B0] font-sans max-w-xl leading-relaxed mb-10 border-l-2 border-[#00FF3C]/40 pl-6"
+                className="text-base sm:text-lg lg:text-xl text-[#B0B0B0] font-sans max-w-xl leading-relaxed mb-8 md:mb-10 border-l-2 border-[#00FF3C]/40 pl-4 md:pl-6"
               >
                 {description}
               </motion.p>
@@ -229,7 +229,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="relative overflow-hidden flex items-center gap-3 px-8 py-4 bg-[#00FF3C] text-black font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,60,0.5)] group"
+                className="relative overflow-hidden flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-[#00FF3C] text-black font-sans text-xs md:text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,60,0.5)] group"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   GET A QUOTE
@@ -240,7 +240,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
             </div>
 
             {/* Right – Hero Image */}
-            <div className="w-full lg:w-1/2 relative h-[500px] lg:h-[650px] flex items-center justify-center">
+            <div className="w-full lg:w-1/2 relative h-[350px] sm:h-[450px] lg:h-[650px] flex items-center justify-center mt-4 lg:mt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

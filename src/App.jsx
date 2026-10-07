@@ -24,7 +24,11 @@ import ProductPage from './pages/ProductPage';
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
   return null;
 };
@@ -65,6 +69,7 @@ const App = () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    window.lenis = lenis;
 
     function raf(time) {
       lenis.raf(time);
@@ -74,6 +79,7 @@ const App = () => {
 
     return () => {
       lenis.destroy();
+      delete window.lenis;
     };
   }, []);
 

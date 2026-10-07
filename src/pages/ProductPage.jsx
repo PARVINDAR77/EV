@@ -45,14 +45,14 @@ const ProductPage = () => {
             <div className="absolute bottom-0 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-[#00FF3C] to-transparent shadow-[0_0_20px_rgba(0,255,60,0.5)]" />
             
             {/* Actual Product Image */}
-            <div className="relative w-full max-w-[500px] aspect-[4/5] sm:aspect-square flex items-center justify-center rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(0,255,60,0.15)] border border-white/5">
+            <div className="relative w-full max-w-[500px] flex items-center justify-center rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(0,255,60,0.15)] border border-white/5 bg-[#020403]/50">
                <img 
                  src={product.image} 
                  alt={product.name} 
-                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                 className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700"
                />
                {/* Overlay gradient to blend bottom edge */}
-               <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050708] to-transparent" />
+               <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050708] to-transparent pointer-events-none" />
             </div>
           </motion.div>
 

@@ -127,13 +127,13 @@ const ElectricShiftSection = () => {
 
         </div>
 
-        {/* Right Content - Framed Angled Image */}
+        {/* Right Content - Framed Angled Image (Hidden on mobile) */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95, x: 30 }}
           whileInView={{ opacity: 1, scale: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          className="relative w-full h-[350px] sm:h-[450px] md:h-[600px] flex justify-end items-center"
+          className="relative w-full h-[350px] sm:h-[450px] md:h-[600px] hidden lg:flex justify-end items-center"
         >
           {/* Glowing Green Backdrop shape */}
           <div 

@@ -24,7 +24,7 @@ const Franchise = () => {
         <div className="absolute top-0 right-[-10%] w-[1000px] h-[1000px] bg-[#00FF3C]/5 rounded-full blur-[200px] pointer-events-none" />
         <div className="absolute top-1/2 left-[-10%] w-[800px] h-[800px] bg-[#00FF3C]/5 rounded-full blur-[150px] pointer-events-none" />
 
-        <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-10 pb-24 relative z-10">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-24 relative z-10">
           
           {/* 1. HERO SECTION (ULTRA PREMIUM) */}
           <div className="flex flex-col xl:flex-row items-center justify-between gap-12 lg:gap-20 mb-40 relative">
@@ -45,7 +45,7 @@ const Franchise = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-6xl lg:text-[5.5rem] font-display font-bold text-white uppercase tracking-tighter mb-8 leading-none"
+                className="text-5xl md:text-6xl lg:text-[5.5rem] font-display font-bold text-white uppercase tracking-tighter mb-8 leading-none"
               >
                 TURN SPACE <br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-white/70 drop-shadow-sm">INTO REVENUE.</span>
@@ -102,7 +102,7 @@ const Franchise = () => {
                 initial={{ opacity: 0, x: 50, y: 30 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 1, delay: 0.8 }}
-                className="absolute bottom-4 -right-4 lg:bottom-12 lg:-right-8 w-64 md:w-80 p-6 rounded-2xl bg-[#020403]/95 backdrop-blur-xl border border-[#00FF3C]/40 shadow-[0_20px_50px_rgba(0,0,0,0.9)] z-20"
+                className="absolute bottom-4 right-0 sm:-right-4 lg:bottom-12 lg:-right-8 w-64 md:w-80 p-6 rounded-2xl bg-[#020403]/95 backdrop-blur-xl border border-[#00FF3C]/40 shadow-[0_20px_50px_rgba(0,0,0,0.9)] z-20"
               >
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-white/70 text-[0.7rem] font-mono uppercase tracking-[0.15em]">Projected Rev (Y1)</span>
@@ -125,7 +125,7 @@ const Franchise = () => {
                 initial={{ opacity: 0, x: -50, y: -30 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 1, delay: 0.6 }}
-                className="absolute top-12 -left-4 lg:top-24 lg:-left-12 px-6 py-4 rounded-xl bg-[#020403]/95 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.9)] z-20 flex items-center gap-4"
+                className="absolute top-12 left-0 sm:-left-4 lg:top-24 lg:-left-12 px-6 py-4 rounded-xl bg-[#020403]/95 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.9)] z-20 flex items-center gap-4"
               >
                 <div className="w-12 h-12 rounded-full bg-[#00FF3C]/20 flex items-center justify-center border border-[#00FF3C]/50">
                   <ShieldCheck className="text-[#00FF3C] w-6 h-6" />
@@ -261,7 +261,7 @@ const Franchise = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
-            className="w-full max-w-6xl mx-auto bg-gradient-to-br from-[#050A07] to-[#020403] rounded-[3rem] p-10 lg:p-20 border border-[#00FF3C]/20 shadow-[0_0_100px_rgba(0,255,60,0.05)] relative overflow-hidden"
+            className="w-full max-w-6xl mx-auto bg-gradient-to-br from-[#050A07] to-[#020403] rounded-3xl md:rounded-[3rem] p-6 md:p-10 lg:p-20 border border-[#00FF3C]/20 shadow-[0_0_100px_rgba(0,255,60,0.05)] relative overflow-hidden"
           >
             {/* Form BG Decoration */}
             <div className="absolute -top-20 -right-20 w-96 h-96 bg-[#00FF3C]/10 rounded-full blur-[100px]" />
@@ -272,7 +272,7 @@ const Franchise = () => {
                 <div className="w-16 h-16 rounded-2xl bg-[#00FF3C]/10 border border-[#00FF3C]/30 flex items-center justify-center mb-8">
                   <Zap className="text-[#00FF3C] w-8 h-8" />
                 </div>
-                <h2 className="text-5xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight">BECOME A <br/><span className="text-[#00FF3C]">PARTNER.</span></h2>
+                <h2 className="text-4xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight">BECOME A <br/><span className="text-[#00FF3C]">PARTNER.</span></h2>
                 <p className="text-[#A0A0A0] font-sans mb-10 text-lg">Submit your property details. Our infrastructure analysts will generate a free custom ROI projection for your specific location within 48 hours.</p>
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">

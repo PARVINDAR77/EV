@@ -21,7 +21,7 @@ const Contact = () => {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#00FF3C]/5 rounded-full blur-[200px] pointer-events-none" />
         <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] bg-[#00FF3C]/10 rounded-full blur-[150px] pointer-events-none" />
 
-        <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-10 pb-24 relative z-10">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-24 relative z-10">
           
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
             
@@ -106,7 +106,7 @@ const Contact = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.4 }}
-                className="w-full bg-gradient-to-br from-[#050A07] to-[#020403] rounded-[3rem] p-10 lg:p-16 border border-[#00FF3C]/20 shadow-[0_0_80px_rgba(0,255,60,0.05)] relative overflow-hidden"
+                className="w-full bg-gradient-to-br from-[#050A07] to-[#020403] rounded-3xl md:rounded-[3rem] p-6 md:p-10 lg:p-16 border border-[#00FF3C]/20 shadow-[0_0_80px_rgba(0,255,60,0.05)] relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#00FF3C]/10 rounded-full blur-[80px]" />
                 

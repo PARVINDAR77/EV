@@ -93,10 +93,10 @@ const StatItem = ({ value, goal, duration, label, isActive = false }) => {
   
   return (
     <div className={`flex flex-col border-l ${isActive ? 'border-[#00FF3C]' : 'border-[#00FF3C]/40'} pl-3 md:pl-4`}>
-      <div className="text-[#00FF3C] font-mono text-3xl font-bold leading-none mb-1">
+      <div className="text-[#00FF3C] font-mono text-xl sm:text-2xl md:text-3xl font-bold leading-none mb-1">
         <AnimatedNumber value={value} duration={duration} />+
       </div>
-      <div className="text-[0.55rem] text-gray-400 font-sans tracking-widest uppercase font-bold mt-1 max-w-[120px] leading-tight mb-2">
+      <div className="text-[0.45rem] sm:text-[0.55rem] text-gray-400 font-sans tracking-wider sm:tracking-widest uppercase font-bold mt-1 w-full leading-tight mb-2">
         {label}
       </div>
       <div className="w-full max-w-[100px]">
@@ -106,8 +106,8 @@ const StatItem = ({ value, goal, duration, label, isActive = false }) => {
             style={{ width: `${percentage}%` }}
           />
         </div>
-        <div className="text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-[0.1em] uppercase mt-1.5 font-medium">
-          <span className="text-white font-bold">{remaining}</span> TO GOAL ({goal})
+        <div className="text-[0.4rem] sm:text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-wide sm:tracking-[0.1em] uppercase mt-1.5 font-medium">
+          <span className="text-white font-bold">{remaining}</span> <span className="hidden sm:inline">TO GOAL</span> ({goal})
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@ const StatItem = ({ value, goal, duration, label, isActive = false }) => {
 const Hero = () => {
   return (
     <>
-      <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-12 md:pb-8">
+      <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-0">
 
         {/* Background Image (Using the provided image as the base layer) */}
         <div
@@ -129,11 +129,12 @@ const Hero = () => {
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/40 to-black/10" />
 
         {/* Content Wrapper */}
-        <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 md:px-10 flex flex-col justify-between h-full pb-8">
+        <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 md:px-10 flex flex-col justify-between flex-1 pb-2 md:pb-8">
 
-          <div className="flex justify-between items-start w-full mt-0">
+          <div className="flex justify-between w-full mt-0 flex-1">
             {/* Left Content */}
-            <div className="w-full md:w-[65%] flex flex-col items-start mt-4 md:mt-8">
+            <div className="w-full md:w-[65%] flex flex-col mt-4 md:mt-8">
+              <div>
 
               {/* Tagline */}
               <div className="flex items-center gap-3 mb-4 md:mb-5">
@@ -142,12 +143,12 @@ const Hero = () => {
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-4 md:mb-5 tracking-[-0.02em] text-white flex flex-col" style={{ textShadow: "0px 4px 15px rgba(0, 0, 0, 0.9)" }}>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-4 md:mb-5 tracking-[-0.02em] text-white flex flex-col break-words" style={{ textShadow: "0px 4px 15px rgba(0, 0, 0, 0.9)" }}>
                 <span className="block">POWERING INDIA'S</span>
                 <LoopingTypewriterText 
                   texts={["ELECTRIC JOURNEY.", "SUSTAINABLE FUTURE.", "GREEN MOBILITY."]} 
                   delay={500} 
-                  className="text-[#00FF3C] mt-1 md:mt-2" 
+                  className="text-[#00FF3C] mt-1 md:mt-2 break-words" 
                 />
               </h1>
 
@@ -161,36 +162,45 @@ const Hero = () => {
                 }
               `}</style>
 
-              {/* Buttons */}
-              <div className="flex flex-wrap gap-3 mb-8 md:mb-24 opacity-0 animate-[fadeIn_1s_ease-in_3s_forwards]">
-                <button className="group flex items-center justify-center gap-3 px-5 md:px-7 py-3 md:py-3.5 bg-[#00FF3C] text-black font-sans text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(0,255,60,0.3)] hover:shadow-[0_0_25px_rgba(0,255,60,0.6)]">
-                  EXPLORE SOLUTIONS
-                  <span className="text-[1.1rem] leading-none mb-[2px] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-                </button>
-                <button className="group flex items-center justify-center gap-3 px-5 md:px-7 py-3 md:py-3.5 border border-white/40 text-white font-sans text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-white transition-all bg-transparent hover:bg-white/5">
-                  GET A QUOTE
-                  <span className="text-[1.1rem] leading-none mb-[2px] opacity-70 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-                </button>
               </div>
 
-              {/* Stats Bar */}
-              <div className="w-full">
-                <h3 className="text-white font-sans font-bold tracking-[0.1em] text-[0.7rem] md:text-[0.85rem] mb-4 md:mb-5 uppercase">
-                  THE WAY INDIA MOVES IS CHANGING.
-                </h3>
-                <div className="grid grid-cols-2 gap-y-8 gap-x-4 sm:flex sm:gap-10 md:gap-14">
-
-                  <StatItem value={5} goal={100} duration={1500} label="CHARGING SOLUTIONS" isActive={true} />
-                  <StatItem value={150} goal={500} duration={2500} label="PROJECTS" />
-                  <StatItem value={45} goal={200} duration={2000} label="PARTNERS" />
-                  <StatItem value={28} goal={100} duration={2000} label="CITIES" />
-
-                </div>
-              </div>
-
+              {/* Bottom Section (Buttons & Stats) */}
+              <div className="w-full mt-auto pt-4 flex flex-col gap-4 md:gap-8">
+            {/* Buttons */}
+            <div className="flex flex-row w-full gap-2 sm:gap-3 opacity-0 animate-[fadeIn_1s_ease-in_3s_forwards]">
+              <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 bg-[#00FF3C] text-black font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(0,255,60,0.3)] hover:shadow-[0_0_25px_rgba(0,255,60,0.6)]">
+                EXPLORE SOLUTIONS
+                <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+              </button>
+              <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 border border-white/40 text-white font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-white transition-all bg-transparent hover:bg-white/5">
+                GET A QUOTE
+                <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] opacity-70 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+              </button>
             </div>
 
+            {/* Stats Bar */}
+            <div className="w-full">
+            <h3 className="text-white font-sans font-bold tracking-[0.1em] text-[0.7rem] md:text-[0.85rem] mb-4 md:mb-5 uppercase">
+              THE WAY INDIA MOVES IS CHANGING.
+            </h3>
+            <div className="grid grid-cols-4 gap-1 sm:gap-4 md:gap-8 lg:gap-14 w-full">
+              <div className="w-full">
+                <StatItem value={5} goal={100} duration={1500} label="CHARGING SOLUTIONS" isActive={true} />
+              </div>
+              <div className="w-full">
+                <StatItem value={150} goal={500} duration={2500} label="PROJECTS" />
+              </div>
+              <div className="w-full">
+                <StatItem value={45} goal={200} duration={2000} label="PARTNERS" />
+              </div>
+              <div className="w-full">
+                <StatItem value={28} goal={100} duration={2000} label="CITIES" />
+              </div>
+            </div>
+          </div>
 
+              </div>
+            </div>
 
           </div>
         </div>
@@ -211,7 +221,7 @@ const Hero = () => {
           <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-8 md:mb-10 gap-3">
             <div>
               <h2 className="text-white font-sans font-bold text-[1.2rem] tracking-wide mb-2 uppercase">ONE ENERGY ECOSYSTEM.</h2>
-              <p className="text-gray-400 font-sans text-[0.8rem]"><span className="underline underline-offset-4 text-gray-500">From</span> home to highway — a complete charging network.</p>
+              <p className="text-gray-400 font-sans text-[0.8rem]"><span className="text-gray-500">From</span> home to highway — a complete charging network.</p>
             </div>
             <div className="hidden md:flex items-center text-[0.55rem] text-gray-400 font-mono tracking-widest uppercase gap-2">
               EXPLORE THE ECOSYSTEM <ArrowRight size={12} />
@@ -222,7 +232,7 @@ const Hero = () => {
             {/* Horizontal dotted line */}
             <div className="absolute top-9 left-0 w-full border-t border-dashed border-[#00FF3C]/30 hidden md:block z-0"></div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 relative z-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 md:gap-16 relative z-10">
 
               {/* Home */}
               <div className="flex flex-col gap-5">

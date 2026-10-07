@@ -15,7 +15,7 @@ const Loader = ({ onComplete }) => {
         muted 
         playsInline 
         onEnded={onComplete}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-contain md:object-cover"
       >
         <source src={loadingVideo} type="video/mp4" />
       </video>

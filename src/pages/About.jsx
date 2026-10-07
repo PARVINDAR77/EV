@@ -5,11 +5,11 @@ import Footer from '../components/Footer/Footer';
 import { Leaf, Zap, Shield, Globe, Cpu, Wrench, Headphones, Cloud } from 'lucide-react';
 
 // Using local images to guarantee they load perfectly without network blocking
-import heroImg from '../assets/images/highway.jpg';
-import hardwareImg from '../assets/images/commercial.jpg';
-import softwareImg from '../assets/images/workplace.jpg';
-import supportImg from '../assets/images/residential.jpg';
-import networkImg from '../assets/images/fleet.jpg';
+import heroImg from '../assets/images/why_scalable.jpg';
+import hardwareImg from '../assets/images/why_engineered.jpg';
+import softwareImg from '../assets/images/why_smarttech.jpg';
+import supportImg from '../assets/images/why_support.jpg';
+import networkImg from '../assets/images/why_deployment.jpg';
 
 const About = () => {
   return (
@@ -73,10 +73,7 @@ const About = () => {
                 className="w-full h-full relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(0,255,60,0.2)] z-20"
                 style={{ transformPerspective: "1000px" }}
               >
-                <img src={heroImg} alt="Future of Mobility" className="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-1000" />
-                
-                {/* Tech Overlays inside image */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#020403]/90 via-[#020403]/20 to-transparent" />
+                <img src={heroImg} alt="Future of Mobility" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-transform duration-1000" />
                 <div className="absolute bottom-8 left-8 flex flex-col">
                   <div className="w-12 h-[2px] bg-[#00FF3C] mb-3" />
                   <span className="text-[#00FF3C] font-mono text-xs uppercase tracking-widest">Global Infrastructure</span>
@@ -115,8 +112,7 @@ const About = () => {
                 className="flex flex-col lg:flex-row items-center gap-16"
               >
                 <div className="w-full lg:w-1/2 relative h-[400px] rounded-3xl overflow-hidden border border-white/5 hover:border-[#00FF3C]/30 transition-all duration-500 group">
-                  <img src={hardwareImg} alt="Proprietary Hardware" className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#020403]/80 to-transparent pointer-events-none" />
+                  <img src={hardwareImg} alt="Proprietary Hardware" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-all duration-700" />
                 </div>
                 <div className="w-full lg:w-1/2">
                   <div className="w-12 h-12 rounded-full bg-[#00FF3C]/10 border border-[#00FF3C]/30 flex items-center justify-center mb-6">
@@ -140,8 +136,7 @@ const About = () => {
                 className="flex flex-col lg:flex-row-reverse items-center gap-16"
               >
                 <div className="w-full lg:w-1/2 relative h-[400px] rounded-3xl overflow-hidden border border-white/5 hover:border-[#00FF3C]/30 transition-all duration-500 group">
-                  <img src={softwareImg} alt="Intelligent Software" className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#020403]/80 to-transparent pointer-events-none" />
+                  <img src={softwareImg} alt="Intelligent Software" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-all duration-700" />
                 </div>
                 <div className="w-full lg:w-1/2">
                   <div className="w-12 h-12 rounded-full bg-[#00FF3C]/10 border border-[#00FF3C]/30 flex items-center justify-center mb-6">
@@ -165,8 +160,7 @@ const About = () => {
                 className="flex flex-col lg:flex-row items-center gap-16"
               >
                 <div className="w-full lg:w-1/2 relative h-[400px] rounded-3xl overflow-hidden border border-white/5 hover:border-[#00FF3C]/30 transition-all duration-500 group">
-                  <img src={supportImg} alt="Installation and Support" className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#020403]/80 to-transparent pointer-events-none" />
+                  <img src={supportImg} alt="Installation and Support" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-all duration-700" />
                 </div>
                 <div className="w-full lg:w-1/2">
                   <div className="w-12 h-12 rounded-full bg-[#00FF3C]/10 border border-[#00FF3C]/30 flex items-center justify-center mb-6">
@@ -237,29 +231,47 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="w-full relative rounded-3xl overflow-hidden border border-[#00FF3C]/20 shadow-[0_0_50px_rgba(0,255,60,0.1)] py-20 px-8 flex flex-col items-center justify-center text-center"
+            className="w-full relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,255,60,0.15)] py-24 px-8 flex flex-col items-center justify-center text-center group"
           >
-            <div className="absolute inset-0">
-               <img src={networkImg} alt="Global Network" className="w-full h-full object-cover opacity-20" />
-               <div className="absolute inset-0 bg-[#020403]/80 backdrop-blur-sm" />
+            {/* Animated Panning Background */}
+            <div className="absolute inset-0 z-0">
+               <img src={networkImg} alt="Global Network" className="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-[10s] ease-out" />
+               <div className="absolute inset-0 bg-gradient-to-b from-[#020403]/60 via-[#020403]/80 to-[#020403]" />
+               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00FF3C]/10 via-transparent to-transparent" />
             </div>
             
+            {/* Top Glowing Edge */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-[#00FF3C] to-transparent opacity-50" />
+            
             <div className="relative z-10 w-full max-w-5xl">
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-16">BUILDING THE NETWORK <br/> OF TOMORROW</h2>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-20 tracking-tight drop-shadow-xl">
+                BUILDING THE NETWORK <br/> OF TOMORROW
+              </h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 divide-y md:divide-y-0 md:divide-x divide-white/10">
-                <div className="flex flex-col items-center pt-8 md:pt-0">
-                  <span className="text-6xl font-display font-bold text-[#00FF3C] mb-2">10k+</span>
-                  <span className="text-white/60 font-sans tracking-widest uppercase text-sm">Active Chargers</span>
-                </div>
-                <div className="flex flex-col items-center pt-8 md:pt-0">
-                  <span className="text-6xl font-display font-bold text-[#00FF3C] mb-2">45M</span>
-                  <span className="text-white/60 font-sans tracking-widest uppercase text-sm">Gallons of Gas Saved</span>
-                </div>
-                <div className="flex flex-col items-center pt-8 md:pt-0">
-                  <span className="text-6xl font-display font-bold text-[#00FF3C] mb-2">99.9%</span>
-                  <span className="text-white/60 font-sans tracking-widest uppercase text-sm">Network Uptime</span>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <motion.div 
+                  whileHover={{ y: -10 }}
+                  className="flex flex-col items-center p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-xl hover:bg-white/[0.04] hover:border-[#00FF3C]/30 transition-all duration-300"
+                >
+                  <span className="text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-[#00FF3C] mb-3 drop-shadow-[0_0_20px_rgba(0,255,60,0.3)] px-2 py-1">10k+</span>
+                  <span className="text-white/60 font-mono tracking-[0.2em] uppercase text-xs font-bold">Active Chargers</span>
+                </motion.div>
+                
+                <motion.div 
+                  whileHover={{ y: -10 }}
+                  className="flex flex-col items-center p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-xl hover:bg-white/[0.04] hover:border-[#00FF3C]/30 transition-all duration-300"
+                >
+                  <span className="text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-[#00FF3C] mb-3 drop-shadow-[0_0_20px_rgba(0,255,60,0.3)] px-2 py-1">45M</span>
+                  <span className="text-white/60 font-mono tracking-[0.2em] uppercase text-xs font-bold">Gallons of Gas Saved</span>
+                </motion.div>
+
+                <motion.div 
+                  whileHover={{ y: -10 }}
+                  className="flex flex-col items-center p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-xl hover:bg-white/[0.04] hover:border-[#00FF3C]/30 transition-all duration-300"
+                >
+                  <span className="text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-[#00FF3C] mb-3 drop-shadow-[0_0_20px_rgba(0,255,60,0.3)] px-2 py-1">99.9%</span>
+                  <span className="text-white/60 font-mono tracking-[0.2em] uppercase text-xs font-bold">Network Uptime</span>
+                </motion.div>
               </div>
             </div>
           </motion.div>

@@ -158,12 +158,12 @@ const WhyAxionSection = () => {
               className="text-[clamp(2.5rem,8vw,5.5rem)] font-display font-bold text-white uppercase tracking-tighter leading-[0.9]"
             >
               WHY
-              <div className="mt-0 md:mt-2 flex justify-start -ml-2 md:-ml-4">
+              <div className="flex justify-start -ml-2 md:-ml-4 -mt-5 sm:-mt-6 md:-mt-10 lg:-mt-16 -mb-12 sm:-mb-16 md:-mb-24 lg:-mb-[138px]">
                 <img 
                   src="/logo.png" 
                   alt="Axion Logo" 
                   className="h-28 sm:h-36 md:h-52 lg:h-[300px] w-auto object-contain mix-blend-screen drop-shadow-[0_0_20px_rgba(0,255,60,0.4)]"
-                  style={{ clipPath: 'inset(20% 0 46% 0)', marginBottom: '-22%', marginTop: '-12%' }}
+                  style={{ clipPath: 'inset(20% 0 46% 0)' }}
                 />
               </div>
             </motion.h2>

@@ -31,7 +31,7 @@ const CTASection = () => {
             <div className="w-8 h-[1px] bg-[#00FF3C]" />
           </div>
           
-          <h2 className="text-[2.2rem] sm:text-[3rem] md:text-[4.5rem] font-display font-bold text-white uppercase tracking-tighter leading-[0.95]">
+          <h2 className="text-[2.2rem] sm:text-[3rem] md:text-[4.5rem] font-display font-bold text-white uppercase tracking-tighter leading-[1.1] md:leading-[0.95]">
             BUILD A <br className="md:hidden" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF3C] to-[#00A020]">CHARGING</span> BUSINESS.
           </h2>

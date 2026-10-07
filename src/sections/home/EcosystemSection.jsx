@@ -171,7 +171,7 @@ const EcosystemSection = () => {
         </div>
 
         {/* Mobile fallback grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:hidden mt-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 md:hidden mt-4">
           {[
             { icon: Home, title: 'HOME', description: 'Charging at your home' },
             { icon: Truck, title: 'FLEET', description: 'Keeping fleets moving' },

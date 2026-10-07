@@ -288,8 +288,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#020403] z-40 transition-transform duration-500 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden flex flex-col pt-32 px-8 overflow-y-auto pb-10`}>
-        <div className="flex flex-col gap-6 text-xl font-display uppercase tracking-widest text-white">
+      <div 
+        data-lenis-prevent="true"
+        className={`fixed inset-0 bg-[#020403] z-40 transition-transform duration-500 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden flex flex-col pt-32 px-8 overflow-y-auto pb-10 h-[100dvh]`}
+      >
+        <div className="flex flex-col gap-6 text-xl font-display uppercase tracking-widest text-white min-h-max">
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#00FF3C] transition-colors pb-4 border-b border-white/10">Home</Link>
           
           <div className="flex flex-col gap-4 pb-4 border-b border-white/10">
@@ -305,9 +308,24 @@ const Navbar = () => {
 
           <div className="flex flex-col gap-4 pb-4 border-b border-white/10">
             <span className="text-[#00FF3C]">Products</span>
-            <div className="flex flex-col gap-3 pl-4 text-base text-white/60">
-              <Link to="/products/ac-chargers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors">AC Chargers</Link>
-              <Link to="/products/dc-chargers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors">DC Fast Chargers</Link>
+            <div className="flex flex-col gap-4 pl-4 text-base text-white/60">
+              
+              <div className="flex flex-col gap-3">
+                <Link to="/products/ac-chargers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors text-white">AC Chargers</Link>
+                <div className="flex flex-col gap-3 pl-4 border-l border-white/20 text-sm">
+                  <Link to="/product/ac-7kw" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#00FF3C] transition-colors">Axion AC 7kW</Link>
+                  <Link to="/product/ac-22kw" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#00FF3C] transition-colors">Axion AC 22kW</Link>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <Link to="/products/dc-chargers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors text-white">DC Fast Chargers</Link>
+                <div className="flex flex-col gap-3 pl-4 border-l border-white/20 text-sm">
+                  <Link to="/product/dc-30kw" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#00FF3C] transition-colors">Axion DC 30kW</Link>
+                  <Link to="/product/dc-120kw" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#00FF3C] transition-colors">Axion DC 120kW</Link>
+                </div>
+              </div>
+
               <Link to="/products/software" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors">Software</Link>
               <Link to="/products/accessories" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors">Accessories</Link>
             </div>

@@ -84,7 +84,7 @@ const DeploymentProcessSection = () => {
         </div>
 
         {/* Process Steps */}
-        <div className="relative w-full flex flex-col sm:flex-row items-center sm:items-start justify-between gap-12 sm:gap-0">
+        <div className="relative w-full grid grid-cols-2 gap-y-12 gap-x-4 sm:flex sm:flex-row items-start sm:items-start justify-between sm:gap-0">
           
           {/* Horizontal Connecting Line */}
           <div className="hidden sm:block absolute top-8 md:top-10 left-10 right-10 h-[2px] bg-white/10 z-0">
