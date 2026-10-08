@@ -219,14 +219,14 @@ const Calculator = () => {
                       <optgroup label="⚡ AC Charging Stations (Home & Workplace)" className="bg-[#050A07] text-accent font-bold py-2">
                         {CHARGER_MODELS.filter(m => m.category === 'AC Chargers').map(model => (
                           <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2">
-                            {model.name} — {formatCurrency(model.price)}
+                            {model.name}
                           </option>
                         ))}
                       </optgroup>
                       <optgroup label="⚡ DC Fast Charging Stations (Highway & Commercial Hubs)" className="bg-[#050A07] text-accent font-bold py-2">
                         {CHARGER_MODELS.filter(m => m.category === 'DC Fast Chargers').map(model => (
                           <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2">
-                            {model.name} — {formatCurrency(model.price)}
+                            {model.name}
                           </option>
                         ))}
                       </optgroup>
