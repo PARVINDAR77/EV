@@ -1,13 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, Zap, TrendingUp, IndianRupee, ShieldCheck, ArrowRight, Minus, Plus } from 'lucide-react';
 import PageTransition from '../components/PageTransition/PageTransition';
 import Footer from '../components/Footer/Footer';
 
 const CHARGER_MODELS = [
-  { id: 'pro', name: 'Axion Pro (AC 7.4kW)', price: 24999, defaultKwh: 5 },
-  { id: 'ultra', name: 'Axion Ultra (AC 22kW)', price: 45000, defaultKwh: 15 },
-  { id: 'dc-fast', name: 'Axion DC Fast (30kW)', price: 350000, defaultKwh: 20 },
+  // ── AC Charging Wallboxes ──
+  {
+    id: 'ac-3-3kw',
+    name: 'Axion 3.3 kW AC (Entry Wallbox)',
+    category: 'AC Chargers',
+    price: 18000,
+    defaultKwh: 5,
+  },
+  {
+    id: 'ac-7-4kw',
+    name: 'Axion 7.4 kW AC (Axion Pro)',
+    category: 'AC Chargers',
+    price: 24999,
+    defaultKwh: 10,
+  },
+  {
+    id: 'ac-11kw',
+    name: 'Axion 11 kW AC (Commercial 3-Phase)',
+    category: 'AC Chargers',
+    price: 38000,
+    defaultKwh: 15,
+  },
+  {
+    id: 'ac-22kw',
+    name: 'Axion 22 kW AC (Axion Ultra)',
+    category: 'AC Chargers',
+    price: 45000,
+    defaultKwh: 20,
+  },
+
+  // ── DC Fast Chargers ──
+  {
+    id: 'dc-30kw',
+    name: 'Axion DC Fast (30kW)',
+    category: 'DC Fast Chargers',
+    price: 350000,
+    defaultKwh: 25,
+  },
+  {
+    id: 'dc-60kw',
+    name: 'Axion DC Fast (60kW Dual Gun)',
+    category: 'DC Fast Chargers',
+    price: 650000,
+    defaultKwh: 35,
+  },
+  {
+    id: 'dc-120kw',
+    name: 'Axion DC Ultra-Fast (120kW Highway Dual)',
+    category: 'DC Fast Chargers',
+    price: 1200000,
+    defaultKwh: 50,
+  },
+  {
+    id: 'dc-240kw',
+    name: 'Axion DC Hyper-Fast (240kW Heavy Duty)',
+    category: 'DC Fast Chargers',
+    price: 2200000,
+    defaultKwh: 70,
+  },
 ];
 
 const SOFTWARE_PLANS = [
@@ -17,7 +74,7 @@ const SOFTWARE_PLANS = [
 ];
 
 const Calculator = () => {
-  const [selectedCharger, setSelectedCharger] = useState(CHARGER_MODELS[0]);
+  const [selectedCharger, setSelectedCharger] = useState(CHARGER_MODELS[1]); // Default to Axion 7.4kW Pro
   const [selectedPlan, setSelectedPlan] = useState(SOFTWARE_PLANS[0]);
   const [vehiclesPerDay, setVehiclesPerDay] = useState(15);
   
@@ -130,7 +187,7 @@ const Calculator = () => {
               transition={{ delay: 0.2 }}
               className="text-[#A0A0A0] text-lg max-w-2xl mx-auto"
             >
-              Pick a charger, tell us how busy your location is, and instantly see your projected monthly earnings, net profit, and break-even timeline.
+              Pick any Axion AC or DC Fast charger from our lineup, set your location traffic, and instantly see your projected revenue, profit margins, and ROI break-even timeline.
             </motion.p>
           </div>
 
@@ -148,19 +205,33 @@ const Calculator = () => {
                 <h2 className="text-2xl font-display font-bold text-white mb-2">Just two quick inputs</h2>
                 <p className="text-[#888] text-sm mb-8">That's all it takes to see your potential.</p>
 
+                {/* ── Choose Your Charger Dropdown Only ── */}
                 <div className="mb-8">
-                  <label className="block text-white/70 text-sm font-bold mb-4 uppercase tracking-wider">Choose Your Charger</label>
+                  <label className="block text-white/70 text-sm font-bold mb-4 uppercase tracking-wider">
+                    Choose Your Charger
+                  </label>
                   <div className="relative">
                     <select 
                       value={selectedCharger.id}
                       onChange={(e) => setSelectedCharger(CHARGER_MODELS.find(c => c.id === e.target.value))}
-                      className="w-full bg-[#050A07] border border-white/20 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-accent/50 transition-colors cursor-pointer"
+                      className="w-full bg-[#050A07] border border-white/20 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-accent/50 transition-colors cursor-pointer text-base font-medium"
                     >
-                      {CHARGER_MODELS.map(model => (
-                        <option key={model.id} value={model.id}>{model.name}</option>
-                      ))}
+                      <optgroup label="⚡ AC Charging Stations (Home & Workplace)" className="bg-[#050A07] text-accent font-bold py-2">
+                        {CHARGER_MODELS.filter(m => m.category === 'AC Chargers').map(model => (
+                          <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2">
+                            {model.name} — {formatCurrency(model.price)}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="⚡ DC Fast Charging Stations (Highway & Commercial Hubs)" className="bg-[#050A07] text-accent font-bold py-2">
+                        {CHARGER_MODELS.filter(m => m.category === 'DC Fast Chargers').map(model => (
+                          <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2">
+                            {model.name} — {formatCurrency(model.price)}
+                          </option>
+                        ))}
+                      </optgroup>
                     </select>
-                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-accent">
+                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-accent text-sm">
                       ▼
                     </div>
                   </div>
@@ -200,25 +271,25 @@ const Calculator = () => {
                     <InputStepper 
                       label="Tariff to driver (₹/kWh)" 
                       value={tariff} 
-                      onAdjust={(dir) => handleAdjust(setTariff, dir, 5, 50, 1)} 
+                      onAdjust={(dir) => handleAdjust(setTariff, dir, 5, 60, 1)} 
                     />
                     
                     <InputStepper 
                       label="Your power cost (₹/kWh)" 
                       value={powerCost} 
-                      onAdjust={(dir) => handleAdjust(setPowerCost, dir, 2, 30, 1)} 
+                      onAdjust={(dir) => handleAdjust(setPowerCost, dir, 2, 40, 0.5)} 
                     />
                     
                     <InputStepper 
                       label="kWh per vehicle" 
                       value={kwhPerVehicle} 
-                      onAdjust={(dir) => handleAdjust(setKwhPerVehicle, dir, 1, 100, 0.5)} 
+                      onAdjust={(dir) => handleAdjust(setKwhPerVehicle, dir, 1, 150, 1)} 
                     />
                     
                     <InputStepper 
                       label="Charger price (₹)" 
                       value={chargerPrice} 
-                      onAdjust={(dir) => handleAdjust(setChargerPrice, dir, 5000, 1000000, 1000)} 
+                      onAdjust={(dir) => handleAdjust(setChargerPrice, dir, 5000, 3000000, chargerPrice >= 100000 ? 10000 : 1000)} 
                     />
                   </div>
                 </div>
@@ -300,12 +371,18 @@ const Calculator = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="flex-1 bg-accent text-black font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.5)] transition-all duration-300">
+                  <Link 
+                    to="/contact" 
+                    className="flex-1 text-center bg-accent text-black font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.5)] transition-all duration-300"
+                  >
                     Buy Now
-                  </button>
-                  <button className="flex-1 bg-transparent border border-accent text-accent font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-accent/10 transition-all duration-300 flex items-center justify-center gap-2">
+                  </Link>
+                  <Link 
+                    to="/contact" 
+                    className="flex-1 text-center bg-transparent border border-accent text-accent font-bold uppercase tracking-widest text-sm py-4 rounded-xl hover:bg-accent/10 transition-all duration-300 flex items-center justify-center gap-2"
+                  >
                     Talk to an Expert
-                  </button>
+                  </Link>
                 </div>
               </div>
 
