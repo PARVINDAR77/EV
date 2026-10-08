@@ -3,11 +3,11 @@ import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { ArrowRight, Home, Briefcase, ShoppingBag, Truck, Map } from 'lucide-react';
 
 // Import newly generated high-quality sector images
-import resImg from '../../assets/images/residential.jpg';
-import workImg from '../../assets/images/workplace.jpg';
-import commImg from '../../assets/images/commercial.jpg';
-import fleetImg from '../../assets/images/fleet.jpg';
-import highImg from '../../assets/images/WhatsApp Image 2026-10-05 at 4.24.45 PM (1).jpeg';
+import resVideo from '../../assets/images/EV_charging_at_night_20260929123844_gwr_video_mvp.mp4';
+import workVideo from '../../assets/images/EV_charging_at_corporate_office_20260929124509_gwr_video_mvp.mp4';
+import commVideo from '../../assets/images/AXION_CHARGE_commercial_video_se…_20260929125000_gwr_video_mvp.mp4';
+import fleetVideo from '../../assets/images/Electric_fleet_vans_charging_depot_20260929131411_gwr_video_mvp.mp4';
+import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929134507_gwr_video_mvp.mp4';
 
 const Watermark = () => (
   <div className="absolute top-6 right-6 z-[30] flex flex-col items-end opacity-80 transition-opacity duration-500 pointer-events-none">
@@ -22,7 +22,8 @@ const solutions = [
     subtitle: 'Home / Villa / Apartment',
     description: 'Smart AC charging solutions designed for seamless home integration, overnight charging, and energy efficiency.',
     icon: Home,
-    image: resImg
+    video: resVideo,
+    imageClass: 'w-full h-full object-cover object-center'
   },
   {
     id: 'workplace',
@@ -30,7 +31,8 @@ const solutions = [
     subtitle: 'Office / Corporate Campus',
     description: 'Scalable infrastructure for corporate campuses to empower employees and visitors with reliable daily charging.',
     icon: Briefcase,
-    image: workImg
+    video: workVideo,
+    imageClass: 'w-full h-full object-cover object-center'
   },
   {
     id: 'commercial',
@@ -38,7 +40,8 @@ const solutions = [
     subtitle: 'Retail / Hospitality / Malls',
     description: 'Attract premium customers with high-speed EV charging integrated directly into your retail or hospitality parking.',
     icon: ShoppingBag,
-    image: commImg
+    video: commVideo,
+    imageClass: 'w-full h-full object-cover object-center'
   },
   {
     id: 'fleet',
@@ -46,7 +49,8 @@ const solutions = [
     subtitle: 'Logistics / Transport',
     description: 'Ultra-fast DC charging hubs built for continuous operation, ensuring your logistics fleet is never grounded.',
     icon: Truck,
-    image: fleetImg
+    video: fleetVideo,
+    imageClass: 'w-full h-full object-cover object-center'
   },
   {
     id: 'highway',
@@ -54,8 +58,8 @@ const solutions = [
     subtitle: 'Long Distance Corridors',
     description: 'High-power infrastructure enabling cross-country travel with reliable, rapid charging at strategic highway nodes.',
     icon: Map,
-    image: highImg,
-    imageClass: 'w-full h-full object-cover object-center brightness-150 contrast-110',
+    video: highVideo,
+    imageClass: 'w-full h-full object-cover object-center',
     hideWatermark: true
   }
 ];
@@ -96,7 +100,11 @@ const ChargingSolutionsSection = () => {
         <div className="flex flex-col gap-6">
           {solutions.map((sol) => (
             <div key={sol.id} className="relative rounded-xl overflow-hidden h-[260px] border border-white/5">
-              <img src={sol.image} alt={sol.title} className={`absolute inset-0 ${sol.imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}`} />
+              {sol.video ? (
+                <video src={sol.video} autoPlay loop muted playsInline className={`absolute inset-0 ${sol.imageClass || "w-full h-full object-cover"}`} />
+              ) : (
+                <img src={sol.image} alt={sol.title} className={`absolute inset-0 ${sol.imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}`} />
+              )}
               {!sol.hideWatermark && <Watermark />}
               
               {/* Darker gradient for better text legibility */}
@@ -184,11 +192,19 @@ const ChargingSolutionsSection = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="absolute inset-0"
               >
-                <img 
-                  src={solutions[activeTab].image} 
-                  alt={solutions[activeTab].title} 
-                  className={solutions[activeTab].imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}
-                />
+                {solutions[activeTab].video ? (
+                  <video 
+                    src={solutions[activeTab].video} 
+                    autoPlay loop muted playsInline
+                    className={solutions[activeTab].imageClass || "w-full h-full object-cover"}
+                  />
+                ) : (
+                  <img 
+                    src={solutions[activeTab].image} 
+                    alt={solutions[activeTab].title} 
+                    className={solutions[activeTab].imageClass || "w-full h-full object-cover opacity-100 brightness-[1.6] contrast-125"}
+                  />
+                )}
                 
                 {!solutions[activeTab].hideWatermark && <Watermark />}
                 

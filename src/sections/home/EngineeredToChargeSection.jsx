@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Cpu, ArrowRight } from 'lucide-react';
-import dcChargerImg from '../../assets/images/product_render.jpg';
-import acChargerImg from '../../assets/images/ac_charger.jpg';
+import dcChargerImg from '../../assets/images/AXION DC charger with black cables-1.png';
+import acChargerImg from '../../assets/images/22 kW EV charger, black AXION logo-4.png';
 import softwareImg from '../../assets/images/software_dashboard.jpg';
 
 const Watermark = () => (
@@ -57,7 +57,7 @@ const EngineeredToChargeSection = () => {
             <img 
               src={dcChargerImg} 
               alt="DC Fast Charger" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-100"
+              className="absolute inset-0 w-full h-full object-contain transition-transform duration-[2s] group-hover:scale-105 opacity-100"
             />
             
             <Watermark />
@@ -97,12 +97,12 @@ const EngineeredToChargeSection = () => {
               <img 
                 src={acChargerImg} 
                 alt="AC Wallbox Charger" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-100"
+                className="absolute inset-0 w-full h-full object-contain transition-transform duration-[2s] group-hover:scale-105 opacity-100"
               />
               <Watermark />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 to-transparent pointer-events-none" />
               
-              <div className="absolute bottom-0 left-0 p-8 w-full">
+              <div className="absolute bottom-0 left-0 p-8 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[#00E32C] font-mono text-[0.6rem] uppercase tracking-widest">3.3kW - 22kW</div>
                 </div>

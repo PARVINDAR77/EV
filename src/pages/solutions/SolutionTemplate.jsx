@@ -11,13 +11,19 @@ import imgCommercial  from '../../assets/images/commercial.jpg';
 import imgFleet       from '../../assets/images/fleet.jpg';
 import imgHighway     from '../../assets/images/WhatsApp Image 2026-10-05 at 4.24.45 PM (1).jpeg';
 
-// Maps each solution to its dedicated intro video (served from /public)
+import resVideo from '../../assets/images/EV_charging_at_night_20260929123844_gwr_video_mvp.mp4';
+import workVideo from '../../assets/images/EV_charging_at_corporate_office_20260929124509_gwr_video_mvp.mp4';
+import commVideo from '../../assets/images/AXION_CHARGE_commercial_video_se…_20260929125000_gwr_video_mvp.mp4';
+import fleetVideo from '../../assets/images/Electric_fleet_vans_charging_depot_20260929131411_gwr_video_mvp.mp4';
+import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929134507_gwr_video_mvp.mp4';
+
+// Maps each solution to its dedicated video
 const videoMap = {
-  residential: '/videos/highway.mp4',     // EV charging at night — calm home feel
-  workplace:   '/videos/workplace.mp4',   // Corporate office EV charging
-  commercial:  '/videos/commercial.mp4',  // AXION CHARGE commercial video
-  fleet:       '/videos/fleet.mp4',       // Electric fleet vans at depot
-  highway:     '/videos/residential.mp4', // Blue SUV at fast charging station
+  residential: resVideo,
+  workplace:   workVideo,
+  commercial:  commVideo,
+  fleet:       fleetVideo,
+  highway:     highVideo,
 };
 
 // Maps each solution to its imported hero image

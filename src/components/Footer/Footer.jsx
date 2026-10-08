@@ -6,18 +6,6 @@ import { ArrowRight, Mail } from 'lucide-react';
 const Footer = () => {
   return (
     <footer className="relative w-full bg-[#020403] pt-24 pb-10 z-20 overflow-hidden border-t border-white/5">
-      
-      {/* SVG Filter to dynamically make black background transparent */}
-      <svg width="0" height="0" className="absolute">
-        <filter id="footer-remove-black" colorInterpolationFilters="sRGB">
-          <feColorMatrix type="matrix" values="
-            1 0 0 0 0
-            0 1 0 0 0
-            0 0 1 0 0
-            3 3 3 0 0
-          " />
-        </filter>
-      </svg>
 
       {/* Huge Background Watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-0">
@@ -55,7 +43,7 @@ const Footer = () => {
               </div>
               <button 
                 type="submit"
-                className="w-full sm:w-auto sm:absolute sm:right-2 px-6 py-4 sm:py-2 bg-accent text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300"
+                className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-1/2 sm:-translate-y-1/2 px-6 py-4 sm:py-2 bg-accent text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300"
               >
                 Subscribe
               </button>
@@ -67,8 +55,7 @@ const Footer = () => {
               <img 
                 src="/logo.png" 
                 alt="Axion Charge Logo" 
-                className="h-28 sm:h-32 md:h-36 lg:h-32 w-auto object-contain transition-all duration-300" 
-                style={{ filter: 'url(#footer-remove-black)' }} 
+                className="h-28 sm:h-32 md:h-36 lg:h-32 w-auto object-contain transition-all duration-300 opacity-60 hover:opacity-100" 
               />
             </div>
             
@@ -100,7 +87,7 @@ const Footer = () => {
           
           <div className="flex flex-col">
             <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-accent pl-3">Company</h5>
-            <ul className="flex flex-col gap-4 text-white/50 font-sans text-sm">
+            <ul className="flex flex-col gap-4 text-white/80 font-sans text-sm font-medium">
               <li><Link to="/about" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> About Us</Link></li>
               <li><Link to="/franchise" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Franchise</Link></li>
               <li><Link to="/contact" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Contact</Link></li>
@@ -110,7 +97,7 @@ const Footer = () => {
           
           <div className="flex flex-col">
             <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-accent pl-3">Solutions</h5>
-            <ul className="flex flex-col gap-4 text-white/50 font-sans text-sm">
+            <ul className="flex flex-col gap-4 text-white/80 font-sans text-sm font-medium">
               <li><Link to="/solutions/residential" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Residential</Link></li>
               <li><Link to="/solutions/workplace" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Workplace</Link></li>
               <li><Link to="/solutions/commercial" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Commercial</Link></li>
@@ -121,28 +108,30 @@ const Footer = () => {
 
           <div className="flex flex-col">
             <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-accent pl-3">Hardware</h5>
-            <ul className="flex flex-col gap-4 text-white/50 font-sans text-sm">
-              <li><Link to="#" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> AC Wallboxes</Link></li>
-              <li><Link to="#" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> DC Fast Chargers</Link></li>
-              <li><Link to="#" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Fleet Hubs</Link></li>
-              <li><Link to="#" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Accessories</Link></li>
+            <ul className="flex flex-col gap-4 text-white/80 font-sans text-sm font-medium">
+              <li><Link to="/products/ac-chargers" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> AC Wallboxes</Link></li>
+              <li><Link to="/products/dc-chargers" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> DC Fast Chargers</Link></li>
+              <li><Link to="/solutions/fleet" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Fleet Hubs</Link></li>
+              <li><Link to="/products/accessories" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Accessories</Link></li>
             </ul>
           </div>
 
           <div className="flex flex-col">
             <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-accent pl-3">Contact HQ</h5>
-            <ul className="flex flex-col gap-4 text-white/50 font-sans text-sm">
+            <ul className="flex flex-col gap-4 text-white/80 font-sans text-sm font-medium">
               <li className="flex flex-col gap-1">
-                <span className="text-white/30 text-[0.65rem] font-bold uppercase tracking-wider">Call Us</span>
-                <span className="text-white font-mono">+91 98798 80561</span>
+                <span className="text-white/40 text-[0.65rem] font-bold uppercase tracking-wider">Call Us</span>
+                <span className="text-white font-mono text-xs mb-1">Growth: +91 99799 93397</span>
+                <span className="text-white font-mono text-xs">Systems: +91 99799 93396</span>
               </li>
               <li className="flex flex-col gap-1 mt-2">
-                <span className="text-white/30 text-[0.65rem] font-bold uppercase tracking-wider">Email</span>
-                <a href="mailto:info@axioncharge.com" className="hover:text-accent transition-colors font-mono">info@axioncharge.com</a>
+                <span className="text-white/40 text-[0.65rem] font-bold uppercase tracking-wider">Email</span>
+                <a href="mailto:info@axioncharge.com" className="hover:text-accent transition-colors font-mono text-xs mb-1">info@axioncharge.com</a>
+                <a href="mailto:systems@axioncharge.com" className="hover:text-accent transition-colors font-mono text-xs">systems@axioncharge.com</a>
               </li>
               <li className="flex flex-col gap-1 mt-2">
-                <span className="text-white/30 text-[0.65rem] font-bold uppercase tracking-wider">Location</span>
-                <span className="leading-relaxed">Silicon Valley, CA 94025<br/>United States</span>
+                <span className="text-white/40 text-[0.65rem] font-bold uppercase tracking-wider">Location</span>
+                <span className="leading-relaxed text-xs">509, Skywalk The Element,<br/>Jagatpur Rd, off SG Highway,<br/>Ahmedabad, Gujarat 382470</span>
               </li>
             </ul>
           </div>
