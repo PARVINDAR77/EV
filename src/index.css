@@ -8,9 +8,11 @@
   --color-primary: #F5F7F5;
   --color-muted: #9BA49E;
   
-  /* Brand Colors */
-  --color-accent: #00E800;
-  --color-accent-rgb: 0, 232, 0;
+  /* Brand Colors (Electric Green from Axion Charge Logo) */
+  --color-accent: #00FF00;
+  --color-accent-rgb: 0, 255, 0;
+  --color-brand: #00FF00;
+  --color-brand-dark: #00C800;
   
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
@@ -29,13 +31,13 @@
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 10px rgba(var(--color-accent-rgb), 0.5);
+    text-shadow: 0 0 10px rgba(var(--color-accent-rgb), 0.6), 0 0 20px rgba(var(--color-accent-rgb), 0.3);
   }
   .box-glow {
-    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.2);
+    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.25), 0 0 30px rgba(var(--color-accent-rgb), 0.1);
   }
   .border-glow {
     border-color: rgba(var(--color-accent-rgb), 0.5);
-    box-shadow: inset 0 0 10px rgba(var(--color-accent-rgb), 0.2), 0 0 10px rgba(var(--color-accent-rgb), 0.2);
+    box-shadow: inset 0 0 10px rgba(var(--color-accent-rgb), 0.2), 0 0 12px rgba(var(--color-accent-rgb), 0.25);
   }
 }

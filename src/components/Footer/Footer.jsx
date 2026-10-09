@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail } from 'lucide-react';
+import AxionLogo from '../common/AxionLogo';
 
 const Footer = () => {
   return (
@@ -9,14 +10,14 @@ const Footer = () => {
 
       {/* Huge Background Watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-0">
-        <span className="text-[25vw] font-display font-black text-white/[0.04] tracking-tighter uppercase whitespace-nowrap select-none">
+        <span className="text-[25vw] font-display font-black text-white/[0.03] tracking-tighter uppercase whitespace-nowrap select-none">
           AXION
         </span>
       </div>
 
       {/* Ambient Glows */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/[0.02] rounded-full blur-[150px] pointer-events-none z-0" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/[0.02] rounded-full blur-[120px] pointer-events-none z-0" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/[0.035] rounded-full blur-[160px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/[0.035] rounded-full blur-[130px] pointer-events-none z-0" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 w-full relative z-10 flex flex-col">
         
@@ -25,7 +26,7 @@ const Footer = () => {
           
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:max-w-lg">
             <h3 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4">
-              Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#00A020] pr-2">Evolution.</span>
+              Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#00C800] pr-2">Evolution.</span>
             </h3>
             <p className="text-white/50 font-sans text-sm md:text-base leading-relaxed mb-8">
               Subscribe to our newsletter for the latest updates on EV infrastructure, product launches, and industry insights.
@@ -51,13 +52,15 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center lg:items-end text-center lg:text-right w-full lg:w-auto mt-4 lg:mt-0">
-            <div className="flex flex-col items-center mb-6 group cursor-pointer transition-all duration-300 hover:brightness-125">
-              <img 
-                src="/logo.png" 
-                alt="Axion Charge Logo" 
-                className="h-28 sm:h-32 md:h-36 lg:h-32 w-auto object-contain transition-all duration-300 opacity-60 hover:opacity-100" 
+            <Link 
+              to="/" 
+              className="flex flex-col items-center lg:items-end mb-6 group cursor-pointer transition-all duration-300"
+              aria-label="AXION CHARGE Home"
+            >
+              <AxionLogo 
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all duration-300 drop-shadow-[0_0_14px_rgba(0,255,0,0.35)] group-hover:drop-shadow-[0_0_26px_rgba(0,255,0,0.8)] group-hover:scale-105" 
               />
-            </div>
+            </Link>
             
             <div className="flex items-center justify-center lg:justify-end gap-4 mt-2">
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-accent hover:border-accent/50 hover:bg-accent/10 hover:shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.2)] transition-all duration-300">

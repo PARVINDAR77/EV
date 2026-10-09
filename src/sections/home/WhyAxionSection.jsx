@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Maximize, Cpu, Headphones, CheckCircle2, Handshake } from 'lucide-react';
+import AxionLogo from '../../components/common/AxionLogo';
 
 // 6 completely unique images — none repeated anywhere else on the site
 import imgEngineered  from '../../assets/images/why_engineered.jpg';    // EV tech / India roads
@@ -155,15 +156,13 @@ const WhyAxionSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-[clamp(2.5rem,8vw,5.5rem)] font-display font-bold text-white uppercase tracking-tighter leading-[0.9]"
+              className="text-[clamp(2.5rem,8vw,5.5rem)] font-display font-bold text-white uppercase tracking-tighter leading-[0.9] flex flex-col items-start gap-1"
             >
-              WHY
-              <div className="flex justify-start -ml-2 md:-ml-4 -mt-5 sm:-mt-6 md:-mt-10 lg:-mt-16 -mb-12 sm:-mb-16 md:-mb-24 lg:-mb-[138px]">
-                <img 
-                  src="/logo.png" 
-                  alt="Axion Logo" 
-                  className="h-28 sm:h-36 md:h-52 lg:h-[300px] w-auto object-contain mix-blend-screen drop-shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)]"
-                  style={{ clipPath: 'inset(20% 0 46% 0)' }}
+              <span>WHY</span>
+              <div className="flex items-center mt-1 sm:mt-2">
+                <AxionLogo 
+                  wordmarkOnly
+                  className="h-9 sm:h-11 md:h-14 lg:h-[68px] max-w-[85vw] sm:max-w-[380px] md:max-w-[440px] w-auto object-contain drop-shadow-[0_0_15px_rgba(0,255,0,0.35)] transition-all duration-300 hover:drop-shadow-[0_0_25px_rgba(0,255,0,0.65)]"
                 />
               </div>
             </motion.h2>

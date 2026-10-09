@@ -10,8 +10,9 @@ export default {
         background: '#050708',
         secondary: '#0B0F12',
         tertiary: '#11171B',
-        brand: '#00E32C',
-        brandDark: '#00B523',
+        brand: '#00FF00',
+        brandDark: '#00C800',
+        accent: '#00FF00',
         textMain: '#F3F4F6',
         textMuted: '#9CA3AF'
       },

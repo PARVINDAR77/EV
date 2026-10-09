@@ -9,11 +9,11 @@ import imgResidential from '../../assets/images/residential.jpg';
 import imgWorkplace   from '../../assets/images/workplace.jpg';
 import imgCommercial  from '../../assets/images/commercial.jpg';
 import imgFleet       from '../../assets/images/fleet.jpg';
-import imgHighway     from '../../assets/images/WhatsApp Image 2026-10-05 at 4.24.45 PM (1).jpeg';
+import imgHighway     from '../../assets/images/highway.jpg';
 
 import resVideo from '../../assets/images/EV_charging_at_night_20260929123844_gwr_video_mvp.mp4';
 import workVideo from '../../assets/images/EV_charging_at_corporate_office_20260929124509_gwr_video_mvp.mp4';
-import commVideo from '../../assets/images/AXION_CHARGE_commercial_video_se…_20260929125000_gwr_video_mvp.mp4';
+import commVideo from '../../assets/images/commercial_video.mp4';
 import fleetVideo from '../../assets/images/Electric_fleet_vans_charging_depot_20260929131411_gwr_video_mvp.mp4';
 import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929134507_gwr_video_mvp.mp4';
 
@@ -190,10 +190,12 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 pt-10 pb-24 relative z-10">
 
           {/* ── Hero Split Layout ── */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-20 md:mb-32">
+          <div className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-14 mb-20 md:mb-32 ${
+            id === 'highway' ? 'lg:items-center' : 'lg:items-center'
+          }`}>
 
             {/* Left – Text */}
-            <div className="w-full lg:w-1/2 flex flex-col items-start">
+            <div className={`w-full ${id === 'highway' ? 'lg:w-5/12' : 'lg:w-1/2'} flex flex-col items-start`}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -246,27 +248,36 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
             </div>
 
             {/* Right – Hero Image */}
-            <div className="w-full lg:w-1/2 relative h-[350px] sm:h-[450px] lg:h-[650px] flex items-center justify-center mt-4 lg:mt-0">
+            <div className={`w-full ${id === 'highway' ? 'lg:w-7/12' : 'lg:w-1/2'} relative flex items-center justify-center mt-6 lg:mt-0`}>
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(var(--color-accent-rgb),0.15)] z-10"
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className={`relative w-full ${
+                  id === 'highway' 
+                    ? 'aspect-video max-h-[500px]' 
+                    : 'aspect-square max-h-[500px]'
+                } rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 hover:border-accent/40 shadow-[0_0_50px_rgba(var(--color-accent-rgb),0.2)] z-10 bg-[#0B0F12] group transition-colors duration-300`}
+                style={{ aspectRatio: id === 'highway' ? '16 / 9' : '1 / 1' }}
               >
-                <img src={heroImage} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#020403]/80 via-transparent to-transparent" />
+                <img 
+                  src={heroImage} 
+                  alt={title} 
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
               </motion.div>
 
               {/* Decorative floating rings */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                className="absolute -top-16 -right-16 w-[380px] h-[380px] border border-dashed border-accent/15 rounded-full z-0 pointer-events-none"
+                className="absolute -top-10 -right-10 w-[340px] h-[340px] border border-dashed border-accent/15 rounded-full z-0 pointer-events-none"
               />
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 55, repeat: Infinity, ease: 'linear' }}
-                className="absolute -bottom-8 -left-8 w-[260px] h-[260px] border border-accent/10 rounded-full z-0 pointer-events-none"
+                className="absolute -bottom-8 -left-8 w-[240px] h-[240px] border border-accent/10 rounded-full z-0 pointer-events-none"
               />
             </div>
           </div>

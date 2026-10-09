@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { sectionStats } from '../../data/axionStats';
-import bgImage from '../../assets/images/hero_bg_final.jpg';
+import electricShiftCar from '../../assets/images/electric_shift_car.png';
 
 // Subcomponent: Animated Counter
 const AnimatedCounter = ({ from = 0, to, duration = 2 }) => {
@@ -149,7 +149,7 @@ const ElectricShiftSection = () => {
             <div 
               className="w-full h-full bg-cover bg-center"
               style={{ 
-                backgroundImage: `url('/src/assets/images/electric_shift_car.png')`, 
+                backgroundImage: `url(${electricShiftCar})`, 
                 clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" 
               }}
             >

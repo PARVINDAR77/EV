@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, ArrowRight, Cpu, Smartphone, Wrench, Home, Briefcase, Map } from 'lucide-react';
+import AxionLogo from '../common/AxionLogo';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -23,30 +24,19 @@ const Navbar = () => {
 
   return (
     <nav 
-      className="fixed top-6 left-0 w-full z-50 flex justify-center px-8 transition-all duration-300"
+      className="fixed top-6 left-0 w-full z-50 flex justify-center px-4 sm:px-8 transition-all duration-300"
       onMouseLeave={() => setActiveMenu(null)}
     >
-      {/* SVG Filter to dynamically make black background transparent */}
-      <svg width="0" height="0" className="absolute">
-        <filter id="remove-black" colorInterpolationFilters="sRGB">
-          <feColorMatrix type="matrix" values="
-            1 0 0 0 0
-            0 1 0 0 0
-            0 0 1 0 0
-            3 3 3 0 0
-          " />
-        </filter>
-      </svg>
-
-      <div className="w-full max-w-[1400px] flex items-center justify-between bg-[#020403]/40 backdrop-blur-lg border border-white/10 rounded-full px-8 py-3.5 shadow-lg relative z-50">
+      <div className="w-full max-w-[1400px] flex items-center justify-between bg-[#020403]/60 backdrop-blur-xl border border-white/10 rounded-full px-6 sm:px-8 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.8)] relative z-50">
         
         {/* Logo */}
-        <Link to="/" className="flex flex-col items-center justify-center -mt-1 group cursor-pointer transition-all duration-300">
-          <img 
-            src="/logo.png" 
-            alt="Axion Charge Logo" 
-            className="h-14 sm:h-16 w-auto object-contain scale-[1.4] sm:scale-[1.5] origin-left transition-all duration-300 group-hover:brightness-125"
-            style={{ filter: 'url(#remove-black)' }}
+        <Link 
+          to="/" 
+          className="flex items-center group cursor-pointer transition-transform duration-300 hover:scale-[1.03] select-none"
+          aria-label="AXION CHARGE Home"
+        >
+          <AxionLogo 
+            className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-all duration-300 drop-shadow-[0_0_10px_rgba(0,255,0,0.35)] group-hover:drop-shadow-[0_0_18px_rgba(0,255,0,0.75)]" 
           />
         </Link>
 

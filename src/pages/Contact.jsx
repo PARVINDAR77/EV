@@ -23,8 +23,8 @@ const Contact = () => {
       <main className="w-full min-h-screen bg-[#020403] pt-32 overflow-hidden relative font-sans">
         
         {/* Abstract Ambient Lights */}
-        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,rgba(0,227,44,0.08)_0%,transparent_60%)] pointer-events-none z-0" />
-        <div className="absolute bottom-0 left-[-20%] w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(0,227,44,0.05)_0%,transparent_60%)] pointer-events-none z-0" />
+        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,rgba(0,255,0,0.08)_0%,transparent_60%)] pointer-events-none z-0" />
+        <div className="absolute bottom-0 left-[-20%] w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(0,255,0,0.05)_0%,transparent_60%)] pointer-events-none z-0" />
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-32 relative z-10">
           
@@ -49,7 +49,7 @@ const Contact = () => {
                 className="text-6xl sm:text-7xl lg:text-[7rem] font-display font-bold text-white uppercase tracking-tighter mb-8 leading-[0.85]"
               >
                 LET'S <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E32C] via-[#00B523] to-white drop-shadow-lg">CONNECT.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF00] via-[#00C800] to-white drop-shadow-lg">CONNECT.</span>
               </motion.h1>
 
               <motion.p 
