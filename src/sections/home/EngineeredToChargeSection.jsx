@@ -5,12 +5,6 @@ import dcChargerImg from '../../assets/images/AXION DC charger with black cables
 import acChargerImg from '../../assets/images/22 kW EV charger, black AXION logo-4.png';
 import softwareImg from '../../assets/images/software_dashboard.jpg';
 
-const Watermark = () => (
-  <div className="absolute top-6 right-6 z-10 flex flex-col items-end opacity-20 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none">
-    <img src="/axion_logo.svg" alt="Axion Charge Logo" className="h-6 sm:h-7 w-auto object-contain drop-shadow-[0_0_8px_rgba(0,255,0,0.4)]" />
-  </div>
-);
-
 const EngineeredToChargeSection = () => {
   return (
     <section className="relative w-full bg-[#050708] py-24 md:py-32 z-20 overflow-hidden border-t border-white/5">
@@ -44,7 +38,7 @@ const EngineeredToChargeSection = () => {
         </div>
 
         {/* Asymmetric Product Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 min-h-[700px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 min-h-[580px]">
           
           {/* Main Feature: DC Fast Charger (Left, spanning 7 columns) */}
           <motion.div 
@@ -52,34 +46,41 @@ const EngineeredToChargeSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7 relative rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group h-[500px] lg:h-auto cursor-pointer"
+            className="lg:col-span-7 relative rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 hover:border-[#00FF00]/30 group h-[480px] lg:h-auto min-h-[480px] lg:min-h-[580px] cursor-pointer transition-colors duration-300"
           >
             <img 
               src={dcChargerImg} 
               alt="DC Fast Charger" 
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 w-full h-full object-contain transition-transform duration-[2s] group-hover:scale-105 opacity-100"
+              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[2s] group-hover:scale-105 opacity-100"
             />
             
-            <Watermark />
-            
-            {/* Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050708]/80 via-transparent to-transparent" />
+            {/* Top Badges */}
+            <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
+              <div className="px-3 py-1 bg-black/70 backdrop-blur-md border border-[#00FF00]/40 rounded-full text-[#00FF00] font-mono text-[0.65rem] uppercase tracking-widest font-bold shadow-[0_0_12px_rgba(0,255,0,0.25)]">
+                Flagship
+              </div>
+              <div className="px-3 py-1 bg-black/70 backdrop-blur-md border border-white/10 rounded-full text-gray-300 font-mono text-[0.65rem] uppercase tracking-widest">
+                30kW – 240kW+
+              </div>
+            </div>
 
-            {/* Content */}
-            <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="px-2 py-1 bg-[#00FF00]/10 border border-[#00FF00]/30 rounded text-[#00FF00] font-mono text-[0.6rem] uppercase tracking-widest">Flagship</div>
-                  <div className="px-2 py-1 bg-white/5 border border-white/10 rounded text-gray-400 font-mono text-[0.6rem] uppercase tracking-widest">30kW - 240kW+</div>
-                </div>
-                <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">DC FAST CHARGER</h3>
-                <p className="text-gray-400 font-sans text-sm md:text-base max-w-[400px]">High-power monolithic charging stations designed for highways and fleet depots.</p>
+            {/* Gradient Overlay for Legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/85 via-transparent to-transparent pointer-events-none" />
+
+            {/* Content Bottom Bar */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10 flex items-end justify-between gap-4">
+              <div className="max-w-[460px]">
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-1.5 tracking-wide">
+                  DC FAST CHARGER
+                </h3>
+                <p className="text-gray-300 font-sans text-xs md:text-sm leading-relaxed">
+                  High-power monolithic charging stations designed for highway corridors and rapid fleet depots.
+                </p>
               </div>
               
-              <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-[#00FF00] group-hover:border-[#00FF00] group-hover:text-black transition-all duration-300">
+              <div className="w-11 h-11 rounded-full border border-white/20 bg-black/60 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-[#00FF00] group-hover:border-[#00FF00] group-hover:text-black transition-all duration-300 flex-shrink-0 shadow-lg">
                 <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
               </div>
             </div>
@@ -94,24 +95,38 @@ const EngineeredToChargeSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative min-h-[300px] lg:min-h-0 lg:flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group cursor-pointer"
+              className="relative min-h-[260px] lg:min-h-0 lg:flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 hover:border-[#00FF00]/30 group cursor-pointer transition-colors duration-300"
             >
               <img 
                 src={acChargerImg} 
                 alt="AC Wallbox Charger" 
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-contain transition-transform duration-[2s] group-hover:scale-105 opacity-100"
+                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[2s] group-hover:scale-105 opacity-100"
               />
-              <Watermark />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 to-transparent pointer-events-none" />
               
-              <div className="absolute bottom-0 left-0 p-8 w-full pointer-events-none">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[#00FF00] font-mono text-[0.6rem] uppercase tracking-widest">3.3kW - 22kW</div>
+              {/* Top Badges */}
+              <div className="absolute top-5 left-5 z-10 flex items-center gap-2">
+                <div className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-[#00FF00]/40 rounded-full text-[#00FF00] font-mono text-[0.6rem] uppercase tracking-widest font-bold shadow-[0_0_10px_rgba(0,255,0,0.2)]">
+                  AC Wallbox
                 </div>
-                <h3 className="text-2xl font-display font-bold text-white mb-1">AC CHARGERS</h3>
-                <p className="text-gray-400 font-sans text-sm">Compact and smart wallboxes for residential and workplace charging.</p>
+                <div className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-white/10 rounded-full text-gray-300 font-mono text-[0.6rem] uppercase tracking-widest">
+                  3.3kW – 22kW
+                </div>
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/85 via-transparent to-transparent pointer-events-none" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10 flex items-end justify-between gap-3 pointer-events-none">
+                <div className="max-w-[380px]">
+                  <h3 className="text-xl font-display font-bold text-white mb-1">AC CHARGERS</h3>
+                  <p className="text-gray-300 font-sans text-xs leading-relaxed">
+                    Compact and smart wallboxes for residential, apartment, and corporate workplace charging.
+                  </p>
+                </div>
+                <div className="w-9 h-9 rounded-full border border-white/20 bg-black/60 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-[#00FF00] group-hover:border-[#00FF00] group-hover:text-black transition-all duration-300 flex-shrink-0">
+                  <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                </div>
               </div>
             </motion.div>
 
@@ -121,26 +136,38 @@ const EngineeredToChargeSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative min-h-[300px] lg:min-h-0 lg:flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 group cursor-pointer"
+              className="relative min-h-[260px] lg:min-h-0 lg:flex-1 rounded-2xl overflow-hidden bg-[#0B0F12] border border-white/5 hover:border-[#00FF00]/30 group cursor-pointer transition-colors duration-300"
             >
               <img 
                 src={softwareImg} 
                 alt="Smart Charging Software" 
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-100"
+                className="absolute inset-0 w-full h-full object-cover object-[center_28%] transition-transform duration-[2s] group-hover:scale-105 opacity-100"
               />
-              <Watermark />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/90 to-transparent" />
               
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="px-2 py-1 bg-[#00FF00]/10 border border-[#00FF00]/30 rounded text-[#00FF00] font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1">
-                     <Cpu className="w-3 h-3" /> Core OS
-                   </div>
+              {/* Top Badges */}
+              <div className="absolute top-5 left-5 z-10 flex items-center gap-2">
+                <div className="px-2.5 py-1 bg-[#00FF00]/15 backdrop-blur-md border border-[#00FF00]/40 rounded-full text-[#00FF00] font-mono text-[0.6rem] uppercase tracking-widest font-bold flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,255,0,0.2)]">
+                  <Cpu className="w-3 h-3 text-[#00FF00]" /> Core OS
                 </div>
-                <h3 className="text-2xl font-display font-bold text-white mb-1">AXION INTELLIGENCE</h3>
-                <p className="text-gray-400 font-sans text-sm">Real-time monitoring, dynamic load balancing, and fleet management.</p>
+                <div className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-white/10 rounded-full text-gray-300 font-mono text-[0.6rem] uppercase tracking-widest">
+                  Cloud CMS
+                </div>
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050708]/85 via-transparent to-transparent pointer-events-none" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10 flex items-end justify-between gap-3 pointer-events-none">
+                <div className="max-w-[380px]">
+                  <h3 className="text-xl font-display font-bold text-white mb-1">AXION INTELLIGENCE</h3>
+                  <p className="text-gray-300 font-sans text-xs leading-relaxed">
+                    Real-time monitoring, dynamic load balancing, telemetry, and fleet management.
+                  </p>
+                </div>
+                <div className="w-9 h-9 rounded-full border border-white/20 bg-black/60 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-[#00FF00] group-hover:border-[#00FF00] group-hover:text-black transition-all duration-300 flex-shrink-0">
+                  <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                </div>
               </div>
             </motion.div>
 
