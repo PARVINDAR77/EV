@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { sectionStats } from '../../data/axionStats';
-import electricShiftCar from '../../assets/images/electric_shift_car.png';
+import electricShiftCar from '../../assets/images/electric_shift_car.jpg';
 
 // Subcomponent: Animated Counter
 const AnimatedCounter = ({ from = 0, to, duration = 2 }) => {
@@ -143,18 +143,22 @@ const ElectricShiftSection = () => {
 
           {/* The Actual Image Container with thick green border */}
           <div 
-             className="relative w-[85%] h-[90%] z-10 p-[2px] right-0 bg-accent shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.6)]"
+             className="relative w-[85%] h-[90%] z-10 p-[2px] right-0 bg-accent shadow-[0_0_35px_rgba(var(--color-accent-rgb),0.6)]"
              style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           >
             <div 
-              className="w-full h-full bg-cover bg-center"
-              style={{ 
-                backgroundImage: `url(${electricShiftCar})`, 
-                clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" 
-              }}
+              className="relative w-full h-full overflow-hidden bg-[#050806]"
+              style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
             >
-              {/* Optional dark overlay if image is too bright */}
-              <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+              <img 
+                src={electricShiftCar} 
+                alt="Electric Mobility Charging Infrastructure" 
+                className="w-full h-full object-cover object-center brightness-[1.02] contrast-[1.02]"
+                loading="eager"
+                decoding="async"
+              />
+              {/* Subtle ambient gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
         </motion.div>
