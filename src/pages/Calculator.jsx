@@ -67,16 +67,11 @@ const CHARGER_MODELS = [
   },
 ];
 
-const SOFTWARE_PLANS = [
-  { id: 'basic', name: 'Basic', commission: 15, desc: 'Up to 3 chargers' },
-  { id: 'premium', name: 'Premium', commission: 20, desc: '3+ chargers - CMS' },
-  { id: 'enterprise', name: 'Enterprise', commission: 2.5, desc: 'Large deployments' },
-];
-
 const Calculator = () => {
   const [selectedCharger, setSelectedCharger] = useState(CHARGER_MODELS[1]); // Default to Axion 7.4kW Pro
-  const [selectedPlan, setSelectedPlan] = useState(SOFTWARE_PLANS[0]);
+  const [chargerQuantity, setChargerQuantity] = useState(1);
   const [vehiclesPerDay, setVehiclesPerDay] = useState(15);
+  const [timeHorizon, setTimeHorizon] = useState('monthly'); // 'daily' | 'monthly' | 'yearly'
   
   // Assumptions
   const [tariff, setTariff] = useState(18); // ₹/kWh
@@ -90,37 +85,82 @@ const Calculator = () => {
     setChargerPrice(selectedCharger.price);
   }, [selectedCharger]);
 
-  // Calculations for current selection
+  const numTariff = Number(tariff) || 0;
+  const numPowerCost = Number(powerCost) || 0;
+  const numKwh = Number(kwhPerVehicle) || 0;
+  const numPrice = Number(chargerPrice) || 0;
+  const numVehicles = Number(vehiclesPerDay) || 0;
+  const numChargers = Math.max(1, Number(chargerQuantity) || 1);
+  const totalHardwareInvestment = numPrice * numChargers;
+
+  // 1. Daily Metrics (1 Day)
+  const dailySessionsPerCharger = numVehicles;
+  const dailySessions = dailySessionsPerCharger * numChargers;
+  const dailyKwh = dailySessions * numKwh;
+  const dailyRevenue = dailyKwh * numTariff;
+  const dailyPowerCost = dailyKwh * numPowerCost;
+  const dailyNetProfit = dailyRevenue - dailyPowerCost;
+
+  // 2. Monthly Metrics (30 Days)
+  const monthlySessions = dailySessions * 30;
+  const monthlyKwh = dailyKwh * 30;
+  const grossRevenueMonthly = dailyRevenue * 30;
+  const powerCostMonthly = dailyPowerCost * 30;
+  const netProfitMonthly = dailyNetProfit * 30;
+
+  // 3. Yearly Metrics (360 Days / 12 Months)
+  const yearlySessions = monthlySessions * 12;
+  const yearlyKwh = monthlyKwh * 12;
+  const grossRevenueYearly = grossRevenueMonthly * 12;
+  const powerCostYearly = powerCostMonthly * 12;
+  const netProfitYearly = netProfitMonthly * 12;
+
+  // Calculations for traffic scenario chart
   const calculateNetProfit = (vehicles) => {
-    const monthlySessions = vehicles * 30;
-    const revenuePerSession = kwhPerVehicle * tariff;
-    const costPerSession = kwhPerVehicle * powerCost;
-    
-    const grossRevenueMonthly = revenuePerSession * monthlySessions;
-    const commissionMonthly = grossRevenueMonthly * (selectedPlan.commission / 100);
-    const powerCostMonthly = costPerSession * monthlySessions;
-    
-    return grossRevenueMonthly - commissionMonthly - powerCostMonthly;
+    const s = vehicles * 30 * numChargers;
+    const rev = numKwh * numTariff * s;
+    const cost = numKwh * numPowerCost * s;
+    return rev - cost;
   };
 
-  const monthlySessions = vehiclesPerDay * 30;
-  const revenuePerSession = kwhPerVehicle * tariff;
-  const costPerSession = kwhPerVehicle * powerCost;
-  
-  const grossRevenueMonthly = revenuePerSession * monthlySessions;
-  const grossRevenueYearly = grossRevenueMonthly * 12;
-  
-  const commissionMonthly = grossRevenueMonthly * (selectedPlan.commission / 100);
-  const powerCostMonthly = costPerSession * monthlySessions;
-  
-  const netProfitMonthly = grossRevenueMonthly - commissionMonthly - powerCostMonthly;
-  const breakEvenMonths = netProfitMonthly > 0 ? (chargerPrice / netProfitMonthly) : 0;
-  
-  const netMarginPerKwh = tariff - powerCost - (tariff * (selectedPlan.commission / 100));
+  const breakEvenMonths = netProfitMonthly > 0 ? (totalHardwareInvestment / netProfitMonthly) : 0;
+  const netMarginPerKwh = numTariff - numPowerCost;
+
+  // Active Time Horizon Display Helper
+  const activeMetrics = {
+    daily: {
+      label: 'Daily',
+      periodUnit: 'day',
+      revenue: dailyRevenue,
+      powerCost: dailyPowerCost,
+      profit: dailyNetProfit,
+      subText: numChargers > 1
+        ? `Based on ${dailySessions} total sessions/day (${dailySessionsPerCharger}/charger) across ${numChargers} chargers`
+        : `Based on ${dailySessions} charging sessions / day (${dailyKwh.toFixed(0)} kWh)`
+    },
+    monthly: {
+      label: 'Monthly',
+      periodUnit: 'month',
+      revenue: grossRevenueMonthly,
+      powerCost: powerCostMonthly,
+      profit: netProfitMonthly,
+      subText: numChargers > 1
+        ? `≈ ${new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(grossRevenueYearly)} a year across ${numChargers} chargers`
+        : `≈ ${new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(grossRevenueYearly)} a year in gross revenue`
+    },
+    yearly: {
+      label: 'Annual',
+      periodUnit: 'year',
+      revenue: grossRevenueYearly,
+      powerCost: powerCostYearly,
+      profit: netProfitYearly,
+      subText: `Total annual throughput: ${yearlySessions.toLocaleString('en-IN')} sessions (${yearlyKwh.toLocaleString('en-IN')} kWh) across ${numChargers} ${numChargers === 1 ? 'unit' : 'units'}`
+    }
+  }[timeHorizon];
   
   // Chart Calculations
-  const quietVehicles = Math.max(1, Math.floor(vehiclesPerDay * 0.5));
-  const busyVehicles = Math.floor(vehiclesPerDay * 1.5);
+  const quietVehicles = Math.max(1, Math.floor(numVehicles * 0.5));
+  const busyVehicles = Math.floor(numVehicles * 1.5);
   
   const quietProfit = calculateNetProfit(quietVehicles);
   const busyProfit = calculateNetProfit(busyVehicles);
@@ -146,7 +186,8 @@ const Calculator = () => {
 
   const handleAdjust = (setter, value, min, max, step) => {
     setter(prev => {
-      const newVal = prev + (value * step);
+      const current = typeof prev === 'number' && !isNaN(prev) ? prev : min;
+      const newVal = Math.round((current + (value * step)) * 10) / 10;
       if (newVal < min) return min;
       if (newVal > max) return max;
       return newVal;
@@ -202,14 +243,19 @@ const Calculator = () => {
             >
               {/* Primary Inputs Box */}
               <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/10 backdrop-blur-md">
-                <h2 className="text-2xl font-display font-bold text-white mb-2">Just two quick inputs</h2>
-                <p className="text-[#888] text-sm mb-8">That's all it takes to see your potential.</p>
+                <h2 className="text-2xl font-display font-bold text-white mb-2">Configure Station Setup</h2>
+                <p className="text-[#888] text-sm mb-8">Choose your charger model, number of units, and expected daily traffic.</p>
 
-                {/* ── Choose Your Charger Dropdown Only ── */}
-                <div className="mb-8">
-                  <label className="block text-white/70 text-sm font-bold mb-4 uppercase tracking-wider">
-                    Choose Your Charger
-                  </label>
+                {/* ── Choose Your Charger Dropdown ── */}
+                <div className="mb-6">
+                  <div className="flex justify-between items-center mb-3">
+                    <label className="block text-white/70 text-sm font-bold uppercase tracking-wider">
+                      Choose Your Charger
+                    </label>
+                    <span className="text-xs font-mono text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">
+                      ₹{selectedCharger.price.toLocaleString('en-IN')} / unit
+                    </span>
+                  </div>
                   <div className="relative">
                     <select 
                       value={selectedCharger.id}
@@ -237,10 +283,92 @@ const Calculator = () => {
                   </div>
                 </div>
 
+                {/* ── Number of Chargers / Units Selector ── */}
+                <div className="mb-8 p-5 rounded-2xl bg-[#050A07]/80 border border-white/10">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                      <label className="block text-white/90 text-sm font-bold uppercase tracking-wider">
+                        Number of Chargers / Units
+                      </label>
+                      <p className="text-xs text-white/40 mt-0.5">Scale station deployment size</p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleAdjust(setChargerQuantity, -1, 1, 100, 1)}
+                        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/20 flex items-center justify-center text-accent transition-colors cursor-pointer"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus size={16} />
+                      </button>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={chargerQuantity === 0 ? 0 : chargerQuantity || ''}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (val === '') setChargerQuantity('');
+                          else {
+                            const num = parseInt(val, 10);
+                            if (!isNaN(num)) setChargerQuantity(num);
+                          }
+                        }}
+                        onBlur={() => {
+                          const num = parseInt(chargerQuantity, 10);
+                          if (isNaN(num) || num < 1) setChargerQuantity(1);
+                          else if (num > 100) setChargerQuantity(100);
+                        }}
+                        className="w-16 h-10 bg-black/60 border border-white/20 focus:border-accent text-center font-mono text-white font-bold text-lg rounded-lg focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-text selection:bg-accent selection:text-black"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleAdjust(setChargerQuantity, 1, 1, 100, 1)}
+                        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/20 flex items-center justify-center text-accent transition-colors cursor-pointer"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus size={16} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Preset Pills */}
+                  <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-white/5">
+                    {[1, 2, 4, 6, 8, 12].map((qty) => (
+                      <button
+                        key={qty}
+                        type="button"
+                        onClick={() => setChargerQuantity(qty)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
+                          chargerQuantity === qty
+                            ? 'bg-accent text-black font-bold shadow-[0_0_12px_rgba(var(--color-accent-rgb),0.35)]'
+                            : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
+                        }`}
+                      >
+                        {qty} {qty === 1 ? 'Unit' : 'Units'}
+                      </button>
+                    ))}
+                    <div className="ml-auto text-xs font-mono text-white/50 pt-1 sm:pt-0">
+                      Total Hardware: <span className="text-accent font-bold">₹{totalHardwareInvestment.toLocaleString('en-IN')}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── How busy is your location ── */}
                 <div className="mb-4">
                   <div className="flex justify-between items-end mb-4">
-                    <label className="block text-white/70 text-sm font-bold uppercase tracking-wider">How busy is your location?</label>
-                    <span className="text-accent font-bold text-xl">{vehiclesPerDay} <span className="text-sm text-accent/70">vehicles/day</span></span>
+                    <div>
+                      <label className="block text-white/70 text-sm font-bold uppercase tracking-wider">
+                        Sessions per charger / day
+                      </label>
+                      {numChargers > 1 && (
+                        <p className="text-xs text-white/40 mt-0.5">
+                          {dailySessions} total sessions across all {numChargers} chargers
+                        </p>
+                      )}
+                    </div>
+                    <span className="text-accent font-bold text-xl">{vehiclesPerDay} <span className="text-sm text-accent/70">sessions/day</span></span>
                   </div>
                   
                   <input 
@@ -271,56 +399,48 @@ const Calculator = () => {
                     <InputStepper 
                       label="Tariff to driver (₹/kWh)" 
                       value={tariff} 
-                      onAdjust={(dir) => handleAdjust(setTariff, dir, 5, 60, 1)} 
+                      onChange={setTariff}
+                      onAdjust={(dir) => handleAdjust(setTariff, dir, 1, 100, 1)} 
+                      min={1}
+                      max={100}
+                      step={0.5}
                     />
                     
                     <InputStepper 
                       label="Your power cost (₹/kWh)" 
                       value={powerCost} 
-                      onAdjust={(dir) => handleAdjust(setPowerCost, dir, 2, 40, 0.5)} 
+                      onChange={setPowerCost}
+                      onAdjust={(dir) => handleAdjust(setPowerCost, dir, 1, 50, 0.5)} 
+                      min={1}
+                      max={50}
+                      step={0.5}
                     />
                     
                     <InputStepper 
                       label="kWh per vehicle" 
                       value={kwhPerVehicle} 
-                      onAdjust={(dir) => handleAdjust(setKwhPerVehicle, dir, 1, 150, 1)} 
+                      onChange={setKwhPerVehicle}
+                      onAdjust={(dir) => handleAdjust(setKwhPerVehicle, dir, 1, 250, 1)} 
+                      min={1}
+                      max={250}
+                      step={1}
                     />
                     
                     <InputStepper 
                       label="Charger price (₹)" 
                       value={chargerPrice} 
-                      onAdjust={(dir) => handleAdjust(setChargerPrice, dir, 5000, 3000000, chargerPrice >= 100000 ? 10000 : 1000)} 
+                      onChange={setChargerPrice}
+                      onAdjust={(dir) => handleAdjust(setChargerPrice, dir, 1000, 5000000, chargerPrice >= 100000 ? 10000 : 1000)} 
+                      min={1000}
+                      max={5000000}
+                      step={1000}
                     />
-                  </div>
-                </div>
-
-                {/* Software Plan */}
-                <div className="pt-6 border-t border-white/10">
-                  <h3 className="text-sm font-bold text-white/70 mb-4">Software plan <span className="text-[#888] font-normal">— commission comes off your earnings</span></h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {SOFTWARE_PLANS.map(plan => (
-                      <div 
-                        key={plan.id}
-                        onClick={() => setSelectedPlan(plan)}
-                        className={`cursor-pointer rounded-xl p-4 transition-all duration-300 border ${
-                          selectedPlan.id === plan.id 
-                            ? 'bg-accent/10 border-accent' 
-                            : 'bg-white/5 border-white/10 hover:border-white/30'
-                        }`}
-                      >
-                        <div className="text-sm font-bold text-white mb-1">{plan.name}</div>
-                        <div className={`text-xl font-bold mb-1 ${selectedPlan.id === plan.id ? 'text-accent' : 'text-white/80'}`}>
-                          {plan.commission}%
-                        </div>
-                        <div className="text-[0.65rem] text-white/50">{plan.desc}</div>
-                      </div>
-                    ))}
                   </div>
                 </div>
 
                 {/* Net Margin */}
                 <div className="pt-6 border-t border-white/10 flex justify-between items-center">
-                  <span className="text-sm text-white/50">Net margin per kWh, after power & commission</span>
+                  <span className="text-sm text-white/50">Net electricity margin per kWh</span>
                   <span className="text-xl font-bold text-accent">₹{netMarginPerKwh.toFixed(1)}</span>
                 </div>
 
@@ -338,34 +458,101 @@ const Calculator = () => {
               <div className="w-full bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/30 rounded-[2rem] p-8 lg:p-10 shadow-[0_0_50px_rgba(var(--color-accent-rgb),0.1)] overflow-hidden relative">
                 <Zap className="absolute -right-10 -bottom-10 w-64 h-64 text-accent/10 rotate-12 pointer-events-none" />
 
-                <h4 className="text-white/80 text-sm font-bold uppercase tracking-wider mb-2">Estimated Monthly Earnings</h4>
+                {/* Period Selector Tabs */}
+                <div className="flex items-center gap-2 p-1.5 bg-[#020403]/80 border border-white/10 rounded-2xl mb-6 backdrop-blur-md w-fit">
+                  <button
+                    type="button"
+                    onClick={() => setTimeHorizon('daily')}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                      timeHorizon === 'daily'
+                        ? 'bg-accent text-black shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.4)]'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    Per Day
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTimeHorizon('monthly')}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                      timeHorizon === 'monthly'
+                        ? 'bg-accent text-black shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.4)]'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    Per Month
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTimeHorizon('yearly')}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                      timeHorizon === 'yearly'
+                        ? 'bg-accent text-black shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.4)]'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    Per Year
+                  </button>
+                </div>
+
+                <h4 className="text-white/80 text-sm font-bold uppercase tracking-wider mb-2 flex items-center justify-between">
+                  <span>Estimated {activeMetrics.label} Earnings</span>
+                  {numChargers > 1 && (
+                    <span className="text-xs font-mono text-accent bg-black/40 px-2.5 py-0.5 rounded-full border border-accent/30 font-normal">
+                      {numChargers} Chargers Combined
+                    </span>
+                  )}
+                </h4>
                 <div className="text-5xl lg:text-6xl font-display font-bold text-white mb-2 tracking-tight">
-                  {formatCurrency(grossRevenueMonthly)}
+                  {formatCurrency(activeMetrics.revenue)}
                 </div>
                 <p className="text-accent text-sm font-mono mb-8 border-b border-accent/20 pb-8">
-                  ≈ {formatCurrency(grossRevenueYearly)} a year in gross revenue
+                  {activeMetrics.subText}
                 </p>
 
                 <div className="flex flex-col gap-4 mb-8">
                   <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col">
-                    <span className="text-white/60 text-xs font-bold uppercase tracking-wider mb-1">Net profit per charger</span>
-                    <span className="text-2xl font-bold text-accent mb-1">{formatCurrency(netProfitMonthly)}</span>
-                    <span className="text-white/40 text-[0.65rem] uppercase">per month</span>
+                    <span className="text-white/60 text-xs font-bold uppercase tracking-wider mb-1">
+                      {numChargers > 1 ? 'Total Net profit (All Chargers)' : 'Net profit per charger'}
+                    </span>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-2xl font-bold text-accent mb-1">
+                        {formatCurrency(activeMetrics.profit)}
+                      </span>
+                      {numChargers > 1 && (
+                        <span className="text-xs font-mono text-white/50">
+                          ≈ {formatCurrency(activeMetrics.profit / numChargers)} / unit
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-white/40 text-[0.65rem] uppercase">
+                      per {activeMetrics.periodUnit}
+                    </span>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-white/10 flex flex-col">
-                      <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider mb-1">Platform comm.</span>
-                      <span className="text-xl font-bold text-white mb-1">{formatCurrency(commissionMonthly)}</span>
-                      <span className="text-white/40 text-[0.65rem] uppercase">{selectedPlan.name} - {selectedPlan.commission}%</span>
+                      <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider mb-1">
+                        Grid power cost
+                      </span>
+                      <span className="text-xl font-bold text-white mb-1">
+                        {formatCurrency(activeMetrics.powerCost)}
+                      </span>
+                      <span className="text-white/40 text-[0.65rem] uppercase">
+                        per {activeMetrics.periodUnit}
+                      </span>
                     </div>
 
                     <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-accent/30 flex flex-col shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.1)]">
-                      <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider mb-1">Break-even</span>
+                      <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider mb-1">
+                        Break-even
+                      </span>
                       <span className="text-xl font-bold text-accent mb-1">
                         {breakEvenMonths < 1 ? '< 1 Month' : `${breakEvenMonths.toFixed(1)} Months`}
                       </span>
-                      <span className="text-white/40 text-[0.65rem] uppercase">on charger price</span>
+                      <span className="text-white/40 text-[0.65rem] uppercase">
+                        on ₹{totalHardwareInvestment.toLocaleString('en-IN')} capex ({numChargers} {numChargers === 1 ? 'unit' : 'units'})
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -383,6 +570,98 @@ const Calculator = () => {
                   >
                     Talk to an Expert
                   </Link>
+                </div>
+              </div>
+
+              {/* Detailed Multi-Period Economics Comparison Table */}
+              <div className="w-full bg-[#050A07]/90 border border-white/10 rounded-[2rem] p-5 sm:p-7 backdrop-blur-md shadow-2xl">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5 pb-4 border-b border-white/10 gap-3">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-display font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                      Detailed Period Breakdown
+                    </h4>
+                    <p className="text-xs text-white/50 mt-1">
+                      Direct side-by-side comparison across all operating timeframes
+                    </p>
+                  </div>
+                  <span className="text-[0.68rem] font-mono text-accent uppercase tracking-wider px-3 py-1 rounded-full bg-accent/10 border border-accent/25 w-fit whitespace-nowrap font-bold">
+                    {numChargers > 1 ? `${numChargers} Units Combined` : '100% Direct Margins'}
+                  </span>
+                </div>
+
+                <div className="overflow-x-auto -mx-2 sm:mx-0 px-2 sm:px-0">
+                  <table className="w-full text-left font-mono text-xs sm:text-sm min-w-[420px]">
+                    <thead>
+                      <tr className="border-b border-white/10 text-white/50 text-[0.7rem] uppercase tracking-wider font-bold">
+                        <th className="py-3 px-3 w-[34%] whitespace-nowrap">Metric</th>
+                        <th className="py-3 px-3 text-right w-[22%] whitespace-nowrap">Per Day</th>
+                        <th className="py-3 px-3 text-right w-[22%] whitespace-nowrap">Per Month</th>
+                        <th className="py-3 px-3 text-right w-[22%] text-accent font-bold whitespace-nowrap">Per Year</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-xs sm:text-sm divide-y divide-white/5">
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">Charging Sessions</td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{dailySessions}</td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{monthlySessions.toLocaleString('en-IN')}</td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{yearlySessions.toLocaleString('en-IN')}</td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">
+                          Energy Delivered <span className="text-white/40 text-[0.7rem] font-normal">(kWh)</span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">
+                          {dailyKwh.toFixed(0)} <span className="text-white/40 text-[0.7rem] font-normal">kWh</span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">
+                          {monthlyKwh.toLocaleString('en-IN', { maximumFractionDigits: 0 })} <span className="text-white/40 text-[0.7rem] font-normal">kWh</span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">
+                          {yearlyKwh.toLocaleString('en-IN', { maximumFractionDigits: 0 })} <span className="text-white/40 text-[0.7rem] font-normal">kWh</span>
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">Gross Tariff Collection</td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{formatCurrency(dailyRevenue)}</td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{formatCurrency(grossRevenueMonthly)}</td>
+                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{formatCurrency(grossRevenueYearly)}</td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">DISCOM Power Cost</td>
+                        <td className="py-3 px-3 text-right text-amber-400 font-semibold font-mono whitespace-nowrap">
+                          −₹{Math.round(dailyPowerCost).toLocaleString('en-IN')}
+                        </td>
+                        <td className="py-3 px-3 text-right text-amber-400 font-semibold font-mono whitespace-nowrap">
+                          −₹{Math.round(powerCostMonthly).toLocaleString('en-IN')}
+                        </td>
+                        <td className="py-3 px-3 text-right text-amber-400 font-semibold font-mono whitespace-nowrap">
+                          −₹{Math.round(powerCostYearly).toLocaleString('en-IN')}
+                        </td>
+                      </tr>
+                      <tr className="bg-gradient-to-r from-accent/15 via-accent/20 to-accent/15 border-y border-accent/40 shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.08)]">
+                        <td className="py-3.5 px-3 rounded-l-xl border-l border-accent/40 text-accent font-bold font-sans whitespace-nowrap">
+                          <div className="flex items-center gap-1.5">
+                            <TrendingUp className="w-4 h-4 text-accent flex-shrink-0" />
+                            <span>Net Operator Earnings</span>
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-3 text-right text-accent font-bold font-mono whitespace-nowrap text-xs sm:text-sm">
+                          {formatCurrency(dailyNetProfit)}
+                        </td>
+                        <td className="py-3.5 px-3 text-right text-accent font-bold font-mono whitespace-nowrap text-xs sm:text-sm">
+                          {formatCurrency(netProfitMonthly)}
+                        </td>
+                        <td className="py-3.5 px-3 rounded-r-xl border-r border-accent/40 text-right text-accent font-bold font-mono whitespace-nowrap text-sm sm:text-base">
+                          {formatCurrency(netProfitYearly)}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-[0.7rem] text-white/40 font-mono">
+                  <span>* Calculated for {numChargers} {numChargers === 1 ? 'charger' : 'chargers'} @ ₹{tariff}/kWh tariff & ₹{powerCost}/kWh grid cost</span>
+                  <span className="text-accent/90 font-semibold">Zero Commission · 100% Retained</span>
                 </div>
               </div>
 
@@ -437,21 +716,52 @@ const Calculator = () => {
   );
 };
 
-// Reusable component for the +/- number inputs
-const InputStepper = ({ label, value, onAdjust }) => (
+// Reusable component for the +/- number inputs with direct manual editing
+const InputStepper = ({ label, value, onChange, onAdjust, min = 0, max = 10000000, step = 1 }) => (
   <div>
     <label className="block text-white/50 text-[0.7rem] font-bold mb-2 uppercase tracking-wider h-8">{label}</label>
-    <div className="flex items-center justify-between bg-[#050A07] border border-white/10 rounded-xl p-2 h-14">
+    <div className="flex items-center justify-between bg-[#050A07] border border-white/10 focus-within:border-accent/50 rounded-xl p-2 h-14 transition-colors">
       <button 
+        type="button"
         onClick={() => onAdjust(-1)}
-        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-accent transition-colors"
+        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/20 flex items-center justify-center text-accent transition-colors flex-shrink-0 cursor-pointer"
+        aria-label="Decrease"
       >
         <Minus size={16} />
       </button>
-      <span className="font-mono text-white font-bold">{value}</span>
+
+      <input 
+        type="number"
+        value={value === 0 ? 0 : value || ''}
+        min={min}
+        max={max}
+        step={step}
+        onChange={(e) => {
+          const raw = e.target.value;
+          if (raw === '') {
+            onChange('');
+          } else {
+            const num = parseFloat(raw);
+            if (!isNaN(num)) onChange(num);
+          }
+        }}
+        onBlur={(e) => {
+          const raw = e.target.value;
+          const num = parseFloat(raw);
+          if (raw === '' || isNaN(num) || num < min) {
+            onChange(min);
+          } else if (num > max) {
+            onChange(max);
+          }
+        }}
+        className="w-full bg-transparent text-center font-mono text-white font-bold text-lg focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-text px-2 selection:bg-accent selection:text-black"
+      />
+
       <button 
+        type="button"
         onClick={() => onAdjust(1)}
-        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-accent transition-colors"
+        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/20 flex items-center justify-center text-accent transition-colors flex-shrink-0 cursor-pointer"
+        aria-label="Increase"
       >
         <Plus size={16} />
       </button>

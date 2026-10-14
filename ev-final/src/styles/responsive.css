@@ -1,0 +1,60 @@
+/* Responsive Breakpoints & Mobile Optimization */
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-16: 48px;
+    --space-20: 56px;
+    --space-24: 64px;
+    --header-height: 64px;
+  }
+
+  .grid-4,
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .section {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+  }
+
+  .cta-banner {
+    padding: var(--space-8) var(--space-4);
+    text-align: left;
+  }
+
+  .cta-banner-buttons {
+    justify-content: flex-start;
+  }
+
+  .cta-banner-buttons .btn {
+    width: 100%;
+  }
+
+  .container {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
+  }
+  
+  .btn-sm {
+    width: auto;
+  }
+}
