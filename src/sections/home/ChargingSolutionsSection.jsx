@@ -23,7 +23,7 @@ const solutions = [
     subtitle: 'Home / Villa / Apartment',
     description: 'Smart AC charging solutions designed for seamless home integration, overnight charging, and energy efficiency.',
     icon: Home,
-    video: null,
+    video: resVideo,
     image: resImg,
     imageClass: 'w-full h-full object-cover object-[center_40%]'
   },
@@ -33,7 +33,7 @@ const solutions = [
     subtitle: 'Office / Corporate Campus',
     description: 'Scalable infrastructure for corporate campuses to empower employees and visitors with reliable daily charging.',
     icon: Briefcase,
-    video: null,
+    video: workVideo,
     image: workImg,
     imageClass: 'w-full h-full object-cover object-center'
   },
@@ -43,7 +43,7 @@ const solutions = [
     subtitle: 'Retail / Hospitality / Malls',
     description: 'Attract premium customers with high-speed EV charging integrated directly into your retail or hospitality parking.',
     icon: ShoppingBag,
-    video: null,
+    video: commVideo,
     image: commImg,
     imageClass: 'w-full h-full object-cover object-[center_45%]'
   },
@@ -53,7 +53,7 @@ const solutions = [
     subtitle: 'Logistics / Transport',
     description: 'Ultra-fast DC charging hubs built for continuous operation, ensuring your logistics fleet is never grounded.',
     icon: Truck,
-    video: null,
+    video: fleetVideo,
     image: fleetImg,
     imageClass: 'w-full h-full object-cover object-[center_45%]'
   },
@@ -63,7 +63,7 @@ const solutions = [
     subtitle: 'Long Distance Corridors',
     description: 'High-power infrastructure enabling cross-country travel with reliable, rapid charging at strategic highway nodes.',
     icon: Map,
-    video: null,
+    video: highVideo,
     image: highImg,
     imageClass: 'w-full h-full object-cover object-center'
   }
@@ -94,6 +94,9 @@ const ChargingSolutionsSection = () => {
   }, [scrollYProgress]);
 
   const handleTabClick = (index) => {
+    if (activeTab === index) {
+      setVideoEnded(false);
+    }
     setActiveTab(index);
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
@@ -228,6 +231,14 @@ const ChargingSolutionsSection = () => {
                     playsInline
                     preload="auto"
                     onEnded={() => setVideoEnded(true)}
+                    onError={() => setVideoEnded(true)}
+                    ref={(el) => {
+                      if (el) {
+                        el.muted = true;
+                        el.defaultMuted = true;
+                        el.play().catch(() => {});
+                      }
+                    }}
                     className={solutions[activeTab].imageClass || "w-full h-full object-cover"}
                   />
                 ) : (

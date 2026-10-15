@@ -9,16 +9,16 @@ import dcImage from '../../assets/images/Phoenix Marketcity EV Charging Plaza.pn
 import accImage from '../../assets/images/AXION Charge Logistics Hub.png';
 
 // AC Images
-import ac3kwImg from '../../assets/images/Black AXION logo on EV charger-1.png';
+import ac3kwImg from '../../assets/images/Modern Green EV Charger Garage Display.png';
 import ac7kwImg from '../../assets/images/Black Axion Logo on White EV Charger-2.png';
 import ac11kwImg from '../../assets/images/Black AXION logo on white charger-3.png';
 import ac22kwImg from '../../assets/images/22 kW EV charger, black AXION logo-4.png';
 
 // DC Images
 import dc30kwImg from '../../assets/images/AXION DC charger with black cables-1.png';
-import dc60kwImg from '../../assets/images/60 kW AXION charger with black cables-2.png';
-import dc120kwImg from '../../assets/images/AXION charger with matte black cables-3.png';
-import dc240kwImg from '../../assets/images/Matte Black EV Charging Cable.png';
+import dc60kwImg from '../../assets/images/AXION 60 kW EV Wallbox Advertisement.png';
+import dc120kwImg from '../../assets/images/AXION 120 kW EV Charging Station.png';
+import dc240kwImg from '../../assets/images/Axion 240 kW EV Charger Showcase.png';
 
 // Accessory Images
 import cableImg from '../../assets/images/AXION Type 1 Charging Cable.png';

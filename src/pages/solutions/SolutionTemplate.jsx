@@ -19,11 +19,11 @@ import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929
 
 // Maps each solution to its dedicated video
 const videoMap = {
-  residential: null,
-  workplace:   null,
-  commercial:  null,
-  fleet:       null,
-  highway:     null,
+  residential: resVideo,
+  workplace:   workVideo,
+  commercial:  commVideo,
+  fleet:       fleetVideo,
+  highway:     highVideo,
 };
 
 // Maps each solution to its imported hero image
@@ -91,22 +91,66 @@ const sectionData = {
 };
 
 const SolutionTemplate = ({ title, subtitle, description, id }) => {
-  const [showVideo, setShowVideo] = useState(true);
+  const currentVideo = videoMap[id];
+  const [showVideo, setShowVideo] = useState(Boolean(currentVideo));
+  const [progress, setProgress] = useState(0);
   const videoRef = React.useRef(null);
   const data = sectionData[id] || {};
   const heroImage = imageMap[id];
 
-  // Always play the video on every visit — no sessionStorage skipping
+  // Play video with explicit autoplay compatibility
   useEffect(() => {
-    setShowVideo(true);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {
-        // If autoplay blocked by browser, skip to page directly
-        setShowVideo(false);
-      });
+    if (!currentVideo) {
+      setShowVideo(false);
+      return;
     }
-  }, [id]);
+
+    setShowVideo(true);
+    setProgress(0);
+
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.currentTime = 0;
+
+      const tryPlay = () => {
+        const promise = video.play();
+        if (promise !== undefined) {
+          promise.catch((err) => {
+            console.warn("Autoplay deferred or blocked:", err);
+          });
+        }
+      };
+
+      tryPlay();
+      video.addEventListener('canplay', tryPlay);
+      video.addEventListener('loadeddata', tryPlay);
+
+      const handleTimeUpdate = () => {
+        if (video.duration && !isNaN(video.duration)) {
+          setProgress((video.currentTime / video.duration) * 100);
+        }
+      };
+      video.addEventListener('timeupdate', handleTimeUpdate);
+
+      return () => {
+        video.removeEventListener('canplay', tryPlay);
+        video.removeEventListener('loadeddata', tryPlay);
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+      };
+    }
+  }, [id, currentVideo]);
+
+  // Safety fallback: if video stalls or takes too long, auto-transition after 10s so user is never blocked
+  useEffect(() => {
+    if (!showVideo) return;
+    const safetyTimer = setTimeout(() => {
+      setShowVideo(false);
+    }, 10000);
+    return () => clearTimeout(safetyTimer);
+  }, [showVideo, id]);
 
   const handleVideoEnd = () => {
     setShowVideo(false);
@@ -122,12 +166,12 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
 
       {/* ── Full-Screen Cinematic Video Intro ── */}
       <AnimatePresence>
-        {showVideo && (
+        {showVideo && currentVideo && (
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: 'easeInOut' }}
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center"
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
           >
             <video
               key={id}
@@ -135,28 +179,29 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
               autoPlay
               muted
               playsInline
+              preload="auto"
               onEnded={handleVideoEnd}
               onError={handleVideoError}
               className="w-full h-full object-cover"
-              src={videoMap[id]}
+              src={currentVideo}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50 pointer-events-none" />
 
             {/* Bottom-left title overlay */}
-            <div className="absolute bottom-12 md:bottom-16 left-6 md:left-20 z-10">
+            <div className="absolute bottom-12 md:bottom-16 left-6 md:left-20 z-10 pointer-events-none">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
                 className="flex items-center gap-3 mb-4"
               >
-                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--color-accent)]" />
                 <span className="text-accent font-mono text-xs uppercase tracking-[0.25em]">{data.badge}</span>
               </motion.div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
                 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-white tracking-widest uppercase"
               >
                 {title}
@@ -164,18 +209,26 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
               <motion.div
                 initial={{ opacity: 0, width: 0 }}
                 animate={{ opacity: 1, width: '100px' }}
-                transition={{ delay: 1.2, duration: 1 }}
-                className="h-[2px] bg-accent mt-4"
+                transition={{ delay: 0.8, duration: 1 }}
+                className="h-[2px] bg-accent mt-4 shadow-[0_0_10px_var(--color-accent)]"
               />
             </div>
 
             {/* Skip button */}
             <button
               onClick={handleVideoEnd}
-              className="absolute top-8 right-4 md:right-8 z-20 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white/80 hover:text-white transition-all text-[0.7rem] md:text-sm font-mono tracking-widest border border-white/10"
+              className="absolute top-8 right-4 md:right-8 z-20 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white/80 hover:text-white transition-all text-[0.7rem] md:text-sm font-mono tracking-widest border border-white/10 cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
             >
               SKIP <SkipForward size={14} />
             </button>
+
+            {/* High-Tech Energy Progress Bar along bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10 z-20 overflow-hidden">
+              <div 
+                className="h-full bg-accent shadow-[0_0_8px_var(--color-accent)] transition-all duration-100 ease-linear"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

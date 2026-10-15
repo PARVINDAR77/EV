@@ -1,7 +1,7 @@
 import ac7kwImg from '../assets/images/WhatsApp Image 2026-10-05 at 4.18.49 PM.jpeg';
 import ac22kwImg from '../assets/images/WhatsApp Image 2026-10-05 at 4.18.49 PM (1).jpeg';
 import dc30kwImg from '../assets/images/WhatsApp Image 2026-10-05 at 4.18.49 PM (3).jpeg';
-import dc120kwImg from '../assets/images/WhatsApp Image 2026-10-05 at 4.18.49 PM (2).jpeg';
+import dc120kwImg from '../assets/images/AXION 120 kW EV Charging Station.png';
 
 export const productsData = [
   {

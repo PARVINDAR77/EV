@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail, Check, Loader2 } from 'lucide-react';
 import AxionLogo from '../common/AxionLogo';
+import { sendNewsletterSubscription } from '../../services/mailService';
 
 const Footer = () => {
+  const [newsEmail, setNewsEmail] = useState('');
+  const [newsStatus, setNewsStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!newsEmail) return;
+    setNewsStatus('loading');
+    try {
+      await sendNewsletterSubscription(newsEmail);
+      setNewsStatus('success');
+      setNewsEmail('');
+      setTimeout(() => setNewsStatus('idle'), 5000);
+    } catch (err) {
+      console.error('Newsletter error:', err);
+      setNewsStatus('error');
+      setTimeout(() => setNewsStatus('idle'), 4000);
+    }
+  };
   return (
     <footer className="relative w-full bg-[#020403] pt-24 pb-10 z-20 overflow-hidden border-t border-white/5">
 
@@ -32,23 +51,50 @@ const Footer = () => {
               Subscribe to our newsletter for the latest updates on EV infrastructure, product launches, and industry insights.
             </p>
             
-            <form className="flex flex-col sm:relative sm:items-center w-full max-w-md gap-3 sm:gap-0" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col sm:relative sm:items-center w-full max-w-md gap-3 sm:gap-0" onSubmit={handleSubscribe}>
               <div className="relative w-full">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5" />
                 <input 
                   type="email" 
-                  placeholder="Enter your email address" 
-                  className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-12 pr-4 sm:pr-32 text-white font-sans text-sm focus:outline-none focus:border-accent/50 transition-colors"
+                  value={newsEmail}
+                  onChange={(e) => setNewsEmail(e.target.value)}
+                  placeholder={newsStatus === 'success' ? "Thanks for subscribing!" : "Enter your email address"} 
+                  disabled={newsStatus === 'loading' || newsStatus === 'success'}
+                  className={`w-full bg-white/5 border rounded-full py-4 pl-12 pr-4 sm:pr-36 text-white font-sans text-sm focus:outline-none transition-colors ${
+                    newsStatus === 'success' 
+                      ? 'border-accent text-accent' 
+                      : newsStatus === 'error' 
+                      ? 'border-red-500/60' 
+                      : 'border-white/10 focus:border-accent/50'
+                  }`}
                   required
                 />
               </div>
               <button 
                 type="submit"
-                className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-1/2 sm:-translate-y-1/2 px-6 py-4 sm:py-2 bg-accent text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300"
+                disabled={newsStatus === 'loading' || newsStatus === 'success'}
+                className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-1/2 sm:-translate-y-1/2 px-6 py-4 sm:py-2 bg-accent text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300 disabled:opacity-75 flex items-center justify-center gap-1.5"
               >
-                Subscribe
+                {newsStatus === 'loading' ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Joining...</span>
+                  </>
+                ) : newsStatus === 'success' ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Joined!</span>
+                  </>
+                ) : (
+                  "Subscribe"
+                )}
               </button>
             </form>
+            {newsStatus === 'error' && (
+              <span className="text-xs text-red-400 mt-2 font-sans">
+                Could not subscribe right now. Please try again.
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col items-center lg:items-end text-center lg:text-right w-full lg:w-auto mt-4 lg:mt-0">

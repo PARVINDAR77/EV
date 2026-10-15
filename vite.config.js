@@ -1,9 +1,26 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import { handleEmailRequest } from './server/handleEmailRequest.js'
+
+function mailApiPlugin() {
+  return {
+    name: 'mail-api-plugin',
+    configureServer(server) {
+      server.middlewares.use('/api/send-email', (req, res) => {
+        handleEmailRequest(req, res);
+      });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use('/api/send-email', (req, res) => {
+        handleEmailRequest(req, res);
+      });
+    }
+  };
+}
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), mailApiPlugin()],
   build: {
     emptyOutDir: true,
     rollupOptions: {

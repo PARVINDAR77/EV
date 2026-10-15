@@ -1,21 +1,36 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition/PageTransition';
 import Footer from '../components/Footer/Footer';
-import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { sendContactMessage } from '../services/mailService';
 
 const Contact = () => {
   const [formState, setFormState] = useState({ name: '', email: '', subject: 'General Inquiry', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState({ type: null, message: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      alert("Message Sent! Our team will get back to you within 24 hours.");
+    setStatus({ type: null, message: '' });
+
+    try {
+      await sendContactMessage(formState);
+      setStatus({
+        type: 'success',
+        message: 'Message delivered! Our team will get back to you within 24 hours.'
+      });
       setFormState({ name: '', email: '', subject: 'General Inquiry', message: '' });
+    } catch (err) {
+      console.error('Contact submit error:', err);
+      setStatus({
+        type: 'error',
+        message: err.message || 'Unable to deliver message. Please contact axion@vardaansmartsolutions.com directly.'
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -190,14 +205,45 @@ const Contact = () => {
                       />
                     </div>
 
+                    <AnimatePresence>
+                      {status.type && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className={`p-4 rounded-xl flex items-center gap-3 text-sm font-sans ${
+                            status.type === 'success'
+                              ? 'bg-accent/10 border border-accent/30 text-accent shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.15)]'
+                              : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                          }`}
+                        >
+                          {status.type === 'success' ? (
+                            <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-accent" />
+                          ) : (
+                            <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-400" />
+                          )}
+                          <span>{status.message}</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
                     <button 
                       type="submit"
                       disabled={isSubmitting}
                       className="w-full mt-2 relative overflow-hidden flex justify-center items-center gap-3 bg-accent text-black font-bold uppercase tracking-widest py-5 rounded-2xl transition-all duration-300 group shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.2)] hover:shadow-[0_0_40px_rgba(var(--color-accent-rgb),0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       <span className="relative z-10 flex items-center gap-2">
-                        {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
-                        {!isSubmitting && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            DELIVERING TO AXION...
+                          </>
+                        ) : (
+                          <>
+                            SEND MESSAGE
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
                       </span>
                       <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0" />
                     </button>

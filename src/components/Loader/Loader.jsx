@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import loadingVideo from '../../assets/images/erasio_Axion_charger_loading_animation_20261005181352.mp4';
+import loadingVideo from '../../assets/images/EV_charging_commercial_video_prompt_20261015162719.mp4';
 
 const Loader = ({ onComplete }) => {
   const videoRef = useRef(null);
@@ -57,7 +57,7 @@ const Loader = ({ onComplete }) => {
       exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black overflow-hidden"
     >
-      {/* Background Video directly bound to src for instant hardware decoding */}
+      {/* Background Video directly bound to src with dual fallback for live hosting environments */}
       <video 
         ref={videoRef}
         src={loadingVideo}
@@ -66,8 +66,19 @@ const Loader = ({ onComplete }) => {
         playsInline 
         preload="auto"
         onEnded={onComplete}
+        onError={() => {
+          if (videoRef.current && !videoRef.current.src.includes('/videos/loading.mp4')) {
+            videoRef.current.src = '/videos/loading.mp4';
+            videoRef.current.play().catch(() => onComplete());
+          } else {
+            onComplete();
+          }
+        }}
         className="absolute inset-0 w-full h-full object-contain md:object-cover"
-      />
+      >
+        <source src={loadingVideo} type="video/mp4" />
+        <source src="/videos/loading.mp4" type="video/mp4" />
+      </video>
 
       {/* Subtle Cinematic Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40 pointer-events-none z-10" />

@@ -1,19 +1,39 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition/PageTransition';
 import Footer from '../components/Footer/Footer';
-import { TrendingUp, MapPin, DollarSign, ArrowRight, ShieldCheck, Zap, Activity, Building, Briefcase } from 'lucide-react';
+import { TrendingUp, MapPin, DollarSign, ArrowRight, ShieldCheck, Zap, Activity, Building, Briefcase, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { sendFranchiseApplication } from '../services/mailService';
 
 // Using the freshly downloaded unique image
 import heroImg from '../assets/images/franchise_hero.jpg';
 
 const Franchise = () => {
   const [formState, setFormState] = useState({ name: '', email: '', phone: '', location: '', model: 'Partner' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState({ type: null, message: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Application Received! Our infrastructure team will contact you shortly.");
-    setFormState({ name: '', email: '', phone: '', location: '', model: 'Partner' });
+    setIsSubmitting(true);
+    setStatus({ type: null, message: '' });
+
+    try {
+      await sendFranchiseApplication(formState);
+      setStatus({
+        type: 'success',
+        message: 'Application submitted! Our partnership team will contact you within 48 hours.'
+      });
+      setFormState({ name: '', email: '', phone: '', location: '', model: 'Partner' });
+    } catch (err) {
+      console.error('Franchise submit error:', err);
+      setStatus({
+        type: 'error',
+        message: err.message || 'Unable to submit application. Please contact axion@vardaansmartsolutions.com directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -338,11 +358,41 @@ const Franchise = () => {
                     </div>
                   </div>
 
+                  <AnimatePresence>
+                    {status.type && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className={`p-4 rounded-xl flex items-center gap-3 text-sm font-sans ${
+                          status.type === 'success'
+                            ? 'bg-accent/10 border border-accent/30 text-accent shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.15)]'
+                            : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                        }`}
+                      >
+                        {status.type === 'success' ? (
+                          <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-accent" />
+                        ) : (
+                          <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-400" />
+                        )}
+                        <span>{status.message}</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   <button 
                     type="submit"
-                    className="w-full mt-6 bg-accent text-black font-bold uppercase tracking-widest py-5 rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300"
+                    disabled={isSubmitting}
+                    className="w-full mt-2 bg-accent text-black font-bold uppercase tracking-widest py-5 rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Request Free ROI Analysis
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Submitting Application...
+                      </>
+                    ) : (
+                      "Request Free ROI Analysis"
+                    )}
                   </button>
                 </form>
               </div>
