@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { Activity, Shield, RefreshCw, Cpu, Wifi } from 'lucide-react';
-import supportImg from '../../assets/images/why_support.jpg';
+import supportImg from '../../assets/images/why_support.webp';
 
 const Maintenance = () => {
   return (

@@ -4,31 +4,31 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { ArrowRight, CheckCircle2, FileText, Printer, X, Download, ShieldCheck, Zap } from 'lucide-react';
-import acImage from '../../assets/images/Modern Home EV Charging Showcase.png';
-import dcImage from '../../assets/images/Phoenix Marketcity EV Charging Plaza.png';
-import accImage from '../../assets/images/AXION Charge Logistics Hub.png';
+import acImage from '../../assets/images/Modern Home EV Charging Showcase.webp';
+import dcImage from '../../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
+import accImage from '../../assets/images/AXION Charge Logistics Hub.webp';
 
 // AC Images
-import ac3kwImg from '../../assets/images/Modern Green EV Charger Garage Display.png';
-import ac7kwImg from '../../assets/images/Black Axion Logo on White EV Charger-2.png';
-import ac11kwImg from '../../assets/images/Black AXION logo on white charger-3.png';
-import ac22kwImg from '../../assets/images/22 kW EV charger, black AXION logo-4.png';
+import ac3kwImg from '../../assets/images/Modern Green EV Charger Garage Display.webp';
+import ac7kwImg from '../../assets/images/Black Axion Logo on White EV Charger-2.webp';
+import ac11kwImg from '../../assets/images/Black AXION logo on white charger-3.webp';
+import ac22kwImg from '../../assets/images/22 kW EV charger, black AXION logo-4.webp';
 
 // DC Images
-import dc30kwImg from '../../assets/images/AXION DC charger with black cables-1.png';
-import dc60kwImg from '../../assets/images/AXION 60 kW EV Wallbox Advertisement.png';
-import dc120kwImg from '../../assets/images/AXION 120 kW EV Charging Station.png';
-import dc240kwImg from '../../assets/images/Axion 240 kW EV Charger Showcase.png';
+import dc30kwImg from '../../assets/images/AXION DC charger with black cables-1.webp';
+import dc60kwImg from '../../assets/images/AXION 60 kW EV Wallbox Advertisement.webp';
+import dc120kwImg from '../../assets/images/AXION 120 kW EV Charging Station.webp';
+import dc240kwImg from '../../assets/images/Axion 240 kW EV Charger Showcase.webp';
 
 // Accessory Images
-import cableImg from '../../assets/images/AXION Type 1 Charging Cable.png';
-import pedestalImg from '../../assets/images/Axion pedestal stand product advertisement.png';
-import rfidKeyfobImg from '../../assets/images/Axion RFID Card and Keyfob.png';
+import cableImg from '../../assets/images/AXION Type 1 Charging Cable.webp';
+import pedestalImg from '../../assets/images/Axion pedestal stand product advertisement.webp';
+import rfidKeyfobImg from '../../assets/images/Axion RFID Card and Keyfob.webp';
 
 // Software Images
-import appImg from '../../assets/images/why_smarttech.jpg';
-import cmsImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.png';
-import apiImg from '../../assets/images/ecosystem_diagram.png';
+import appImg from '../../assets/images/why_smarttech.webp';
+import cmsImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.webp';
+import apiImg from '../../assets/images/ecosystem_diagram.webp';
 
 const PRODUCT_DB = {
   'ac-3-3kw': {

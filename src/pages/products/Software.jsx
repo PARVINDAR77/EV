@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPage from './ProductPage';
-import swImage from '../../assets/images/workplace.jpg';
+import swImage from '../../assets/images/workplace.webp';
 
 const Software = () => (
   <ProductPage 

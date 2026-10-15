@@ -10,11 +10,11 @@ import fleetVideo from '../../assets/images/Electric_fleet_vans_charging_depot_2
 import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929134507_gwr_video_mvp.mp4';
 
 // High-resolution still images (displayed cleanly after video completes)
-import resImg from '../../assets/images/Modern Home EV Charging Showcase.png';
-import workImg from '../../assets/images/AXION Ecocharge Station 01 (2).png';
-import commImg from '../../assets/images/Phoenix Marketcity EV Charging Plaza.png';
-import fleetImg from '../../assets/images/AXION Charge Logistics Hub.png';
-import highImg from '../../assets/images/Axion Charge Highway Stop.png';
+import resImg from '../../assets/images/Modern Home EV Charging Showcase.webp';
+import workImg from '../../assets/images/AXION Ecocharge Station 01 (2).webp';
+import commImg from '../../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
+import fleetImg from '../../assets/images/AXION Charge Logistics Hub.webp';
+import highImg from '../../assets/images/Axion Charge Highway Stop.webp';
 
 const solutions = [
   {
@@ -226,6 +226,7 @@ const ChargingSolutionsSection = () => {
                   <video 
                     key={`vid-${solutions[activeTab].id}`}
                     src={solutions[activeTab].video}
+                    poster={solutions[activeTab].image}
                     autoPlay 
                     muted 
                     playsInline
@@ -245,6 +246,8 @@ const ChargingSolutionsSection = () => {
                   <img 
                     src={solutions[activeTab].image} 
                     alt={solutions[activeTab].title} 
+                    loading="lazy"
+                    decoding="async"
                     className={solutions[activeTab].imageClass || "w-full h-full object-cover brightness-[1.02] contrast-[1.02]"}
                   />
                 )}

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Activity, Zap, Users, BarChart3, ArrowRight } from 'lucide-react';
-import dashboardBillboardImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.png';
+import dashboardBillboardImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.webp';
 
 const FeatureBullet = ({ icon: Icon, title, description, delay }) => (
   <motion.div 

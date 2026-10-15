@@ -5,11 +5,11 @@ import Footer from '../../components/Footer/Footer';
 import { ArrowRight, SkipForward, Zap } from 'lucide-react';
 
 // Static imports — Vite bundles these correctly
-import imgResidential from '../../assets/images/Modern Home EV Charging Showcase.png';
-import imgWorkplace   from '../../assets/images/AXION Ecocharge Station 01 (2).png';
-import imgCommercial  from '../../assets/images/Phoenix Marketcity EV Charging Plaza.png';
-import imgFleet       from '../../assets/images/AXION Charge Logistics Hub.png';
-import imgHighway     from '../../assets/images/Axion Charge Highway Stop.png';
+import imgResidential from '../../assets/images/Modern Home EV Charging Showcase.webp';
+import imgWorkplace   from '../../assets/images/AXION Ecocharge Station 01 (2).webp';
+import imgCommercial  from '../../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
+import imgFleet       from '../../assets/images/AXION Charge Logistics Hub.webp';
+import imgHighway     from '../../assets/images/Axion Charge Highway Stop.webp';
 
 import resVideo from '../../assets/images/EV_charging_at_night_20260929123844_gwr_video_mvp.mp4';
 import workVideo from '../../assets/images/EV_charging_at_corporate_office_20260929124509_gwr_video_mvp.mp4';
@@ -176,6 +176,7 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
             <video
               key={id}
               ref={videoRef}
+              poster={heroImage}
               autoPlay
               muted
               playsInline
@@ -316,6 +317,8 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 <img 
                   src={heroImage} 
                   alt={title} 
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />

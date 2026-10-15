@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPage from './ProductPage';
-import acImage from '../../assets/images/22 kW EV charger, black AXION logo-4.png';
+import acImage from '../../assets/images/22 kW EV charger, black AXION logo-4.webp';
 
 const ACChargers = () => (
   <ProductPage 

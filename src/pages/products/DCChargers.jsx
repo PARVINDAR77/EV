@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPage from './ProductPage';
-import dcImage from '../../assets/images/AXION 120 kW EV Charging Station.png';
+import dcImage from '../../assets/images/AXION 120 kW EV Charging Station.webp';
 
 const DCChargers = () => (
   <ProductPage 

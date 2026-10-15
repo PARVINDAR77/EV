@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { Smartphone, Map, CreditCard, Route, BatteryCharging } from 'lucide-react';
-import appImg from '../../assets/images/why_smarttech.jpg';
+import appImg from '../../assets/images/why_smarttech.webp';
 
 const ChargeApp = () => {
   return (

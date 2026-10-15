@@ -6,7 +6,7 @@ import { TrendingUp, MapPin, DollarSign, ArrowRight, ShieldCheck, Zap, Activity,
 import { sendFranchiseApplication } from '../services/mailService';
 
 // Using the freshly downloaded unique image
-import heroImg from '../assets/images/franchise_hero.jpg';
+import heroImg from '../assets/images/franchise_hero.webp';
 
 const Franchise = () => {
   const [formState, setFormState] = useState({ name: '', email: '', phone: '', location: '', model: 'Partner' });

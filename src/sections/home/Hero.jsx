@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Zap, Settings, TowerControl } from 'lucide-react';
-import bgImage from '../../assets/images/hero_bg_final.jpg';
+import bgImage from '../../assets/images/hero_bg_final.webp';
 
 const LoopingTypewriterText = ({ texts, delay = 0, className = '' }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -119,10 +119,13 @@ const Hero = () => {
     <>
       <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-0">
 
-        {/* Background Image (Using the provided image as the base layer) */}
-        <div
-          className="absolute inset-0 z-0 opacity-100 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${bgImage})`, backgroundPosition: 'center' }}
+        {/* Background Image with high LCP priority */}
+        <img
+          src={bgImage}
+          alt="AXION CHARGE EV Charging Network"
+          fetchPriority="high"
+          decoding="sync"
+          className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none select-none"
         />
         
         {/* Gradient Overlay for text readability */}

@@ -5,11 +5,11 @@ import Footer from '../components/Footer/Footer';
 import { Leaf, Zap, Shield, Globe, Cpu, Wrench, Headphones, Cloud } from 'lucide-react';
 
 // Using local images to guarantee they load perfectly without network blocking
-import heroImg from '../assets/images/why_scalable.jpg';
-import hardwareImg from '../assets/images/why_engineered.jpg';
-import softwareImg from '../assets/images/why_smarttech.jpg';
-import supportImg from '../assets/images/why_support.jpg';
-import networkImg from '../assets/images/why_deployment.jpg';
+import heroImg from '../assets/images/why_scalable.webp';
+import hardwareImg from '../assets/images/why_engineered.webp';
+import softwareImg from '../assets/images/why_smarttech.webp';
+import supportImg from '../assets/images/why_support.webp';
+import networkImg from '../assets/images/why_deployment.webp';
 
 const About = () => {
   return (

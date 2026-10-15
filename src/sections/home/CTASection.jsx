@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import bgImage from '../../assets/images/hero_bg_final.jpg';
+import bgImage from '../../assets/images/hero_bg_final.webp';
 
 const CTASection = () => {
   return (

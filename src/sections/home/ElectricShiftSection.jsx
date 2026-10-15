@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { sectionStats } from '../../data/axionStats';
-import electricShiftCar from '../../assets/images/electric_shift_car.jpg';
+import electricShiftCar from '../../assets/images/electric_shift_car.webp';
 
 // Subcomponent: Animated Counter
 const AnimatedCounter = ({ from = 0, to, duration = 2 }) => {
@@ -154,7 +154,7 @@ const ElectricShiftSection = () => {
                 src={electricShiftCar} 
                 alt="Electric Mobility Charging Infrastructure" 
                 className="w-full h-full object-cover object-center brightness-[1.02] contrast-[1.02]"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
               {/* Subtle ambient gradient overlay */}

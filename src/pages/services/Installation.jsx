@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { HardHat, Ruler, Zap, Hammer, CheckCircle } from 'lucide-react';
-import bgImg from '../../assets/images/why_deployment.jpg';
+import bgImg from '../../assets/images/why_deployment.webp';
 
 const Installation = () => {
   const { scrollYProgress } = useScroll();

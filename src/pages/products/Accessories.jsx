@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPage from './ProductPage';
-import accImage from '../../assets/images/Axion pedestal stand product advertisement.png';
+import accImage from '../../assets/images/Axion pedestal stand product advertisement.webp';
 
 const Accessories = () => (
   <ProductPage 

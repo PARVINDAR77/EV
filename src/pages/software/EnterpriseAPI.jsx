@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { Terminal, Code2, Webhook, Database, Lock, Zap } from 'lucide-react';
-import apiImg from '../../assets/images/ecosystem_diagram.png';
+import apiImg from '../../assets/images/ecosystem_diagram.webp';
 
 const EnterpriseAPI = () => {
   return (

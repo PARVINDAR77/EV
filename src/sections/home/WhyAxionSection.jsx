@@ -4,12 +4,12 @@ import { Shield, Maximize, Cpu, Headphones, CheckCircle2, Handshake } from 'luci
 import AxionLogo from '../../components/common/AxionLogo';
 
 // 6 completely unique images — none repeated anywhere else on the site
-import imgEngineered  from '../../assets/images/why_engineered.jpg';    // EV tech / India roads
-import imgScalable    from '../../assets/images/why_scalable.jpg';      // Large charging station
-import imgSmartTech   from '../../assets/images/why_smarttech.jpg';     // AI / tech brain
-import imgDeployment  from '../../assets/images/why_deployment.jpg';    // Installation crew
-import imgSupport     from '../../assets/images/why_support.jpg';       // NOC support room
-import imgPartnership from '../../assets/images/why_partnership.jpg';   // Business handshake
+import imgEngineered  from '../../assets/images/why_engineered.webp';    // EV tech / India roads
+import imgScalable    from '../../assets/images/why_scalable.webp';      // Large charging station
+import imgSmartTech   from '../../assets/images/why_smarttech.webp';     // AI / tech brain
+import imgDeployment  from '../../assets/images/why_deployment.webp';    // Installation crew
+import imgSupport     from '../../assets/images/why_support.webp';       // NOC support room
+import imgPartnership from '../../assets/images/why_partnership.webp';   // Business handshake
 
 const cards = [
   {
@@ -86,6 +86,8 @@ const Card = ({ image, badge, icon: Icon, title, desc, delay, span, height }) =>
     <img
       src={image}
       alt={title}
+      loading="lazy"
+      decoding="async"
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110 opacity-80 group-hover:opacity-100 group-hover:brightness-110"
     />
 
