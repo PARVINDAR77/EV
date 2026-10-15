@@ -10,11 +10,11 @@ import fleetVideo from '../../assets/images/Electric_fleet_vans_charging_depot_2
 import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929134507_gwr_video_mvp.mp4';
 
 // High-resolution still images (displayed cleanly after video completes)
-import resImg from '../../assets/images/residential.jpg';
-import workImg from '../../assets/images/workplace.jpg';
-import commImg from '../../assets/images/commercial.jpg';
-import fleetImg from '../../assets/images/fleet.jpg';
-import highImg from '../../assets/images/highway.jpg';
+import resImg from '../../assets/images/Modern Home EV Charging Showcase.png';
+import workImg from '../../assets/images/AXION Ecocharge Station 01 (2).png';
+import commImg from '../../assets/images/Phoenix Marketcity EV Charging Plaza.png';
+import fleetImg from '../../assets/images/AXION Charge Logistics Hub.png';
+import highImg from '../../assets/images/Axion Charge Highway Stop.png';
 
 const solutions = [
   {
@@ -23,9 +23,9 @@ const solutions = [
     subtitle: 'Home / Villa / Apartment',
     description: 'Smart AC charging solutions designed for seamless home integration, overnight charging, and energy efficiency.',
     icon: Home,
-    video: resVideo,
+    video: null,
     image: resImg,
-    imageClass: 'w-full h-full object-cover object-center'
+    imageClass: 'w-full h-full object-cover object-[center_40%]'
   },
   {
     id: 'workplace',
@@ -33,7 +33,7 @@ const solutions = [
     subtitle: 'Office / Corporate Campus',
     description: 'Scalable infrastructure for corporate campuses to empower employees and visitors with reliable daily charging.',
     icon: Briefcase,
-    video: workVideo,
+    video: null,
     image: workImg,
     imageClass: 'w-full h-full object-cover object-center'
   },
@@ -43,9 +43,9 @@ const solutions = [
     subtitle: 'Retail / Hospitality / Malls',
     description: 'Attract premium customers with high-speed EV charging integrated directly into your retail or hospitality parking.',
     icon: ShoppingBag,
-    video: commVideo,
+    video: null,
     image: commImg,
-    imageClass: 'w-full h-full object-cover object-center'
+    imageClass: 'w-full h-full object-cover object-[center_45%]'
   },
   {
     id: 'fleet',
@@ -53,9 +53,9 @@ const solutions = [
     subtitle: 'Logistics / Transport',
     description: 'Ultra-fast DC charging hubs built for continuous operation, ensuring your logistics fleet is never grounded.',
     icon: Truck,
-    video: fleetVideo,
+    video: null,
     image: fleetImg,
-    imageClass: 'w-full h-full object-cover object-center'
+    imageClass: 'w-full h-full object-cover object-[center_45%]'
   },
   {
     id: 'highway',
@@ -63,7 +63,7 @@ const solutions = [
     subtitle: 'Long Distance Corridors',
     description: 'High-power infrastructure enabling cross-country travel with reliable, rapid charging at strategic highway nodes.',
     icon: Map,
-    video: highVideo,
+    video: null,
     image: highImg,
     imageClass: 'w-full h-full object-cover object-center'
   }
@@ -92,6 +92,20 @@ const ChargingSolutionsSection = () => {
       setActiveTab(index);
     });
   }, [scrollYProgress]);
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const containerTop = rect.top + scrollTop;
+      const totalScrollableDistance = containerRef.current.offsetHeight - window.innerHeight;
+      if (totalScrollableDistance > 0) {
+        const targetScroll = containerTop + ((index + 0.5) / 5) * totalScrollableDistance;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <section ref={containerRef} className="relative w-full bg-[#050708] z-20">
@@ -163,7 +177,7 @@ const ChargingSolutionsSection = () => {
                 return (
                   <button 
                     key={sol.id}
-                    onClick={() => setActiveTab(index)}
+                    onClick={() => handleTabClick(index)}
                     className={`relative p-4 md:p-5 border-l-[3px] text-left transition-all duration-300 ${
                       isActive 
                         ? 'border-[#00FF00] bg-[#0B0F12]' 

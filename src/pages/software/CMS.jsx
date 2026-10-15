@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { LineChart, LayoutDashboard, CreditCard, CloudLightning, Activity, Settings2 } from 'lucide-react';
-import cmsImg from '../../assets/images/software_dashboard.jpg';
+import cmsImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.png';
 
 const CMS = () => {
   return (

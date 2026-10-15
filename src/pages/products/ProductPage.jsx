@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { ArrowRight, CheckCircle2, FileText, Printer, X, Download, ShieldCheck, Zap } from 'lucide-react';
-import acImage from '../../assets/images/residential.jpg';
-import dcImage from '../../assets/images/commercial.jpg';
-import accImage from '../../assets/images/fleet.jpg';
+import acImage from '../../assets/images/Modern Home EV Charging Showcase.png';
+import dcImage from '../../assets/images/Phoenix Marketcity EV Charging Plaza.png';
+import accImage from '../../assets/images/AXION Charge Logistics Hub.png';
 
 // AC Images
 import ac3kwImg from '../../assets/images/Black AXION logo on EV charger-1.png';
@@ -27,7 +27,7 @@ import rfidKeyfobImg from '../../assets/images/Axion RFID Card and Keyfob.png';
 
 // Software Images
 import appImg from '../../assets/images/why_smarttech.jpg';
-import cmsImg from '../../assets/images/software_dashboard.jpg';
+import cmsImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.png';
 import apiImg from '../../assets/images/ecosystem_diagram.png';
 
 const PRODUCT_DB = {

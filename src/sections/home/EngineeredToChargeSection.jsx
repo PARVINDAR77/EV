@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Zap, Cpu, ArrowRight } from 'lucide-react';
 import dcChargerImg from '../../assets/images/AXION DC charger with black cables-1.png';
 import acChargerImg from '../../assets/images/22 kW EV charger, black AXION logo-4.png';
-import softwareImg from '../../assets/images/software_dashboard.jpg';
+import softwareImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.png';
 
 const EngineeredToChargeSection = () => {
   return (

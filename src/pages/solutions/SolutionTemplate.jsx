@@ -5,11 +5,11 @@ import Footer from '../../components/Footer/Footer';
 import { ArrowRight, SkipForward, Zap } from 'lucide-react';
 
 // Static imports — Vite bundles these correctly
-import imgResidential from '../../assets/images/residential.jpg';
-import imgWorkplace   from '../../assets/images/workplace.jpg';
-import imgCommercial  from '../../assets/images/commercial.jpg';
-import imgFleet       from '../../assets/images/fleet.jpg';
-import imgHighway     from '../../assets/images/highway.jpg';
+import imgResidential from '../../assets/images/Modern Home EV Charging Showcase.png';
+import imgWorkplace   from '../../assets/images/AXION Ecocharge Station 01 (2).png';
+import imgCommercial  from '../../assets/images/Phoenix Marketcity EV Charging Plaza.png';
+import imgFleet       from '../../assets/images/AXION Charge Logistics Hub.png';
+import imgHighway     from '../../assets/images/Axion Charge Highway Stop.png';
 
 import resVideo from '../../assets/images/EV_charging_at_night_20260929123844_gwr_video_mvp.mp4';
 import workVideo from '../../assets/images/EV_charging_at_corporate_office_20260929124509_gwr_video_mvp.mp4';
@@ -19,11 +19,11 @@ import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929
 
 // Maps each solution to its dedicated video
 const videoMap = {
-  residential: resVideo,
-  workplace:   workVideo,
-  commercial:  commVideo,
-  fleet:       fleetVideo,
-  highway:     highVideo,
+  residential: null,
+  workplace:   null,
+  commercial:  null,
+  fleet:       null,
+  highway:     null,
 };
 
 // Maps each solution to its imported hero image
