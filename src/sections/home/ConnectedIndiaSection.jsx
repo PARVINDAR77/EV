@@ -33,11 +33,12 @@ const cities = [
   { name: "MAHARASHTRA", coordinates: [73.8567, 18.5204], isHub: true, delay: 1.3, anchor: "start", dx: 14, dy: 6 }
 ];
 
-// Sequential network line paths connecting Delhi -> Ahmedabad -> Mumbai -> Maharashtra
+// Sequential network line paths connecting Delhi -> Ahmedabad -> Mumbai -> Maharashtra -> Delhi
 const lines = [
   { from: "DELHI", to: "AHMEDABAD", delay: 0.2 },
   { from: "AHMEDABAD", to: "MUMBAI", delay: 0.6 },
-  { from: "MUMBAI", to: "MAHARASHTRA", delay: 1.0 }
+  { from: "MUMBAI", to: "MAHARASHTRA", delay: 1.0 },
+  { from: "MAHARASHTRA", to: "DELHI", delay: 1.4 }
 ];
 
 // Premium High-Tech Holographic WebGL Earth
@@ -81,7 +82,8 @@ const CyberHoloEarth = ({ onFocusIndia }) => {
       arcs: [
         { from: [28.6139, 77.2090], to: [23.0225, 72.5714], color: [0, 1, 0] },
         { from: [23.0225, 72.5714], to: [19.0760, 72.8777], color: [0, 1, 0] },
-        { from: [19.0760, 72.8777], to: [18.5204, 73.8567], color: [0, 1, 0] }
+        { from: [19.0760, 72.8777], to: [18.5204, 73.8567], color: [0, 1, 0] },
+        { from: [18.5204, 73.8567], to: [28.6139, 77.2090], color: [0, 1, 0] }
       ],
       arcColor: [0, 1, 0],
       arcWidth: 1.0,
