@@ -1,87 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { sectionStats } from '../../data/axionStats';
+import React from 'react';
+import { motion } from 'framer-motion';
 import electricShiftCar from '../../assets/images/electric_shift_car.webp';
-
-// Subcomponent: Animated Counter
-const AnimatedCounter = ({ from = 0, to, duration = 2 }) => {
-  const [count, setCount] = useState(from);
-  const nodeRef = useRef(null);
-  const inView = useInView(nodeRef, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    if (!inView) return;
-    
-    // Fallback if 'to' is not a number (e.g. string with XX+)
-    if (typeof to !== 'number' && isNaN(parseInt(to))) {
-      setCount(to);
-      return;
-    }
-
-    const targetValue = typeof to === 'number' ? to : parseInt(to);
-    
-    let startTime;
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      setCount(Math.floor(easeProgress * (targetValue - from) + from));
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
-  }, [inView, from, to, duration]);
-
-  return <span ref={nodeRef}>{count}</span>;
-};
-
-// Subcomponent: StatCard
-const StatCard = ({ stat, index }) => {
-  const percentage = stat.goal ? Math.min((stat.value / stat.goal) * 100, 100) : 0;
-  const remaining = stat.goal ? stat.goal - stat.value : 0;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-      className="flex flex-col items-center justify-center p-4 py-8 rounded-lg border border-white/10 bg-transparent hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 w-full"
-    >
-      <div className="flex items-baseline gap-0.5 mb-2">
-        <span className="text-[2rem] font-display font-bold text-accent leading-none tracking-tight drop-shadow-[0_0_8px_rgba(var(--color-accent-rgb),0.5)]">
-          {stat.value === 'XX' || isNaN(stat.value) ? stat.value : <AnimatedCounter to={stat.value} />}
-          <span className="text-[1.5rem]">{stat.suffix}</span>
-        </span>
-      </div>
-      <span className="text-[0.55rem] font-sans font-bold text-gray-300 uppercase tracking-widest leading-snug text-center mb-4">
-        {stat.label.split(' ').map((word, i) => <React.Fragment key={i}>{word}<br/></React.Fragment>)}
-      </span>
-      
-      {stat.goal && (
-        <div className="w-full px-2">
-          <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden mb-1.5">
-            <motion.div 
-              initial={{ width: 0 }}
-              whileInView={{ width: `${percentage}%` }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, delay: 0.8 + index * 0.1, ease: "easeOut" }}
-              className="h-full bg-accent shadow-[0_0_10px_rgba(var(--color-accent-rgb),0.8)]" 
-            />
-          </div>
-          <div className="text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-[0.1em] uppercase text-center mt-1.5 font-medium">
-            <span className="text-white font-bold">{remaining}</span> TO GOAL ({stat.goal})
-          </div>
-        </div>
-      )}
-    </motion.div>
-  );
-};
 
 const ElectricShiftSection = () => {
   return (
-    <section className="relative w-full min-h-[90vh] bg-[#050806] flex items-center justify-center py-20 z-20">
+    <section className="relative w-full min-h-[80vh] md:min-h-[85vh] bg-[#050806] flex items-center justify-center py-20 z-20">
       
       <div className="max-w-[1500px] mx-auto px-4 md:px-10 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
         
@@ -101,28 +24,19 @@ const ElectricShiftSection = () => {
           </motion.h2>
 
           {/* Description */}
-          <motion.p 
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[1rem] md:text-[1.1rem] text-gray-300 font-sans max-w-[500px] mb-12 leading-relaxed"
+            className="flex flex-col gap-4 max-w-[540px]"
           >
-            The transition to electric mobility requires an infrastructure built for scale.
-          </motion.p>
-
-          {/* Statistics Grid */}
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, margin: "-100px" }}
-             transition={{ duration: 0.8, delay: 0.4 }}
-             className="grid grid-cols-2 md:grid-cols-4 gap-4"
-          >
-            <StatCard index={0} stat={{ value: 5, suffix: '+', label: 'CHARGING SOLUTIONS', goal: 100 }} />
-            <StatCard index={1} stat={{ value: 150, suffix: '+', label: 'PROJECTS', goal: 500 }} />
-            <StatCard index={2} stat={{ value: 45, suffix: '+', label: 'PARTNERS', goal: 200 }} />
-            <StatCard index={3} stat={{ value: 28, suffix: '+', label: 'CITIES', goal: 100 }} />
+            <p className="text-[1.05rem] md:text-[1.2rem] text-gray-300 font-sans leading-relaxed">
+              The transition to electric mobility requires an infrastructure built for scale.
+            </p>
+            <p className="text-[0.95rem] md:text-[1.05rem] text-gray-400 font-sans leading-relaxed">
+              AXION CHARGE delivers ultra-fast, intelligent charging technology designed to power personal vehicles, enterprise commercial fleets, and national highway corridors with relentless reliability.
+            </p>
           </motion.div>
 
         </div>
