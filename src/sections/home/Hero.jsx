@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Zap, Settings, TowerControl } from 'lucide-react';
 import bgImage from '../../assets/images/hero_bg_final.webp';
 
@@ -55,6 +56,30 @@ const LoopingTypewriterText = ({ texts, delay = 0, className = '' }) => {
 
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleExploreSolutions = () => {
+    const el = document.getElementById('solutions');
+    if (el) {
+      if (window.lenis) {
+        window.lenis.scrollTo(el, { offset: -40, duration: 1.2 });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/solutions/residential');
+    }
+  };
+
+  const handleGetQuote = () => {
+    navigate('/contact', {
+      state: {
+        type: 'quote',
+        source: 'hero'
+      }
+    });
+  };
+
   return (
     <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-0">
 
@@ -110,11 +135,19 @@ const Hero = () => {
               <div className="w-full mt-auto pt-6 pb-6 md:pb-14 flex flex-col gap-4">
                 {/* Buttons */}
                 <div className="flex flex-row w-full gap-2 sm:gap-3 opacity-0 animate-[fadeIn_1s_ease-in_3s_forwards]">
-                  <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 bg-accent text-black font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.6)]">
+                  <button 
+                    type="button"
+                    onClick={handleExploreSolutions}
+                    className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 bg-accent text-black font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.6)] cursor-pointer"
+                  >
                     EXPLORE SOLUTIONS
                     <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                   </button>
-                  <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 border border-white/40 text-white font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-white transition-all bg-transparent hover:bg-white/5">
+                  <button 
+                    type="button"
+                    onClick={handleGetQuote}
+                    className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 border border-white/40 text-white font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-white transition-all bg-transparent hover:bg-white/5 cursor-pointer"
+                  >
                     GET A QUOTE
                     <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] opacity-70 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                   </button>

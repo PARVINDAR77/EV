@@ -1,14 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition/PageTransition';
 import Footer from '../components/Footer/Footer';
-import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight, CheckCircle2, AlertCircle, Loader2, Sparkles, X } from 'lucide-react';
 import { sendContactMessage } from '../services/mailService';
 
 const Contact = () => {
-  const [formState, setFormState] = useState({ name: '', email: '', subject: 'General Inquiry', message: '' });
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const formRef = useRef(null);
+
+  const [formState, setFormState] = useState({ 
+    name: '', 
+    email: '', 
+    subject: 'General Inquiry', 
+    message: '' 
+  });
+  const [quoteContext, setQuoteContext] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ type: null, message: '' });
+
+  useEffect(() => {
+    const isQuoteType = location.state?.type === 'quote' || searchParams.get('type') === 'quote';
+    const solutionParam = location.state?.solution || searchParams.get('solution');
+    const productParam = location.state?.product || searchParams.get('product');
+    const subtitleParam = location.state?.subtitle || searchParams.get('subtitle') || location.state?.category || '';
+
+    if (isQuoteType || solutionParam || productParam) {
+      let context = null;
+      let prefilledMsg = '';
+
+      if (solutionParam) {
+        context = {
+          type: 'solution',
+          title: solutionParam,
+          subtitle: subtitleParam
+        };
+        prefilledMsg = `Hi Axion Team,\n\nI would like to request an official quote and consultation for the ${solutionParam} Charging Solution${subtitleParam ? ` (${subtitleParam})` : ''}. Please share pricing details, technical specifications, and installation options.\n\nThank you!`;
+      } else if (productParam) {
+        context = {
+          type: 'product',
+          title: productParam,
+          subtitle: subtitleParam
+        };
+        prefilledMsg = `Hi Axion Team,\n\nI would like to request an official quote for the ${productParam}${subtitleParam ? ` (${subtitleParam})` : ''}. Please share commercial pricing, lead time, and technical documentation.\n\nThank you!`;
+      } else {
+        context = {
+          type: 'general_quote',
+          title: 'AXION Charging Infrastructure',
+          subtitle: 'Commercial & Residential Systems'
+        };
+        prefilledMsg = `Hi Axion Team,\n\nI am interested in AXION EV charging systems and would like to request an official quote. Please connect me with your sales and engineering team.\n\nThank you!`;
+      }
+
+      setQuoteContext(context);
+      setFormState((prev) => ({
+        ...prev,
+        subject: 'Quote Request',
+        message: prev.message && prev.message !== '' ? prev.message : prefilledMsg
+      }));
+
+      // Scroll to form smoothly so user immediately sees their quote context
+      const timer = setTimeout(() => {
+        if (formRef.current) {
+          if (window.lenis) {
+            window.lenis.scrollTo(formRef.current, { offset: -90, duration: 1.2 });
+          } else {
+            formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [location.state, searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +88,7 @@ const Contact = () => {
         message: 'Message delivered! Our team will get back to you within 24 hours.'
       });
       setFormState({ name: '', email: '', subject: 'General Inquiry', message: '' });
+      setQuoteContext(null);
     } catch (err) {
       console.error('Contact submit error:', err);
       setStatus({
@@ -145,14 +212,64 @@ const Contact = () => {
                   <div className="w-full h-full bg-[#020403] rounded-[2.5rem]" />
                 </div>
 
-                <div className="relative z-30 w-full bg-[#050806]/80 backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-12 border border-white/5 shadow-[0_30px_100px_rgba(0,0,0,0.8),inset_0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden">
+                <div ref={formRef} className="relative z-30 w-full bg-[#050806]/80 backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-12 border border-white/5 shadow-[0_30px_100px_rgba(0,0,0,0.8),inset_0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden">
                   
                   <div className="absolute -top-32 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none" />
                   
-                  <div className="mb-10 relative z-10">
-                    <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">Send a Message</h3>
-                    <p className="text-white/40 font-sans text-sm md:text-base">Fill out the form below and our team will get back to you immediately.</p>
+                  <div className="mb-8 relative z-10">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                      <span className="text-accent font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold">
+                        {quoteContext ? 'Instant Quote Consultation' : 'Direct Inquiry'}
+                      </span>
+                    </div>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
+                      {quoteContext ? 'Request a Quote' : 'Send a Message'}
+                    </h3>
+                    <p className="text-white/40 font-sans text-sm md:text-base leading-relaxed">
+                      {quoteContext
+                        ? 'Complete the details below to receive official specifications, commercial pricing, and deployment timelines.'
+                        : 'Fill out the form below and our engineering team will get back to you immediately.'}
+                    </p>
                   </div>
+
+                  {/* Contextual Quote Selection Badge */}
+                  <AnimatePresence>
+                    {quoteContext && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                        className="mb-8 p-4 rounded-2xl bg-gradient-to-r from-accent/15 via-accent/5 to-transparent border border-accent/30 shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.1)] flex items-center justify-between gap-4 relative z-10"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center text-accent flex-shrink-0">
+                            <Sparkles size={16} />
+                          </div>
+                          <div className="min-w-0">
+                            <span className="block font-mono text-[0.6rem] uppercase tracking-wider text-accent font-bold">
+                              Selected for Quote
+                            </span>
+                            <h4 className="text-white font-display font-bold text-sm truncate">
+                              {quoteContext.title}
+                              {quoteContext.subtitle ? <span className="text-white/60 font-sans text-xs font-normal"> · {quoteContext.subtitle}</span> : null}
+                            </h4>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setQuoteContext(null);
+                            setFormState((prev) => ({ ...prev, subject: 'General Inquiry' }));
+                          }}
+                          className="p-1.5 rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0 cursor-pointer"
+                          title="Clear selection"
+                        >
+                          <X size={15} />
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                   
                   <form onSubmit={handleSubmit} className="flex flex-col gap-7 relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
@@ -178,12 +295,12 @@ const Contact = () => {
                     
                     <div className="flex flex-col gap-3">
                       <label className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Subject</label>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {['General Inquiry', 'Technical Support', 'Sales'].map((sub) => (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        {['Quote Request', 'General Inquiry', 'Technical Support', 'Sales'].map((sub) => (
                           <div 
                             key={sub}
                             onClick={() => setFormState({...formState, subject: sub})}
-                            className={`cursor-pointer px-4 py-3.5 rounded-xl border text-center text-sm font-bold transition-all duration-300 select-none ${
+                            className={`cursor-pointer px-3 py-3.5 rounded-xl border text-center text-xs sm:text-sm font-bold transition-all duration-300 select-none ${
                               formState.subject === sub 
                               ? 'bg-accent border-accent text-black shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)]' 
                               : 'bg-white/[0.02] border-white/10 text-white/50 hover:border-white/30 hover:bg-white/[0.05]'
@@ -200,7 +317,7 @@ const Contact = () => {
                       <textarea 
                         required rows="5"
                         value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})}
-                        className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-accent focus:bg-accent/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 shadow-inner resize-none"
+                        className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-accent focus:bg-accent/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 shadow-inner resize-none font-sans text-sm leading-relaxed"
                         placeholder="How can we help you today?"
                       />
                     </div>
@@ -230,9 +347,9 @@ const Contact = () => {
                     <button 
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full mt-2 relative overflow-hidden flex justify-center items-center gap-3 bg-accent text-black font-bold uppercase tracking-widest py-5 rounded-2xl transition-all duration-300 group shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.2)] hover:shadow-[0_0_40px_rgba(var(--color-accent-rgb),0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full mt-2 relative overflow-hidden flex justify-center items-center gap-3 bg-accent text-black font-bold uppercase tracking-widest py-5 rounded-2xl transition-all duration-300 group shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.2)] hover:shadow-[0_0_40px_rgba(var(--color-accent-rgb),0.5)] disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                     >
-                      <span className="relative z-10 flex items-center gap-2">
+                      <span className="relative z-10 flex items-center gap-2 text-xs md:text-sm font-bold">
                         {isSubmitting ? (
                           <>
                             <Loader2 className="w-5 h-5 animate-spin" />
@@ -240,7 +357,7 @@ const Contact = () => {
                           </>
                         ) : (
                           <>
-                            SEND MESSAGE
+                            {quoteContext || formState.subject === 'Quote Request' ? 'SUBMIT QUOTE REQUEST' : 'SEND MESSAGE'}
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                           </>
                         )}

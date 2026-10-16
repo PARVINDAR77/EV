@@ -117,7 +117,7 @@ const ChargingSolutionsSection = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative w-full bg-[#050708] z-20">
+    <section id="solutions" ref={containerRef} className="relative w-full bg-[#050708] z-20">
 
       {/* Mobile: stacked visual cards */}
       <div className="md:hidden px-4 pt-32 pb-20 border-t border-white/5">

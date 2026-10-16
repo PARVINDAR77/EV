@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
@@ -91,12 +92,25 @@ const sectionData = {
 };
 
 const SolutionTemplate = ({ title, subtitle, description, id }) => {
+  const navigate = useNavigate();
   const currentVideo = videoMap[id];
   const [showVideo, setShowVideo] = useState(Boolean(currentVideo));
   const [progress, setProgress] = useState(0);
   const videoRef = React.useRef(null);
   const data = sectionData[id] || {};
   const heroImage = imageMap[id];
+
+  const handleGetQuote = () => {
+    navigate('/contact', {
+      state: {
+        type: 'quote',
+        solution: title,
+        subtitle: subtitle,
+        solutionId: id,
+        source: 'solution_page'
+      }
+    });
+  };
 
   // Play video with explicit autoplay compatibility
   useEffect(() => {
@@ -288,10 +302,12 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
               </motion.p>
 
               <motion.button
+                type="button"
+                onClick={handleGetQuote}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="relative overflow-hidden flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-accent text-black font-sans text-xs md:text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.5)] group"
+                className="relative overflow-hidden flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-accent text-black font-sans text-xs md:text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.5)] group cursor-pointer"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   GET A QUOTE
@@ -368,6 +384,36 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* ── Bottom Quote CTA Banner ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full relative rounded-3xl overflow-hidden p-8 md:p-12 mb-20 border border-white/10 bg-gradient-to-r from-accent/10 via-white/[0.02] to-transparent backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          >
+            <div className="max-w-xl">
+              <span className="text-accent font-mono text-xs uppercase tracking-[0.25em] font-bold block mb-2">CUSTOM DEPLOYMENT</span>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight mb-3">
+                Ready to deploy {title} charging?
+              </h3>
+              <p className="text-[#A0A0A0] font-sans text-sm md:text-base leading-relaxed">
+                Connect with Axion engineering for site survey, hardware sizing, power load consultation, and official commercial pricing.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleGetQuote}
+              className="relative overflow-hidden flex-shrink-0 flex items-center gap-3 px-8 py-4 bg-accent text-black font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.5)] group cursor-pointer"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                GET A QUOTE
+                <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
+              </span>
+              <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0" />
+            </button>
           </motion.div>
 
         </div>

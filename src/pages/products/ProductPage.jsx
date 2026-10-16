@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
@@ -445,6 +445,7 @@ const PRODUCT_DB = {
 
 const ProductPage = (props) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [isDatasheetOpen, setIsDatasheetOpen] = useState(false);
   const [selectedModelKey, setSelectedModelKey] = useState(null);
   const datasheetRef = useRef(null);
@@ -476,6 +477,18 @@ const ProductPage = (props) => {
       setSelectedModelKey(id);
     }
   }, [id]);
+
+  const handleGetQuoteClick = () => {
+    navigate('/contact', {
+      state: {
+        type: 'quote',
+        product: title,
+        category: category,
+        productId: id || activeKey,
+        source: 'product_page'
+      }
+    });
+  };
 
   const handleDownloadSheetClick = () => {
     setIsDatasheetOpen(true);
@@ -592,21 +605,37 @@ const ProductPage = (props) => {
                 </motion.div>
               )}
 
-              {/* Download Datasheet Button */}
-              <motion.button 
-                type="button"
-                onClick={handleDownloadSheetClick}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative overflow-hidden flex items-center gap-3 px-8 py-4 bg-accent text-black font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.5)] group cursor-pointer"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  DOWNLOAD DATASHEET
-                  <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
-                </span>
-                <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0" />
-              </motion.button>
+              {/* Action Buttons: Get Quote & Download Datasheet */}
+              <div className="flex flex-wrap items-center gap-4">
+                <motion.button 
+                  type="button"
+                  onClick={handleGetQuoteClick}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.35 }}
+                  className="relative overflow-hidden flex items-center gap-3 px-8 py-4 bg-accent text-black font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.5)] group cursor-pointer"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    GET A QUOTE
+                    <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0" />
+                </motion.button>
+
+                <motion.button 
+                  type="button"
+                  onClick={handleDownloadSheetClick}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="relative overflow-hidden flex items-center gap-3 px-8 py-4 border border-white/20 text-white hover:border-accent hover:text-accent font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 bg-white/5 hover:bg-accent/5 group cursor-pointer"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    DOWNLOAD DATASHEET
+                    <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
+                  </span>
+                </motion.button>
+              </div>
             </div>
 
             {/* Right Content (Image) */}
