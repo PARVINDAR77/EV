@@ -82,23 +82,21 @@ const Hero = () => {
   return (
     <section className="relative w-full min-h-[100svh] bg-[#020403] overflow-hidden flex flex-col justify-center pt-28 md:pt-32 pb-12">
 
-      {/* Background Image with high LCP priority - dulled and cinematic */}
+      {/* Background Image: Crisp, bright, and fully visible */}
       <img
         src={bgImage}
         alt="Tata Tiago EV charging at AXION DC Fast Charger"
         fetchPriority="high"
         decoding="sync"
-        className="absolute inset-0 w-full h-full object-cover object-[72%_center] md:object-[65%_center] lg:object-center z-0 pointer-events-none select-none brightness-[0.88] contrast-[1.04]"
+        className="absolute inset-0 w-full h-full object-cover object-[75%_center] md:object-[68%_center] lg:object-center z-0 pointer-events-none select-none brightness-100 contrast-[1.02]"
       />
-      
-      {/* Overall dulling veil so the image is pleasant and never glaring */}
-      <div className="absolute inset-0 z-[1] bg-[#020403]/40 pointer-events-none" />
 
-      {/* Asymmetric Horizontal Gradient: Deep dark on left to protect text, soft darkening on right */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#020403]/95 via-[#020403]/85 md:via-[#020403]/65 to-[#020403]/30 pointer-events-none" />
+      {/* Asymmetric Scrim: Darkens ONLY the left side (0% - 40%) behind the headline & text,
+          then fades completely to 100% transparent so the Tata Tiago EV & AXION Fast Charger are fully visible, bright, and vibrant! */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b md:bg-gradient-to-r from-[#020403]/95 via-[#020403]/70 via-40% to-transparent pointer-events-none" />
 
-      {/* Vertical Edge Gradients: Seamless blends for Navbar and next section */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#020403]/90 via-transparent to-[#020403] pointer-events-none" />
+      {/* Subtle edge blend at the very bottom into the next section */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#020403]/80 via-transparent via-25% to-transparent pointer-events-none" />
 
       {/* Content Wrapper */}
       <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-10 flex flex-col justify-center flex-1">
