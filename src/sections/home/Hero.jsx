@@ -116,8 +116,7 @@ const StatItem = ({ value, goal, duration, label, isActive = false }) => {
 
 const Hero = () => {
   return (
-    <>
-      <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-0">
+    <section className="relative w-full min-h-[100svh] bg-[#000] overflow-hidden flex flex-col pt-32 md:pt-40 pb-0">
 
         {/* Background Image with high LCP priority */}
         <img
@@ -207,85 +206,7 @@ const Hero = () => {
 
           </div>
         </div>
-      </section>
-
-      {/* Ecosystem Section underneath */}
-      <section className="w-full bg-[#000] relative pb-20 -mt-1">
-
-        {/* Angled SVG Divider */}
-        <div className="w-full max-w-[1920px] mx-auto h-[50px] relative hidden md:block">
-          <svg width="100%" height="100%" viewBox="0 0 1440 50" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0 0 H450 L500 50 H1440" stroke="var(--color-accent)" strokeWidth="1" strokeOpacity="0.4" />
-          </svg>
-        </div>
-
-        <div className="max-w-[1500px] mx-auto px-4 md:px-10 relative mt-8 md:mt-12">
-
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-8 md:mb-10 gap-3">
-            <div>
-              <h2 className="text-white font-sans font-bold text-[1.2rem] tracking-wide mb-2 uppercase">ONE ENERGY ECOSYSTEM.</h2>
-              <p className="text-gray-400 font-sans text-[0.8rem]"><span className="text-gray-500">From</span> home to highway — a complete charging network.</p>
-            </div>
-            <div className="hidden md:flex items-center text-[0.55rem] text-gray-400 font-mono tracking-widest uppercase gap-2">
-              EXPLORE THE ECOSYSTEM <ArrowRight size={12} />
-            </div>
-          </div>
-
-          <div className="relative">
-            {/* Horizontal dotted line */}
-            <div className="absolute top-9 left-0 w-full border-t border-dashed border-accent/30 hidden md:block z-0"></div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 md:gap-16 relative z-10">
-
-              {/* Home */}
-              <div className="flex flex-col gap-5">
-                <div className="w-[70px] h-[70px] rounded-2xl border border-accent flex items-center justify-center bg-black relative">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
-                </div>
-                <div>
-                  <h4 className="text-white font-sans font-bold uppercase text-[0.85rem] mb-1.5 tracking-wide">HOME</h4>
-                  <p className="text-gray-400 text-[0.75rem] leading-relaxed max-w-[180px]">Charge at your home<br />with ease.</p>
-                </div>
-              </div>
-
-              {/* Business */}
-              <div className="flex flex-col gap-5">
-                <div className="w-[70px] h-[70px] rounded-2xl border border-accent flex items-center justify-center bg-black relative">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M12 6h.01" /><path d="M12 10h.01" /><path d="M12 14h.01" /><path d="M16 10h.01" /><path d="M16 14h.01" /><path d="M8 10h.01" /><path d="M8 14h.01" /></svg>
-                </div>
-                <div>
-                  <h4 className="text-white font-sans font-bold uppercase text-[0.85rem] mb-1.5 tracking-wide">BUSINESS</h4>
-                  <p className="text-gray-400 text-[0.75rem] leading-relaxed max-w-[180px]">Powering workplaces<br />and commercial spaces.</p>
-                </div>
-              </div>
-
-              {/* Fleet */}
-              <div className="flex flex-col gap-5">
-                <div className="w-[70px] h-[70px] rounded-2xl border border-accent flex items-center justify-center bg-black relative">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 17h4V5H2v12h3" /><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5" /><path d="M14 17h1" /><circle cx="7.5" cy="17.5" r="2.5" /><circle cx="17.5" cy="17.5" r="2.5" /></svg>
-                </div>
-                <div>
-                  <h4 className="text-white font-sans font-bold uppercase text-[0.85rem] mb-1.5 tracking-wide">FLEET</h4>
-                  <p className="text-gray-400 text-[0.75rem] leading-relaxed max-w-[180px]">Keep your fleet<br />moving.</p>
-                </div>
-              </div>
-
-              {/* Highway */}
-              <div className="flex flex-col gap-5">
-                <div className="w-[70px] h-[70px] rounded-2xl border border-accent flex items-center justify-center bg-black relative">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 22 8.7-17.4a2 2 0 0 1 3.6 0L24 22" /><path d="M14 13h-4l-1 2h6Z" /></svg>
-                </div>
-                <div>
-                  <h4 className="text-white font-sans font-bold uppercase text-[0.85rem] mb-1.5 tracking-wide">HIGHWAY</h4>
-                  <p className="text-gray-400 text-[0.75rem] leading-relaxed max-w-[180px]">Longer journeys,<br />greater freedom.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+    </section>
   );
 };
 

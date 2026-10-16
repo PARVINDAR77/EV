@@ -73,10 +73,16 @@ const ChargingSolutionsSection = () => {
   const containerRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
   const [videoEnded, setVideoEnded] = useState(false);
+  const [videoReady, setVideoReady] = useState(true);
 
-  // When active tab changes, reset so the new video plays cleanly
+  // When active tab changes, debounce video loading so fast scrolling uses zero decoder overhead
   useEffect(() => {
     setVideoEnded(false);
+    setVideoReady(false);
+    const timer = setTimeout(() => {
+      setVideoReady(true);
+    }, 280);
+    return () => clearTimeout(timer);
   }, [activeTab]);
 
   const { scrollYProgress } = useScroll({
@@ -89,7 +95,7 @@ const ChargingSolutionsSection = () => {
       let index = Math.floor(latest * 5);
       if (index >= 5) index = 4;
       if (index < 0) index = 0;
-      setActiveTab(index);
+      setActiveTab((prev) => (prev !== index ? index : prev));
     });
   }, [scrollYProgress]);
 
@@ -221,8 +227,8 @@ const ChargingSolutionsSection = () => {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
-                {/* Clean sequential play: video plays first, on complete it sets the image without overlap */}
-                {solutions[activeTab].video && !videoEnded ? (
+                {/* Clean sequential play: video plays cleanly after scroll settles, on complete it sets the image without overlap */}
+                {solutions[activeTab].video && !videoEnded && videoReady ? (
                   <video 
                     key={`vid-${solutions[activeTab].id}`}
                     src={solutions[activeTab].video}

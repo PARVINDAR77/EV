@@ -42,7 +42,7 @@ const Loader = ({ onComplete }) => {
 
     let safetyTimer = setTimeout(() => {
       onComplete();
-    }, 12000);
+    }, 4500);
 
     tryPlay();
     video.addEventListener('canplay', tryPlay);

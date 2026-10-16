@@ -82,24 +82,44 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    try {
+      return !sessionStorage.getItem('axion_intro_shown');
+    } catch (e) {
+      return true;
+    }
+  });
+
+  const handleLoaderComplete = () => {
+    try {
+      sessionStorage.setItem('axion_intro_shown', 'true');
+    } catch (e) {}
+    setLoading(false);
+  };
 
   useEffect(() => {
-    // Initialize Lenis smooth scrolling
+    // Only initialize Lenis on desktop pointer devices to avoid mobile scroll drag
+    const isTouchOrMobile = window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window);
+    if (isTouchOrMobile) return;
+
+    let rafId;
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
     });
     window.lenis = lenis;
 
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       lenis.destroy();
       delete window.lenis;
     };
@@ -110,7 +130,7 @@ const App = () => {
       <ScrollToTop />
       <AnimatePresence mode="wait">
         {loading ? (
-          <Loader key="loader" onComplete={() => setLoading(false)} />
+          <Loader key="loader" onComplete={handleLoaderComplete} />
         ) : (
           <React.Fragment key="content">
             <Navbar />

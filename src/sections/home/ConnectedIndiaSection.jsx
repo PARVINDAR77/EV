@@ -61,17 +61,17 @@ const CyberHoloEarth = ({ onFocusIndia }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const width = 600;
+    const width = 500;
 
     globe = createGlobe(canvas, {
-      devicePixelRatio: 2,
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
       width: width * 2,
       height: width * 2,
       phi: phi,
       theta: 0.35,
       dark: 1,
       diffuse: 1.6,
-      mapSamples: 28000, // Ultra-high density of digital points
+      mapSamples: 7500, // Balanced high-tech density, 73% lower GPU overhead
       mapBrightness: 8.5, // Vibrant electric neon green landmasses
       mapBaseBrightness: 0.08, // Subtle cyber dots over the oceans for complete 3D depth
       baseColor: [0.03, 0.09, 0.04],
