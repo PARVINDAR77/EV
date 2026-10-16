@@ -27,26 +27,17 @@ const FeatureItem = ({ icon: Icon, title, description, delay }) => (
 );
 
 const cities = [
-  { name: "DELHI", coordinates: [77.2090, 28.6139], isHub: true, delay: 0.1 },
-  { name: "AHMEDABAD", coordinates: [72.5714, 23.0225], isHub: false, delay: 0.5 },
-  { name: "MUMBAI", coordinates: [72.8777, 19.0760], isHub: true, delay: 0.9 },
-  { name: "PUNE", coordinates: [73.8567, 18.5204], isHub: false, delay: 1.3 },
-  { name: "BENGALURU", coordinates: [77.5946, 12.9716], isHub: true, delay: 1.7 },
-  { name: "CHENNAI", coordinates: [80.2707, 13.0827], isHub: false, delay: 2.1 },
-  { name: "HYDERABAD", coordinates: [78.4867, 17.3850], isHub: false, delay: 2.5 },
-  { name: "KOLKATA", coordinates: [88.3639, 22.5726], isHub: false, delay: 3.0 }
+  { name: "DELHI", coordinates: [77.2090, 28.6139], isHub: true, delay: 0.1, anchor: "start", dx: 14, dy: 4 },
+  { name: "AHMEDABAD", coordinates: [72.5714, 23.0225], isHub: true, delay: 0.5, anchor: "start", dx: 14, dy: 4 },
+  { name: "MUMBAI", coordinates: [72.8777, 19.0760], isHub: true, delay: 0.9, anchor: "end", dx: -14, dy: 4 },
+  { name: "MAHARASHTRA", coordinates: [73.8567, 18.5204], isHub: true, delay: 1.3, anchor: "start", dx: 14, dy: 6 }
 ];
 
-// Sequential network line paths
+// Sequential network line paths connecting Delhi -> Ahmedabad -> Mumbai -> Maharashtra
 const lines = [
   { from: "DELHI", to: "AHMEDABAD", delay: 0.2 },
   { from: "AHMEDABAD", to: "MUMBAI", delay: 0.6 },
-  { from: "MUMBAI", to: "PUNE", delay: 1.0 },
-  { from: "PUNE", to: "BENGALURU", delay: 1.4 },
-  { from: "BENGALURU", to: "CHENNAI", delay: 1.8 },
-  { from: "BENGALURU", to: "HYDERABAD", delay: 2.2 },
-  { from: "HYDERABAD", to: "DELHI", delay: 2.7 },
-  { from: "HYDERABAD", to: "KOLKATA", delay: 3.2 }
+  { from: "MUMBAI", to: "MAHARASHTRA", delay: 1.0 }
 ];
 
 // Premium High-Tech Holographic WebGL Earth
@@ -82,12 +73,15 @@ const CyberHoloEarth = ({ onFocusIndia }) => {
       markers: [
         // Pinpoint satellite beacon over India (subtle & precise, not oversized)
         { location: [20.5937, 78.9629], size: 0.035, color: [0, 1, 0] },
-        { location: [28.6139, 77.2090], size: 0.025, color: [0, 1, 0] },
-        { location: [19.0760, 72.8777], size: 0.025, color: [0, 1, 0] },
-        { location: [12.9716, 77.5946], size: 0.025, color: [0, 1, 0] }
+        { location: [28.6139, 77.2090], size: 0.025, color: [0, 1, 0] }, // Delhi
+        { location: [23.0225, 72.5714], size: 0.025, color: [0, 1, 0] }, // Ahmedabad
+        { location: [19.0760, 72.8777], size: 0.025, color: [0, 1, 0] }, // Mumbai
+        { location: [18.5204, 73.8567], size: 0.025, color: [0, 1, 0] }  // Maharashtra
       ],
       arcs: [
-        { from: [28.6139, 77.2090], to: [12.9716, 77.5946], color: [0, 1, 0] }
+        { from: [28.6139, 77.2090], to: [23.0225, 72.5714], color: [0, 1, 0] },
+        { from: [23.0225, 72.5714], to: [19.0760, 72.8777], color: [0, 1, 0] },
+        { from: [19.0760, 72.8777], to: [18.5204, 73.8567], color: [0, 1, 0] }
       ],
       arcColor: [0, 1, 0],
       arcWidth: 1.0,
@@ -283,7 +277,7 @@ const AccurateIndiaMap = ({ animKey = 0 }) => {
           })}
 
           {/* City Nodes */}
-          {cities.map(({ name, coordinates, isHub, delay }) => (
+          {cities.map(({ name, coordinates, isHub, delay, anchor, dx, dy }) => (
             <Marker key={`${name}-${animKey}`} coordinates={coordinates}>
               <motion.g
                 initial={{ opacity: 0, scale: 0 }}
@@ -307,9 +301,9 @@ const AccurateIndiaMap = ({ animKey = 0 }) => {
                 
                 {/* Label */}
                 <text
-                  textAnchor="start"
-                  x={12}
-                  y={4}
+                  textAnchor={anchor || "start"}
+                  x={dx !== undefined ? dx : 12}
+                  y={dy !== undefined ? dy : 4}
                   className="fill-[#F3F4F6] font-mono text-[9px] tracking-[0.25em] uppercase font-bold"
                   style={{ filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,1))' }}
                 >
