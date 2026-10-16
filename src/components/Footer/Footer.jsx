@@ -11,18 +11,25 @@ const Footer = () => {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (!newsEmail) return;
+    if (!newsEmail || newsStatus === 'loading') return;
     setNewsStatus('loading');
     try {
       await sendNewsletterSubscription(newsEmail);
       setNewsStatus('success');
       setNewsEmail('');
-      setTimeout(() => setNewsStatus('idle'), 5000);
+      setTimeout(() => setNewsStatus('idle'), 2500);
     } catch (err) {
       console.error('Newsletter error:', err);
       setNewsStatus('error');
-      setTimeout(() => setNewsStatus('idle'), 4000);
+      setTimeout(() => setNewsStatus('idle'), 3000);
     }
+  };
+
+  const handleEmailChange = (e) => {
+    if (newsStatus !== 'idle' && newsStatus !== 'loading') {
+      setNewsStatus('idle');
+    }
+    setNewsEmail(e.target.value);
   };
   return (
     <footer className="relative w-full bg-[#020403] pt-24 pb-10 z-20 overflow-hidden border-t border-white/5">
@@ -55,11 +62,13 @@ const Footer = () => {
               <div className="relative w-full">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5" />
                 <input 
+                  id="newsletter-email"
+                  name="email"
                   type="email" 
                   value={newsEmail}
-                  onChange={(e) => setNewsEmail(e.target.value)}
-                  placeholder={newsStatus === 'success' ? "Thanks for subscribing!" : "Enter your email address"} 
-                  disabled={newsStatus === 'loading' || newsStatus === 'success'}
+                  onChange={handleEmailChange}
+                  placeholder={newsStatus === 'success' ? "Subscribed! Enter another to send again" : "Enter your email address"} 
+                  disabled={newsStatus === 'loading'}
                   className={`w-full bg-white/5 border rounded-full py-4 pl-12 pr-4 sm:pr-36 text-white font-sans text-sm focus:outline-none transition-colors ${
                     newsStatus === 'success' 
                       ? 'border-accent text-accent' 
@@ -72,8 +81,8 @@ const Footer = () => {
               </div>
               <button 
                 type="submit"
-                disabled={newsStatus === 'loading' || newsStatus === 'success'}
-                className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-1/2 sm:-translate-y-1/2 px-6 py-4 sm:py-2 bg-accent text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300 disabled:opacity-75 flex items-center justify-center gap-1.5"
+                disabled={newsStatus === 'loading'}
+                className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-1/2 sm:-translate-y-1/2 px-6 py-4 sm:py-2 bg-accent text-black font-bold uppercase tracking-wider text-xs rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-300 disabled:opacity-75 flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 {newsStatus === 'loading' ? (
                   <>

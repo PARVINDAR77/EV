@@ -76,6 +76,19 @@ const Contact = () => {
     }
   }, [location.state, searchParams]);
 
+  const updateField = (field, value) => {
+    if (status.type) {
+      setStatus({ type: null, message: '' });
+    }
+    setFormState(prev => ({ ...prev, [field]: value }));
+  };
+
+  const resetForm = () => {
+    setFormState({ name: '', email: '', subject: 'General Inquiry', message: '' });
+    setQuoteContext(null);
+    setStatus({ type: null, message: '' });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -87,13 +100,19 @@ const Contact = () => {
         type: 'success',
         message: 'Message delivered! Our team will get back to you within 24 hours.'
       });
+      // Clear inputs immediately so user can compose another message right away
       setFormState({ name: '', email: '', subject: 'General Inquiry', message: '' });
       setQuoteContext(null);
+
+      // Auto-clear success banner after 8s so form stays completely fresh
+      setTimeout(() => {
+        setStatus(prev => prev.type === 'success' ? { type: null, message: '' } : prev);
+      }, 8000);
     } catch (err) {
       console.error('Contact submit error:', err);
       setStatus({
         type: 'error',
-        message: err.message || 'Unable to deliver message. Please contact axion@vardaansmartsolutions.com directly.'
+        message: err.message || 'Unable to deliver message. Please contact us directly.'
       });
     } finally {
       setIsSubmitting(false);
@@ -274,19 +293,23 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="flex flex-col gap-7 relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                       <div className="flex flex-col gap-2">
-                        <label className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Your Name</label>
+                        <label htmlFor="contact-name" className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Your Name</label>
                         <input 
+                          id="contact-name"
+                          name="name"
                           type="text" required
-                          value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})}
+                          value={formState.name} onChange={e => updateField('name', e.target.value)}
                           className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-accent focus:bg-accent/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 shadow-inner"
                           placeholder="e.g. John Doe"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <label className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Email Address</label>
+                        <label htmlFor="contact-email" className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Email Address</label>
                         <input 
+                          id="contact-email"
+                          name="email"
                           type="email" required
-                          value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})}
+                          value={formState.email} onChange={e => updateField('email', e.target.value)}
                           className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-accent focus:bg-accent/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 shadow-inner"
                           placeholder="e.g. john@company.com"
                         />
@@ -299,7 +322,7 @@ const Contact = () => {
                         {['Quote Request', 'General Inquiry', 'Technical Support', 'Sales'].map((sub) => (
                           <div 
                             key={sub}
-                            onClick={() => setFormState({...formState, subject: sub})}
+                            onClick={() => updateField('subject', sub)}
                             className={`cursor-pointer px-3 py-3.5 rounded-xl border text-center text-xs sm:text-sm font-bold transition-all duration-300 select-none ${
                               formState.subject === sub 
                               ? 'bg-accent border-accent text-black shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)]' 
@@ -313,10 +336,12 @@ const Contact = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Message</label>
+                      <label htmlFor="contact-message" className="text-white/40 text-[0.65rem] font-bold uppercase tracking-[0.2em] pl-1">Message</label>
                       <textarea 
+                        id="contact-message"
+                        name="message"
                         required rows="5"
-                        value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})}
+                        value={formState.message} onChange={e => updateField('message', e.target.value)}
                         className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-accent focus:bg-accent/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 shadow-inner resize-none font-sans text-sm leading-relaxed"
                         placeholder="How can we help you today?"
                       />
@@ -328,18 +353,29 @@ const Contact = () => {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className={`p-4 rounded-xl flex items-center gap-3 text-sm font-sans ${
+                          className={`p-4 rounded-xl flex items-center justify-between gap-3 text-sm font-sans ${
                             status.type === 'success'
                               ? 'bg-accent/10 border border-accent/30 text-accent shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.15)]'
                               : 'bg-red-500/10 border border-red-500/30 text-red-400'
                           }`}
                         >
-                          {status.type === 'success' ? (
-                            <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-accent" />
-                          ) : (
-                            <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-400" />
+                          <div className="flex items-center gap-3">
+                            {status.type === 'success' ? (
+                              <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-accent" />
+                            ) : (
+                              <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-400" />
+                            )}
+                            <span>{status.message}</span>
+                          </div>
+                          {status.type === 'success' && (
+                            <button
+                              type="button"
+                              onClick={resetForm}
+                              className="text-xs uppercase tracking-wider font-bold underline hover:text-white transition-colors cursor-pointer flex-shrink-0 ml-2"
+                            >
+                              Send Another
+                            </button>
                           )}
-                          <span>{status.message}</span>
                         </motion.div>
                       )}
                     </AnimatePresence>

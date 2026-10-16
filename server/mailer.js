@@ -13,7 +13,7 @@ const SMTP_CONFIG = {
   },
 };
 
-const ADMIN_EMAIL = process.env.MAIL_TO || 'axion@vardaansmartsolutions.com';
+const ADMIN_EMAIL = process.env.MAIL_TO || 'panjabiparvindar77@gmail.com';
 
 const transporter = nodemailer.createTransport(SMTP_CONFIG);
 
