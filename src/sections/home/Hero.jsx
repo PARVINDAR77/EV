@@ -52,67 +52,7 @@ const LoopingTypewriterText = ({ texts, delay = 0, className = '' }) => {
   );
 };
 
-const AnimatedNumber = ({ value, duration = 2000 }) => {
-  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    let startTime;
-    let animationFrame;
-
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      const percentage = Math.min(progress / duration, 1);
-      
-      // easeOutCubic
-      const easeOut = 1 - Math.pow(1 - percentage, 3);
-      setCount(Math.floor(easeOut * value));
-
-      if (percentage < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    // Small delay before starting the animation for better effect
-    const timeoutId = setTimeout(() => {
-      animationFrame = requestAnimationFrame(animate);
-    }, 1000);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-    };
-  }, [value, duration]);
-
-  return <>{count}</>;
-};
-
-const StatItem = ({ value, goal, duration, label, isActive = false }) => {
-  const percentage = Math.min((value / goal) * 100, 100);
-  const remaining = goal - value;
-  
-  return (
-    <div className={`flex flex-col border-l ${isActive ? 'border-accent' : 'border-accent/40'} pl-3 md:pl-4`}>
-      <div className="text-accent font-mono text-xl sm:text-2xl md:text-3xl font-bold leading-none mb-1">
-        <AnimatedNumber value={value} duration={duration} />+
-      </div>
-      <div className="text-[0.45rem] sm:text-[0.55rem] text-gray-400 font-sans tracking-wider sm:tracking-widest uppercase font-bold mt-1 w-full leading-tight mb-2">
-        {label}
-      </div>
-      <div className="w-full max-w-[100px]">
-        <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden mb-1">
-          <div 
-            className="h-full bg-accent transition-all duration-1000 ease-out" 
-            style={{ width: `${percentage}%` }}
-          />
-        </div>
-        <div className="text-[0.4rem] sm:text-[0.6rem] md:text-[0.65rem] text-gray-400 font-sans tracking-wide sm:tracking-[0.1em] uppercase mt-1.5 font-medium">
-          <span className="text-white font-bold">{remaining}</span> <span className="hidden sm:inline">TO GOAL</span> ({goal})
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Hero = () => {
   return (
@@ -166,41 +106,19 @@ const Hero = () => {
 
               </div>
 
-              {/* Bottom Section (Buttons & Stats) */}
-              <div className="w-full mt-auto pt-4 flex flex-col gap-4 md:gap-8">
-            {/* Buttons */}
-            <div className="flex flex-row w-full gap-2 sm:gap-3 opacity-0 animate-[fadeIn_1s_ease-in_3s_forwards]">
-              <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 bg-accent text-black font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.6)]">
-                EXPLORE SOLUTIONS
-                <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-              </button>
-              <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 border border-white/40 text-white font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-white transition-all bg-transparent hover:bg-white/5">
-                GET A QUOTE
-                <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] opacity-70 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-              </button>
-            </div>
-
-            {/* Stats Bar */}
-            <div className="w-full">
-            <h3 className="text-white font-sans font-bold tracking-[0.1em] text-[0.7rem] md:text-[0.85rem] mb-4 md:mb-5 uppercase">
-              THE WAY INDIA MOVES IS CHANGING.
-            </h3>
-            <div className="grid grid-cols-4 gap-1 sm:gap-4 md:gap-8 lg:gap-14 w-full">
-              <div className="w-full">
-                <StatItem value={5} goal={100} duration={1500} label="CHARGING SOLUTIONS" isActive={true} />
-              </div>
-              <div className="w-full">
-                <StatItem value={150} goal={500} duration={2500} label="PROJECTS" />
-              </div>
-              <div className="w-full">
-                <StatItem value={45} goal={200} duration={2000} label="PARTNERS" />
-              </div>
-              <div className="w-full">
-                <StatItem value={28} goal={100} duration={2000} label="CITIES" />
-              </div>
-            </div>
-          </div>
-
+              {/* Bottom Section (Buttons) */}
+              <div className="w-full mt-auto pt-6 pb-6 md:pb-14 flex flex-col gap-4">
+                {/* Buttons */}
+                <div className="flex flex-row w-full gap-2 sm:gap-3 opacity-0 animate-[fadeIn_1s_ease-in_3s_forwards]">
+                  <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 bg-accent text-black font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.6)]">
+                    EXPLORE SOLUTIONS
+                    <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                  </button>
+                  <button className="group flex flex-1 items-center justify-center gap-1 sm:gap-3 px-2 sm:px-5 md:px-7 py-3 md:py-3.5 border border-white/40 text-white font-sans text-[0.65rem] sm:text-[0.75rem] md:text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-white transition-all bg-transparent hover:bg-white/5">
+                    GET A QUOTE
+                    <span className="text-[0.9rem] sm:text-[1.1rem] leading-none mb-[2px] opacity-70 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                  </button>
+                </div>
               </div>
             </div>
 
