@@ -82,41 +82,41 @@ const Card = ({ image, badge, icon: Icon, title, desc, delay, span, height }) =>
     transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     className={`relative rounded-3xl overflow-hidden group cursor-pointer ${span} ${height}`}
   >
-    {/* Background image */}
+    {/* Background image - brightened and vivid */}
     <img
       src={image}
       alt={title}
       loading="lazy"
       decoding="async"
-      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110 opacity-80 group-hover:opacity-100 group-hover:brightness-110"
+      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-105 opacity-95 group-hover:opacity-100 brightness-[1.06] contrast-[1.02]"
     />
 
-    {/* Dark gradient overlays - reduced to let image shine through */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-[#020403]/50 to-transparent" />
-    <div className="absolute inset-0 bg-gradient-to-r from-[#020403]/40 to-transparent" />
+    {/* Light gradient overlays - subtle text protection while keeping image bright */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[#020403]/90 via-[#020403]/30 to-transparent pointer-events-none" />
+    <div className="absolute inset-0 bg-gradient-to-r from-[#020403]/25 via-transparent to-transparent pointer-events-none" />
 
     {/* Neon border glow on hover */}
-    <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 group-hover:ring-[var(--color-accent)]/40 transition-all duration-500" />
+    <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10 group-hover:ring-[var(--color-accent)]/50 transition-all duration-500 pointer-events-none" />
     {/* Green ambient glow */}
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(var(--color-accent-rgb),0.12),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(var(--color-accent-rgb),0.12),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
     {/* Content */}
     <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
       {/* Badge + icon */}
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-full bg-black/60 border border-accent/30 flex items-center justify-center backdrop-blur-md group-hover:border-accent/80 group-hover:bg-accent/10 group-hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] transition-all duration-500 flex-shrink-0">
+        <div className="w-10 h-10 rounded-full bg-black/60 border border-accent/40 flex items-center justify-center backdrop-blur-md group-hover:border-accent group-hover:bg-accent/15 group-hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.4)] transition-all duration-500 flex-shrink-0">
           <Icon className="text-accent w-4 h-4" strokeWidth={1.5} />
         </div>
-        <span className="text-accent font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold">{badge}</span>
+        <span className="text-accent font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold drop-shadow-[0_0_8px_rgba(var(--color-accent-rgb),0.5)]">{badge}</span>
       </div>
 
       {/* Title */}
-      <h4 className="text-white font-display font-bold text-2xl md:text-3xl uppercase tracking-tight mb-3 group-hover:text-accent transition-colors duration-500 leading-tight drop-shadow-lg">
+      <h4 className="text-white font-display font-bold text-2xl md:text-3xl uppercase tracking-tight mb-3 group-hover:text-accent transition-colors duration-500 leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
         {title}
       </h4>
 
       {/* Description */}
-      <p className="text-white/55 font-sans text-sm leading-relaxed group-hover:text-white/80 transition-colors duration-500 max-w-sm">
+      <p className="text-white/80 font-sans text-sm leading-relaxed group-hover:text-white transition-colors duration-500 max-w-sm drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
         {desc}
       </p>
     </div>
