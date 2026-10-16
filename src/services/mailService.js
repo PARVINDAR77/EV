@@ -17,29 +17,36 @@ export async function sendEmailRequest(type, data) {
       body: JSON.stringify(payload),
     });
 
+    const contentType = res.headers.get('content-type') || '';
+    const isJson = contentType.includes('application/json');
+
+    // If the server returned HTML (e.g. Apache rewrite returned index.html) or 404,
+    // don't try to parse HTML as JSON; immediately fall back to the PHP endpoint.
+    if (!isJson || res.status === 404) {
+      return await sendPhpFallback(payload);
+    }
+
     if (res.ok) {
       const json = await res.json();
       if (json.success) return json;
       throw new Error(json.error || 'Failed to send message.');
     }
 
-    // If 404 (e.g. static hosting on Hostinger without Node server), try PHP endpoint
-    if (res.status === 404) {
-      return await sendPhpFallback(payload);
-    }
-
     const errJson = await res.json().catch(() => ({}));
     throw new Error(errJson.error || `Server responded with status ${res.status}`);
   } catch (err) {
-    // If network error occurred, attempt PHP endpoint fallback as well
-    if (err.message?.includes('Failed to fetch') || err.message?.includes('NetworkError')) {
-      try {
-        return await sendPhpFallback(payload);
-      } catch (fallbackErr) {
-        throw new Error(fallbackErr.message || err.message);
+    // If any error occurs on the primary endpoint (network error, syntax error from HTML, etc.),
+    // attempt the PHP fallback endpoint
+    try {
+      return await sendPhpFallback(payload);
+    } catch (fallbackErr) {
+      // Return a clean, human-friendly message instead of raw JSON parse errors
+      const msg = fallbackErr.message || err.message || '';
+      if (msg.includes('Unexpected token') || msg.includes('JSON')) {
+        throw new Error('Unable to deliver message. Please contact axion@vardaansmartsolutions.com directly.');
       }
+      throw new Error(msg || 'Unable to deliver message. Please contact axion@vardaansmartsolutions.com directly.');
     }
-    throw err;
   }
 }
 
@@ -51,6 +58,11 @@ async function sendPhpFallback(payload) {
     },
     body: JSON.stringify(payload),
   });
+
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error('Email service is temporarily unavailable. Please email axion@vardaansmartsolutions.com directly.');
+  }
 
   const json = await res.json().catch(() => ({}));
   if (res.ok && json.success) {
