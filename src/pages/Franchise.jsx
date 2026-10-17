@@ -18,7 +18,6 @@ import evPlugImg from '../assets/images/ev_plug_charging.jpg';
 import evSupportCableImg from '../assets/images/ev_support_cable.jpg';
 import solarBessImg from '../assets/images/solar_bess_canopy.jpg';
 import isometricCarImg from '../assets/images/isometric_ev_car.jpg';
-import webinarImg from '../assets/images/workplace.webp';
 
 const INDIAN_STATES = [
   "Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam",
@@ -82,7 +81,6 @@ const Franchise = () => {
     investmentBudget: '25L - 50L',
     landAvailability: 'Yes',
     locationType: 'City',
-    webinarInterest: true,
     privacyAccepted: true
   });
 
@@ -103,9 +101,6 @@ const Franchise = () => {
       } else {
         setFormData(prev => ({ ...prev, investmentBudget: '25L - 50L' }));
       }
-    }
-    if (prefill.webinar) {
-      setFormData(prev => ({ ...prev, webinarInterest: true }));
     }
     if (formRef.current) {
       formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -984,20 +979,6 @@ const Franchise = () => {
                         </div>
                       </div>
 
-                      {/* Webinar checkbox */}
-                      <div className="flex items-start gap-2.5 pt-1 cursor-pointer">
-                        <input 
-                          type="checkbox" 
-                          id="webinarCheck2"
-                          checked={formData.webinarInterest}
-                          onChange={e => setFormData({ ...formData, webinarInterest: e.target.checked })}
-                          className="mt-0.5 accent-[#FF3B30] w-3.5 h-3.5 cursor-pointer"
-                        />
-                        <label htmlFor="webinarCheck2" className="text-[0.7rem] text-gray-700 cursor-pointer leading-tight">
-                          Webinar session on franchise opportunity: <strong>Interested</strong>
-                        </label>
-                      </div>
-
                       {/* Privacy policy checkbox */}
                       <div className="flex items-start gap-2.5 cursor-pointer">
                         <input 
@@ -1191,60 +1172,6 @@ const Franchise = () => {
                     {brand}
                   </div>
                 ))}
-              </div>
-            </div>
-          </section>
-
-          {/* ── MASTERCLASS WEBINAR MODULE ── */}
-          <section className="mb-32">
-            <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-br from-[#06140B] via-[#030905] to-[#010402] border border-accent/30 relative overflow-hidden">
-              <div className="flex flex-col lg:flex-row items-center gap-12">
-                <div className="w-full lg:w-7/12">
-                  <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">
-                    Masterclass Series
-                  </span>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white uppercase mt-2 mb-4">
-                    Curious, but have questions? <br/>
-                    <span className="text-accent">Join Our Next Webinar.</span>
-                  </h2>
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-sans">
-                    Focusing on the Franchise Opportunity, this session covers how EV charging networks are revolutionizing infrastructure in India. Discover innovative site selection strategies, technological integration, tariff economics, and Green Capital financing options.
-                  </p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                    {[
-                      "End-to-end walkthrough of owning an Axion franchise",
-                      "Exclusive insights on expected ROI by industry experts",
-                      "Strategic guidance on investment models & site selection",
-                      "Live Q&A with EV charging engineers and finance specialists"
-                    ].map((item, idx) => (
-                      <div key={idx} className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-2.5 text-xs text-gray-300">
-                        <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => scrollToForm({ webinar: true })}
-                    className="px-8 py-4 bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white hover:shadow-[0_0_30px_#00FF00] transition-all inline-flex items-center gap-2 cursor-pointer"
-                  >
-                    Reserve Seat for Next Webinar
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-
-                <div className="w-full lg:w-5/12 h-[320px] sm:h-[380px] rounded-2xl overflow-hidden border border-white/10 relative shadow-2xl">
-                  <img src={webinarImg} alt="EV Masterclass Webinar" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                    <div>
-                      <div className="text-white text-xs font-bold">Upcoming Live Session</div>
-                      <div className="text-accent font-mono text-[0.7rem]">Held Every Alternate Thursday • 4:00 PM IST</div>
-                    </div>
-                    <div className="w-3 h-3 rounded-full bg-accent animate-ping" />
-                  </div>
-                </div>
               </div>
             </div>
           </section>
