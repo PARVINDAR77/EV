@@ -1,58 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import bgImage from '../../assets/images/hero_bg_tiago.webp';
-
-const TYPEWRITER_PHRASES = [
-  'ELECTRIC JOURNEY.',
-  'SUSTAINABLE FUTURE.',
-  'GREEN MOBILITY.'
-];
-
-const LoopingTypewriterText = () => {
-  const [displayText, setDisplayText] = useState('');
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentPhrase = TYPEWRITER_PHRASES[phraseIndex % TYPEWRITER_PHRASES.length];
-
-    let timer;
-    if (!isDeleting) {
-      if (displayText.length < currentPhrase.length) {
-        timer = setTimeout(() => {
-          setDisplayText(currentPhrase.slice(0, displayText.length + 1));
-        }, 75);
-      } else {
-        // Full word reached, pause for readability
-        timer = setTimeout(() => {
-          setIsDeleting(true);
-        }, 2200);
-      }
-    } else {
-      if (displayText.length > 0) {
-        timer = setTimeout(() => {
-          setDisplayText(currentPhrase.slice(0, displayText.length - 1));
-        }, 35);
-      } else {
-        // Finished deleting, transition to next phrase immediately
-        setIsDeleting(false);
-        setPhraseIndex((prev) => (prev + 1) % TYPEWRITER_PHRASES.length);
-      }
-    }
-
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, phraseIndex]);
-
-  return (
-    <span className="inline-flex items-center min-h-[1.15em] max-w-full">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF00] via-[#39FF14] to-white font-bold drop-shadow-[0_0_20px_rgba(0,255,0,0.4)]">
-        {displayText || '\u00A0'}
-      </span>
-      <span className="inline-block w-[3px] sm:w-[5px] h-[0.8em] bg-[#00FF00] ml-2 animate-pulse shadow-[0_0_12px_#00FF00] flex-shrink-0" />
-    </span>
-  );
-};
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -112,14 +61,16 @@ const Hero = () => {
             </span>
           </div>
 
-          {/* Main Headline with protected line box & no overlap */}
+          {/* Main Headline */}
           <h1 
             className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.2rem] font-display font-bold leading-[1.12] mb-5 md:mb-6 tracking-tight text-white drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]"
           >
             <span className="block mb-1 sm:mb-2 text-white">
               POWERING INDIA'S
             </span>
-            <LoopingTypewriterText />
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00FF00] via-[#39FF14] to-white drop-shadow-[0_0_25px_rgba(0,255,0,0.4)]">
+              SUSTAINABLE FUTURE.
+            </span>
           </h1>
 
           {/* Subheading */}
