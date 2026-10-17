@@ -10,12 +10,15 @@ import {
 } from 'lucide-react';
 import { sendFranchiseApplication } from '../services/mailService';
 
-// Images from assets
+// Reference Images
 import heroBannerNight from '../assets/images/franchise_banner_night.jpg';
-import fastChargerImg from '../assets/images/AXION 60 kW EV Wallbox Advertisement.webp';
-import superChargerImg from '../assets/images/Axion 240 kW EV Charger Showcase.webp';
+import fastChargerCanopy from '../assets/images/Axion Charge Highway Stop.webp';
+import superChargerCanopy from '../assets/images/AXION Charge Logistics Hub.webp';
+import evPlugImg from '../assets/images/ev_plug_charging.jpg';
+import evSupportCableImg from '../assets/images/ev_support_cable.jpg';
+import solarBessImg from '../assets/images/solar_bess_canopy.jpg';
+import isometricCarImg from '../assets/images/isometric_ev_car.jpg';
 import webinarImg from '../assets/images/workplace.webp';
-import plazaImg from '../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
 
 const INDIAN_STATES = [
   "Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam",
@@ -197,19 +200,16 @@ const Franchise = () => {
         <div className="absolute top-2/3 left-[-15%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[180px] pointer-events-none" />
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            1. TOP HERO BANNER (CHARGEZONE STYLE: NIGHT STATION PHOTO + RIGHT TEXT)
+            1. TOP HERO BANNER (NIGHT CHARGING STATION PHOTO + RIGHT-ALIGNED TEXT)
            ══════════════════════════════════════════════════════════════════════════ */}
         <div className="w-full relative min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] flex items-center overflow-hidden border-b border-white/10">
-          {/* Night Charging Station Background Asset */}
           <div 
             className="absolute inset-0 bg-cover bg-center sm:bg-left bg-no-repeat scale-105 transition-transform duration-1000"
             style={{ backgroundImage: `url("${heroBannerNight}")` }}
           />
-          {/* Subtle directional dark gradient ensuring high text contrast */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/60 to-[#020403]/95 sm:via-black/70 sm:to-[#020403]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-transparent to-black/40" />
 
-          {/* Banner Text Content (Aligned to right on desktop, matching screenshot) */}
           <div className="max-w-[1400px] w-full mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-24 relative z-10 flex flex-col items-start lg:items-end text-left lg:text-right">
             <div className="max-w-2xl">
               <motion.div 
@@ -247,736 +247,811 @@ const Franchise = () => {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            2. TWO-COLUMN SPLIT (INDIA IS CHARGING AHEAD + FLOATING PARTNER FORM)
-               Matches exact layout from screenshot!
+            2. TWO-COLUMN SPLIT SECTION (EXACT REPLICA OF 5 SCREENSHOTS)
+               - Left Column: India is Charging Ahead -> Why Partner -> Investment Plans
+               - Right Column: Sticky "Partner With Us" card alongside all 5 steps!
            ══════════════════════════════════════════════════════════════════════════ */}
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 -mt-12 sm:-mt-20 lg:-mt-32 relative z-20 pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-            
-            {/* ── LEFT COLUMN (7 COLS): INDIA IS CHARGING AHEAD ── */}
-            <div className="lg:col-span-7 pt-4 lg:pt-16">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight uppercase leading-[1.1]">
-                  India is Charging Ahead. <br />
-                  <span className="text-[#FF3B30] sm:text-accent font-black drop-shadow-[0_0_20px_rgba(255,59,48,0.4)]">
-                    ARE YOU?
-                  </span>
-                </h2>
+        <div className="w-full bg-[#F8F9FA] text-[#111827] py-16 sm:py-20 lg:py-24 relative z-20 border-b border-gray-200">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              
+              {/* ────────────────────────────────────────────────────────────────
+                  LEFT COLUMN (7 COLS): SCROLLING CONTENT
+                 ──────────────────────────────────────────────────────────────── */}
+              <div className="lg:col-span-7 space-y-24">
 
-                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mt-6 max-w-xl font-sans">
-                  With India targeting 30% EV penetration by 2030, the demand for fast, reliable and accessible charging infrastructure is skyrocketing. Now is the perfect time to ride the EV wave. Not just as a believer, but as an owner of the future.
-                </p>
+                {/* ── STEP 1: INDIA IS CHARGING AHEAD. ARE YOU? (SCREENSHOT 1) ── */}
+                <section>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-display font-bold text-gray-900 tracking-tight leading-[1.12]">
+                      India is Charging Ahead. <br />
+                      <span className="text-[#FF3B30] font-bold">
+                        ARE YOU?
+                      </span>
+                    </h2>
 
-                {/* 2 Key Market Stats */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-xl">
-                  <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-lg flex flex-col justify-between">
-                    <div>
-                      <div className="text-3xl sm:text-4xl font-display font-black text-white mb-1">
-                        <span className="text-accent">₹</span>4,000+cr
-                      </div>
-                      <div className="text-gray-400 text-xs font-sans">
-                        allocated to EV infra under PM E‑Drive Scheme
-                      </div>
-                    </div>
-                  </div>
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-5 max-w-2xl font-sans">
+                      With India targeting 30% EV penetration by 2030, the demand for fast, reliable and accessible charging infrastructure is skyrocketing. Now is the perfect time to ride the EV wave. Not just as a believer, but as an owner of the future.
+                    </p>
 
-                  <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-lg flex flex-col justify-between">
-                    <div>
-                      <div className="text-3xl sm:text-4xl font-display font-black text-white mb-1">
-                        17.1% YoY
-                      </div>
-                      <div className="text-gray-400 text-xs font-sans">
-                        growth across Indian commercial and passenger electric vehicles
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    {/* Two Stat Cards matching Screenshot 1 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
+                      {/* Stat Card 1: ₹4,000+cr */}
+                      <div className="p-6 rounded-2xl bg-white border border-red-200/90 shadow-sm flex flex-col justify-between h-[230px] relative overflow-hidden group hover:border-[#FF3B30]/60 transition-colors">
+                        <div>
+                          <div className="text-3xl sm:text-[2.2rem] font-display font-extrabold text-gray-900 tracking-tight">
+                            ₹4,000+cr
+                          </div>
+                          <div className="text-gray-600 text-xs sm:text-[0.82rem] font-sans mt-1.5 leading-snug">
+                            allocated to EV infra under PM E-Drive Scheme
+                          </div>
+                        </div>
 
-                {/* Highlight badges */}
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <div className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-gray-300 flex items-center gap-2">
-                    <ShieldCheck size={16} className="text-accent" />
-                    <span>Turnkey DOCO Model</span>
-                  </div>
-                  <div className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-gray-300 flex items-center gap-2">
-                    <DollarSign size={16} className="text-accent" />
-                    <span>SBI EV Mitra Financing Up To 75%</span>
-                  </div>
-                  <div className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-gray-300 flex items-center gap-2">
-                    <Zap size={16} className="text-accent" />
-                    <span>2–4 Years Payback</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* ── RIGHT COLUMN (5 COLS): FLOATING PARTNER WITH US CARD ── */}
-            <div id="franchise-form" ref={formRef} className="lg:col-span-5 scroll-mt-28">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="w-full rounded-[2.2rem] bg-gradient-to-b from-[#09150C]/98 via-[#040A06]/98 to-[#020503]/98 border-2 border-[#FF3B30]/40 sm:border-accent/40 p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(0,255,0,0.12)] relative z-20 backdrop-blur-2xl"
-              >
-                <div className="absolute top-0 right-0 w-44 h-44 bg-accent/10 rounded-full blur-[70px] pointer-events-none" />
-
-                {/* Form Heading */}
-                <div className="mb-6 relative z-10">
-                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
-                    Partner With Us
-                  </h3>
-                </div>
-
-                {/* Stepper Header (Personal -> Investment -> Form Review) */}
-                <div className="flex items-center justify-between mb-8 px-2 relative z-10">
-                  {/* Connecting dashed line */}
-                  <div className="absolute top-3.5 left-8 right-8 h-[1px] border-t-2 border-dashed border-white/20 pointer-events-none" />
-
-                  {/* Dot 1: Personal */}
-                  <div className="flex flex-col items-center relative z-10">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
-                      formStep === 1 
-                        ? 'bg-[#FF3B30] sm:bg-accent text-black shadow-[0_0_12px_rgba(255,59,48,0.6)] sm:shadow-[0_0_12px_#00FF00]' 
-                        : formStep > 1 
-                        ? 'bg-accent/40 text-accent border border-accent' 
-                        : 'bg-white/10 text-gray-400 border border-white/20'
-                    }`}>
-                      {formStep > 1 ? <Check size={13} strokeWidth={3} /> : <div className="w-2.5 h-2.5 rounded-full bg-current" />}
-                    </div>
-                    <span className={`text-[0.68rem] font-mono mt-1.5 ${formStep === 1 ? 'text-accent font-bold' : 'text-gray-400'}`}>
-                      Personal
-                    </span>
-                  </div>
-
-                  {/* Dot 2: Investment */}
-                  <div className="flex flex-col items-center relative z-10">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
-                      formStep === 2 
-                        ? 'bg-[#FF3B30] sm:bg-accent text-black shadow-[0_0_12px_rgba(255,59,48,0.6)] sm:shadow-[0_0_12px_#00FF00]' 
-                        : formStep > 2 
-                        ? 'bg-accent/40 text-accent border border-accent' 
-                        : 'bg-[#0a120c] text-gray-500 border border-white/20'
-                    }`}>
-                      {formStep > 2 ? <Check size={13} strokeWidth={3} /> : <div className="w-2.5 h-2.5 rounded-full bg-current" />}
-                    </div>
-                    <span className={`text-[0.68rem] font-mono mt-1.5 ${formStep === 2 ? 'text-accent font-bold' : 'text-gray-400'}`}>
-                      Investment
-                    </span>
-                  </div>
-
-                  {/* Dot 3: Form Review */}
-                  <div className="flex flex-col items-center relative z-10">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
-                      formStep === 3 
-                        ? 'bg-[#FF3B30] sm:bg-accent text-black shadow-[0_0_12px_rgba(255,59,48,0.6)] sm:shadow-[0_0_12px_#00FF00]' 
-                        : 'bg-[#0a120c] text-gray-500 border border-white/20'
-                    }`}>
-                      <div className="w-2.5 h-2.5 rounded-full bg-current" />
-                    </div>
-                    <span className={`text-[0.68rem] font-mono mt-1.5 ${formStep === 3 ? 'text-accent font-bold' : 'text-gray-400'}`}>
-                      Form Review
-                    </span>
-                  </div>
-                </div>
-
-                {/* Status Message */}
-                <AnimatePresence>
-                  {status.type && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className={`mb-5 p-3.5 rounded-2xl flex items-center gap-2.5 text-xs font-sans ${
-                        status.type === 'success'
-                          ? 'bg-accent/10 border border-accent/40 text-accent shadow-[0_0_20px_rgba(0,255,0,0.2)]'
-                          : 'bg-red-500/10 border border-red-500/40 text-red-400'
-                      }`}
-                    >
-                      {status.type === 'success' ? (
-                        <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-accent" />
-                      ) : (
-                        <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-400" />
-                      )}
-                      <span>{status.message}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* ── STEP 1: PERSONAL CONTACT DETAILS ── */}
-                {formStep === 1 && (
-                  <form onSubmit={handleNextStep1} className="space-y-3.5 relative z-10">
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">First Name*</label>
-                        <input 
-                          type="text" 
-                          value={formData.firstName}
-                          onChange={e => setFormData({ ...formData, firstName: e.target.value })}
-                          placeholder="eg. John"
-                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
-                        />
-                        {formErrors.firstName && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.firstName}</span>}
-                      </div>
-                      <div>
-                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Last Name*</label>
-                        <input 
-                          type="text" 
-                          value={formData.lastName}
-                          onChange={e => setFormData({ ...formData, lastName: e.target.value })}
-                          placeholder="eg. Doe"
-                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
-                        />
-                        {formErrors.lastName && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.lastName}</span>}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Email*</label>
-                      <input 
-                        type="email" 
-                        value={formData.email}
-                        onChange={e => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="eg. example@gmail.com"
-                        className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
-                      />
-                      {formErrors.email && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.email}</span>}
-                    </div>
-
-                    <div>
-                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Mobile Number*</label>
-                      <input 
-                        type="tel" 
-                        value={formData.phone}
-                        onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="91 9876543210"
-                        className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
-                      />
-                      {formErrors.phone && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.phone}</span>}
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">City*</label>
-                        <input 
-                          type="text" 
-                          value={formData.city}
-                          onChange={e => setFormData({ ...formData, city: e.target.value })}
-                          placeholder="Eg. Mumbai"
-                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
-                        />
-                        {formErrors.city && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.city}</span>}
-                      </div>
-                      <div>
-                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">State*</label>
-                        <select 
-                          value={formData.state}
-                          onChange={e => setFormData({ ...formData, state: e.target.value })}
-                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors appearance-none cursor-pointer"
-                        >
-                          <option value="">Enter your state</option>
-                          {INDIAN_STATES.map((st) => (
-                            <option key={st} value={st} className="bg-[#020403] text-white">{st}</option>
-                          ))}
-                        </select>
-                        {formErrors.state && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.state}</span>}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">PinCode*</label>
-                      <input 
-                        type="text" 
-                        maxLength={6}
-                        value={formData.pincode}
-                        onChange={e => setFormData({ ...formData, pincode: e.target.value })}
-                        placeholder="400097"
-                        className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
-                      />
-                      {formErrors.pincode && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.pincode}</span>}
-                    </div>
-
-                    {/* Proceed As */}
-                    <div className="pt-1">
-                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">Proceed as*</label>
-                      <div className="grid grid-cols-2 gap-2.5">
-                        {['Business', 'Individual'].map((type) => (
-                          <button
-                            key={type}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, proceedAs: type })}
-                            className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
-                              formData.proceedAs === type
-                                ? 'bg-accent/20 border-accent text-accent shadow-[0_0_12px_rgba(0,255,0,0.25)]'
-                                : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
-                            }`}
-                          >
-                            {type}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-3">
-                      <button
-                        type="submit"
-                        className="w-full py-3 bg-[#FF3B30] sm:bg-accent text-white sm:text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black hover:shadow-[0_0_20px_#00FF00] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                      >
-                        Next
-                        <ArrowRight size={15} />
-                      </button>
-                    </div>
-                  </form>
-                )}
-
-                {/* ── STEP 2: INVESTMENT BUDGET & LAND SCOPE ── */}
-                {formStep === 2 && (
-                  <form onSubmit={handleNextStep2} className="space-y-4 relative z-10">
-                    {/* Turnover (only if Business) */}
-                    {formData.proceedAs === 'Business' && (
-                      <div>
-                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
-                          Business Turnover*
-                        </label>
-                        <div className="grid grid-cols-2 gap-2">
-                          {['1L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '>5Cr'].map((to) => (
-                            <button
-                              key={to}
-                              type="button"
-                              onClick={() => setFormData({ ...formData, businessTurnover: to })}
-                              className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
-                                formData.businessTurnover === to
-                                  ? 'bg-accent/20 border-accent text-accent'
-                                  : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
-                              }`}
-                            >
-                              {to}
-                            </button>
-                          ))}
+                        {/* Graphic: Red Rupee + Upward Arrow (Screenshot 1) */}
+                        <div className="relative w-full h-24 overflow-visible flex items-end">
+                          <svg viewBox="0 0 260 100" className="w-full h-full" fill="none">
+                            {/* Stylized Red Rupee Symbol */}
+                            <text x="5" y="75" fontSize="62" fontWeight="700" fill="#FF5252" opacity="0.8">
+                              ₹
+                            </text>
+                            {/* Trending Line */}
+                            <path 
+                              d="M60 82 L90 62 L120 74 L150 48 L185 60 L245 12" 
+                              stroke="#FF5252" 
+                              strokeWidth="4.5" 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                            />
+                            {/* Arrow Head */}
+                            <path 
+                              d="M220 12 L245 12 L245 37" 
+                              stroke="#FF5252" 
+                              strokeWidth="4.5" 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                            />
+                          </svg>
                         </div>
                       </div>
-                    )}
 
-                    {/* Investment Budget */}
-                    <div>
-                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
-                        Investment Budget*
-                      </label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {(formData.proceedAs === 'Business' 
-                          ? ['25L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '5Cr+'] 
-                          : ['15L - 25L', '25L - 50L', '50L - 1Cr', '1Cr+']
-                        ).map((b) => (
-                          <button
-                            key={b}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, investmentBudget: b })}
-                            className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
-                              formData.investmentBudget === b
-                                ? 'bg-accent/20 border-accent text-accent'
-                                : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
-                            }`}
-                          >
-                            {b}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                      {/* Stat Card 2: 17.1% YoY */}
+                      <div className="p-6 rounded-2xl bg-white border border-red-200/90 shadow-sm flex flex-col justify-between h-[230px] relative overflow-hidden group hover:border-[#FF3B30]/60 transition-colors">
+                        <div>
+                          <div className="text-3xl sm:text-[2.2rem] font-display font-extrabold text-gray-900 tracking-tight">
+                            17.1% YoY
+                          </div>
+                          <div className="text-gray-600 text-xs sm:text-[0.82rem] font-sans mt-1.5 leading-snug">
+                            growth
+                          </div>
+                        </div>
 
-                    {/* Land Availability */}
-                    <div>
-                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
-                        Land Availability*
-                      </label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {['Yes', 'No'].map((ans) => (
-                          <button
-                            key={ans}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, landAvailability: ans })}
-                            className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
-                              formData.landAvailability === ans
-                                ? 'bg-accent/20 border-accent text-accent'
-                                : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
-                            }`}
-                          >
-                            {ans}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Location Environment */}
-                    {formData.landAvailability === 'Yes' && (
-                      <div>
-                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
-                          Location Type*
-                        </label>
-                        <div className="grid grid-cols-2 gap-2">
-                          {['City', 'Highway'].map((loc) => (
-                            <button
-                              key={loc}
-                              type="button"
-                              onClick={() => setFormData({ ...formData, locationType: loc })}
-                              className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
-                                formData.locationType === loc
-                                  ? 'bg-accent/20 border-accent text-accent'
-                                  : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
-                              }`}
-                            >
-                              {loc}
-                            </button>
-                          ))}
+                        {/* Graphic: Shaded Area Chart with Plotted Dots (Screenshot 1) */}
+                        <div className="relative w-full h-24 overflow-hidden flex items-end">
+                          <svg viewBox="0 0 280 90" className="w-full h-full" preserveAspectRatio="none">
+                            <defs>
+                              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#FF5252" stopOpacity="0.45" />
+                                <stop offset="100%" stopColor="#FF5252" stopOpacity="0.03" />
+                              </linearGradient>
+                            </defs>
+                            {/* Area fill */}
+                            <path 
+                              d="M0 90 L0 65 L40 25 L75 68 L115 42 L150 78 L190 40 L235 65 L280 10 L280 90 Z" 
+                              fill="url(#areaGrad)" 
+                            />
+                            {/* Top stroke */}
+                            <path 
+                              d="M0 65 L40 25 L75 68 L115 42 L150 78 L190 40 L235 65 L280 10" 
+                              stroke="#FF5252" 
+                              strokeWidth="2.5" 
+                              fill="none" 
+                              strokeLinejoin="round"
+                            />
+                            {/* Points on peaks */}
+                            <circle cx="40" cy="25" r="3.5" fill="#FF3B30" />
+                            <circle cx="75" cy="68" r="3" fill="#FF3B30" />
+                            <circle cx="115" cy="42" r="3.5" fill="#FF3B30" />
+                            <circle cx="150" cy="78" r="3" fill="#FF3B30" />
+                            <circle cx="190" cy="40" r="3.5" fill="#FF3B30" />
+                            <circle cx="280" cy="10" r="3.5" fill="#FF3B30" />
+                          </svg>
                         </div>
                       </div>
-                    )}
+                    </div>
+                  </motion.div>
+                </section>
 
-                    <div className="pt-2 flex justify-between gap-3">
+                {/* ── STEP 2: WHY PARTNER WITH US + 3 PHOTO CARDS + DISCLAIMER (SCREENSHOT 2) ── */}
+                <section>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-display font-bold text-gray-900 tracking-tight leading-[1.15]">
+                      Why Partner With Axion Charge?
+                    </h2>
+
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl font-sans">
+                      Our Franchise Model, formerly known as the Dealer Owned Company Operated (DOCO) Model, is a turnkey investment opportunity that plugs you directly into India's largest EV charging network, complete with tech, operations, and marketing support for long-term ROI.
+                    </p>
+
+                    {/* 3 Image Cards with Text Overlays matching Screenshot 2 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                      {/* Photo Card 1: 15000+ Charging Points */}
+                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-md group">
+                        <img 
+                          src={evPlugImg} 
+                          alt="15000+ Charging Points Across India" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-4">
+                          <div className="text-2xl font-display font-extrabold text-white">
+                            15000+
+                          </div>
+                          <div className="text-xs text-white/95 font-sans mt-0.5 leading-snug">
+                            Charging Points Across India
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Photo Card 2: 24x7 Support */}
+                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-md group">
+                        <img 
+                          src={evSupportCableImg} 
+                          alt="24x7 Support with 98% Network Uptime" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-4">
+                          <div className="text-2xl font-display font-extrabold text-white">
+                            24x7
+                          </div>
+                          <div className="text-xs text-white/95 font-sans mt-0.5 leading-snug">
+                            Support with 98% Network Uptime
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Photo Card 3: Solar + BESS */}
+                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-md group">
+                        <img 
+                          src={solarBessImg} 
+                          alt="Solar + BESS options for high-end sites" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-4">
+                          <div className="text-2xl font-display font-extrabold text-white">
+                            Solar + BESS
+                          </div>
+                          <div className="text-xs text-white/95 font-sans mt-0.5 leading-snug">
+                            options for high-end sites
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Disclaimer matching Screenshot 2 */}
+                    <div className="mt-12">
+                      <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#FF3B30] mb-3">
+                        Disclaimer
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans">
+                        Certain social media accounts are misusing the name, logo and trademark of Axion Charge to spread false claims and rumours about EVCS investments under the PM E-DRIVE Scheme. Axion Charge has no association whatsoever with such claims and rumours and hereby disclaims any and all liabilities arising from them.
+                      </p>
+                    </div>
+                  </motion.div>
+                </section>
+
+                {/* ── STEP 3: CHOOSE YOUR INVESTMENT PLAN (SCREENSHOTS 3, 4, 5) ── */}
+                <section id="investment-plans" className="scroll-mt-28">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    {/* 3D Isometric Car Banner Graphic (Screenshot 3) */}
+                    <div className="w-full max-w-md mx-auto sm:ml-auto mb-6 rounded-2xl overflow-hidden shadow-sm bg-white border border-gray-100 p-2">
+                      <img 
+                        src={isometricCarImg} 
+                        alt="Axion 3D EV Car & Charging Station" 
+                        className="w-full h-auto object-contain max-h-[220px]" 
+                      />
+                    </div>
+
+                    <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-display font-bold text-gray-900 tracking-tight leading-[1.15]">
+                      Choose Your Investment Plan. <br />
+                      <span>We’ll Power the Rest.</span>
+                    </h2>
+
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl font-sans">
+                      Whether you're entering the EV space for the first time or expanding a larger energy portfolio, Axion Charge offers a scalable, high-ROI franchise model built for the future. We offer two tailored investment models, each designed to suit a different scale of ambition. These are ideal for landowners, retail entrepreneurs, and institutional investors looking to power highways, cities, and logistics hubs across India.
+                    </p>
+
+                    {/* Navigation Tabs with Red Underline Indicator (Screenshots 3, 4, 5) */}
+                    <div className="flex items-center gap-8 sm:gap-12 border-b border-gray-200 mt-10 mb-6">
                       <button
                         type="button"
-                        onClick={() => setFormStep(1)}
-                        className="w-1/3 py-2.5 rounded-full border border-white/20 text-gray-300 hover:text-white text-xs font-mono font-bold transition-all cursor-pointer"
+                        onClick={() => setActiveModelTab('fast')}
+                        className={`pb-3 font-display text-base sm:text-lg transition-all relative cursor-pointer ${
+                          activeModelTab === 'fast'
+                            ? 'text-gray-900 font-bold'
+                            : 'text-gray-400 font-semibold hover:text-gray-700'
+                        }`}
                       >
-                        Back
+                        Fast Charging Stations
+                        {activeModelTab === 'fast' && (
+                          <motion.div 
+                            layoutId="activeTabUnderline"
+                            className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF3B30] rounded-full" 
+                          />
+                        )}
                       </button>
-                      <button
-                        type="submit"
-                        className="w-2/3 py-2.5 bg-[#FF3B30] sm:bg-accent text-white sm:text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
-                      >
-                        Next
-                        <ArrowRight size={14} />
-                      </button>
-                    </div>
-                  </form>
-                )}
 
-                {/* ── STEP 3: SUMMARY VERIFICATION & SUBMISSION ── */}
-                {formStep === 3 && (
-                  <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
-                    <div className="p-4 rounded-2xl bg-black/60 border border-white/15 space-y-2 text-xs">
-                      <div className="text-[0.68rem] font-mono text-accent font-bold uppercase border-b border-white/10 pb-1">
-                        Check your details and Submit
-                      </div>
-                      <div className="grid grid-cols-2 gap-2 text-[0.72rem]">
-                        <div><span className="text-gray-400">Name:</span> <span className="text-white font-medium">{formData.firstName} {formData.lastName}</span></div>
-                        <div><span className="text-gray-400">Phone:</span> <span className="text-white font-medium">+91 {formData.phone}</span></div>
-                        <div className="col-span-2"><span className="text-gray-400">Email:</span> <span className="text-white font-medium break-all">{formData.email}</span></div>
-                        <div><span className="text-gray-400">Location:</span> <span className="text-white font-medium">{formData.city}, {formData.state}</span></div>
-                        <div><span className="text-gray-400">Pincode:</span> <span className="text-white font-medium">{formData.pincode}</span></div>
-                        <div><span className="text-gray-400">Budget:</span> <span className="text-accent font-bold">{formData.investmentBudget}</span></div>
-                        <div><span className="text-gray-400">Land:</span> <span className="text-white font-medium">{formData.landAvailability} ({formData.locationType})</span></div>
-                      </div>
-                    </div>
-
-                    {/* Webinar checkbox */}
-                    <div className="flex items-start gap-2.5 pt-1 cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        id="webinarCheck2"
-                        checked={formData.webinarInterest}
-                        onChange={e => setFormData({ ...formData, webinarInterest: e.target.checked })}
-                        className="mt-0.5 accent-accent w-3.5 h-3.5 cursor-pointer"
-                      />
-                      <label htmlFor="webinarCheck2" className="text-[0.7rem] text-gray-300 cursor-pointer leading-tight">
-                        Webinar session on franchise opportunity: <strong>Interested</strong>
-                      </label>
-                    </div>
-
-                    {/* Privacy policy checkbox */}
-                    <div className="flex items-start gap-2.5 cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        id="privacyCheck2"
-                        checked={formData.privacyAccepted}
-                        onChange={e => setFormData({ ...formData, privacyAccepted: e.target.checked })}
-                        className="mt-0.5 accent-accent w-3.5 h-3.5 cursor-pointer"
-                      />
-                      <label htmlFor="privacyCheck2" className="text-[0.68rem] text-gray-400 cursor-pointer leading-tight">
-                        I agree to the use of my info for communication and support.
-                      </label>
-                    </div>
-
-                    <div className="pt-2 flex justify-between gap-3">
                       <button
                         type="button"
-                        onClick={() => setFormStep(2)}
-                        className="w-1/3 py-2.5 rounded-full border border-white/20 text-gray-300 hover:text-white text-xs font-mono font-bold transition-all cursor-pointer"
+                        onClick={() => setActiveModelTab('super')}
+                        className={`pb-3 font-display text-base sm:text-lg transition-all relative cursor-pointer ${
+                          activeModelTab === 'super'
+                            ? 'text-gray-900 font-bold'
+                            : 'text-gray-400 font-semibold hover:text-gray-700'
+                        }`}
                       >
-                        Back
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-2/3 py-2.5 bg-[#FF3B30] sm:bg-accent text-white sm:text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black hover:shadow-[0_0_20px_#00FF00] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            Submitting...
-                          </>
-                        ) : (
-                          <>
-                            Submit
-                            <Check size={14} />
-                          </>
+                        Super Charging Stations
+                        {activeModelTab === 'super' && (
+                          <motion.div 
+                            layoutId="activeTabUnderline"
+                            className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF3B30] rounded-full" 
+                          />
                         )}
                       </button>
                     </div>
-                  </form>
-                )}
-              </motion.div>
-            </div>
 
+                    {/* Tab 1: Fast Charging Stations (Screenshot 4) */}
+                    {activeModelTab === 'fast' && (
+                      <motion.div
+                        key="fast-tab"
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="rounded-3xl border border-red-200/90 bg-white p-6 sm:p-8 shadow-sm"
+                      >
+                        {/* Big Canopy Photo */}
+                        <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden mb-7 shadow-inner bg-gray-100">
+                          <img 
+                            src={fastChargerCanopy} 
+                            alt="Fast Charging Stations Canopy" 
+                            className="w-full h-full object-cover" 
+                          />
+                        </div>
+
+                        {/* Bullet Points with exact labels from Screenshot 4 */}
+                        <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-800 font-sans">
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Starting Investment:</strong> ₹25 Lakhs*</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Charger Options:</strong> 30, 60, 120 kW DC (Single/Dual Gun)</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Vehicle Type:</strong> 4-wheeler passenger EVs (CCS2 compatible)</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Space Needed:</strong> 550 sq. ft. (2 car parks)</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Power:</strong> Direct grid connection, plug-and-play setup</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Ideal Locations:</strong> Highways, office parks, malls, residential societies</span>
+                          </li>
+                        </ul>
+                      </motion.div>
+                    )}
+
+                    {/* Tab 2: Super Charging Stations (Screenshot 5) */}
+                    {activeModelTab === 'super' && (
+                      <motion.div
+                        key="super-tab"
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="rounded-3xl border border-red-200/90 bg-white p-6 sm:p-8 shadow-sm"
+                      >
+                        {/* Big Canopy Photo with Commercial Fleet */}
+                        <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden mb-7 shadow-inner bg-gray-100">
+                          <img 
+                            src={superChargerCanopy} 
+                            alt="Super Charging Stations Mega Hub" 
+                            className="w-full h-full object-cover" 
+                          />
+                        </div>
+
+                        {/* Bullet Points with exact labels from Screenshot 5 */}
+                        <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-800 font-sans">
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Starting Investment:</strong> ₹1 Crore*</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Charger Options:</strong> 240 kW & 360 kW DC</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Scalability:</strong> Upto 1.2 MW with multi-gun setup</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Vehicle Compatibility:</strong> 4-wheelers, e-buses, and electric trucks</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Space Requirement:</strong> Larger footprint to accommodate commercial EVs</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
+                            <span><strong>Power Infrastructure:</strong> Direct grid connection with Solar + BESS integration for 24x7</span>
+                          </li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </section>
+
+              </div>
+
+              {/* ────────────────────────────────────────────────────────────────
+                  RIGHT COLUMN (5 COLS): STICKY "PARTNER WITH US" FORM
+                  PINS ALONGSIDE ALL 5 STEPS AS SHOWN IN SCREENSHOTS 1, 2, 3, 4, 5
+                 ──────────────────────────────────────────────────────────────── */}
+              <div 
+                id="franchise-form" 
+                ref={formRef} 
+                className="lg:col-span-5 sticky top-28 self-start z-30 scroll-mt-28"
+              >
+                <div className="w-full rounded-[2.2rem] bg-white border-2 border-red-200/90 p-6 sm:p-8 shadow-xl relative">
+                  
+                  {/* Title matching all 5 screenshots */}
+                  <div className="mb-6">
+                    <h3 className="text-2xl sm:text-[1.75rem] font-display font-bold text-gray-900 tracking-tight">
+                      Partner With Us
+                    </h3>
+                  </div>
+
+                  {/* Stepper Header (Personal -> Investment -> Form Review) */}
+                  <div className="flex items-center justify-between mb-8 px-2 relative">
+                    {/* Connecting dotted line */}
+                    <div className="absolute top-2.5 left-7 right-7 h-[1px] border-t border-dotted border-gray-400 pointer-events-none" />
+
+                    {/* Step 1: Personal */}
+                    <div className="flex flex-col items-center relative z-10">
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
+                        formStep === 1 
+                          ? 'bg-[#FF3B30] shadow-[0_0_8px_rgba(255,59,48,0.5)]' 
+                          : formStep > 1 
+                          ? 'bg-[#FF3B30]' 
+                          : 'bg-neutral-800'
+                      }`}>
+                        {formStep > 1 && <Check size={11} strokeWidth={3} className="text-white" />}
+                      </div>
+                      <span className="text-[0.68rem] font-sans font-medium text-gray-800 mt-2">
+                        Personal
+                      </span>
+                    </div>
+
+                    {/* Step 2: Investment */}
+                    <div className="flex flex-col items-center relative z-10">
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
+                        formStep === 2 
+                          ? 'bg-[#FF3B30] shadow-[0_0_8px_rgba(255,59,48,0.5)]' 
+                          : formStep > 2 
+                          ? 'bg-[#FF3B30]' 
+                          : 'bg-neutral-800'
+                      }`}>
+                        {formStep > 2 && <Check size={11} strokeWidth={3} className="text-white" />}
+                      </div>
+                      <span className="text-[0.68rem] font-sans font-medium text-gray-800 mt-2">
+                        Investment
+                      </span>
+                    </div>
+
+                    {/* Step 3: Form Review */}
+                    <div className="flex flex-col items-center relative z-10">
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
+                        formStep === 3 
+                          ? 'bg-[#FF3B30] shadow-[0_0_8px_rgba(255,59,48,0.5)]' 
+                          : 'bg-neutral-800'
+                      }`} />
+                      <span className="text-[0.68rem] font-sans font-medium text-gray-800 mt-2">
+                        Form Review
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Status Notification */}
+                  <AnimatePresence>
+                    {status.type && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className={`mb-5 p-3.5 rounded-2xl flex items-center gap-2.5 text-xs font-sans ${
+                          status.type === 'success'
+                            ? 'bg-emerald-50 border border-emerald-300 text-emerald-800'
+                            : 'bg-red-50 border border-red-300 text-red-700'
+                        }`}
+                      >
+                        {status.type === 'success' ? (
+                          <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-600" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-600" />
+                        )}
+                        <span>{status.message}</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* ── STEP 1: PERSONAL CONTACT DETAILS (SCREENSHOTS 1 TO 5) ── */}
+                  {formStep === 1 && (
+                    <form onSubmit={handleNextStep1} className="space-y-3.5">
+                      {/* First Name & Last Name */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">First Name*</label>
+                          <input 
+                            type="text" 
+                            value={formData.firstName}
+                            onChange={e => setFormData({ ...formData, firstName: e.target.value })}
+                            placeholder="eg. John"
+                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                          />
+                          {formErrors.firstName && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.firstName}</span>}
+                        </div>
+                        <div>
+                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">Last Name*</label>
+                          <input 
+                            type="text" 
+                            value={formData.lastName}
+                            onChange={e => setFormData({ ...formData, lastName: e.target.value })}
+                            placeholder="eg. Doe"
+                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                          />
+                          {formErrors.lastName && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.lastName}</span>}
+                        </div>
+                      </div>
+
+                      {/* Email */}
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">Email*</label>
+                        <input 
+                          type="email" 
+                          value={formData.email}
+                          onChange={e => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="eg. example@gmail.com"
+                          className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                        />
+                        {formErrors.email && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.email}</span>}
+                      </div>
+
+                      {/* Mobile Number */}
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">Mobile Number*</label>
+                        <input 
+                          type="tel" 
+                          value={formData.phone}
+                          onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="91 9876543210"
+                          className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                        />
+                        {formErrors.phone && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.phone}</span>}
+                      </div>
+
+                      {/* City & State */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">City*</label>
+                          <input 
+                            type="text" 
+                            value={formData.city}
+                            onChange={e => setFormData({ ...formData, city: e.target.value })}
+                            placeholder="Eg. Mumbai"
+                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                          />
+                          {formErrors.city && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.city}</span>}
+                        </div>
+                        <div>
+                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">State*</label>
+                          <select 
+                            value={formData.state}
+                            onChange={e => setFormData({ ...formData, state: e.target.value })}
+                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all cursor-pointer"
+                          >
+                            <option value="">Enter your state</option>
+                            {INDIAN_STATES.map((st) => (
+                              <option key={st} value={st}>{st}</option>
+                            ))}
+                          </select>
+                          {formErrors.state && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.state}</span>}
+                        </div>
+                      </div>
+
+                      {/* PinCode */}
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">PinCode*</label>
+                        <input 
+                          type="text" 
+                          maxLength={6}
+                          value={formData.pincode}
+                          onChange={e => setFormData({ ...formData, pincode: e.target.value })}
+                          placeholder="400097"
+                          className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                        />
+                        {formErrors.pincode && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.pincode}</span>}
+                      </div>
+
+                      {/* Proceed As Radio Options */}
+                      <div className="pt-2">
+                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">Proceed as*</label>
+                        <div className="flex items-center gap-6">
+                          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-800">
+                            <input 
+                              type="radio" 
+                              name="proceedAs" 
+                              value="Business"
+                              checked={formData.proceedAs === 'Business'}
+                              onChange={() => setFormData({ ...formData, proceedAs: 'Business' })}
+                              className="accent-[#FF3B30] w-4 h-4 cursor-pointer"
+                            />
+                            <span>Business</span>
+                          </label>
+
+                          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-800">
+                            <input 
+                              type="radio" 
+                              name="proceedAs" 
+                              value="Individual"
+                              checked={formData.proceedAs === 'Individual'}
+                              onChange={() => setFormData({ ...formData, proceedAs: 'Individual' })}
+                              className="accent-[#FF3B30] w-4 h-4 cursor-pointer"
+                            />
+                            <span>Individual</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Black Pill Next Button */}
+                      <div className="pt-4">
+                        <button
+                          type="submit"
+                          className="w-full py-3.5 bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </form>
+                  )}
+
+                  {/* ── STEP 2: INVESTMENT BUDGET & LAND SCOPE ── */}
+                  {formStep === 2 && (
+                    <form onSubmit={handleNextStep2} className="space-y-4">
+                      {/* Business Turnover (if Business selected) */}
+                      {formData.proceedAs === 'Business' && (
+                        <div>
+                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                            Business Turnover*
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {['1L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '>5Cr'].map((to) => (
+                              <button
+                                key={to}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, businessTurnover: to })}
+                                className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
+                                  formData.businessTurnover === to
+                                    ? 'bg-black border-black text-white font-bold'
+                                    : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                                }`}
+                              >
+                                {to}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Investment Budget */}
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                          Investment Budget*
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {(formData.proceedAs === 'Business' 
+                            ? ['25L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '5Cr+'] 
+                            : ['15L - 25L', '25L - 50L', '50L - 1Cr', '1Cr+']
+                          ).map((b) => (
+                            <button
+                              key={b}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, investmentBudget: b })}
+                              className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
+                                formData.investmentBudget === b
+                                  ? 'bg-black border-black text-white font-bold'
+                                  : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                              }`}
+                            >
+                              {b}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Land Availability */}
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                          Land Availability*
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {['Yes', 'No'].map((ans) => (
+                            <button
+                              key={ans}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, landAvailability: ans })}
+                              className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                                formData.landAvailability === ans
+                                  ? 'bg-black border-black text-white'
+                                  : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                              }`}
+                            >
+                              {ans}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Location Type */}
+                      {formData.landAvailability === 'Yes' && (
+                        <div>
+                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                            Location Type*
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {['City', 'Highway'].map((loc) => (
+                              <button
+                                key={loc}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, locationType: loc })}
+                                className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                                  formData.locationType === loc
+                                    ? 'bg-black border-black text-white'
+                                    : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                                }`}
+                              >
+                                {loc}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="pt-3 flex justify-between gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setFormStep(1)}
+                          className="w-1/3 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:border-black text-xs font-mono font-bold transition-all cursor-pointer"
+                        >
+                          Back
+                        </button>
+                        <button
+                          type="submit"
+                          className="w-2/3 py-2.5 bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </form>
+                  )}
+
+                  {/* ── STEP 3: FORM REVIEW & SUBMISSION ── */}
+                  {formStep === 3 && (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-2 text-xs">
+                        <div className="text-[0.68rem] font-mono text-[#FF3B30] font-bold uppercase border-b border-gray-200 pb-1">
+                          Check your details and Submit
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-[0.72rem]">
+                          <div><span className="text-gray-500">Name:</span> <span className="text-gray-900 font-medium">{formData.firstName} {formData.lastName}</span></div>
+                          <div><span className="text-gray-500">Phone:</span> <span className="text-gray-900 font-medium">+91 {formData.phone}</span></div>
+                          <div className="col-span-2"><span className="text-gray-500">Email:</span> <span className="text-gray-900 font-medium break-all">{formData.email}</span></div>
+                          <div><span className="text-gray-500">Location:</span> <span className="text-gray-900 font-medium">{formData.city}, {formData.state}</span></div>
+                          <div><span className="text-gray-500">Pincode:</span> <span className="text-gray-900 font-medium">{formData.pincode}</span></div>
+                          <div><span className="text-gray-500">Budget:</span> <span className="text-red-600 font-bold">{formData.investmentBudget}</span></div>
+                          <div><span className="text-gray-500">Land:</span> <span className="text-gray-900 font-medium">{formData.landAvailability} ({formData.locationType})</span></div>
+                        </div>
+                      </div>
+
+                      {/* Webinar checkbox */}
+                      <div className="flex items-start gap-2.5 pt-1 cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          id="webinarCheck2"
+                          checked={formData.webinarInterest}
+                          onChange={e => setFormData({ ...formData, webinarInterest: e.target.checked })}
+                          className="mt-0.5 accent-[#FF3B30] w-3.5 h-3.5 cursor-pointer"
+                        />
+                        <label htmlFor="webinarCheck2" className="text-[0.7rem] text-gray-700 cursor-pointer leading-tight">
+                          Webinar session on franchise opportunity: <strong>Interested</strong>
+                        </label>
+                      </div>
+
+                      {/* Privacy policy checkbox */}
+                      <div className="flex items-start gap-2.5 cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          id="privacyCheck2"
+                          checked={formData.privacyAccepted}
+                          onChange={e => setFormData({ ...formData, privacyAccepted: e.target.checked })}
+                          className="mt-0.5 accent-[#FF3B30] w-3.5 h-3.5 cursor-pointer"
+                        />
+                        <label htmlFor="privacyCheck2" className="text-[0.68rem] text-gray-500 cursor-pointer leading-tight">
+                          I agree to the use of my info for communication and support.
+                        </label>
+                      </div>
+
+                      <div className="pt-2 flex justify-between gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setFormStep(2)}
+                          className="w-1/3 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:border-black text-xs font-mono font-bold transition-all cursor-pointer"
+                        >
+                          Back
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-2/3 py-2.5 bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                              Submitting...
+                            </>
+                          ) : (
+                            <>
+                              Submit
+                              <Check size={14} />
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </form>
+                  )}
+
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            3. WHY PARTNER WITH US? (DOCO MODEL EXPLAINED)
+            3. LOWER FULL-WIDTH SECTIONS (SBI FINANCING, BRANDS, WEBINAR, FAQS)
            ══════════════════════════════════════════════════════════════════════════ */}
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pb-32 relative z-10">
-          <section className="mb-28">
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Turnkey EV Infrastructure</span>
-              <h2 className="text-3xl sm:text-5xl font-display font-bold text-white uppercase mt-2 mb-4">
-                Why Partner With Axion?
-              </h2>
-              <p className="text-gray-400 text-sm leading-relaxed font-sans">
-                Our Franchise Model, formerly known as the Dealer Owned Company Operated (DOCO) Model, is a turnkey investment opportunity that plugs you directly into India’s largest EV charging network, complete with tech, operations, and marketing support for long-term ROI.
-              </p>
-            </div>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 py-24 relative z-10">
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-8 rounded-3xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/10 hover:border-accent/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                  <MapPin size={22} />
-                </div>
-                <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">15,000+</div>
-                <h4 className="text-lg font-bold text-white mb-2">Charging Points Across India</h4>
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  Established presence spanning major national expressways, key state transit corridors, high-density residential complexes, and premium commercial malls.
-                </p>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/10 hover:border-accent/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                  <ShieldCheck size={22} />
-                </div>
-                <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">24x7 Support</div>
-                <h4 className="text-lg font-bold text-white mb-2">98% Network Uptime</h4>
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  Continuous IoT telemetry, remote automated firmware self-healing, dedicated regional field service engineers, and an in-house round-the-clock helpline.
-                </p>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/10 hover:border-accent/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                  <Zap size={22} />
-                </div>
-                <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">Solar + BESS</div>
-                <h4 className="text-lg font-bold text-white mb-2">Green Energy Options</h4>
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  Architectural integration with rooftop Solar PV arrays and Battery Energy Storage Systems (BESS) for zero-emission operations and peak-tariff shaving.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* ══════════════════════════════════════════════════════════════════════════
-              4. DUAL INVESTMENT MODELS (FAST VS SUPER CHARGING)
-             ══════════════════════════════════════════════════════════════════════════ */}
-          <section id="investment-plans" className="mb-32 scroll-mt-24">
-            <div className="text-center max-w-3xl mx-auto mb-10">
-              <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Tailored Investment Portfolios</span>
-              <h2 className="text-3xl sm:text-5xl font-display font-bold text-white uppercase mt-2 mb-4">
-                Choose Your Investment Plan. <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white">We’ll Power the Rest.</span>
-              </h2>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Whether you're entering the EV space for the first time or expanding a larger energy portfolio, we offer a scalable, high-ROI franchise model built for the future. Two tailored investment models designed to suit different scales of ambition for landowners, retail entrepreneurs, and institutional investors.
-              </p>
-
-              {/* Tab Switcher */}
-              <div className="inline-flex p-1.5 rounded-2xl bg-white/[0.04] border border-white/10 mt-8">
-                <button
-                  onClick={() => setActiveModelTab('fast')}
-                  className={`px-6 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all cursor-pointer ${
-                    activeModelTab === 'fast'
-                      ? 'bg-accent text-black shadow-[0_0_15px_#00FF00]'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  Fast Charging Stations
-                </button>
-                <button
-                  onClick={() => setActiveModelTab('super')}
-                  className={`px-6 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all cursor-pointer ${
-                    activeModelTab === 'super'
-                      ? 'bg-accent text-black shadow-[0_0_15px_#00FF00]'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  Super Charging Stations
-                </button>
-              </div>
-            </div>
-
-            {/* Model Card Display */}
-            <div className="w-full max-w-5xl mx-auto">
-              {activeModelTab === 'fast' ? (
-                <motion.div 
-                  key="fast"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="rounded-3xl bg-gradient-to-b from-[#06140A] to-[#020503] border border-accent/40 p-8 sm:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
-                >
-                  <div className="flex flex-col lg:flex-row items-center gap-10">
-                    <div className="w-full lg:w-1/2">
-                      <div className="inline-block px-3 py-1 rounded-full bg-accent/15 border border-accent/40 text-accent font-mono text-[0.7rem] uppercase font-bold mb-3">
-                        Model 01 • Passenger Vehicle Hubs
-                      </div>
-                      <h3 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase mb-2">
-                        Fast Charging Stations
-                      </h3>
-                      <div className="text-2xl sm:text-3xl font-display font-black text-accent mb-6">
-                        Starting at ₹25 Lakhs*
-                      </div>
-
-                      <ul className="space-y-3 text-sm text-gray-300">
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Charger Options:</strong> 30, 60, 120 kW DC (Single/Dual Gun)</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Vehicle Type:</strong> 4-wheeler passenger EVs (CCS2 compatible)</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Space Needed:</strong> ~550 sq. ft. (2 car parking bays)</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Power Connection:</strong> 50–150 kVA sanctioned load, plug-and-play setup</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Ideal Locations:</strong> Highways, office parks, malls, residential societies, hotels</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Support Includes:</strong> CMS dashboard, 24x7 tech support, marketing assistance</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Typical Payback:</strong> 2 to 4 Years</span>
-                        </li>
-                      </ul>
-
-                      <div className="mt-8">
-                        <button
-                          onClick={() => scrollToForm({ model: 'fast' })}
-                          className="px-8 py-3.5 bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white hover:shadow-[0_0_25px_#00FF00] transition-all flex items-center gap-2 cursor-pointer"
-                        >
-                          Apply For Fast Charging Station
-                          <ArrowRight size={16} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-1/2 h-[340px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/10 relative shadow-2xl">
-                      <img src={fastChargerImg} alt="Fast Charging Station" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 text-xs">
-                        <span className="text-accent font-mono font-bold uppercase">Plug & Play Setup</span>
-                        <p className="text-gray-300 text-[0.72rem] mt-0.5">Compatible with 100% of Indian passenger EVs including Tata, MG, Mahindra, BYD, and Hyundai.</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div 
-                  key="super"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="rounded-3xl bg-gradient-to-b from-[#0A1810] to-[#020503] border border-accent/40 p-8 sm:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
-                >
-                  <div className="flex flex-col lg:flex-row items-center gap-10">
-                    <div className="w-full lg:w-1/2">
-                      <div className="inline-block px-3 py-1 rounded-full bg-accent/15 border border-accent/40 text-accent font-mono text-[0.7rem] uppercase font-bold mb-3">
-                        Model 02 • High-Throughput & Commercial Fleets
-                      </div>
-                      <h3 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase mb-2">
-                        Super Charging Stations
-                      </h3>
-                      <div className="text-2xl sm:text-3xl font-display font-black text-accent mb-6">
-                        Starting at ₹1 Crore*
-                      </div>
-
-                      <ul className="space-y-3 text-sm text-gray-300">
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Charger Options:</strong> 240 kW & 360 kW DC Ultra-Fast Dispensers</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Scalability:</strong> Modular expansion up to 1.2 MW with multi-gun array</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Vehicle Compatibility:</strong> 4-wheelers, e-buses, and heavy commercial trucks</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Space Requirement:</strong> Larger footprint accommodating commercial & fleet vehicles</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Power Infrastructure:</strong> 250–1,200 kVA load with optional Solar + BESS integration</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Ideal Locations:</strong> National highways, logistics hubs, bus depots, city expressways</span>
-                        </li>
-                        <li className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                          <span><strong>Typical Payback:</strong> 3 to 5 Years</span>
-                        </li>
-                      </ul>
-
-                      <div className="mt-8">
-                        <button
-                          onClick={() => scrollToForm({ model: 'super' })}
-                          className="px-8 py-3.5 bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white hover:shadow-[0_0_25px_#00FF00] transition-all flex items-center gap-2 cursor-pointer"
-                        >
-                          Apply For Super Charging Hub
-                          <ArrowRight size={16} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-1/2 h-[340px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/10 relative shadow-2xl">
-                      <img src={superChargerImg} alt="Super Charging Hub" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 text-xs">
-                        <span className="text-accent font-mono font-bold uppercase">Mega-Watt Class Depot</span>
-                        <p className="text-gray-300 text-[0.72rem] mt-0.5">Liquid-cooled heavy duty architecture delivering 200 km range in under 12 minutes.</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          </section>
-
-          {/* ══════════════════════════════════════════════════════════════════════════
-              5. SBI EV MITRA SCHEME FINANCING HUB
-             ══════════════════════════════════════════════════════════════════════════ */}
+          {/* ── SBI EV MITRA SCHEME FINANCING HUB ── */}
           <section className="mb-32">
             <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-b from-[#05140A] via-[#020804] to-[#010402] border border-accent/30 relative overflow-hidden">
               <div className="text-center max-w-3xl mx-auto mb-12">
@@ -1034,9 +1109,7 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════════════════════
-              6. BRAND & OEM PARTNERS MARQUEE
-             ══════════════════════════════════════════════════════════════════════════ */}
+          {/* ── BRAND & FLEET PARTNERS MARQUEE ── */}
           <section className="mb-32 text-center">
             <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Trusted Across the Industry</span>
             <h2 className="text-2xl sm:text-3xl font-display font-bold text-white uppercase mt-2 mb-8">
@@ -1058,9 +1131,7 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════════════════════
-              7. WEBINAR / MASTERCLASS REGISTRATION MODULE
-             ══════════════════════════════════════════════════════════════════════════ */}
+          {/* ── MASTERCLASS WEBINAR MODULE ── */}
           <section className="mb-32">
             <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-br from-[#06140B] via-[#030905] to-[#010402] border border-accent/30 relative overflow-hidden">
               <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -1114,9 +1185,7 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════════════════════
-              8. COMPREHENSIVE FAQS ACCORDION (ALL 7 QUESTIONS)
-             ══════════════════════════════════════════════════════════════════════════ */}
+          {/* ── ALL 7 EXPANDABLE FAQS ── */}
           <section className="mb-32">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Clear Answers</span>
@@ -1163,9 +1232,7 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════════════════════
-              9. STATUTORY DISCLAIMER & PM E-DRIVE COMPLIANCE
-             ══════════════════════════════════════════════════════════════════════════ */}
+          {/* ── STATUTORY ADVISORY ── */}
           <section className="p-6 sm:p-8 rounded-2xl bg-black/80 border border-white/10 text-xs text-gray-400 leading-relaxed max-w-4xl mx-auto font-sans">
             <h4 className="text-white font-mono font-bold text-xs uppercase tracking-wider mb-2 flex items-center gap-2">
               <ShieldCheck size={14} className="text-accent" />
@@ -1180,6 +1247,7 @@ const Franchise = () => {
           </section>
 
         </div>
+
         <Footer />
       </main>
     </PageTransition>
