@@ -11,7 +11,7 @@ import {
 import { sendFranchiseApplication } from '../services/mailService';
 
 // Images from assets
-import heroImg from '../assets/images/franchise_hero.webp';
+import heroBannerNight from '../assets/images/franchise_banner_night.jpg';
 import fastChargerImg from '../assets/images/AXION 60 kW EV Wallbox Advertisement.webp';
 import superChargerImg from '../assets/images/Axion 240 kW EV Charger Showcase.webp';
 import webinarImg from '../assets/images/workplace.webp';
@@ -190,648 +190,562 @@ const Franchise = () => {
 
   return (
     <PageTransition locationKey="franchise">
-      <main className="w-full min-h-screen bg-[#020403] pt-32 overflow-hidden relative font-sans text-gray-200">
+      <main className="w-full min-h-screen bg-[#020403] pt-24 overflow-hidden relative font-sans text-gray-200">
         
         {/* Ambient Glows */}
-        <div className="absolute top-0 right-[-10%] w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px] pointer-events-none" />
-        <div className="absolute top-1/3 left-[-15%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[180px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-[-10%] w-[700px] h-[700px] bg-accent/5 rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute top-1/4 right-[-10%] w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px] pointer-events-none" />
+        <div className="absolute top-2/3 left-[-15%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[180px] pointer-events-none" />
 
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pt-8 pb-24 relative z-10">
-          
-          {/* ══════════════════════════════════════════════════════════
-              1. HERO SECTION (BUILD THE FUTURE OF E-MOBILITY)
-             ══════════════════════════════════════════════════════════ */}
-          <div className="flex flex-col xl:flex-row items-center justify-between gap-12 lg:gap-20 mb-28 relative">
-            
-            <div className="w-full xl:w-1/2 flex flex-col items-start relative z-10">
+        {/* ══════════════════════════════════════════════════════════════════════════
+            1. TOP HERO BANNER (CHARGEZONE STYLE: NIGHT STATION PHOTO + RIGHT TEXT)
+           ══════════════════════════════════════════════════════════════════════════ */}
+        <div className="w-full relative min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] flex items-center overflow-hidden border-b border-white/10">
+          {/* Night Charging Station Background Asset */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center sm:bg-left bg-no-repeat scale-105 transition-transform duration-1000"
+            style={{ backgroundImage: `url("${heroBannerNight}")` }}
+          />
+          {/* Subtle directional dark gradient ensuring high text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/60 to-[#020403]/95 sm:via-black/70 sm:to-[#020403]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-transparent to-black/40" />
+
+          {/* Banner Text Content (Aligned to right on desktop, matching screenshot) */}
+          <div className="max-w-[1400px] w-full mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-24 relative z-10 flex flex-col items-start lg:items-end text-left lg:text-right">
+            <div className="max-w-2xl">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 mb-6 backdrop-blur-md"
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent/15 border border-accent/40 mb-4 backdrop-blur-md"
               >
-                <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_#00FF00]" />
-                <span className="text-accent font-mono text-[0.72rem] uppercase tracking-[0.2em] font-bold">
-                  B2B FRANCHISE PROGRAM • PM E-DRIVE ENABLED
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="text-accent font-mono text-[0.7rem] uppercase tracking-widest font-bold">
+                  B2B Franchise Opportunity
                 </span>
               </motion.div>
 
               <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white uppercase tracking-tight mb-6 leading-[1.08]"
+                className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white tracking-tight leading-[1.08] drop-shadow-2xl"
               >
-                Build the Future of <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-emerald-300 to-white drop-shadow-sm">
-                  E-Mobility.
-                </span>
+                Build the Future <br />
+                of E-Mobility
               </motion.h1>
 
               <motion.p 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-base sm:text-lg text-gray-300 max-w-xl leading-relaxed mb-8 border-l-2 border-accent/60 pl-5"
-              >
-                Be a franchise partner with India’s fastest-growing EV charging network. Start your station starting at just <strong className="text-accent font-mono">₹25 lakhs*</strong> with turnkey setup, SBI financing, and guaranteed tech support.
-              </motion.p>
-
-              {/* Stat Badges */}
-              <motion.div 
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.25 }}
-                className="grid grid-cols-3 gap-3 w-full max-w-xl mb-10"
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-base sm:text-xl text-gray-300 mt-4 leading-relaxed font-sans max-w-xl lg:ml-auto drop-shadow-md"
               >
-                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                  <div className="text-accent font-mono text-xs font-bold uppercase tracking-wider mb-1">Starting</div>
-                  <div className="text-white font-display text-xl sm:text-2xl font-black">₹25 Lakhs*</div>
-                  <div className="text-gray-400 text-[0.65rem] mt-0.5">Fast DC Hubs</div>
-                </div>
-                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                  <div className="text-accent font-mono text-xs font-bold uppercase tracking-wider mb-1">Bank Loan</div>
-                  <div className="text-white font-display text-xl sm:text-2xl font-black">Up to 75%</div>
-                  <div className="text-gray-400 text-[0.65rem] mt-0.5">SBI EV Mitra</div>
-                </div>
-                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                  <div className="text-accent font-mono text-xs font-bold uppercase tracking-wider mb-1">Payback</div>
-                  <div className="text-white font-display text-xl sm:text-2xl font-black">2–4 Yrs</div>
-                  <div className="text-gray-400 text-[0.65rem] mt-0.5">Typical ROI</div>
-                </div>
-              </motion.div>
-
-              {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 w-full max-w-xl"
-              >
-                <button 
-                  onClick={() => scrollToForm()}
-                  className="flex items-center justify-center gap-3 px-8 py-4 bg-accent text-black text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 hover:bg-white hover:shadow-[0_0_35px_rgba(0,255,0,0.5)] cursor-pointer"
-                >
-                  Partner With Us
-                  <ArrowRight size={17} />
-                </button>
-                <button 
-                  onClick={() => document.getElementById('investment-plans')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-accent text-white text-sm font-bold uppercase tracking-wider transition-all cursor-pointer"
-                >
-                  Explore Models
-                  <ChevronDown size={17} />
-                </button>
-              </motion.div>
-            </div>
-            
-            {/* Right Side Visual Showcase */}
-            <div className="w-full xl:w-1/2 relative h-[440px] sm:h-[520px] lg:h-[600px] z-10">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="absolute inset-0 rounded-[2.5rem] overflow-hidden border border-accent/25 shadow-[0_20px_70px_rgba(0,0,0,0.9)] z-10"
-              >
-                <img 
-                  src={plazaImg} 
-                  alt="Axion Charging Station Plaza" 
-                  className="w-full h-full object-cover" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-black/40 to-transparent" />
-              </motion.div>
-
-              {/* Floating Widget 1: Revenue Graph */}
-              <motion.div 
-                initial={{ opacity: 0, x: 40, y: 30 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="absolute bottom-4 right-2 sm:-right-4 lg:bottom-10 lg:-right-6 w-64 sm:w-72 p-5 rounded-2xl bg-[#030805]/95 backdrop-blur-xl border border-accent/40 shadow-[0_20px_50px_rgba(0,0,0,0.9)] z-20"
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-white/70 text-[0.68rem] font-mono uppercase tracking-wider">Projected Hub ROI</span>
-                  <TrendingUp className="text-accent w-4 h-4" />
-                </div>
-                <div className="flex items-end gap-2 h-16 mb-3">
-                  {[35, 55, 45, 75, 60, 85, 100].map((h, i) => (
-                    <div key={i} className="flex-1 bg-white/5 rounded-t-sm h-full relative overflow-hidden">
-                      <div 
-                        className="absolute bottom-0 w-full bg-gradient-to-t from-accent to-accent/50 rounded-t-sm" 
-                        style={{ height: `${h}%` }} 
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-white font-display text-2xl font-bold">
-                  ₹18,40,000 <span className="text-accent text-xs font-mono font-normal">/ yr net</span>
-                </div>
-                <div className="text-gray-400 text-[0.65rem] font-mono mt-0.5">Based on 6-gun 60kW DC setup</div>
-              </motion.div>
-
-              {/* Floating Widget 2: Uptime Pill */}
-              <motion.div 
-                initial={{ opacity: 0, x: -30, y: -20 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 1, delay: 0.6 }}
-                className="absolute top-6 left-2 sm:-left-4 lg:top-12 lg:-left-6 px-5 py-3.5 rounded-xl bg-[#030805]/95 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.9)] z-20 flex items-center gap-3.5"
-              >
-                <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center border border-accent/50">
-                  <ShieldCheck className="text-accent w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-white font-bold text-xs">Turnkey DOCO Model</div>
-                  <div className="text-accent text-[0.65rem] font-mono font-bold tracking-widest uppercase">98% Guaranteed Uptime</div>
-                </div>
-              </motion.div>
+                Be a franchise partner with India's largest EV charging network. Starting at just <strong className="text-accent font-semibold">₹25 lakhs*</strong>
+              </motion.p>
             </div>
           </div>
+        </div>
 
-          {/* ══════════════════════════════════════════════════════════
-              2. INTERACTIVE 3-STEP LEAD WIZARD ("PARTNER WITH US")
-             ══════════════════════════════════════════════════════════ */}
-          <section id="franchise-form" ref={formRef} className="mb-32 scroll-mt-24">
-            <div className="w-full max-w-4xl mx-auto rounded-3xl bg-gradient-to-b from-[#051108] via-[#030905] to-[#020503] border border-accent/30 p-6 sm:p-10 md:p-14 shadow-[0_20px_80px_rgba(0,0,0,0.85)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
+        {/* ══════════════════════════════════════════════════════════════════════════
+            2. TWO-COLUMN SPLIT (INDIA IS CHARGING AHEAD + FLOATING PARTNER FORM)
+               Matches exact layout from screenshot!
+           ══════════════════════════════════════════════════════════════════════════ */}
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 -mt-12 sm:-mt-20 lg:-mt-32 relative z-20 pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            
+            {/* ── LEFT COLUMN (7 COLS): INDIA IS CHARGING AHEAD ── */}
+            <div className="lg:col-span-7 pt-4 lg:pt-16">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight uppercase leading-[1.1]">
+                  India is Charging Ahead. <br />
+                  <span className="text-[#FF3B30] sm:text-accent font-black drop-shadow-[0_0_20px_rgba(255,59,48,0.4)]">
+                    ARE YOU?
+                  </span>
+                </h2>
 
-              {/* Form Title & Stepper */}
-              <div className="mb-8 relative z-10 text-center">
-                <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Fast-Track Onboarding</span>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase mt-1 mb-3">Partner With Us</h2>
-                <p className="text-gray-400 text-sm max-w-lg mx-auto">
-                  Step into the future of clean energy. Fill out the 3 quick steps below to receive a personalized site assessment and ROI projection.
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mt-6 max-w-xl font-sans">
+                  With India targeting 30% EV penetration by 2030, the demand for fast, reliable and accessible charging infrastructure is skyrocketing. Now is the perfect time to ride the EV wave. Not just as a believer, but as an owner of the future.
                 </p>
 
-                {/* Progress Indicators */}
-                <div className="flex items-center justify-center gap-3 mt-6">
-                  {[
-                    { num: 1, label: "Basic Details" },
-                    { num: 2, label: "Investment & Land" },
-                    { num: 3, label: "Review & Submit" }
-                  ].map((s) => (
-                    <div key={s.num} className="flex items-center gap-2">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-all ${
-                        formStep === s.num
-                          ? 'bg-accent text-black shadow-[0_0_12px_#00FF00]'
-                          : formStep > s.num
-                          ? 'bg-accent/30 text-accent border border-accent/60'
-                          : 'bg-white/5 text-gray-400 border border-white/10'
-                      }`}>
-                        {formStep > s.num ? <Check size={14} /> : s.num}
+                {/* 2 Key Market Stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-xl">
+                  <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-lg flex flex-col justify-between">
+                    <div>
+                      <div className="text-3xl sm:text-4xl font-display font-black text-white mb-1">
+                        <span className="text-accent">₹</span>4,000+cr
                       </div>
-                      <span className="hidden sm:inline text-xs font-medium text-gray-300">{s.label}</span>
-                      {s.num < 3 && <div className="w-6 sm:w-10 h-[1px] bg-white/10 mx-1" />}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Status Banner */}
-              <AnimatePresence>
-                {status.type && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className={`mb-6 p-4 rounded-xl flex items-center gap-3 text-sm font-sans ${
-                      status.type === 'success'
-                        ? 'bg-accent/10 border border-accent/40 text-accent shadow-[0_0_20px_rgba(0,255,0,0.2)]'
-                        : 'bg-red-500/10 border border-red-500/40 text-red-400'
-                    }`}
-                  >
-                    {status.type === 'success' ? (
-                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-accent" />
-                    ) : (
-                      <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-400" />
-                    )}
-                    <span>{status.message}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* ── STEP 1: CONTACT DETAILS & ENTITY ── */}
-              {formStep === 1 && (
-                <motion.form 
-                  key="step1"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  onSubmit={handleNextStep1}
-                  className="space-y-5 relative z-10"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">First Name *</label>
-                      <input 
-                        type="text" 
-                        value={formData.firstName}
-                        onChange={e => setFormData({ ...formData, firstName: e.target.value })}
-                        placeholder="eg. Rahul"
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
-                      />
-                      {formErrors.firstName && <span className="text-red-400 text-xs mt-1 block">{formErrors.firstName}</span>}
-                    </div>
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">Last Name *</label>
-                      <input 
-                        type="text" 
-                        value={formData.lastName}
-                        onChange={e => setFormData({ ...formData, lastName: e.target.value })}
-                        placeholder="eg. Sharma"
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
-                      />
-                      {formErrors.lastName && <span className="text-red-400 text-xs mt-1 block">{formErrors.lastName}</span>}
+                      <div className="text-gray-400 text-xs font-sans">
+                        allocated to EV infra under PM E‑Drive Scheme
+                      </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-lg flex flex-col justify-between">
                     <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">Email Address *</label>
+                      <div className="text-3xl sm:text-4xl font-display font-black text-white mb-1">
+                        17.1% YoY
+                      </div>
+                      <div className="text-gray-400 text-xs font-sans">
+                        growth across Indian commercial and passenger electric vehicles
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Highlight badges */}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <div className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-gray-300 flex items-center gap-2">
+                    <ShieldCheck size={16} className="text-accent" />
+                    <span>Turnkey DOCO Model</span>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-gray-300 flex items-center gap-2">
+                    <DollarSign size={16} className="text-accent" />
+                    <span>SBI EV Mitra Financing Up To 75%</span>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-gray-300 flex items-center gap-2">
+                    <Zap size={16} className="text-accent" />
+                    <span>2–4 Years Payback</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* ── RIGHT COLUMN (5 COLS): FLOATING PARTNER WITH US CARD ── */}
+            <div id="franchise-form" ref={formRef} className="lg:col-span-5 scroll-mt-28">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="w-full rounded-[2.2rem] bg-gradient-to-b from-[#09150C]/98 via-[#040A06]/98 to-[#020503]/98 border-2 border-[#FF3B30]/40 sm:border-accent/40 p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(0,255,0,0.12)] relative z-20 backdrop-blur-2xl"
+              >
+                <div className="absolute top-0 right-0 w-44 h-44 bg-accent/10 rounded-full blur-[70px] pointer-events-none" />
+
+                {/* Form Heading */}
+                <div className="mb-6 relative z-10">
+                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
+                    Partner With Us
+                  </h3>
+                </div>
+
+                {/* Stepper Header (Personal -> Investment -> Form Review) */}
+                <div className="flex items-center justify-between mb-8 px-2 relative z-10">
+                  {/* Connecting dashed line */}
+                  <div className="absolute top-3.5 left-8 right-8 h-[1px] border-t-2 border-dashed border-white/20 pointer-events-none" />
+
+                  {/* Dot 1: Personal */}
+                  <div className="flex flex-col items-center relative z-10">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+                      formStep === 1 
+                        ? 'bg-[#FF3B30] sm:bg-accent text-black shadow-[0_0_12px_rgba(255,59,48,0.6)] sm:shadow-[0_0_12px_#00FF00]' 
+                        : formStep > 1 
+                        ? 'bg-accent/40 text-accent border border-accent' 
+                        : 'bg-white/10 text-gray-400 border border-white/20'
+                    }`}>
+                      {formStep > 1 ? <Check size={13} strokeWidth={3} /> : <div className="w-2.5 h-2.5 rounded-full bg-current" />}
+                    </div>
+                    <span className={`text-[0.68rem] font-mono mt-1.5 ${formStep === 1 ? 'text-accent font-bold' : 'text-gray-400'}`}>
+                      Personal
+                    </span>
+                  </div>
+
+                  {/* Dot 2: Investment */}
+                  <div className="flex flex-col items-center relative z-10">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+                      formStep === 2 
+                        ? 'bg-[#FF3B30] sm:bg-accent text-black shadow-[0_0_12px_rgba(255,59,48,0.6)] sm:shadow-[0_0_12px_#00FF00]' 
+                        : formStep > 2 
+                        ? 'bg-accent/40 text-accent border border-accent' 
+                        : 'bg-[#0a120c] text-gray-500 border border-white/20'
+                    }`}>
+                      {formStep > 2 ? <Check size={13} strokeWidth={3} /> : <div className="w-2.5 h-2.5 rounded-full bg-current" />}
+                    </div>
+                    <span className={`text-[0.68rem] font-mono mt-1.5 ${formStep === 2 ? 'text-accent font-bold' : 'text-gray-400'}`}>
+                      Investment
+                    </span>
+                  </div>
+
+                  {/* Dot 3: Form Review */}
+                  <div className="flex flex-col items-center relative z-10">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+                      formStep === 3 
+                        ? 'bg-[#FF3B30] sm:bg-accent text-black shadow-[0_0_12px_rgba(255,59,48,0.6)] sm:shadow-[0_0_12px_#00FF00]' 
+                        : 'bg-[#0a120c] text-gray-500 border border-white/20'
+                    }`}>
+                      <div className="w-2.5 h-2.5 rounded-full bg-current" />
+                    </div>
+                    <span className={`text-[0.68rem] font-mono mt-1.5 ${formStep === 3 ? 'text-accent font-bold' : 'text-gray-400'}`}>
+                      Form Review
+                    </span>
+                  </div>
+                </div>
+
+                {/* Status Message */}
+                <AnimatePresence>
+                  {status.type && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className={`mb-5 p-3.5 rounded-2xl flex items-center gap-2.5 text-xs font-sans ${
+                        status.type === 'success'
+                          ? 'bg-accent/10 border border-accent/40 text-accent shadow-[0_0_20px_rgba(0,255,0,0.2)]'
+                          : 'bg-red-500/10 border border-red-500/40 text-red-400'
+                      }`}
+                    >
+                      {status.type === 'success' ? (
+                        <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-accent" />
+                      ) : (
+                        <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-400" />
+                      )}
+                      <span>{status.message}</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* ── STEP 1: PERSONAL CONTACT DETAILS ── */}
+                {formStep === 1 && (
+                  <form onSubmit={handleNextStep1} className="space-y-3.5 relative z-10">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">First Name*</label>
+                        <input 
+                          type="text" 
+                          value={formData.firstName}
+                          onChange={e => setFormData({ ...formData, firstName: e.target.value })}
+                          placeholder="eg. John"
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
+                        />
+                        {formErrors.firstName && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.firstName}</span>}
+                      </div>
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Last Name*</label>
+                        <input 
+                          type="text" 
+                          value={formData.lastName}
+                          onChange={e => setFormData({ ...formData, lastName: e.target.value })}
+                          placeholder="eg. Doe"
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
+                        />
+                        {formErrors.lastName && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.lastName}</span>}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Email*</label>
                       <input 
                         type="email" 
                         value={formData.email}
                         onChange={e => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="rahul@example.com"
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
+                        placeholder="eg. example@gmail.com"
+                        className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
                       />
-                      {formErrors.email && <span className="text-red-400 text-xs mt-1 block">{formErrors.email}</span>}
+                      {formErrors.email && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.email}</span>}
                     </div>
+
                     <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">Mobile Number *</label>
+                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Mobile Number*</label>
                       <input 
                         type="tel" 
                         value={formData.phone}
                         onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="9876543210"
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
+                        placeholder="91 9876543210"
+                        className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
                       />
-                      {formErrors.phone && <span className="text-red-400 text-xs mt-1 block">{formErrors.phone}</span>}
+                      {formErrors.phone && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.phone}</span>}
                     </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">City *</label>
-                      <input 
-                        type="text" 
-                        value={formData.city}
-                        onChange={e => setFormData({ ...formData, city: e.target.value })}
-                        placeholder="eg. Mumbai"
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
-                      />
-                      {formErrors.city && <span className="text-red-400 text-xs mt-1 block">{formErrors.city}</span>}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">City*</label>
+                        <input 
+                          type="text" 
+                          value={formData.city}
+                          onChange={e => setFormData({ ...formData, city: e.target.value })}
+                          placeholder="Eg. Mumbai"
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
+                        />
+                        {formErrors.city && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.city}</span>}
+                      </div>
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">State*</label>
+                        <select 
+                          value={formData.state}
+                          onChange={e => setFormData({ ...formData, state: e.target.value })}
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors appearance-none cursor-pointer"
+                        >
+                          <option value="">Enter your state</option>
+                          {INDIAN_STATES.map((st) => (
+                            <option key={st} value={st} className="bg-[#020403] text-white">{st}</option>
+                          ))}
+                        </select>
+                        {formErrors.state && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.state}</span>}
+                      </div>
                     </div>
+
                     <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">State *</label>
-                      <select 
-                        value={formData.state}
-                        onChange={e => setFormData({ ...formData, state: e.target.value })}
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
-                      >
-                        <option value="">Select State</option>
-                        {INDIAN_STATES.map((st) => (
-                          <option key={st} value={st} className="bg-[#020403] text-white">{st}</option>
-                        ))}
-                      </select>
-                      {formErrors.state && <span className="text-red-400 text-xs mt-1 block">{formErrors.state}</span>}
-                    </div>
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-1.5">PinCode *</label>
+                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">PinCode*</label>
                       <input 
                         type="text" 
                         maxLength={6}
                         value={formData.pincode}
                         onChange={e => setFormData({ ...formData, pincode: e.target.value })}
                         placeholder="400097"
-                        className="w-full px-4 py-3 bg-black/60 border border-white/15 focus:border-accent rounded-xl text-white text-sm focus:outline-none transition-colors"
+                        className="w-full px-4 py-2.5 bg-black/60 border border-white/20 focus:border-accent rounded-full text-white text-xs focus:outline-none transition-colors"
                       />
-                      {formErrors.pincode && <span className="text-red-400 text-xs mt-1 block">{formErrors.pincode}</span>}
+                      {formErrors.pincode && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.pincode}</span>}
                     </div>
-                  </div>
 
-                  {/* Proceed As */}
-                  <div className="pt-2">
-                    <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-2">Proceed as *</label>
-                    <div className="grid grid-cols-2 gap-3">
-                      {['Business', 'Individual'].map((type) => (
-                        <button
-                          key={type}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, proceedAs: type })}
-                          className={`py-3 px-4 rounded-xl text-sm font-bold border transition-all cursor-pointer ${
-                            formData.proceedAs === type
-                              ? 'bg-accent/15 border-accent text-accent shadow-[0_0_15px_rgba(0,255,0,0.25)]'
-                              : 'bg-black/40 border-white/10 text-gray-400 hover:text-white hover:border-white/20'
-                          }`}
-                        >
-                          {type}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-4 flex justify-end">
-                    <button
-                      type="submit"
-                      className="px-8 py-3.5 bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white hover:shadow-[0_0_25px_#00FF00] transition-all flex items-center gap-2 cursor-pointer"
-                    >
-                      Next Step
-                      <ArrowRight size={16} />
-                    </button>
-                  </div>
-                </motion.form>
-              )}
-
-              {/* ── STEP 2: SCOPE, BUDGET & LAND AVAILABILITY ── */}
-              {formStep === 2 && (
-                <motion.form 
-                  key="step2"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  onSubmit={handleNextStep2}
-                  className="space-y-6 relative z-10"
-                >
-                  {/* Turnover (only if Business) */}
-                  {formData.proceedAs === 'Business' && (
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-2.5">
-                        Business Annual Turnover *
-                      </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                        {['1L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '>5Cr'].map((to) => (
+                    {/* Proceed As */}
+                    <div className="pt-1">
+                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">Proceed as*</label>
+                      <div className="grid grid-cols-2 gap-2.5">
+                        {['Business', 'Individual'].map((type) => (
                           <button
-                            key={to}
+                            key={type}
                             type="button"
-                            onClick={() => setFormData({ ...formData, businessTurnover: to })}
-                            className={`py-3 px-3 rounded-xl text-xs font-mono font-semibold border transition-all cursor-pointer ${
-                              formData.businessTurnover === to
-                                ? 'bg-accent/15 border-accent text-accent shadow-[0_0_15px_rgba(0,255,0,0.25)]'
-                                : 'bg-black/40 border-white/10 text-gray-400 hover:text-white'
+                            onClick={() => setFormData({ ...formData, proceedAs: type })}
+                            className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                              formData.proceedAs === type
+                                ? 'bg-accent/20 border-accent text-accent shadow-[0_0_12px_rgba(0,255,0,0.25)]'
+                                : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
                             }`}
                           >
-                            {to}
+                            {type}
                           </button>
                         ))}
                       </div>
                     </div>
-                  )}
 
-                  {/* Investment Budget */}
-                  <div>
-                    <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-2.5">
-                      Investment Budget *
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                      {(formData.proceedAs === 'Business' 
-                        ? ['25L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '5Cr+'] 
-                        : ['15L - 25L', '25L - 50L', '50L - 1Cr', '1Cr+']
-                      ).map((b) => (
-                        <button
-                          key={b}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, investmentBudget: b })}
-                          className={`py-3 px-3 rounded-xl text-xs font-mono font-semibold border transition-all cursor-pointer ${
-                            formData.investmentBudget === b
-                              ? 'bg-accent/15 border-accent text-accent shadow-[0_0_15px_rgba(0,255,0,0.25)]'
-                              : 'bg-black/40 border-white/10 text-gray-400 hover:text-white'
-                          }`}
-                        >
-                          {b}
-                        </button>
-                      ))}
+                    <div className="pt-3">
+                      <button
+                        type="submit"
+                        className="w-full py-3 bg-[#FF3B30] sm:bg-accent text-white sm:text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black hover:shadow-[0_0_20px_#00FF00] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                      >
+                        Next
+                        <ArrowRight size={15} />
+                      </button>
                     </div>
-                  </div>
+                  </form>
+                )}
 
-                  {/* Land Availability */}
-                  <div>
-                    <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-2.5">
-                      Do you have available land/parking space? *
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      {['Yes', 'No'].map((ans) => (
-                        <button
-                          key={ans}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, landAvailability: ans })}
-                          className={`py-3 px-4 rounded-xl text-sm font-bold border transition-all cursor-pointer ${
-                            formData.landAvailability === ans
-                              ? 'bg-accent/15 border-accent text-accent shadow-[0_0_15px_rgba(0,255,0,0.25)]'
-                              : 'bg-black/40 border-white/10 text-gray-400 hover:text-white'
-                          }`}
-                        >
-                          {ans === 'Yes' ? 'Yes, I have space' : 'No, need site assistance'}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Location Type (if land available) */}
-                  {formData.landAvailability === 'Yes' && (
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-gray-300 font-bold mb-2.5">
-                        Location Environment *
-                      </label>
-                      <div className="grid grid-cols-2 gap-3">
-                        {['City', 'Highway'].map((loc) => (
-                          <button
-                            key={loc}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, locationType: loc })}
-                            className={`py-3 px-4 rounded-xl text-sm font-bold border transition-all cursor-pointer ${
-                              formData.locationType === loc
-                                ? 'bg-accent/15 border-accent text-accent shadow-[0_0_15px_rgba(0,255,0,0.25)]'
-                                : 'bg-black/40 border-white/10 text-gray-400 hover:text-white'
-                            }`}
-                          >
-                            {loc === 'City' ? 'City (Mall, Society, Office)' : 'Highway Corridor / Transport Hub'}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="pt-4 flex justify-between items-center">
-                    <button
-                      type="button"
-                      onClick={() => setFormStep(1)}
-                      className="px-6 py-3 rounded-xl border border-white/15 text-gray-300 hover:text-white hover:bg-white/5 text-xs font-mono font-bold transition-all cursor-pointer"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="px-8 py-3.5 bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white hover:shadow-[0_0_25px_#00FF00] transition-all flex items-center gap-2 cursor-pointer"
-                    >
-                      Next Step
-                      <ArrowRight size={16} />
-                    </button>
-                  </div>
-                </motion.form>
-              )}
-
-              {/* ── STEP 3: SUMMARY VERIFICATION & SUBMISSION ── */}
-              {formStep === 3 && (
-                <motion.form 
-                  key="step3"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  onSubmit={handleSubmit}
-                  className="space-y-6 relative z-10"
-                >
-                  <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-3">
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-accent border-b border-white/10 pb-2">
-                      Application Summary
-                    </h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                {/* ── STEP 2: INVESTMENT BUDGET & LAND SCOPE ── */}
+                {formStep === 2 && (
+                  <form onSubmit={handleNextStep2} className="space-y-4 relative z-10">
+                    {/* Turnover (only if Business) */}
+                    {formData.proceedAs === 'Business' && (
                       <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Applicant Name</span>
-                        <span className="text-white font-semibold">{formData.firstName} {formData.lastName}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Email</span>
-                        <span className="text-white font-semibold break-all">{formData.email}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Phone</span>
-                        <span className="text-white font-semibold">+91 {formData.phone}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Location</span>
-                        <span className="text-white font-semibold">{formData.city}, {formData.state} ({formData.pincode})</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Proceeding As</span>
-                        <span className="text-white font-semibold">{formData.proceedAs}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Investment Budget</span>
-                        <span className="text-accent font-mono font-bold">{formData.investmentBudget}</span>
-                      </div>
-                      {formData.proceedAs === 'Business' && (
-                        <div>
-                          <span className="text-gray-400 block font-mono text-[0.7rem]">Annual Turnover</span>
-                          <span className="text-white font-semibold">{formData.businessTurnover}</span>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
+                          Business Turnover*
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {['1L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '>5Cr'].map((to) => (
+                            <button
+                              key={to}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, businessTurnover: to })}
+                              className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
+                                formData.businessTurnover === to
+                                  ? 'bg-accent/20 border-accent text-accent'
+                                  : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
+                              }`}
+                            >
+                              {to}
+                            </button>
+                          ))}
                         </div>
-                      )}
-                      <div>
-                        <span className="text-gray-400 block font-mono text-[0.7rem]">Land Available</span>
-                        <span className="text-white font-semibold">{formData.landAvailability} ({formData.locationType})</span>
+                      </div>
+                    )}
+
+                    {/* Investment Budget */}
+                    <div>
+                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
+                        Investment Budget*
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {(formData.proceedAs === 'Business' 
+                          ? ['25L - 50L', '50L - 1Cr', '1Cr - 5 Cr', '5Cr+'] 
+                          : ['15L - 25L', '25L - 50L', '50L - 1Cr', '1Cr+']
+                        ).map((b) => (
+                          <button
+                            key={b}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, investmentBudget: b })}
+                            className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
+                              formData.investmentBudget === b
+                                ? 'bg-accent/20 border-accent text-accent'
+                                : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
+                            }`}
+                          >
+                            {b}
+                          </button>
+                        ))}
                       </div>
                     </div>
-                  </div>
 
-                  {/* Webinar Interest Checkbox */}
-                  <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-start gap-3 cursor-pointer">
-                    <input 
-                      type="checkbox"
-                      id="webinarCheck"
-                      checked={formData.webinarInterest}
-                      onChange={e => setFormData({ ...formData, webinarInterest: e.target.checked })}
-                      className="mt-0.5 accent-accent w-4 h-4 cursor-pointer"
-                    />
-                    <label htmlFor="webinarCheck" className="text-xs text-gray-300 cursor-pointer">
-                      <strong>Join next Franchise Masterclass Webinar:</strong> I would like to receive an invite for the live masterclass session on EV station economics and ROI strategy.
-                    </label>
-                  </div>
-
-                  {/* Privacy Policy Checkbox */}
-                  <div className="flex items-start gap-3">
-                    <input 
-                      type="checkbox"
-                      id="privacyCheck"
-                      checked={formData.privacyAccepted}
-                      onChange={e => setFormData({ ...formData, privacyAccepted: e.target.checked })}
-                      className="mt-0.5 accent-accent w-4 h-4 cursor-pointer"
-                    />
-                    <label htmlFor="privacyCheck" className="text-xs text-gray-400 cursor-pointer">
-                      I agree to the use of my information for official communication, feasibility reports, and franchise onboarding support.
-                    </label>
-                  </div>
-
-                  <div className="pt-4 flex justify-between items-center">
-                    <button
-                      type="button"
-                      onClick={() => setFormStep(2)}
-                      className="px-6 py-3 rounded-xl border border-white/15 text-gray-300 hover:text-white hover:bg-white/5 text-xs font-mono font-bold transition-all cursor-pointer"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="px-8 py-3.5 bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white hover:shadow-[0_0_30px_#00FF00] transition-all flex items-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>
-                          Submit Franchise Application
-                          <Check size={16} />
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </motion.form>
-              )}
-            </div>
-          </section>
-
-          {/* ══════════════════════════════════════════════════════════
-              3. MACRO MARKET STATS ("INDIA IS CHARGING AHEAD")
-             ══════════════════════════════════════════════════════════ */}
-          <section className="mb-32">
-            <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-r from-white/[0.03] to-transparent border border-white/10 relative overflow-hidden">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-                <div className="w-full lg:w-1/2">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                    <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">National Momentum</span>
-                  </div>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white uppercase mb-4 leading-tight">
-                    India is Charging Ahead. <br/>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white">Are You?</span>
-                  </h2>
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                    With India targeting 30% EV penetration across all vehicle segments by 2030, the demand for fast, reliable, and accessible commercial charging infrastructure is skyrocketing. Now is the perfect time to ride the EV wave — not just as a believer, but as an owner of the future.
-                  </p>
-                </div>
-
-                <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-6 rounded-2xl bg-black/60 border border-accent/30 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between">
+                    {/* Land Availability */}
                     <div>
-                      <span className="text-accent font-mono text-[0.7rem] uppercase tracking-wider font-bold">Government Allocation</span>
-                      <div className="text-3xl sm:text-4xl font-display font-black text-white mt-2 mb-1">₹4,000+ Cr</div>
-                      <p className="text-gray-400 text-xs">Allocated to EV public charging infrastructure under the central PM E‑DRIVE Scheme.</p>
+                      <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
+                        Land Availability*
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {['Yes', 'No'].map((ans) => (
+                          <button
+                            key={ans}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, landAvailability: ans })}
+                            className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                              formData.landAvailability === ans
+                                ? 'bg-accent/20 border-accent text-accent'
+                                : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
+                            }`}
+                          >
+                            {ans}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6 rounded-2xl bg-black/60 border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between">
-                    <div>
-                      <span className="text-emerald-400 font-mono text-[0.7rem] uppercase tracking-wider font-bold">Compound Growth</span>
-                      <div className="text-3xl sm:text-4xl font-display font-black text-white mt-2 mb-1">17.1% YoY</div>
-                      <p className="text-gray-400 text-xs">Annual electric vehicle sales growth across commercial fleets and passenger cars.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              4. WHY PARTNER WITH US? (DOCO MODEL EXPLAINED)
-             ══════════════════════════════════════════════════════════ */}
-          <section className="mb-32">
+                    {/* Location Environment */}
+                    {formData.landAvailability === 'Yes' && (
+                      <div>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
+                          Location Type*
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {['City', 'Highway'].map((loc) => (
+                            <button
+                              key={loc}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, locationType: loc })}
+                              className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                                formData.locationType === loc
+                                  ? 'bg-accent/20 border-accent text-accent'
+                                  : 'bg-black/40 border-white/15 text-gray-400 hover:text-white'
+                              }`}
+                            >
+                              {loc}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="pt-2 flex justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setFormStep(1)}
+                        className="w-1/3 py-2.5 rounded-full border border-white/20 text-gray-300 hover:text-white text-xs font-mono font-bold transition-all cursor-pointer"
+                      >
+                        Back
+                      </button>
+                      <button
+                        type="submit"
+                        className="w-2/3 py-2.5 bg-[#FF3B30] sm:bg-accent text-white sm:text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                      >
+                        Next
+                        <ArrowRight size={14} />
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                {/* ── STEP 3: SUMMARY VERIFICATION & SUBMISSION ── */}
+                {formStep === 3 && (
+                  <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+                    <div className="p-4 rounded-2xl bg-black/60 border border-white/15 space-y-2 text-xs">
+                      <div className="text-[0.68rem] font-mono text-accent font-bold uppercase border-b border-white/10 pb-1">
+                        Check your details and Submit
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[0.72rem]">
+                        <div><span className="text-gray-400">Name:</span> <span className="text-white font-medium">{formData.firstName} {formData.lastName}</span></div>
+                        <div><span className="text-gray-400">Phone:</span> <span className="text-white font-medium">+91 {formData.phone}</span></div>
+                        <div className="col-span-2"><span className="text-gray-400">Email:</span> <span className="text-white font-medium break-all">{formData.email}</span></div>
+                        <div><span className="text-gray-400">Location:</span> <span className="text-white font-medium">{formData.city}, {formData.state}</span></div>
+                        <div><span className="text-gray-400">Pincode:</span> <span className="text-white font-medium">{formData.pincode}</span></div>
+                        <div><span className="text-gray-400">Budget:</span> <span className="text-accent font-bold">{formData.investmentBudget}</span></div>
+                        <div><span className="text-gray-400">Land:</span> <span className="text-white font-medium">{formData.landAvailability} ({formData.locationType})</span></div>
+                      </div>
+                    </div>
+
+                    {/* Webinar checkbox */}
+                    <div className="flex items-start gap-2.5 pt-1 cursor-pointer">
+                      <input 
+                        type="checkbox"
+                        id="webinarCheck2"
+                        checked={formData.webinarInterest}
+                        onChange={e => setFormData({ ...formData, webinarInterest: e.target.checked })}
+                        className="mt-0.5 accent-accent w-3.5 h-3.5 cursor-pointer"
+                      />
+                      <label htmlFor="webinarCheck2" className="text-[0.7rem] text-gray-300 cursor-pointer leading-tight">
+                        Webinar session on franchise opportunity: <strong>Interested</strong>
+                      </label>
+                    </div>
+
+                    {/* Privacy policy checkbox */}
+                    <div className="flex items-start gap-2.5 cursor-pointer">
+                      <input 
+                        type="checkbox"
+                        id="privacyCheck2"
+                        checked={formData.privacyAccepted}
+                        onChange={e => setFormData({ ...formData, privacyAccepted: e.target.checked })}
+                        className="mt-0.5 accent-accent w-3.5 h-3.5 cursor-pointer"
+                      />
+                      <label htmlFor="privacyCheck2" className="text-[0.68rem] text-gray-400 cursor-pointer leading-tight">
+                        I agree to the use of my info for communication and support.
+                      </label>
+                    </div>
+
+                    <div className="pt-2 flex justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setFormStep(2)}
+                        className="w-1/3 py-2.5 rounded-full border border-white/20 text-gray-300 hover:text-white text-xs font-mono font-bold transition-all cursor-pointer"
+                      >
+                        Back
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-2/3 py-2.5 bg-[#FF3B30] sm:bg-accent text-white sm:text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black hover:shadow-[0_0_20px_#00FF00] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            Submitting...
+                          </>
+                        ) : (
+                          <>
+                            Submit
+                            <Check size={14} />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════════════
+            3. WHY PARTNER WITH US? (DOCO MODEL EXPLAINED)
+           ══════════════════════════════════════════════════════════════════════════ */}
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pb-32 relative z-10">
+          <section className="mb-28">
             <div className="text-center max-w-2xl mx-auto mb-14">
               <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Turnkey EV Infrastructure</span>
               <h2 className="text-3xl sm:text-5xl font-display font-bold text-white uppercase mt-2 mb-4">
                 Why Partner With Axion?
               </h2>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Our Franchise Model, formerly known as the Dealer Owned Company Operated (DOCO) Model, is a turnkey investment opportunity that plugs you directly into our national EV charging network, complete with tech, operations, and marketing support for long-term ROI.
+              <p className="text-gray-400 text-sm leading-relaxed font-sans">
+                Our Franchise Model, formerly known as the Dealer Owned Company Operated (DOCO) Model, is a turnkey investment opportunity that plugs you directly into India’s largest EV charging network, complete with tech, operations, and marketing support for long-term ROI.
               </p>
             </div>
 
@@ -871,9 +785,9 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              5. DUAL INVESTMENT MODELS (FAST VS SUPER CHARGING)
-             ══════════════════════════════════════════════════════════ */}
+          {/* ══════════════════════════════════════════════════════════════════════════
+              4. DUAL INVESTMENT MODELS (FAST VS SUPER CHARGING)
+             ══════════════════════════════════════════════════════════════════════════ */}
           <section id="investment-plans" className="mb-32 scroll-mt-24">
             <div className="text-center max-w-3xl mx-auto mb-10">
               <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Tailored Investment Portfolios</span>
@@ -1060,9 +974,9 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              6. SBI EV MITRA SCHEME FINANCING HUB
-             ══════════════════════════════════════════════════════════ */}
+          {/* ══════════════════════════════════════════════════════════════════════════
+              5. SBI EV MITRA SCHEME FINANCING HUB
+             ══════════════════════════════════════════════════════════════════════════ */}
           <section className="mb-32">
             <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-b from-[#05140A] via-[#020804] to-[#010402] border border-accent/30 relative overflow-hidden">
               <div className="text-center max-w-3xl mx-auto mb-12">
@@ -1120,9 +1034,9 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              7. BRAND & OEM PARTNERS MARQUEE
-             ══════════════════════════════════════════════════════════ */}
+          {/* ══════════════════════════════════════════════════════════════════════════
+              6. BRAND & OEM PARTNERS MARQUEE
+             ══════════════════════════════════════════════════════════════════════════ */}
           <section className="mb-32 text-center">
             <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Trusted Across the Industry</span>
             <h2 className="text-2xl sm:text-3xl font-display font-bold text-white uppercase mt-2 mb-8">
@@ -1144,9 +1058,9 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              8. WEBINAR / MASTERCLASS REGISTRATION MODULE
-             ══════════════════════════════════════════════════════════ */}
+          {/* ══════════════════════════════════════════════════════════════════════════
+              7. WEBINAR / MASTERCLASS REGISTRATION MODULE
+             ══════════════════════════════════════════════════════════════════════════ */}
           <section className="mb-32">
             <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-br from-[#06140B] via-[#030905] to-[#010402] border border-accent/30 relative overflow-hidden">
               <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -1158,7 +1072,7 @@ const Franchise = () => {
                     Curious, but have questions? <br/>
                     <span className="text-accent">Join Our Next Webinar.</span>
                   </h2>
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-sans">
                     Focusing on the Franchise Opportunity, this session covers how EV charging networks are revolutionizing infrastructure in India. Discover innovative site selection strategies, technological integration, tariff economics, and SBI financing options.
                   </p>
 
@@ -1200,9 +1114,9 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              9. COMPREHENSIVE FAQS ACCORDION (ALL 7 QUESTIONS)
-             ══════════════════════════════════════════════════════════ */}
+          {/* ══════════════════════════════════════════════════════════════════════════
+              8. COMPREHENSIVE FAQS ACCORDION (ALL 7 QUESTIONS)
+             ══════════════════════════════════════════════════════════════════════════ */}
           <section className="mb-32">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Clear Answers</span>
@@ -1238,7 +1152,7 @@ const Franchise = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         transition={{ duration: 0.3 }}
-                        className="px-5 pb-5 text-gray-300 text-sm leading-relaxed whitespace-pre-line border-t border-white/5 pt-3"
+                        className="px-5 pb-5 text-gray-300 text-sm leading-relaxed whitespace-pre-line border-t border-white/5 pt-3 font-sans"
                       >
                         {faq.a}
                       </motion.div>
@@ -1249,10 +1163,10 @@ const Franchise = () => {
             </div>
           </section>
 
-          {/* ══════════════════════════════════════════════════════════
-              10. STATUTORY DISCLAIMER & PM E-DRIVE COMPLIANCE
-             ══════════════════════════════════════════════════════════ */}
-          <section className="p-6 sm:p-8 rounded-2xl bg-black/80 border border-white/10 text-xs text-gray-400 leading-relaxed max-w-4xl mx-auto">
+          {/* ══════════════════════════════════════════════════════════════════════════
+              9. STATUTORY DISCLAIMER & PM E-DRIVE COMPLIANCE
+             ══════════════════════════════════════════════════════════════════════════ */}
+          <section className="p-6 sm:p-8 rounded-2xl bg-black/80 border border-white/10 text-xs text-gray-400 leading-relaxed max-w-4xl mx-auto font-sans">
             <h4 className="text-white font-mono font-bold text-xs uppercase tracking-wider mb-2 flex items-center gap-2">
               <ShieldCheck size={14} className="text-accent" />
               Statutory Compliance & Scheme Advisory
