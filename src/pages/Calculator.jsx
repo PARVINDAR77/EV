@@ -334,7 +334,7 @@ const Calculator = () => {
                   </div>
 
                   {/* Preset Pills */}
-                  <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-white/5">
+                  <div className="flex flex-wrap items-center gap-2">
                     {[1, 2, 4, 6, 8, 12].map((qty) => (
                       <button
                         key={qty}
