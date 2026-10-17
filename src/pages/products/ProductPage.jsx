@@ -22,7 +22,6 @@ import dc240kwImg from '../../assets/images/Axion 240 kW EV Charger Showcase.web
 
 // Accessory Images
 import cableImg from '../../assets/images/AXION Type 1 Charging Cable.webp';
-import pedestalImg from '../../assets/images/Axion pedestal stand product advertisement.webp';
 import rfidKeyfobImg from '../../assets/images/Axion RFID Card and Keyfob.webp';
 
 // Software Images
@@ -334,40 +333,6 @@ const PRODUCT_DB = {
         'Mounting': 'In-Vehicle Trunk or Wall Holster',
         'Emergency Switch': 'Thermal Fuse inside Gun Body',
         'Protection': 'Flame retardant UL94 V-0, 2-Tonne Drive-Over Rated, Overheating cutoff'
-      }
-    }
-  },
-  'pedestal-stand': {
-    title: 'Pedestal Stand',
-    category: 'Accessories & Cables',
-    description: 'Sleek, weather-resistant mounting poles for freestanding charger installations.',
-    image: pedestalImg,
-    features: [
-      { title: "Robust Design", desc: "Heavy-duty steel construction for maximum stability and durability." },
-      { title: "Corrosion Resistant", desc: "Powder-coated finish protects against harsh outdoor environments." },
-      { title: "Clean Aesthetics", desc: "Internal cable routing keeps wiring hidden and protected." },
-      { title: "Single or Dual Mount", desc: "Configurations available for mounting one or two chargers per stand." }
-    ],
-    datasheet: {
-      model: 'AXION PEDESTAL',
-      powerRating: 'UNIVERSAL MOUNT',
-      overview: 'Heavy-duty architectural steel mounting pedestal for freestanding deployment of Axion AC chargers in parking lots and outdoor commercial campuses.',
-      featuresList: [
-        'Zinc-coated galvanised steel with outdoor UV powder coat',
-        'Concealed internal wire routing for tamper-proof electrical safety',
-        'Supports Single or Back-to-Back Dual charger installations',
-        'Integrated cable holster and RFID badge tap zone',
-        'Anchor bolt base plate for concrete pad mounting'
-      ],
-      specs: {
-        'Input Power': 'Internal conduit up to 3-Phase 63A',
-        'Output': 'Dual Charger Support (Up to 44 kW combined)',
-        'Display': 'Laser-cut Axion Backlit Logo (Optional)',
-        'Gun': 'Dual Ergonomic Gun Holsters included',
-        'Connectivity': 'Internal cable conduit for Ethernet / Power cables',
-        'Mounting': 'Ground Bolt Anchor Base Plate (M12)',
-        'Emergency Switch': 'Provision for side-mounted Mushroom Switch',
-        'Protection': 'IP65 Weather Sealed internal junction chamber, IK10 Vandal Resistant'
       }
     }
   },

@@ -344,14 +344,11 @@ const Navbar = () => {
                       <ArrowRight size={11} className="opacity-60" />
                     </Link>
                   </div>
-                  <div className="grid grid-cols-3 gap-1.5">
-                    <Link to="/product/pedestal-stand" onClick={() => setActiveMenu(null)} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-sans font-medium rounded-lg text-center border border-white/5 hover:border-accent transition-all">
-                      Pedestals
-                    </Link>
-                    <Link to="/product/charging-cables" onClick={() => setActiveMenu(null)} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-sans font-medium rounded-lg text-center border border-white/5 hover:border-accent transition-all">
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link to="/product/charging-cables" onClick={() => setActiveMenu(null)} className="px-3 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-sans font-medium rounded-lg text-center border border-white/5 hover:border-accent transition-all">
                       Heavy Cables
                     </Link>
-                    <Link to="/product/rfid-access" onClick={() => setActiveMenu(null)} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-sans font-medium rounded-lg text-center border border-white/5 hover:border-accent transition-all">
+                    <Link to="/product/rfid-access" onClick={() => setActiveMenu(null)} className="px-3 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-sans font-medium rounded-lg text-center border border-white/5 hover:border-accent transition-all">
                       RFID Terminals
                     </Link>
                   </div>
@@ -505,7 +502,7 @@ const Navbar = () => {
                     onClick={() => setActiveMenu(null)} 
                     className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
                   >
-                    <span>Pedestals & Mount Stands</span>
+                    <span>Cables & Accessories</span>
                     <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
                   </Link>
                   <div 
@@ -517,20 +514,10 @@ const Navbar = () => {
                   >
                     <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
                       <Link to="/product/charging-cables" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Charging Cables</Link>
-                      <Link to="/product/pedestal-stand" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Pedestal Stand</Link>
                       <Link to="/product/rfid-access" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">RFID Card & Keyfob</Link>
+                      <Link to="/products/accessories" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-accent hover:text-white hover:bg-white/10 rounded-lg transition-colors font-semibold">View All Accessories →</Link>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <Link 
-                    to="/product/rfid-access" 
-                    onClick={() => setActiveMenu(null)} 
-                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group py-1"
-                  >
-                    RFID Cards & Keyfobs 
-                    <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/>
-                  </Link>
                 </li>
               </ul>
             </div>
@@ -641,7 +628,7 @@ const Navbar = () => {
               <span className="text-[0.7rem] text-accent/80 font-mono tracking-widest uppercase">Hardware:</span>
               <Link to="/products/ac-chargers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white pl-2">AC Wallboxes</Link>
               <Link to="/products/dc-chargers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white pl-2">DC Fast Chargers</Link>
-              <Link to="/products/accessories" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white pl-2">Accessories & Stands</Link>
+              <Link to="/products/accessories" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white pl-2">Cables & Accessories</Link>
 
               <span className="text-[0.7rem] text-accent/80 font-mono tracking-widest uppercase mt-2">Software & Services:</span>
               <Link to="/product/charge-app" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white pl-2">Axion Charge App</Link>

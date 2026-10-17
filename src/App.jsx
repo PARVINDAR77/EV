@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 
@@ -64,6 +64,10 @@ const AnimatedRoutes = () => {
           <Route path="/products/ac-chargers" element={<ACChargers />} />
           <Route path="/products/dc-chargers" element={<DCChargers />} />
           <Route path="/products/accessories" element={<Accessories />} />
+          
+          {/* Legacy/removed product redirects */}
+          <Route path="/product/pedestal-stand" element={<Navigate to="/products/accessories" replace />} />
+          <Route path="/product/pedestal_stand" element={<Navigate to="/products/accessories" replace />} />
           
           <Route path="/product/charge-app" element={<ChargeApp />} />
           <Route path="/product/cms" element={<CMS />} />
