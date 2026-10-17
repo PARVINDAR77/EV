@@ -244,12 +244,16 @@ const Franchise = () => {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            2. TWO-COLUMN SPLIT SECTION (EXACT REPLICA OF 5 SCREENSHOTS)
+            2. TWO-COLUMN SPLIT SECTION (AXION CYBER LUXURY THEME)
                - Left Column: India is Charging Ahead -> Why Partner -> Investment Plans
-               - Right Column: Sticky "Partner With Us" card alongside all 5 steps!
+               - Right Column: Sticky "Partner With Us" card alongside all steps!
            ══════════════════════════════════════════════════════════════════════════ */}
-        <div className="w-full bg-[#F8F9FA] text-[#111827] pt-24 sm:pt-28 lg:pt-36 pb-24 relative z-20 border-b border-gray-200">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16">
+        <div className="w-full bg-[#020503] text-gray-200 pt-20 sm:pt-24 lg:pt-28 pb-24 relative z-20 border-b border-white/10 overflow-hidden">
+          {/* Subtle ambient lighting matching website */}
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/5 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               
               {/* ────────────────────────────────────────────────────────────────
@@ -265,64 +269,71 @@ const Franchise = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                   >
-                    <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-display font-bold text-gray-900 tracking-tight leading-[1.12]">
+                    <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-display font-bold text-white tracking-tight leading-[1.12]">
                       India is Charging Ahead. <br />
-                      <span className="text-[#FF3B30] font-bold">
+                      <span className="text-accent font-bold drop-shadow-[0_0_25px_rgba(0,255,0,0.4)]">
                         ARE YOU?
                       </span>
                     </h2>
 
-                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-5 max-w-2xl font-sans">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-5 max-w-2xl font-sans">
                       With India targeting 30% EV penetration by 2030, the demand for fast, reliable and accessible charging infrastructure is skyrocketing. Now is the perfect time to ride the EV wave. Not just as a believer, but as an owner of the future.
                     </p>
 
                     {/* Two Stat Cards matching Screenshot 1 */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
                       {/* Stat Card 1: ₹4,000+cr */}
-                      <div className="p-6 rounded-2xl bg-white border border-red-200/90 shadow-sm flex flex-col justify-between h-[230px] relative overflow-hidden group hover:border-[#FF3B30]/60 transition-colors">
+                      <div className="p-6 rounded-2xl bg-gradient-to-b from-[#09150C] via-[#050D07] to-[#020503] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between h-[230px] relative overflow-hidden group hover:border-accent/50 transition-all backdrop-blur-sm">
                         <div>
-                          <div className="text-3xl sm:text-[2.2rem] font-display font-extrabold text-gray-900 tracking-tight">
+                          <div className="text-3xl sm:text-[2.2rem] font-display font-extrabold text-white tracking-tight">
                             ₹4,000+cr
                           </div>
-                          <div className="text-gray-600 text-xs sm:text-[0.82rem] font-sans mt-1.5 leading-snug">
+                          <div className="text-gray-400 text-xs sm:text-[0.82rem] font-sans mt-1.5 leading-snug">
                             allocated to EV infra under PM E-Drive Scheme
                           </div>
                         </div>
 
-                        {/* Graphic: Red Rupee + Upward Arrow (Screenshot 1) */}
+                        {/* Graphic: Electric Green Rupee + Upward Arrow (Screenshot 1) */}
                         <div className="relative w-full h-24 overflow-visible flex items-end">
                           <svg viewBox="0 0 260 100" className="w-full h-full" fill="none">
-                            {/* Stylized Red Rupee Symbol */}
-                            <text x="5" y="75" fontSize="62" fontWeight="700" fill="#FF5252" opacity="0.8">
+                            <defs>
+                              <filter id="greenGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#00FF00" floodOpacity="0.6"/>
+                              </filter>
+                            </defs>
+                            {/* Stylized Electric Green Rupee Symbol */}
+                            <text x="5" y="75" fontSize="62" fontWeight="700" fill="#00FF00" opacity="0.9">
                               ₹
                             </text>
                             {/* Trending Line */}
                             <path 
                               d="M60 82 L90 62 L120 74 L150 48 L185 60 L245 12" 
-                              stroke="#FF5252" 
+                              stroke="#00FF00" 
                               strokeWidth="4.5" 
                               strokeLinecap="round" 
                               strokeLinejoin="round" 
+                              filter="url(#greenGlow)"
                             />
                             {/* Arrow Head */}
                             <path 
                               d="M220 12 L245 12 L245 37" 
-                              stroke="#FF5252" 
+                              stroke="#00FF00" 
                               strokeWidth="4.5" 
                               strokeLinecap="round" 
                               strokeLinejoin="round" 
+                              filter="url(#greenGlow)"
                             />
                           </svg>
                         </div>
                       </div>
 
                       {/* Stat Card 2: 17.1% YoY */}
-                      <div className="p-6 rounded-2xl bg-white border border-red-200/90 shadow-sm flex flex-col justify-between h-[230px] relative overflow-hidden group hover:border-[#FF3B30]/60 transition-colors">
+                      <div className="p-6 rounded-2xl bg-gradient-to-b from-[#09150C] via-[#050D07] to-[#020503] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between h-[230px] relative overflow-hidden group hover:border-accent/50 transition-all backdrop-blur-sm">
                         <div>
-                          <div className="text-3xl sm:text-[2.2rem] font-display font-extrabold text-gray-900 tracking-tight">
+                          <div className="text-3xl sm:text-[2.2rem] font-display font-extrabold text-white tracking-tight">
                             17.1% YoY
                           </div>
-                          <div className="text-gray-600 text-xs sm:text-[0.82rem] font-sans mt-1.5 leading-snug">
+                          <div className="text-gray-400 text-xs sm:text-[0.82rem] font-sans mt-1.5 leading-snug">
                             growth
                           </div>
                         </div>
@@ -331,31 +342,31 @@ const Franchise = () => {
                         <div className="relative w-full h-24 overflow-hidden flex items-end">
                           <svg viewBox="0 0 280 90" className="w-full h-full" preserveAspectRatio="none">
                             <defs>
-                              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#FF5252" stopOpacity="0.45" />
-                                <stop offset="100%" stopColor="#FF5252" stopOpacity="0.03" />
+                              <linearGradient id="areaGradGreen" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#00FF00" stopOpacity="0.45" />
+                                <stop offset="100%" stopColor="#00FF00" stopOpacity="0.0" />
                               </linearGradient>
                             </defs>
                             {/* Area fill */}
                             <path 
                               d="M0 90 L0 65 L40 25 L75 68 L115 42 L150 78 L190 40 L235 65 L280 10 L280 90 Z" 
-                              fill="url(#areaGrad)" 
+                              fill="url(#areaGradGreen)" 
                             />
                             {/* Top stroke */}
                             <path 
                               d="M0 65 L40 25 L75 68 L115 42 L150 78 L190 40 L235 65 L280 10" 
-                              stroke="#FF5252" 
+                              stroke="#00FF00" 
                               strokeWidth="2.5" 
                               fill="none" 
-                              strokeLinejoin="round"
+                              strokeLinejoin="round" 
                             />
                             {/* Points on peaks */}
-                            <circle cx="40" cy="25" r="3.5" fill="#FF3B30" />
-                            <circle cx="75" cy="68" r="3" fill="#FF3B30" />
-                            <circle cx="115" cy="42" r="3.5" fill="#FF3B30" />
-                            <circle cx="150" cy="78" r="3" fill="#FF3B30" />
-                            <circle cx="190" cy="40" r="3.5" fill="#FF3B30" />
-                            <circle cx="280" cy="10" r="3.5" fill="#FF3B30" />
+                            <circle cx="40" cy="25" r="3.5" fill="#00FF00" />
+                            <circle cx="75" cy="68" r="3" fill="#00FF00" />
+                            <circle cx="115" cy="42" r="3.5" fill="#00FF00" />
+                            <circle cx="150" cy="78" r="3" fill="#00FF00" />
+                            <circle cx="190" cy="40" r="3.5" fill="#00FF00" />
+                            <circle cx="280" cy="10" r="3.5" fill="#00FF00" />
                           </svg>
                         </div>
                       </div>
@@ -371,62 +382,62 @@ const Franchise = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                   >
-                    <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-display font-bold text-gray-900 tracking-tight leading-[1.15]">
+                    <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-display font-bold text-white tracking-tight leading-[1.15]">
                       Why Partner With Axion Charge?
                     </h2>
 
-                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl font-sans">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl font-sans">
                       Our Franchise Model, formerly known as the Dealer Owned Company Operated (DOCO) Model, is a turnkey investment opportunity that plugs you directly into India's largest EV charging network, complete with tech, operations, and marketing support for long-term ROI.
                     </p>
 
                     {/* 3 Image Cards with Text Overlays matching Screenshot 2 */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
                       {/* Photo Card 1: 15000+ Charging Points */}
-                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-md group">
+                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-lg group border border-white/10 hover:border-accent/40 transition-all">
                         <img 
                           src={evPlugImg} 
                           alt="15000+ Charging Points Across India" 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-4">
-                          <div className="text-2xl font-display font-extrabold text-white">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-4">
+                          <div className="text-2xl font-display font-extrabold text-accent drop-shadow-[0_0_10px_rgba(0,255,0,0.3)]">
                             15000+
                           </div>
-                          <div className="text-xs text-white/95 font-sans mt-0.5 leading-snug">
+                          <div className="text-xs text-gray-200 font-sans mt-0.5 leading-snug">
                             Charging Points Across India
                           </div>
                         </div>
                       </div>
 
                       {/* Photo Card 2: 24x7 Support */}
-                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-md group">
+                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-lg group border border-white/10 hover:border-accent/40 transition-all">
                         <img 
                           src={evSupportCableImg} 
                           alt="24x7 Support with 98% Network Uptime" 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-4">
-                          <div className="text-2xl font-display font-extrabold text-white">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-4">
+                          <div className="text-2xl font-display font-extrabold text-accent drop-shadow-[0_0_10px_rgba(0,255,0,0.3)]">
                             24x7
                           </div>
-                          <div className="text-xs text-white/95 font-sans mt-0.5 leading-snug">
+                          <div className="text-xs text-gray-200 font-sans mt-0.5 leading-snug">
                             Support with 98% Network Uptime
                           </div>
                         </div>
                       </div>
 
                       {/* Photo Card 3: Solar + BESS */}
-                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-md group">
+                      <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-lg group border border-white/10 hover:border-accent/40 transition-all">
                         <img 
                           src={solarBessImg} 
                           alt="Solar + BESS options for high-end sites" 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-4">
-                          <div className="text-2xl font-display font-extrabold text-white">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-4">
+                          <div className="text-2xl font-display font-extrabold text-accent drop-shadow-[0_0_10px_rgba(0,255,0,0.3)]">
                             Solar + BESS
                           </div>
-                          <div className="text-xs text-white/95 font-sans mt-0.5 leading-snug">
+                          <div className="text-xs text-gray-200 font-sans mt-0.5 leading-snug">
                             options for high-end sites
                           </div>
                         </div>
@@ -434,11 +445,12 @@ const Franchise = () => {
                     </div>
 
                     {/* Disclaimer matching Screenshot 2 */}
-                    <div className="mt-12">
-                      <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#FF3B30] mb-3">
+                    <div className="mt-12 p-6 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-sm">
+                      <h3 className="text-xl sm:text-2xl font-display font-bold text-accent mb-2.5 flex items-center gap-2">
+                        <AlertCircle size={20} className="text-accent" />
                         Disclaimer
                       </h3>
-                      <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans">
+                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-sans">
                         Certain social media accounts are misusing the name, logo and trademark of Axion Charge to spread false claims and rumours about EVCS investments under the PM E-DRIVE Scheme. Axion Charge has no association whatsoever with such claims and rumours and hereby disclaims any and all liabilities arising from them.
                       </p>
                     </div>
@@ -454,7 +466,7 @@ const Franchise = () => {
                     transition={{ duration: 0.6 }}
                   >
                     {/* 3D Isometric Car Banner Graphic (Screenshot 3) */}
-                    <div className="w-full max-w-md mx-auto sm:ml-auto mb-6 rounded-2xl overflow-hidden shadow-sm bg-white border border-gray-100 p-2">
+                    <div className="w-full max-w-md mx-auto sm:ml-auto mb-6 rounded-2xl overflow-hidden shadow-lg bg-[#09150C]/60 border border-white/10 p-3 backdrop-blur-sm">
                       <img 
                         src={isometricCarImg} 
                         alt="Axion 3D EV Car & Charging Station" 
@@ -462,31 +474,33 @@ const Franchise = () => {
                       />
                     </div>
 
-                    <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-display font-bold text-gray-900 tracking-tight leading-[1.15]">
+                    <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-display font-bold text-white tracking-tight leading-[1.15]">
                       Choose Your Investment Plan. <br />
-                      <span>We’ll Power the Rest.</span>
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-emerald-300 to-teal-300">
+                        We’ll Power the Rest.
+                      </span>
                     </h2>
 
-                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl font-sans">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl font-sans">
                       Whether you're entering the EV space for the first time or expanding a larger energy portfolio, Axion Charge offers a scalable, high-ROI franchise model built for the future. We offer two tailored investment models, each designed to suit a different scale of ambition. These are ideal for landowners, retail entrepreneurs, and institutional investors looking to power highways, cities, and logistics hubs across India.
                     </p>
 
-                    {/* Navigation Tabs with Red Underline Indicator (Screenshots 3, 4, 5) */}
-                    <div className="flex items-center gap-8 sm:gap-12 border-b border-gray-200 mt-10 mb-6">
+                    {/* Navigation Tabs with Green Underline Indicator (Screenshots 3, 4, 5) */}
+                    <div className="flex items-center gap-8 sm:gap-12 border-b border-white/10 mt-10 mb-6">
                       <button
                         type="button"
                         onClick={() => setActiveModelTab('fast')}
                         className={`pb-3 font-display text-base sm:text-lg transition-all relative cursor-pointer ${
                           activeModelTab === 'fast'
-                            ? 'text-gray-900 font-bold'
-                            : 'text-gray-400 font-semibold hover:text-gray-700'
+                            ? 'text-white font-bold'
+                            : 'text-gray-500 font-semibold hover:text-gray-300'
                         }`}
                       >
                         Fast Charging Stations
                         {activeModelTab === 'fast' && (
                           <motion.div 
                             layoutId="activeTabUnderline"
-                            className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF3B30] rounded-full" 
+                            className="absolute bottom-0 left-0 right-0 h-1 bg-accent rounded-full shadow-[0_0_12px_#00FF00]" 
                           />
                         )}
                       </button>
@@ -496,15 +510,15 @@ const Franchise = () => {
                         onClick={() => setActiveModelTab('super')}
                         className={`pb-3 font-display text-base sm:text-lg transition-all relative cursor-pointer ${
                           activeModelTab === 'super'
-                            ? 'text-gray-900 font-bold'
-                            : 'text-gray-400 font-semibold hover:text-gray-700'
+                            ? 'text-white font-bold'
+                            : 'text-gray-500 font-semibold hover:text-gray-300'
                         }`}
                       >
                         Super Charging Stations
                         {activeModelTab === 'super' && (
                           <motion.div 
                             layoutId="activeTabUnderline"
-                            className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF3B30] rounded-full" 
+                            className="absolute bottom-0 left-0 right-0 h-1 bg-accent rounded-full shadow-[0_0_12px_#00FF00]" 
                           />
                         )}
                       </button>
@@ -517,10 +531,10 @@ const Franchise = () => {
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="rounded-3xl border border-red-200/90 bg-white p-6 sm:p-8 shadow-sm"
+                        className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#09150C] via-[#050D07] to-[#020503] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-md"
                       >
                         {/* Big Canopy Photo */}
-                        <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden mb-7 shadow-inner bg-gray-100">
+                        <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden mb-7 shadow-inner bg-black/40 border border-white/10">
                           <img 
                             src={fastChargerCanopy} 
                             alt="Fast Charging Stations Canopy" 
@@ -529,26 +543,26 @@ const Franchise = () => {
                         </div>
 
                         {/* Bullet Points with exact labels from Screenshot 4 */}
-                        <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-800 font-sans">
+                        <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-300 font-sans">
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Charger Options:</strong> 30, 60, 120 kW DC (Single/Dual Gun)</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Charger Options:</strong> 30, 60, 120 kW DC (Single/Dual Gun)</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Vehicle Type:</strong> 4-wheeler passenger EVs (CCS2 compatible)</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Vehicle Type:</strong> 4-wheeler passenger EVs (CCS2 compatible)</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Space Needed:</strong> 550 sq. ft. (2 car parks)</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Space Needed:</strong> 550 sq. ft. (2 car parks)</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Power:</strong> Direct grid connection, plug-and-play setup</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Power:</strong> Direct grid connection, plug-and-play setup</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Ideal Locations:</strong> Highways, office parks, malls, residential societies</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Ideal Locations:</strong> Highways, office parks, malls, residential societies</span>
                           </li>
                         </ul>
                       </motion.div>
@@ -561,10 +575,10 @@ const Franchise = () => {
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="rounded-3xl border border-red-200/90 bg-white p-6 sm:p-8 shadow-sm"
+                        className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#09150C] via-[#050D07] to-[#020503] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-md"
                       >
                         {/* Big Canopy Photo with Commercial Fleet */}
-                        <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden mb-7 shadow-inner bg-gray-100">
+                        <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden mb-7 shadow-inner bg-black/40 border border-white/10">
                           <img 
                             src={superChargerCanopy} 
                             alt="Super Charging Stations Mega Hub" 
@@ -573,26 +587,26 @@ const Franchise = () => {
                         </div>
 
                         {/* Bullet Points with exact labels from Screenshot 5 */}
-                        <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-800 font-sans">
+                        <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-300 font-sans">
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Charger Options:</strong> 240 kW & 360 kW DC</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Charger Options:</strong> 240 kW & 360 kW DC</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Scalability:</strong> Upto 1.2 MW with multi-gun setup</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Scalability:</strong> Upto 1.2 MW with multi-gun setup</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Vehicle Compatibility:</strong> 4-wheelers, e-buses, and electric trucks</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Vehicle Compatibility:</strong> 4-wheelers, e-buses, and electric trucks</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Space Requirement:</strong> Larger footprint to accommodate commercial EVs</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Space Requirement:</strong> Larger footprint to accommodate commercial EVs</span>
                           </li>
                           <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Power Infrastructure:</strong> Direct grid connection with Solar + BESS integration for 24x7</span>
+                            <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_#00FF00]" />
+                            <span><strong className="text-white font-semibold">Power Infrastructure:</strong> Direct grid connection with Solar + BESS integration for 24x7</span>
                           </li>
                         </ul>
                       </motion.div>
@@ -611,32 +625,38 @@ const Franchise = () => {
                 ref={formRef} 
                 className="lg:col-span-5 sticky top-[105px] self-start z-30 scroll-mt-36"
               >
-                <div className="w-full rounded-[2.2rem] bg-white border-2 border-red-200/90 p-5 sm:p-7 shadow-xl relative">
+                <div className="w-full rounded-[2.2rem] bg-gradient-to-b from-[#09160E] via-[#050E09] to-[#020603] border-2 border-accent/40 p-5 sm:p-7 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_35px_rgba(0,255,0,0.12)] relative backdrop-blur-xl">
                   
                   {/* Title matching all 5 screenshots */}
-                  <div className="mb-6">
-                    <h3 className="text-2xl sm:text-[1.75rem] font-display font-bold text-gray-900 tracking-tight">
+                  <div className="mb-6 flex items-center justify-between">
+                    <h3 className="text-2xl sm:text-[1.75rem] font-display font-bold text-white tracking-tight">
                       Partner With Us
                     </h3>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-mono text-[0.65rem] uppercase tracking-wider font-semibold">
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                      Priority Access
+                    </div>
                   </div>
 
                   {/* Stepper Header (Personal -> Investment -> Form Review) */}
                   <div className="flex items-center justify-between mb-8 px-2 relative">
                     {/* Connecting dotted line */}
-                    <div className="absolute top-2.5 left-7 right-7 h-[1px] border-t border-dotted border-gray-400 pointer-events-none" />
+                    <div className="absolute top-2.5 left-7 right-7 h-[1px] border-t border-dotted border-white/20 pointer-events-none" />
 
                     {/* Step 1: Personal */}
                     <div className="flex flex-col items-center relative z-10">
                       <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
                         formStep === 1 
-                          ? 'bg-[#FF3B30] shadow-[0_0_8px_rgba(255,59,48,0.5)]' 
+                          ? 'bg-accent text-black shadow-[0_0_12px_#00FF00]' 
                           : formStep > 1 
-                          ? 'bg-[#FF3B30]' 
-                          : 'bg-neutral-800'
+                          ? 'bg-accent text-black' 
+                          : 'bg-white/10 border border-white/20'
                       }`}>
-                        {formStep > 1 && <Check size={11} strokeWidth={3} className="text-white" />}
+                        {formStep > 1 && <Check size={11} strokeWidth={3} className="text-black" />}
                       </div>
-                      <span className="text-[0.68rem] font-sans font-medium text-gray-800 mt-2">
+                      <span className={`text-[0.68rem] font-sans font-medium mt-2 ${
+                        formStep === 1 ? 'text-accent font-bold' : 'text-gray-400'
+                      }`}>
                         Personal
                       </span>
                     </div>
@@ -645,14 +665,16 @@ const Franchise = () => {
                     <div className="flex flex-col items-center relative z-10">
                       <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
                         formStep === 2 
-                          ? 'bg-[#FF3B30] shadow-[0_0_8px_rgba(255,59,48,0.5)]' 
+                          ? 'bg-accent text-black shadow-[0_0_12px_#00FF00]' 
                           : formStep > 2 
-                          ? 'bg-[#FF3B30]' 
-                          : 'bg-neutral-800'
+                          ? 'bg-accent text-black' 
+                          : 'bg-white/10 border border-white/20'
                       }`}>
-                        {formStep > 2 && <Check size={11} strokeWidth={3} className="text-white" />}
+                        {formStep > 2 && <Check size={11} strokeWidth={3} className="text-black" />}
                       </div>
-                      <span className="text-[0.68rem] font-sans font-medium text-gray-800 mt-2">
+                      <span className={`text-[0.68rem] font-sans font-medium mt-2 ${
+                        formStep === 2 ? 'text-accent font-bold' : 'text-gray-400'
+                      }`}>
                         Investment
                       </span>
                     </div>
@@ -661,10 +683,12 @@ const Franchise = () => {
                     <div className="flex flex-col items-center relative z-10">
                       <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
                         formStep === 3 
-                          ? 'bg-[#FF3B30] shadow-[0_0_8px_rgba(255,59,48,0.5)]' 
-                          : 'bg-neutral-800'
+                          ? 'bg-accent text-black shadow-[0_0_12px_#00FF00]' 
+                          : 'bg-white/10 border border-white/20'
                       }`} />
-                      <span className="text-[0.68rem] font-sans font-medium text-gray-800 mt-2">
+                      <span className={`text-[0.68rem] font-sans font-medium mt-2 ${
+                        formStep === 3 ? 'text-accent font-bold' : 'text-gray-400'
+                      }`}>
                         Form Review
                       </span>
                     </div>
@@ -679,14 +703,14 @@ const Franchise = () => {
                         exit={{ opacity: 0, y: -10 }}
                         className={`mb-5 p-3.5 rounded-2xl flex items-center gap-2.5 text-xs font-sans ${
                           status.type === 'success'
-                            ? 'bg-emerald-50 border border-emerald-300 text-emerald-800'
-                            : 'bg-red-50 border border-red-300 text-red-700'
+                            ? 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300'
+                            : 'bg-red-950/80 border border-red-500/50 text-red-300'
                         }`}
                       >
                         {status.type === 'success' ? (
-                          <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-600" />
+                          <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-400" />
                         ) : (
-                          <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-600" />
+                          <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-400" />
                         )}
                         <span>{status.message}</span>
                       </motion.div>
@@ -699,133 +723,133 @@ const Franchise = () => {
                       {/* First Name & Last Name */}
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">First Name*</label>
+                          <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">First Name*</label>
                           <input 
                             type="text" 
                             value={formData.firstName}
                             onChange={e => setFormData({ ...formData, firstName: e.target.value })}
                             placeholder="eg. John"
-                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                            className="w-full px-4 py-2.5 bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all placeholder:text-gray-500 shadow-inner"
                           />
-                          {formErrors.firstName && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.firstName}</span>}
+                          {formErrors.firstName && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.firstName}</span>}
                         </div>
                         <div>
-                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">Last Name*</label>
+                          <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Last Name*</label>
                           <input 
                             type="text" 
                             value={formData.lastName}
                             onChange={e => setFormData({ ...formData, lastName: e.target.value })}
                             placeholder="eg. Doe"
-                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                            className="w-full px-4 py-2.5 bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all placeholder:text-gray-500 shadow-inner"
                           />
-                          {formErrors.lastName && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.lastName}</span>}
+                          {formErrors.lastName && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.lastName}</span>}
                         </div>
                       </div>
 
                       {/* Email */}
                       <div>
-                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">Email*</label>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Email*</label>
                         <input 
                           type="email" 
                           value={formData.email}
                           onChange={e => setFormData({ ...formData, email: e.target.value })}
                           placeholder="eg. example@gmail.com"
-                          className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all placeholder:text-gray-500 shadow-inner"
                         />
-                        {formErrors.email && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.email}</span>}
+                        {formErrors.email && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.email}</span>}
                       </div>
 
                       {/* Mobile Number */}
                       <div>
-                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">Mobile Number*</label>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">Mobile Number*</label>
                         <input 
                           type="tel" 
                           value={formData.phone}
                           onChange={e => setFormData({ ...formData, phone: e.target.value })}
                           placeholder="91 9876543210"
-                          className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all placeholder:text-gray-500 shadow-inner"
                         />
-                        {formErrors.phone && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.phone}</span>}
+                        {formErrors.phone && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.phone}</span>}
                       </div>
 
                       {/* City & State */}
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">City*</label>
+                          <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">City*</label>
                           <input 
                             type="text" 
                             value={formData.city}
                             onChange={e => setFormData({ ...formData, city: e.target.value })}
                             placeholder="Eg. Mumbai"
-                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                            className="w-full px-4 py-2.5 bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all placeholder:text-gray-500 shadow-inner"
                           />
-                          {formErrors.city && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.city}</span>}
+                          {formErrors.city && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.city}</span>}
                         </div>
                         <div>
-                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">State*</label>
+                          <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">State*</label>
                           <select 
                             value={formData.state}
                             onChange={e => setFormData({ ...formData, state: e.target.value })}
-                            className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all cursor-pointer"
+                            className="w-full px-4 py-2.5 bg-[#09150C] border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all cursor-pointer shadow-inner"
                           >
-                            <option value="">Enter your state</option>
+                            <option value="" className="bg-[#09150C] text-gray-400">Enter your state</option>
                             {INDIAN_STATES.map((st) => (
-                              <option key={st} value={st}>{st}</option>
+                              <option key={st} value={st} className="bg-[#09150C] text-white">{st}</option>
                             ))}
                           </select>
-                          {formErrors.state && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.state}</span>}
+                          {formErrors.state && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.state}</span>}
                         </div>
                       </div>
 
                       {/* PinCode */}
                       <div>
-                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1">PinCode*</label>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1">PinCode*</label>
                         <input 
                           type="text" 
                           maxLength={6}
                           value={formData.pincode}
                           onChange={e => setFormData({ ...formData, pincode: e.target.value })}
                           placeholder="400097"
-                          className="w-full px-4 py-2.5 bg-white border border-gray-300 focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] rounded-full text-gray-900 text-xs focus:outline-none transition-all placeholder:text-gray-400"
+                          className="w-full px-4 py-2.5 bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent rounded-full text-white text-xs focus:outline-none transition-all placeholder:text-gray-500 shadow-inner"
                         />
-                        {formErrors.pincode && <span className="text-red-500 text-[0.65rem] mt-0.5 block">{formErrors.pincode}</span>}
+                        {formErrors.pincode && <span className="text-red-400 text-[0.65rem] mt-0.5 block">{formErrors.pincode}</span>}
                       </div>
 
                       {/* Proceed As Radio Options */}
                       <div className="pt-2">
-                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">Proceed as*</label>
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">Proceed as*</label>
                         <div className="flex items-center gap-6">
-                          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-800">
+                          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-200">
                             <input 
                               type="radio" 
                               name="proceedAs" 
                               value="Business"
                               checked={formData.proceedAs === 'Business'}
                               onChange={() => setFormData({ ...formData, proceedAs: 'Business' })}
-                              className="accent-[#FF3B30] w-4 h-4 cursor-pointer"
+                              className="accent-accent w-4 h-4 cursor-pointer"
                             />
                             <span>Business</span>
                           </label>
 
-                          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-800">
+                          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-200">
                             <input 
                               type="radio" 
                               name="proceedAs" 
                               value="Individual"
                               checked={formData.proceedAs === 'Individual'}
                               onChange={() => setFormData({ ...formData, proceedAs: 'Individual' })}
-                              className="accent-[#FF3B30] w-4 h-4 cursor-pointer"
+                              className="accent-accent w-4 h-4 cursor-pointer"
                             />
                             <span>Individual</span>
                           </label>
                         </div>
                       </div>
 
-                      {/* Black Pill Next Button */}
+                      {/* Submit / Next Button */}
                       <div className="pt-4">
                         <button
                           type="submit"
-                          className="w-full py-3.5 bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                          className="w-full py-3.5 bg-accent hover:bg-white text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(0,255,0,0.3)] hover:shadow-[0_0_25px_#00FF00]"
                         >
                           Next
                         </button>
@@ -839,7 +863,7 @@ const Franchise = () => {
                       {/* Business Turnover (if Business selected) */}
                       {formData.proceedAs === 'Business' && (
                         <div>
-                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                          <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
                             Business Turnover*
                           </label>
                           <div className="grid grid-cols-2 gap-2">
@@ -850,8 +874,8 @@ const Franchise = () => {
                                 onClick={() => setFormData({ ...formData, businessTurnover: to })}
                                 className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
                                   formData.businessTurnover === to
-                                    ? 'bg-black border-black text-white font-bold'
-                                    : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                                    ? 'bg-accent border-accent text-black font-bold shadow-[0_0_10px_rgba(0,255,0,0.4)]'
+                                    : 'bg-black/50 border-white/15 text-gray-300 hover:border-white/40 hover:text-white'
                                 }`}
                               >
                                 {to}
@@ -863,7 +887,7 @@ const Franchise = () => {
 
                       {/* Investment Budget */}
                       <div>
-                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
                           Investment Budget*
                         </label>
                         <div className="grid grid-cols-2 gap-2">
@@ -877,8 +901,8 @@ const Franchise = () => {
                               onClick={() => setFormData({ ...formData, investmentBudget: b })}
                               className={`py-2 px-2.5 rounded-full text-[0.7rem] font-mono border transition-all cursor-pointer ${
                                 formData.investmentBudget === b
-                                  ? 'bg-black border-black text-white font-bold'
-                                  : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                                  ? 'bg-accent border-accent text-black font-bold shadow-[0_0_10px_rgba(0,255,0,0.4)]'
+                                  : 'bg-black/50 border-white/15 text-gray-300 hover:border-white/40 hover:text-white'
                               }`}
                             >
                               {b}
@@ -889,7 +913,7 @@ const Franchise = () => {
 
                       {/* Land Availability */}
                       <div>
-                        <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                        <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
                           Land Availability*
                         </label>
                         <div className="grid grid-cols-2 gap-2">
@@ -900,8 +924,8 @@ const Franchise = () => {
                               onClick={() => setFormData({ ...formData, landAvailability: ans })}
                               className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
                                 formData.landAvailability === ans
-                                  ? 'bg-black border-black text-white'
-                                  : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                                  ? 'bg-accent border-accent text-black font-bold shadow-[0_0_10px_rgba(0,255,0,0.4)]'
+                                  : 'bg-black/50 border-white/15 text-gray-300 hover:border-white/40 hover:text-white'
                               }`}
                             >
                               {ans}
@@ -913,7 +937,7 @@ const Franchise = () => {
                       {/* Location Type */}
                       {formData.landAvailability === 'Yes' && (
                         <div>
-                          <label className="block text-[0.7rem] text-gray-600 font-medium mb-1.5">
+                          <label className="block text-[0.7rem] text-gray-300 font-medium mb-1.5">
                             Location Type*
                           </label>
                           <div className="grid grid-cols-2 gap-2">
@@ -924,8 +948,8 @@ const Franchise = () => {
                                 onClick={() => setFormData({ ...formData, locationType: loc })}
                                 className={`py-2 px-3 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
                                   formData.locationType === loc
-                                    ? 'bg-black border-black text-white'
-                                    : 'bg-white border-gray-300 text-gray-700 hover:border-black'
+                                    ? 'bg-accent border-accent text-black font-bold shadow-[0_0_10px_rgba(0,255,0,0.4)]'
+                                    : 'bg-black/50 border-white/15 text-gray-300 hover:border-white/40 hover:text-white'
                                 }`}
                               >
                                 {loc}
@@ -939,13 +963,13 @@ const Franchise = () => {
                         <button
                           type="button"
                           onClick={() => setFormStep(1)}
-                          className="w-1/3 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:border-black text-xs font-mono font-bold transition-all cursor-pointer"
+                          className="w-1/3 py-2.5 rounded-full border border-white/20 text-gray-300 hover:border-white hover:text-white text-xs font-mono font-bold transition-all cursor-pointer"
                         >
                           Back
                         </button>
                         <button
                           type="submit"
-                          className="w-2/3 py-2.5 bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                          className="w-2/3 py-2.5 bg-accent hover:bg-white text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_0_20px_rgba(0,255,0,0.3)] hover:shadow-[0_0_25px_#00FF00]"
                         >
                           Next
                         </button>
@@ -956,18 +980,18 @@ const Franchise = () => {
                   {/* ── STEP 3: FORM REVIEW & SUBMISSION ── */}
                   {formStep === 3 && (
                     <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-2 text-xs">
-                        <div className="text-[0.68rem] font-mono text-[#FF3B30] font-bold uppercase border-b border-gray-200 pb-1">
+                      <div className="p-4 rounded-2xl bg-black/60 border border-white/15 space-y-2 text-xs">
+                        <div className="text-[0.68rem] font-mono text-accent font-bold uppercase border-b border-white/10 pb-1">
                           Check your details and Submit
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-[0.72rem]">
-                          <div><span className="text-gray-500">Name:</span> <span className="text-gray-900 font-medium">{formData.firstName} {formData.lastName}</span></div>
-                          <div><span className="text-gray-500">Phone:</span> <span className="text-gray-900 font-medium">+91 {formData.phone}</span></div>
-                          <div className="col-span-2"><span className="text-gray-500">Email:</span> <span className="text-gray-900 font-medium break-all">{formData.email}</span></div>
-                          <div><span className="text-gray-500">Location:</span> <span className="text-gray-900 font-medium">{formData.city}, {formData.state}</span></div>
-                          <div><span className="text-gray-500">Pincode:</span> <span className="text-gray-900 font-medium">{formData.pincode}</span></div>
-                          <div><span className="text-gray-500">Budget:</span> <span className="text-red-600 font-bold">{formData.investmentBudget}</span></div>
-                          <div><span className="text-gray-500">Land:</span> <span className="text-gray-900 font-medium">{formData.landAvailability} ({formData.locationType})</span></div>
+                          <div><span className="text-gray-400">Name:</span> <span className="text-white font-medium">{formData.firstName} {formData.lastName}</span></div>
+                          <div><span className="text-gray-400">Phone:</span> <span className="text-white font-medium">+91 {formData.phone}</span></div>
+                          <div className="col-span-2"><span className="text-gray-400">Email:</span> <span className="text-white font-medium break-all">{formData.email}</span></div>
+                          <div><span className="text-gray-400">Location:</span> <span className="text-white font-medium">{formData.city}, {formData.state}</span></div>
+                          <div><span className="text-gray-400">Pincode:</span> <span className="text-white font-medium">{formData.pincode}</span></div>
+                          <div><span className="text-gray-400">Budget:</span> <span className="text-accent font-bold">{formData.investmentBudget}</span></div>
+                          <div><span className="text-gray-400">Land:</span> <span className="text-white font-medium">{formData.landAvailability} ({formData.locationType})</span></div>
                         </div>
                       </div>
 
@@ -978,9 +1002,9 @@ const Franchise = () => {
                           id="privacyCheck2"
                           checked={formData.privacyAccepted}
                           onChange={e => setFormData({ ...formData, privacyAccepted: e.target.checked })}
-                          className="mt-0.5 accent-[#FF3B30] w-3.5 h-3.5 cursor-pointer"
+                          className="mt-0.5 accent-accent w-3.5 h-3.5 cursor-pointer"
                         />
-                        <label htmlFor="privacyCheck2" className="text-[0.68rem] text-gray-500 cursor-pointer leading-tight">
+                        <label htmlFor="privacyCheck2" className="text-[0.68rem] text-gray-400 cursor-pointer leading-tight">
                           I agree to the use of my info for communication and support.
                         </label>
                       </div>
@@ -989,24 +1013,24 @@ const Franchise = () => {
                         <button
                           type="button"
                           onClick={() => setFormStep(2)}
-                          className="w-1/3 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:border-black text-xs font-mono font-bold transition-all cursor-pointer"
+                          className="w-1/3 py-2.5 rounded-full border border-white/20 text-gray-300 hover:border-white hover:text-white text-xs font-mono font-bold transition-all cursor-pointer"
                         >
                           Back
                         </button>
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-2/3 py-2.5 bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                          className="w-2/3 py-2.5 bg-accent hover:bg-white text-black font-mono font-bold text-xs uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_0_20px_rgba(0,255,0,0.4)] hover:shadow-[0_0_30px_#00FF00] disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? (
                             <>
-                              <Loader2 className="w-4 h-4 animate-spin" />
+                              <Loader2 className="w-4 h-4 animate-spin text-black" />
                               Submitting...
                             </>
                           ) : (
                             <>
                               Submit
-                              <Check size={14} />
+                              <Check size={14} className="text-black" />
                             </>
                           )}
                         </button>
