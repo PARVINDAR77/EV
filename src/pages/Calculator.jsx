@@ -9,7 +9,7 @@ const CHARGER_MODELS = [
   // ── AC Charging Wallboxes ──
   {
     id: 'ac-3-3kw',
-    name: 'Axion 3.3 kW AC (Entry Wallbox)',
+    name: 'Axion 3.3 kW AC (AXION 3 Multi-Socket)',
     category: 'AC Chargers',
     price: 18000,
     defaultKwh: 5,

@@ -53,3 +53,22 @@
     scrollbar-width: none;
   }
 }
+
+@media print {
+  nav, footer, .no-print {
+    display: none !important;
+  }
+  body, main {
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .printable-datasheet {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 20px !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+}

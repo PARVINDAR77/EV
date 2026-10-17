@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
@@ -31,36 +31,37 @@ import apiImg from '../../assets/images/ecosystem_diagram.webp';
 
 const PRODUCT_DB = {
   'ac-3-3kw': {
-    title: 'Axion 3.3 kW AC',
+    title: 'Axion 3.3 kW AC (AXION 3)',
     category: 'AC Wallboxes',
-    description: 'Compact and cost-effective. Ideal for long-duration residential charging and plug-in hybrids.',
+    description: 'AXION 3 EV Charger is a compact AC Slow charger with 3 sockets for all Indian cars, 3-wheelers, and 2-wheelers. Rapid deployment with OCPP v1.6 support.',
     image: ac3kwImg,
     features: [
-      { title: "Ultra-Compact Design", desc: "Sleek and minimalistic, fitting perfectly into any residential garage." },
-      { title: "App Connectivity", desc: "Monitor charging sessions and set schedules via the AXION app." },
-      { title: "Weatherproof IP65", desc: "Built to withstand harsh weather conditions indoors or outdoors." },
-      { title: "Over-the-Air Updates", desc: "Stay up-to-date with the latest software and security improvements." }
+      { title: "Compact & Rugged Design", desc: "Sleek and robust casing built for rapid wall or dedicated pole mounting across India." },
+      { title: "Universal Compatibility", desc: "Equipped with 3-Pin socket (16A max) supporting electric cars, 3-wheelers, and 2-wheelers." },
+      { title: "Smart Connectivity", desc: "OCPP v1.6 protocol integration over Wi-Fi and GSM with App Scan Code / QR Code activation." },
+      { title: "Comprehensive Protection", desc: "Complete safety suite with emergency mushroom cutoff, ground fault, and surge protection." }
     ],
     datasheet: {
-      model: 'AXION 3.3',
+      categoryTag: 'AC CHARGERS',
+      brandName: 'AXION',
+      modelBadge: '3',
+      model: 'AXION 3',
       powerRating: '3.3 KW',
-      overview: 'AXION 3.3 is a high-efficiency AC residential wallbox designed for homes, apartments, and light commercial overnight charging with reliable single-phase performance.',
+      overview: 'AXION 3 EV Charger is a compact AC Slow charger. Those variants have three Sockets for all Indian cars, three wheelers and two wheelers. It can deploy charging network rapidly and effectively, providing high-power charging service for electric vehicles.',
       featuresList: [
-        'Compact and rugged weatherproof enclosure',
-        'Easy to install on wall or dedicated mounting pole',
-        'Built-in intelligent safety and voltage monitoring',
-        'App Scan Code / QR Code / Bluetooth / RFID activation',
-        'Available with Type 2 charging gun with 5-meter heavy duty cable'
+        'Compact and rugged design',
+        'Easy to Install and use.',
+        'Compatible with Open Charge Point Protocol (OCPP).',
+        'App Scan Code / QR Code.',
+        'Compatible with 2/3/4 wheeler.'
       ],
       specs: {
-        'Input Power': '1-Phase 230 VAC ± 10%, 50Hz',
-        'Output': '3.3 kW @ 16A',
-        'Display': 'LED Status Halo & Mobile App Interface',
-        'Gun': 'Type 2 Gun (IEC 62196-2)',
-        'Connectivity': 'Bluetooth / Wi-Fi & RFID',
-        'Mounting': 'Wall / Pole Mounted',
-        'Emergency Switch': 'Available (Push Cutoff)',
-        'Protection': 'Over Voltage, Under Voltage, Over Current, Short Circuit, Ground Fault Protection, Residual Current, Surge Protection'
+        'Input Power': '1-Phase 230 VAC',
+        'Output': '3.3 Kw (3Pin Socket) - 16A Max',
+        'OCCP & communication': 'OCCP v1.6 Over Wi-Fi and GSM',
+        'Emergency Switch': 'Available ( Mushroom Red)',
+        'Mounting': 'Wall/ Pole Mounted',
+        'Protection': 'Over Voltage, Under Voltage, Over Current, Short Circuit, Ground Fault Protection, Residual Current, Emergency shutdown, Protection against electric shock'
       }
     }
   },
@@ -410,9 +411,9 @@ const PRODUCT_DB = {
 
 const ProductPage = (props) => {
   const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const [isDatasheetOpen, setIsDatasheetOpen] = useState(false);
-  const [selectedModelKey, setSelectedModelKey] = useState(null);
   const datasheetRef = useRef(null);
   
   // Resolve product
@@ -427,21 +428,36 @@ const ProductPage = (props) => {
   const { title, category, description, image, features } = product;
 
   // Determine active datasheet
-  // If user navigated to a specific product (e.g. /product/ac-22kw), use that product's datasheet
-  // If user is on category overview (/products/ac-chargers), allow switching or default to flagship 22kW
   const defaultKey = id && PRODUCT_DB[id]?.datasheet 
     ? id 
-    : (title?.toLowerCase().includes('dc') ? 'dc-60kw' : 'ac-22kw');
+    : (title?.toLowerCase().includes('dc') ? 'dc-60kw' : 'ac-3-3kw');
 
+  const [selectedModelKey, setSelectedModelKey] = useState(defaultKey);
   const activeKey = selectedModelKey || defaultKey;
-  const activeDatasheet = PRODUCT_DB[activeKey]?.datasheet || PRODUCT_DB['ac-22kw'].datasheet;
+  const activeDatasheet = PRODUCT_DB[activeKey]?.datasheet || PRODUCT_DB['ac-3-3kw'].datasheet;
 
-  // Sync state if id changes
+  // Sync state if route id changes
   useEffect(() => {
     if (id && PRODUCT_DB[id]?.datasheet) {
       setSelectedModelKey(id);
     }
   }, [id]);
+
+  // Support direct hash #datasheet or query parameter
+  useEffect(() => {
+    if (location.hash === '#datasheet' || location.search.includes('datasheet=true')) {
+      setIsDatasheetOpen(true);
+      setTimeout(() => {
+        if (datasheetRef.current) {
+          if (window.lenis) {
+            window.lenis.scrollTo(datasheetRef.current, { offset: -40, duration: 1.2 });
+          } else {
+            datasheetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 300);
+    }
+  }, [location.hash, location.search]);
 
   const handleGetQuoteClick = () => {
     navigate('/contact', {
@@ -459,9 +475,13 @@ const ProductPage = (props) => {
     setIsDatasheetOpen(true);
     setTimeout(() => {
       if (datasheetRef.current) {
-        datasheetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.lenis) {
+          window.lenis.scrollTo(datasheetRef.current, { offset: -40, duration: 1.2 });
+        } else {
+          datasheetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
-    }, 100);
+    }, 150);
   };
 
   // Model switchers for Category overview pages
@@ -648,7 +668,7 @@ const ProductPage = (props) => {
                 className="mt-24 pt-12 border-t border-white/15"
               >
                 {/* Action Bar & Model Switchers */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 no-print">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center text-accent">
                       <FileText size={20} />
@@ -686,6 +706,16 @@ const ProductPage = (props) => {
 
                     <button
                       type="button"
+                      onClick={() => window.print()}
+                      className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-accent text-black hover:bg-white text-xs font-mono font-bold transition-all cursor-pointer shadow-md"
+                      title="Print or Save PDF"
+                    >
+                      <Download size={15} />
+                      Print / Save PDF
+                    </button>
+
+                    <button
+                      type="button"
                       onClick={() => setIsDatasheetOpen(false)}
                       className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white text-xs font-mono transition-colors cursor-pointer border border-white/10"
                       title="Close Datasheet"
@@ -697,7 +727,7 @@ const ProductPage = (props) => {
                 </div>
 
                 {/* ── PRINTABLE DATASHEET DOCUMENT (EXACT MATCH TO REFERENCE IMAGE) ── */}
-                <div className="w-full max-w-4xl mx-auto bg-white text-[#111827] rounded-3xl p-6 sm:p-12 lg:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.7)] relative overflow-hidden font-sans border border-slate-200">
+                <div className="w-full max-w-4xl mx-auto bg-white text-[#111827] rounded-3xl p-6 sm:p-12 lg:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.7)] relative overflow-hidden font-sans border border-slate-200 printable-datasheet">
                   
                   {/* Concentric Branding Rings in Upper-Right Corner (Exact SVG Replica) */}
                   <div className="absolute -top-12 -right-12 w-64 h-64 sm:w-80 sm:h-80 pointer-events-none opacity-85 select-none">
@@ -708,20 +738,32 @@ const ProductPage = (props) => {
                     </svg>
                   </div>
 
-                  {/* Header: Title & Overview */}
+                  {/* Category Box Tag matching uploaded image */}
+                  <div className="inline-block px-5 py-2 bg-[#E9F3F7] rounded-xl text-xs sm:text-sm font-black text-[#1E293B] tracking-wider uppercase mb-6 shadow-xs">
+                    {activeDatasheet.categoryTag || (isDcCategory ? 'DC FAST CHARGERS' : 'AC CHARGERS')}
+                  </div>
+
+                  {/* Header: Title & Overview matching uploaded image */}
                   <div className="relative z-10 mb-8 max-w-xl">
-                    <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tight text-[#111827] uppercase">
-                      {activeDatasheet.model}
-                    </h1>
-                    <div className="mt-2 flex items-baseline gap-2">
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tight text-[#0F172A] uppercase">
+                        {activeDatasheet.brandName || activeDatasheet.model}
+                      </h1>
+                      {activeDatasheet.modelBadge && (
+                        <span className="w-9 h-9 sm:w-11 sm:h-11 bg-[#5EA82E] text-white font-black text-2xl sm:text-3xl rounded-xl flex items-center justify-center shadow-sm">
+                          {activeDatasheet.modelBadge}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-1 flex items-baseline gap-2">
                       <span className="text-sm font-black text-[#5EA82E] tracking-wider uppercase">
                         EV CHARGER
                       </span>
-                      <span className="text-lg font-black text-[#1F2937]">
+                      <span className="text-xl font-black text-[#0F172A]">
                         {activeDatasheet.powerRating}
                       </span>
                     </div>
-                    <p className="mt-4 text-xs sm:text-sm text-[#4B5563] leading-relaxed font-medium">
+                    <p className="mt-4 text-xs sm:text-sm text-[#475569] leading-relaxed font-medium">
                       {activeDatasheet.overview}
                     </p>
                   </div>
@@ -746,7 +788,7 @@ const ProductPage = (props) => {
                     {/* Header with Circuit Line & Node */}
                     <div className="flex items-center gap-4 mb-6">
                       <div className="px-5 py-1.5 bg-[#DDEEEB] border border-[#BCE0D7] rounded-full text-xs sm:text-sm font-black text-[#1F2937] tracking-wider uppercase shadow-xs">
-                        SPECIFICATION
+                        SPECIFICAITON
                       </div>
                       <div className="flex-1 flex items-center">
                         <div className="h-[2px] bg-[#5EA82E] flex-1" />
@@ -762,7 +804,7 @@ const ProductPage = (props) => {
                           className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pb-1"
                         >
                           {/* Pill Label on Left */}
-                          <div className="w-full sm:w-44 flex-shrink-0 bg-[#E2EDF0] text-[#111827] font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xs">
+                          <div className="w-full sm:w-56 flex-shrink-0 bg-[#E2EDF0] text-[#111827] font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xs">
                             {label}
                           </div>
                           {/* Value Text on Right */}
