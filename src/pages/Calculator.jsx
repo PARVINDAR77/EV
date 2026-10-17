@@ -600,13 +600,13 @@ const Calculator = () => {
               </div>
 
               {/* Detailed Multi-Period Economics Comparison Table */}
-              <div className="w-full bg-[#050A07]/90 border border-white/10 rounded-[2rem] p-5 sm:p-7 backdrop-blur-md shadow-2xl">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5 pb-4 border-b border-white/10 gap-3">
+              <div className="w-full bg-[#050A07]/90 border border-white/10 rounded-[2rem] p-4 sm:p-6 backdrop-blur-md shadow-2xl">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 pb-3 border-b border-white/10 gap-2">
                   <div>
                     <h4 className="text-base sm:text-lg font-display font-bold text-white uppercase tracking-wider flex items-center gap-2">
                       Detailed Period Breakdown
                     </h4>
-                    <p className="text-xs text-white/50 mt-1">
+                    <p className="text-xs text-white/50 mt-0.5">
                       Direct side-by-side comparison across all operating timeframes
                     </p>
                   </div>
@@ -615,69 +615,69 @@ const Calculator = () => {
                   </span>
                 </div>
 
-                <div className="overflow-x-auto -mx-2 sm:mx-0 px-2 sm:px-0">
-                  <table className="w-full text-left font-mono text-xs sm:text-sm min-w-[420px]">
+                <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                  <table className="w-full text-left font-mono text-xs">
                     <thead>
-                      <tr className="border-b border-white/10 text-white/50 text-[0.7rem] uppercase tracking-wider font-bold">
-                        <th className="py-3 px-3 w-[34%] whitespace-nowrap">Metric</th>
-                        <th className="py-3 px-3 text-right w-[22%] whitespace-nowrap">Per Day</th>
-                        <th className="py-3 px-3 text-right w-[22%] whitespace-nowrap">Per Month</th>
-                        <th className="py-3 px-3 text-right w-[22%] text-accent font-bold whitespace-nowrap">Per Year</th>
+                      <tr className="border-b border-white/10 text-white/50 text-[0.68rem] sm:text-[0.72rem] uppercase tracking-wider font-bold">
+                        <th className="py-2.5 px-1.5 sm:px-2 w-[34%]">Metric</th>
+                        <th className="py-2.5 px-1 sm:px-2 text-right w-[22%]">Per Day</th>
+                        <th className="py-2.5 px-1 sm:px-2 text-right w-[22%]">Per Month</th>
+                        <th className="py-2.5 px-1 sm:px-2 text-right w-[22%] text-accent font-bold">Per Year</th>
                       </tr>
                     </thead>
-                    <tbody className="text-xs sm:text-sm divide-y divide-white/5">
+                    <tbody className="text-xs divide-y divide-white/5">
                       <tr className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">Charging Sessions</td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{dailySessions}</td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{monthlySessions.toLocaleString('en-IN')}</td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{yearlySessions.toLocaleString('en-IN')}</td>
+                        <td className="py-2.5 px-1.5 sm:px-2 text-white/70 font-sans">Charging Sessions</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">{dailySessions}</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">{monthlySessions.toLocaleString('en-IN')}</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">{yearlySessions.toLocaleString('en-IN')}</td>
                       </tr>
                       <tr className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">
-                          Energy Delivered <span className="text-white/40 text-[0.7rem] font-normal">(kWh)</span>
+                        <td className="py-2.5 px-1.5 sm:px-2 text-white/70 font-sans">
+                          Energy Delivered <span className="text-white/40 text-[0.65rem]">(kWh)</span>
                         </td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">
-                          {dailyKwh.toFixed(0)} <span className="text-white/40 text-[0.7rem] font-normal">kWh</span>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">
+                          {dailyKwh.toFixed(0)} <span className="text-white/40 text-[0.65rem]">kWh</span>
                         </td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">
-                          {monthlyKwh.toLocaleString('en-IN', { maximumFractionDigits: 0 })} <span className="text-white/40 text-[0.7rem] font-normal">kWh</span>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">
+                          {monthlyKwh.toLocaleString('en-IN', { maximumFractionDigits: 0 })} <span className="text-white/40 text-[0.65rem]">kWh</span>
                         </td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">
-                          {yearlyKwh.toLocaleString('en-IN', { maximumFractionDigits: 0 })} <span className="text-white/40 text-[0.7rem] font-normal">kWh</span>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">
+                          {yearlyKwh.toLocaleString('en-IN', { maximumFractionDigits: 0 })} <span className="text-white/40 text-[0.65rem]">kWh</span>
                         </td>
                       </tr>
                       <tr className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">Gross Tariff Collection</td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{formatCurrency(dailyRevenue)}</td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{formatCurrency(grossRevenueMonthly)}</td>
-                        <td className="py-3 px-3 text-right text-white font-bold whitespace-nowrap">{formatCurrency(grossRevenueYearly)}</td>
+                        <td className="py-2.5 px-1.5 sm:px-2 text-white/70 font-sans">Gross Tariff Collection</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">{formatCurrency(dailyRevenue)}</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">{formatCurrency(grossRevenueMonthly)}</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-white font-bold">{formatCurrency(grossRevenueYearly)}</td>
                       </tr>
                       <tr className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3 px-3 text-white/70 font-sans whitespace-nowrap">DISCOM Power Cost</td>
-                        <td className="py-3 px-3 text-right text-amber-400 font-semibold font-mono whitespace-nowrap">
+                        <td className="py-2.5 px-1.5 sm:px-2 text-white/70 font-sans">DISCOM Power Cost</td>
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-amber-400 font-semibold font-mono">
                           −₹{Math.round(dailyPowerCost).toLocaleString('en-IN')}
                         </td>
-                        <td className="py-3 px-3 text-right text-amber-400 font-semibold font-mono whitespace-nowrap">
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-amber-400 font-semibold font-mono">
                           −₹{Math.round(powerCostMonthly).toLocaleString('en-IN')}
                         </td>
-                        <td className="py-3 px-3 text-right text-amber-400 font-semibold font-mono whitespace-nowrap">
+                        <td className="py-2.5 px-1 sm:px-2 text-right text-amber-400 font-semibold font-mono">
                           −₹{Math.round(powerCostYearly).toLocaleString('en-IN')}
                         </td>
                       </tr>
                       <tr className="bg-gradient-to-r from-accent/15 via-accent/20 to-accent/15 border-y border-accent/40 shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.08)]">
-                        <td className="py-3.5 px-3 rounded-l-xl border-l border-accent/40 text-accent font-bold font-sans whitespace-nowrap">
+                        <td className="py-3 px-1.5 sm:px-2 rounded-l-xl border-l border-accent/40 text-accent font-bold font-sans">
                           <div className="flex items-center gap-1.5">
-                            <TrendingUp className="w-4 h-4 text-accent flex-shrink-0" />
+                            <TrendingUp className="w-3.5 h-3.5 text-accent flex-shrink-0" />
                             <span>Net Operator Earnings</span>
                           </div>
                         </td>
-                        <td className="py-3.5 px-3 text-right text-accent font-bold font-mono whitespace-nowrap text-xs sm:text-sm">
+                        <td className="py-3 px-1 sm:px-2 text-right text-accent font-bold font-mono text-xs">
                           {formatCurrency(dailyNetProfit)}
                         </td>
-                        <td className="py-3.5 px-3 text-right text-accent font-bold font-mono whitespace-nowrap text-xs sm:text-sm">
+                        <td className="py-3 px-1 sm:px-2 text-right text-accent font-bold font-mono text-xs">
                           {formatCurrency(netProfitMonthly)}
                         </td>
-                        <td className="py-3.5 px-3 rounded-r-xl border-r border-accent/40 text-right text-accent font-bold font-mono whitespace-nowrap text-sm sm:text-base">
+                        <td className="py-3 px-1 sm:px-2 rounded-r-xl border-r border-accent/40 text-right text-accent font-bold font-mono text-xs">
                           {formatCurrency(netProfitYearly)}
                         </td>
                       </tr>
