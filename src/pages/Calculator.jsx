@@ -285,7 +285,7 @@ const Calculator = () => {
 
                 {/* ── Number of Chargers / Units Selector ── */}
                 <div className="mb-8 p-5 rounded-2xl bg-[#050A07]/80 border border-white/10">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <label className="block text-white/90 text-sm font-bold uppercase tracking-wider">
                         Number of Chargers / Units
@@ -331,24 +331,6 @@ const Calculator = () => {
                         <Plus size={16} />
                       </button>
                     </div>
-                  </div>
-
-                  {/* Preset Pills */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    {[1, 2, 4, 6, 8, 12].map((qty) => (
-                      <button
-                        key={qty}
-                        type="button"
-                        onClick={() => setChargerQuantity(qty)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
-                          chargerQuantity === qty
-                            ? 'bg-accent text-black font-bold shadow-[0_0_12px_rgba(var(--color-accent-rgb),0.35)]'
-                            : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-                        }`}
-                      >
-                        {qty} {qty === 1 ? 'Unit' : 'Units'}
-                      </button>
-                    ))}
                   </div>
                 </div>
 
