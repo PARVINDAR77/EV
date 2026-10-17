@@ -260,7 +260,6 @@ const Navbar = () => {
               <ul className="flex flex-col gap-4">
                 <li><Link to="/product/charge-app" className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Axion Charge App <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
                 <li><Link to="/product/cms" className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Charger Management System <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/product/enterprise-api" className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Enterprise API <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
               </ul>
             </div>
 
