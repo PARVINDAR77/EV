@@ -72,6 +72,7 @@ const Calculator = () => {
   const [chargerQuantity, setChargerQuantity] = useState(1);
   const [vehiclesPerDay, setVehiclesPerDay] = useState(15);
   const [timeHorizon, setTimeHorizon] = useState('monthly'); // 'daily' | 'monthly' | 'yearly'
+  const [breakEvenUnit, setBreakEvenUnit] = useState('months'); // 'months' | 'years'
   
   // Assumptions
   const [tariff, setTariff] = useState(18); // ₹/kWh
@@ -124,7 +125,26 @@ const Calculator = () => {
   };
 
   const breakEvenMonths = netProfitMonthly > 0 ? (totalHardwareInvestment / netProfitMonthly) : 0;
+  const breakEvenYears = breakEvenMonths / 12;
   const netMarginPerKwh = numTariff - numPowerCost;
+
+  const breakEvenDisplay = () => {
+    if (netProfitMonthly <= 0) return 'N/A';
+    if (breakEvenUnit === 'years') {
+      if (breakEvenYears < 0.1) return '< 0.1 Year';
+      return `${breakEvenYears.toFixed(1)} ${breakEvenYears === 1 ? 'Year' : 'Years'}`;
+    }
+    if (breakEvenMonths < 1) return '< 1 Month';
+    return `${breakEvenMonths.toFixed(1)} ${breakEvenMonths === 1 ? 'Month' : 'Months'}`;
+  };
+
+  const breakEvenSecondary = () => {
+    if (netProfitMonthly <= 0) return '';
+    if (breakEvenUnit === 'years') {
+      return breakEvenMonths < 1 ? '(< 1 Mo)' : `(≈ ${breakEvenMonths.toFixed(1)} Mo)`;
+    }
+    return breakEvenYears < 0.1 ? '(< 0.1 Yr)' : `(≈ ${breakEvenYears.toFixed(1)} Yr)`;
+  };
 
   // Active Time Horizon Display Helper
   const activeMetrics = {
@@ -570,12 +590,47 @@ const Calculator = () => {
                     </div>
 
                     <div className="bg-[#020403]/60 backdrop-blur-md rounded-xl p-5 border border-accent/30 flex flex-col shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.1)]">
-                      <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider mb-1">
-                        Break-even
-                      </span>
-                      <span className="text-xl font-bold text-accent mb-1">
-                        {breakEvenMonths < 1 ? '< 1 Month' : `${breakEvenMonths.toFixed(1)} Months`}
-                      </span>
+                      <div className="flex items-center justify-between gap-1 mb-1">
+                        <span className="text-white/60 text-[0.65rem] font-bold uppercase tracking-wider">
+                          Break-even
+                        </span>
+                        <div className="inline-flex items-center bg-black/60 border border-white/15 rounded-lg p-0.5">
+                          <button
+                            type="button"
+                            onClick={() => setBreakEvenUnit('months')}
+                            className={`px-1.5 sm:px-2 py-0.5 rounded text-[0.6rem] sm:text-[0.62rem] font-mono font-bold transition-all cursor-pointer ${
+                              breakEvenUnit === 'months'
+                                ? 'bg-accent text-black shadow-sm'
+                                : 'text-white/50 hover:text-white'
+                            }`}
+                          >
+                            Month
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setBreakEvenUnit('years')}
+                            className={`px-1.5 sm:px-2 py-0.5 rounded text-[0.6rem] sm:text-[0.62rem] font-mono font-bold transition-all cursor-pointer ${
+                              breakEvenUnit === 'years'
+                                ? 'bg-accent text-black shadow-sm'
+                                : 'text-white/50 hover:text-white'
+                            }`}
+                          >
+                            Year
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
+                        <span className="text-xl font-bold text-accent">
+                          {breakEvenDisplay()}
+                        </span>
+                        {breakEvenSecondary() && (
+                          <span className="text-xs font-mono text-accent/60">
+                            {breakEvenSecondary()}
+                          </span>
+                        )}
+                      </div>
+
                       <span className="text-white/40 text-[0.65rem] uppercase">
                         on ₹{totalHardwareInvestment.toLocaleString('en-IN')} capex ({numChargers} {numChargers === 1 ? 'unit' : 'units'})
                       </span>
