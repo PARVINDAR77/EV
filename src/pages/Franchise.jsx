@@ -622,7 +622,7 @@ const Franchise = () => {
               <div 
                 id="franchise-form" 
                 ref={formRef} 
-                className="lg:col-span-5 sticky top-[105px] self-start z-30 scroll-mt-36 max-h-[calc(100vh-120px)] overflow-y-auto"
+                className="lg:col-span-5 sticky top-[105px] self-start z-30 scroll-mt-36"
               >
                 <div className="w-full rounded-[2.2rem] bg-white border-2 border-red-200/90 p-5 sm:p-7 shadow-xl relative">
                   
