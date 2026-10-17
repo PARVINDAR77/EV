@@ -9,7 +9,6 @@ import SmartControlSection from '../sections/home/SmartControlSection';
 import EngineeredToChargeSection from '../sections/home/EngineeredToChargeSection';
 import ChargingSolutionsSection from '../sections/home/ChargingSolutionsSection';
 import WhyAxionSection from '../sections/home/WhyAxionSection';
-import StatsSection from '../sections/home/StatsSection';
 import CTASection from '../sections/home/CTASection';
 import Footer from '../components/Footer/Footer';
 
@@ -26,7 +25,6 @@ const Home = () => {
         <EngineeredToChargeSection />
         <ChargingSolutionsSection />
         <WhyAxionSection />
-        <StatsSection />
         <CTASection />
         <Footer />
       </main>
