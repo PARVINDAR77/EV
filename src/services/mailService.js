@@ -81,8 +81,8 @@ export async function sendContactMessage({ name, email, subject, message }) {
 /**
  * Send Franchise / Partner Application
  */
-export async function sendFranchiseApplication({ name, email, phone, location, model }) {
-  return sendEmailRequest('franchise', { name, email, phone, location, model });
+export async function sendFranchiseApplication(data) {
+  return sendEmailRequest('franchise', data);
 }
 
 /**
