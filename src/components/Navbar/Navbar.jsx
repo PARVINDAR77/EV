@@ -153,7 +153,7 @@ const Navbar = () => {
         onMouseEnter={() => setActiveMenu('growth')}
       >
         <div className="w-full max-w-[1440px] mx-auto px-8 py-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
             
             {/* Column 1: Solutions */}
             <div className="flex flex-col">
@@ -194,26 +194,7 @@ const Navbar = () => {
               </ul>
             </div>
 
-            {/* Column 3: Software & Services */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-3 mb-5 border-b border-white/10 pb-3">
-                <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                  <Smartphone className="text-white w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-white font-sans font-bold text-base">Software & Services</h4>
-                  <p className="text-[0.68rem] text-gray-400 font-mono">App, Cloud & Support</p>
-                </div>
-              </div>
-              <ul className="flex flex-col gap-3">
-                <li><Link to="/product/charge-app" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Axion Driver App <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/product/cms" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Cloud Charger CMS <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/services/installation" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Turnkey Site Installation <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/services/maintenance" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Annual Maintenance SLA <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-              </ul>
-            </div>
-
-            {/* Column 4: ROI Calculator Spotlight Card */}
+            {/* Column 3: ROI Calculator Spotlight Card */}
             <div className="flex flex-col justify-between p-6 rounded-2xl bg-gradient-to-br from-[#05150a] via-[#020403] to-[#010a04] border border-accent/30 shadow-[0_0_25px_rgba(0,255,0,0.15)] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-2xl pointer-events-none" />
               
