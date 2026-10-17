@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
-import { ArrowRight, CheckCircle2, FileText, Printer, X, Download, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, FileText, X, Download, ShieldCheck, Zap } from 'lucide-react';
 import acImage from '../../assets/images/Modern Home EV Charging Showcase.webp';
 import dcImage from '../../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
 import accImage from '../../assets/images/AXION Charge Logistics Hub.webp';
@@ -473,7 +473,7 @@ const ProductPage = (props) => {
     { key: 'ac-3-3kw', label: '3.3 kW' },
     { key: 'ac-7-4kw', label: '7.4 kW' },
     { key: 'ac-11kw', label: '11 kW' },
-    { key: 'ac-22kw', label: '22 kW (Focal 22)' }
+    { key: 'ac-22kw', label: '22 kW' }
   ];
 
   const dcModels = [
@@ -684,14 +684,6 @@ const ProductPage = (props) => {
                       </div>
                     )}
 
-                    <button
-                      type="button"
-                      onClick={() => window.print()}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.3)] cursor-pointer"
-                    >
-                      <Printer size={15} />
-                      Print / Save PDF
-                    </button>
                     <button
                       type="button"
                       onClick={() => setIsDatasheetOpen(false)}
