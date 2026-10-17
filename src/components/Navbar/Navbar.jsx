@@ -187,10 +187,135 @@ const Navbar = () => {
                 </div>
               </div>
               <ul className="flex flex-col gap-3">
-                <li><Link to="/products/ac-chargers" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">AC Smart Wallboxes (3.3kW-22kW) <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/products/dc-chargers" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">DC Ultra-Fast (30kW-240kW) <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/products/accessories" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Pedestals & Accessories <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/product/charging-cables" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Heavy-Duty Charging Cables <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
+                {/* AC Wallboxes with flyout */}
+                <li 
+                  className="relative group/sub w-full"
+                  onMouseEnter={() => setHoveredSubCat('growth-ac')}
+                  onMouseLeave={() => setHoveredSubCat(null)}
+                >
+                  <Link 
+                    to="/products/ac-chargers" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
+                  >
+                    <span>AC Smart Wallboxes (3.3kW-22kW)</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
+                  </Link>
+
+                  {/* Flyout Sub-Menu */}
+                  <div 
+                    className={`absolute top-0 left-full pl-3 w-56 transition-all duration-200 origin-left z-50 ${
+                      hoveredSubCat === 'growth-ac' 
+                        ? 'opacity-100 scale-100 pointer-events-auto' 
+                        : 'opacity-0 scale-95 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto'
+                    }`}
+                  >
+                    <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
+                      <Link to="/product/ac-3-3kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion 3.3 kW AC</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Home</span>
+                      </Link>
+                      <Link to="/product/ac-7-4kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion 7.4 kW AC</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Fast</span>
+                      </Link>
+                      <Link to="/product/ac-11kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion 11 kW AC</span>
+                        <span className="text-[0.6rem] font-mono text-accent">3-Phase</span>
+                      </Link>
+                      <Link to="/product/ac-22kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion 22 kW AC</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Pro</span>
+                      </Link>
+                    </div>
+                  </div>
+                </li>
+
+                {/* DC Ultra-Fast with flyout */}
+                <li 
+                  className="relative group/sub w-full"
+                  onMouseEnter={() => setHoveredSubCat('growth-dc')}
+                  onMouseLeave={() => setHoveredSubCat(null)}
+                >
+                  <Link 
+                    to="/products/dc-chargers" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
+                  >
+                    <span>DC Ultra-Fast (30kW-240kW)</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
+                  </Link>
+
+                  {/* Flyout Sub-Menu */}
+                  <div 
+                    className={`absolute top-0 left-full pl-3 w-56 transition-all duration-200 origin-left z-50 ${
+                      hoveredSubCat === 'growth-dc' 
+                        ? 'opacity-100 scale-100 pointer-events-auto' 
+                        : 'opacity-0 scale-95 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto'
+                    }`}
+                  >
+                    <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
+                      <Link to="/product/dc-30kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion DC 30kW</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Compact</span>
+                      </Link>
+                      <Link to="/product/dc-60kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion DC 60kW</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Dual-Gun</span>
+                      </Link>
+                      <Link to="/product/dc-120kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion DC 120kW</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Highway</span>
+                      </Link>
+                      <Link to="/product/dc-240kw" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex items-center justify-between">
+                        <span>Axion DC 240kW</span>
+                        <span className="text-[0.6rem] font-mono text-accent">Ultra</span>
+                      </Link>
+                    </div>
+                  </div>
+                </li>
+
+                {/* Pedestals & Accessories with flyout */}
+                <li 
+                  className="relative group/sub w-full"
+                  onMouseEnter={() => setHoveredSubCat('growth-acc')}
+                  onMouseLeave={() => setHoveredSubCat(null)}
+                >
+                  <Link 
+                    to="/products/accessories" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
+                  >
+                    <span>Pedestals & Accessories</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
+                  </Link>
+
+                  {/* Flyout Sub-Menu */}
+                  <div 
+                    className={`absolute top-0 left-full pl-3 w-56 transition-all duration-200 origin-left z-50 ${
+                      hoveredSubCat === 'growth-acc' 
+                        ? 'opacity-100 scale-100 pointer-events-auto' 
+                        : 'opacity-0 scale-95 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto'
+                    }`}
+                  >
+                    <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
+                      <Link to="/product/charging-cables" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Charging Cables</Link>
+                      <Link to="/product/pedestal-stand" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Pedestal Stand</Link>
+                      <Link to="/product/rfid-access" onClick={() => setActiveMenu(null)} className="px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">RFID Card & Keyfob</Link>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <Link 
+                    to="/product/charging-cables" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group py-1"
+                  >
+                    Heavy-Duty Charging Cables 
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/>
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -261,37 +386,98 @@ const Navbar = () => {
               </div>
               <ul className="flex flex-col gap-3">
                 <li 
-                  className="relative group w-max"
-                  onMouseEnter={() => setHoveredSubCat('ac')}
+                  className="relative group/sub w-full"
+                  onMouseEnter={() => setHoveredSubCat('sys-ac')}
                   onMouseLeave={() => setHoveredSubCat(null)}
                 >
-                  <Link to="/products/ac-chargers" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2">
-                    AC Wallboxes (3.3 - 22 kW) <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/>
+                  <Link 
+                    to="/products/ac-chargers" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
+                  >
+                    <span>AC Wallboxes (3.3 - 22 kW)</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
                   </Link>
-                  <div className={`absolute top-0 left-full ml-2 w-48 bg-[#020403]/95 backdrop-blur-xl border border-white/10 rounded-xl py-2 px-2 shadow-2xl transition-all duration-300 origin-left ${hoveredSubCat === 'ac' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-                    <Link to="/product/ac-3-3kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion 3.3 kW AC</Link>
-                    <Link to="/product/ac-7-4kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion 7.4 kW AC</Link>
-                    <Link to="/product/ac-11kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion 11 kW AC</Link>
-                    <Link to="/product/ac-22kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion 22 kW AC</Link>
+                  <div 
+                    className={`absolute top-0 left-full pl-3 w-56 transition-all duration-200 origin-left z-50 ${
+                      hoveredSubCat === 'sys-ac' 
+                        ? 'opacity-100 scale-100 pointer-events-auto' 
+                        : 'opacity-0 scale-95 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto'
+                    }`}
+                  >
+                    <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
+                      <Link to="/product/ac-3-3kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 3.3 kW AC</Link>
+                      <Link to="/product/ac-7-4kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 7.4 kW AC</Link>
+                      <Link to="/product/ac-11kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 11 kW AC</Link>
+                      <Link to="/product/ac-22kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 22 kW AC</Link>
+                    </div>
                   </div>
                 </li>
                 <li 
-                  className="relative group w-max"
-                  onMouseEnter={() => setHoveredSubCat('dc')}
+                  className="relative group/sub w-full"
+                  onMouseEnter={() => setHoveredSubCat('sys-dc')}
                   onMouseLeave={() => setHoveredSubCat(null)}
                 >
-                  <Link to="/products/dc-chargers" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2">
-                    DC Fast Chargers (30 - 240 kW) <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/>
+                  <Link 
+                    to="/products/dc-chargers" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
+                  >
+                    <span>DC Fast Chargers (30 - 240 kW)</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
                   </Link>
-                  <div className={`absolute top-0 left-full ml-2 w-48 bg-[#020403]/95 backdrop-blur-xl border border-white/10 rounded-xl py-2 px-2 shadow-2xl transition-all duration-300 origin-left ${hoveredSubCat === 'dc' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-                    <Link to="/product/dc-30kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion DC 30kW</Link>
-                    <Link to="/product/dc-60kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion DC 60kW</Link>
-                    <Link to="/product/dc-120kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion DC 120kW</Link>
-                    <Link to="/product/dc-240kw" onClick={() => setActiveMenu(null)} className="block px-4 py-2 text-xs text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Axion DC 240kW</Link>
+                  <div 
+                    className={`absolute top-0 left-full pl-3 w-56 transition-all duration-200 origin-left z-50 ${
+                      hoveredSubCat === 'sys-dc' 
+                        ? 'opacity-100 scale-100 pointer-events-auto' 
+                        : 'opacity-0 scale-95 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto'
+                    }`}
+                  >
+                    <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
+                      <Link to="/product/dc-30kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion DC 30kW</Link>
+                      <Link to="/product/dc-60kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion DC 60kW</Link>
+                      <Link to="/product/dc-120kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion DC 120kW</Link>
+                      <Link to="/product/dc-240kw" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion DC 240kW</Link>
+                    </div>
                   </div>
                 </li>
-                <li><Link to="/products/accessories" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">Pedestals & Mount Stands <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
-                <li><Link to="/product/rfid-access" onClick={() => setActiveMenu(null)} className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group">RFID Cards & Keyfobs <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/></Link></li>
+                <li 
+                  className="relative group/sub w-full"
+                  onMouseEnter={() => setHoveredSubCat('sys-acc')}
+                  onMouseLeave={() => setHoveredSubCat(null)}
+                >
+                  <Link 
+                    to="/products/accessories" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center justify-between py-1 group cursor-pointer"
+                  >
+                    <span>Pedestals & Mount Stands</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-accent flex-shrink-0 ml-2"/>
+                  </Link>
+                  <div 
+                    className={`absolute top-0 left-full pl-3 w-56 transition-all duration-200 origin-left z-50 ${
+                      hoveredSubCat === 'sys-acc' 
+                        ? 'opacity-100 scale-100 pointer-events-auto' 
+                        : 'opacity-0 scale-95 pointer-events-none group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto'
+                    }`}
+                  >
+                    <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
+                      <Link to="/product/charging-cables" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Charging Cables</Link>
+                      <Link to="/product/pedestal-stand" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Pedestal Stand</Link>
+                      <Link to="/product/rfid-access" onClick={() => setActiveMenu(null)} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">RFID Card & Keyfob</Link>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <Link 
+                    to="/product/rfid-access" 
+                    onClick={() => setActiveMenu(null)} 
+                    className="text-gray-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group py-1"
+                  >
+                    RFID Cards & Keyfobs 
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/>
+                  </Link>
+                </li>
               </ul>
             </div>
 
