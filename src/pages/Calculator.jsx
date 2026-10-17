@@ -349,9 +349,6 @@ const Calculator = () => {
                         {qty} {qty === 1 ? 'Unit' : 'Units'}
                       </button>
                     ))}
-                    <div className="ml-auto text-xs font-mono text-white/50 pt-1 sm:pt-0">
-                      Total Hardware: <span className="text-accent font-bold">₹{totalHardwareInvestment.toLocaleString('en-IN')}</span>
-                    </div>
                   </div>
                 </div>
 
