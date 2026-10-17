@@ -193,11 +193,13 @@ const Franchise = () => {
 
   return (
     <PageTransition locationKey="franchise">
-      <main className="w-full min-h-screen bg-[#020403] pt-24 overflow-hidden relative font-sans text-gray-200">
+      <main className="w-full min-h-screen bg-[#020403] pt-24 relative font-sans text-gray-200">
         
         {/* Ambient Glows */}
-        <div className="absolute top-1/4 right-[-10%] w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px] pointer-events-none" />
-        <div className="absolute top-2/3 left-[-15%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 right-[-10%] w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px]" />
+          <div className="absolute top-2/3 left-[-15%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[180px]" />
+        </div>
 
         {/* ══════════════════════════════════════════════════════════════════════════
             1. TOP HERO BANNER (NIGHT CHARGING STATION PHOTO + RIGHT-ALIGNED TEXT)
@@ -251,7 +253,7 @@ const Franchise = () => {
                - Left Column: India is Charging Ahead -> Why Partner -> Investment Plans
                - Right Column: Sticky "Partner With Us" card alongside all 5 steps!
            ══════════════════════════════════════════════════════════════════════════ */}
-        <div className="w-full bg-[#F8F9FA] text-[#111827] py-16 sm:py-20 lg:py-24 relative z-20 border-b border-gray-200">
+        <div className="w-full bg-[#F8F9FA] text-[#111827] pt-24 sm:pt-28 lg:pt-36 pb-24 relative z-20 border-b border-gray-200">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               
@@ -261,7 +263,7 @@ const Franchise = () => {
               <div className="lg:col-span-7 space-y-24">
 
                 {/* ── STEP 1: INDIA IS CHARGING AHEAD. ARE YOU? (SCREENSHOT 1) ── */}
-                <section>
+                <section className="scroll-mt-36">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -620,9 +622,9 @@ const Franchise = () => {
               <div 
                 id="franchise-form" 
                 ref={formRef} 
-                className="lg:col-span-5 sticky top-28 self-start z-30 scroll-mt-28"
+                className="lg:col-span-5 sticky top-[105px] self-start z-30 scroll-mt-36 max-h-[calc(100vh-120px)] overflow-y-auto"
               >
-                <div className="w-full rounded-[2.2rem] bg-white border-2 border-red-200/90 p-6 sm:p-8 shadow-xl relative">
+                <div className="w-full rounded-[2.2rem] bg-white border-2 border-red-200/90 p-5 sm:p-7 shadow-xl relative">
                   
                   {/* Title matching all 5 screenshots */}
                   <div className="mb-6">
