@@ -32,7 +32,7 @@ const INDIAN_STATES = [
 const FAQS = [
   {
     q: "What are the investment options and who is this for?",
-    a: "We offer two models: Fast Charging (₹25L–₹1Cr) for passenger EVs, and Super Charging (₹1Cr–₹10Cr) for high-throughput sites serving passenger cars, electric buses, and commercial trucks. Ideal for landowners, retail entrepreneurs, commercial real estate developers, and institutional investors."
+    a: "We offer two tailored models: Fast Charging for passenger EVs, and Super Charging for high-throughput commercial hubs serving passenger cars, electric buses, and heavy commercial trucks. Ideal for landowners, retail entrepreneurs, commercial real estate developers, and institutional investors."
   },
   {
     q: "What kind of space and power connection do I need?",
@@ -237,7 +237,7 @@ const Franchise = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-base sm:text-xl text-gray-300 mt-4 leading-relaxed font-sans max-w-xl lg:ml-auto drop-shadow-md"
               >
-                Be a franchise partner with India's largest EV charging network. Starting at just <strong className="text-accent font-semibold">₹25 lakhs*</strong>
+                Be a franchise partner with India's largest EV charging network and build the future of clean transit infrastructure.
               </motion.p>
             </div>
           </div>
@@ -532,10 +532,6 @@ const Franchise = () => {
                         <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-800 font-sans">
                           <li className="flex items-start gap-3">
                             <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Starting Investment:</strong> ₹25 Lakhs*</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
                             <span><strong>Charger Options:</strong> 30, 60, 120 kW DC (Single/Dual Gun)</span>
                           </li>
                           <li className="flex items-start gap-3">
@@ -578,10 +574,6 @@ const Franchise = () => {
 
                         {/* Bullet Points with exact labels from Screenshot 5 */}
                         <ul className="space-y-3.5 text-sm sm:text-[0.95rem] text-gray-800 font-sans">
-                          <li className="flex items-start gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
-                            <span><strong>Starting Investment:</strong> ₹1 Crore*</span>
-                          </li>
                           <li className="flex items-start gap-3">
                             <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 flex-shrink-0" />
                             <span><strong>Charger Options:</strong> 240 kW & 360 kW DC</span>
@@ -1063,7 +1055,7 @@ const Franchise = () => {
 
                 <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-emerald-300 font-mono text-xs sm:text-sm font-semibold">
                   <Zap size={15} className="text-emerald-400 flex-shrink-0" />
-                  <span>From ₹25 Lakhs to ₹10 Cr • Build your station with up to 75% funded capital</span>
+                  <span>Institutional Capital Assistance • Build your station with up to 75% funded debt</span>
                 </div>
               </div>
 
