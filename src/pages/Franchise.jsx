@@ -248,10 +248,12 @@ const Franchise = () => {
                - Left Column: India is Charging Ahead -> Why Partner -> Investment Plans
                - Right Column: Sticky "Partner With Us" card alongside all steps!
            ══════════════════════════════════════════════════════════════════════════ */}
-        <div className="w-full bg-[#020503] text-gray-200 pt-20 sm:pt-24 lg:pt-28 pb-24 relative z-20 border-b border-white/10 overflow-hidden">
+        <div className="w-full bg-[#020503] text-gray-200 pt-20 sm:pt-24 lg:pt-28 pb-24 relative z-20 border-b border-white/10">
           {/* Subtle ambient lighting matching website */}
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/5 rounded-full blur-[140px] pointer-events-none" />
-          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/5 rounded-full blur-[140px]" />
+            <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/5 rounded-full blur-[140px]" />
+          </div>
 
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
