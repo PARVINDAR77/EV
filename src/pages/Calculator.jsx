@@ -336,29 +336,76 @@ const Calculator = () => {
 
                 {/* ── How busy is your location ── */}
                 <div className="mb-4">
-                  <div className="flex justify-between items-end mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div>
                       <label className="block text-white/70 text-sm font-bold uppercase tracking-wider">
                         Sessions per charger / day
                       </label>
-                      {numChargers > 1 && (
+                      {numChargers > 1 ? (
                         <p className="text-xs text-white/40 mt-0.5">
                           {dailySessions} total sessions across all {numChargers} chargers
                         </p>
+                      ) : (
+                        <p className="text-xs text-white/40 mt-0.5">
+                          Scale expected daily traffic
+                        </p>
                       )}
                     </div>
-                    <span className="text-accent font-bold text-xl">{vehiclesPerDay} <span className="text-sm text-accent/70">sessions/day</span></span>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleAdjust(setVehiclesPerDay, -1, 1, 100, 1)}
+                        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/20 active:scale-95 flex items-center justify-center text-accent transition-all cursor-pointer"
+                        aria-label="Decrease sessions per day"
+                      >
+                        <Minus size={16} />
+                      </button>
+
+                      <div className="flex items-center bg-black/60 border border-white/20 focus-within:border-accent rounded-lg px-3 h-10">
+                        <input
+                          type="number"
+                          min="1"
+                          max="100"
+                          value={vehiclesPerDay === 0 ? 0 : vehiclesPerDay || ''}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === '') setVehiclesPerDay('');
+                            else {
+                              const num = parseInt(val, 10);
+                              if (!isNaN(num)) setVehiclesPerDay(num);
+                            }
+                          }}
+                          onBlur={() => {
+                            const num = parseInt(vehiclesPerDay, 10);
+                            if (isNaN(num) || num < 1) setVehiclesPerDay(1);
+                            else if (num > 100) setVehiclesPerDay(100);
+                          }}
+                          className="w-10 bg-transparent text-center font-mono text-accent font-bold text-lg focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-text selection:bg-accent selection:text-black"
+                        />
+                        <span className="text-xs text-accent/70 font-semibold ml-1 whitespace-nowrap">sessions/day</span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleAdjust(setVehiclesPerDay, 1, 1, 100, 1)}
+                        className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/20 active:scale-95 flex items-center justify-center text-accent transition-all cursor-pointer"
+                        aria-label="Increase sessions per day"
+                      >
+                        <Plus size={16} />
+                      </button>
+                    </div>
                   </div>
                   
                   <input 
                     type="range" 
                     min="1" 
                     max="100" 
-                    value={vehiclesPerDay}
+                    value={Number(vehiclesPerDay) || 1}
                     onChange={(e) => setVehiclesPerDay(Number(e.target.value))}
                     className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[var(--color-accent)]"
                     style={{
-                      background: `linear-gradient(to right, var(--color-accent) ${vehiclesPerDay}%, rgba(255,255,255,0.1) ${vehiclesPerDay}%)`
+                      background: `linear-gradient(to right, var(--color-accent) ${Number(vehiclesPerDay) || 0}%, rgba(255,255,255,0.1) ${Number(vehiclesPerDay) || 0}%)`
                     }}
                   />
                   <div className="flex justify-between mt-3 text-xs text-[#666] font-mono uppercase tracking-widest">
