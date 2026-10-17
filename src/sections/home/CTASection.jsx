@@ -1,9 +1,27 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import bgImage from '../../assets/images/hero_bg_final.webp';
 
 const CTASection = () => {
+  const navigate = useNavigate();
+
+  const handleGetSolution = () => {
+    navigate('/contact', {
+      state: {
+        type: 'quote',
+        source: 'cta_charging_solution',
+        solution: 'EV Charging Solution',
+        subtitle: 'Commercial & Business Systems'
+      }
+    });
+  };
+
+  const handleBecomeFranchise = () => {
+    navigate('/franchise');
+  };
+
   return (
     <section className="relative w-full py-32 z-20 flex flex-col items-center justify-center border-t border-white/10 overflow-hidden">
       
@@ -54,13 +72,22 @@ const CTASection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
         >
-          <button className="group w-full md:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-accent text-[#020403] font-sans text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.6)]">
+          <button 
+            type="button"
+            onClick={handleGetSolution}
+            className="group w-full md:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-accent text-[#020403] font-sans text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.6)] cursor-pointer"
+          >
             GET A CHARGING SOLUTION
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={3} />
           </button>
           
-          <button className="group w-full md:w-auto flex items-center justify-center px-8 py-4 border border-accent/50 text-accent font-sans text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-accent hover:bg-accent/10 transition-colors bg-[#020403]/50 backdrop-blur-sm">
+          <button 
+            type="button"
+            onClick={handleBecomeFranchise}
+            className="group w-full md:w-auto flex items-center justify-center gap-2.5 px-8 py-4 border border-accent/50 text-accent font-sans text-[0.85rem] font-bold uppercase tracking-widest rounded-full hover:border-accent hover:bg-accent/10 hover:text-white transition-all bg-[#020403]/50 backdrop-blur-sm cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+          >
             BECOME A FRANCHISE PARTNER
+            <ArrowRight className="w-4 h-4 opacity-70 transition-transform duration-300 group-hover:translate-x-1 group-hover:opacity-100" strokeWidth={2.5} />
           </button>
         </motion.div>
 
