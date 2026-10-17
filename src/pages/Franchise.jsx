@@ -9,9 +9,10 @@ import {
   PhoneCall, Users, FileText, Check, ArrowUpRight, Percent, Clock, Landmark, TrendingDown
 } from 'lucide-react';
 import { sendFranchiseApplication } from '../services/mailService';
+import AxionLogo from '../components/common/AxionLogo';
 
 // Reference Images
-import heroBannerNight from '../assets/images/franchise_banner_night.jpg';
+import heroBannerNight from '../assets/images/franchise_banner_indian_hub.jpg';
 import fastChargerCanopy from '../assets/images/Axion Charge Highway Stop.webp';
 import superChargerCanopy from '../assets/images/AXION Charge Logistics Hub.webp';
 import evPlugImg from '../assets/images/ev_plug_charging.jpg';
@@ -197,28 +198,41 @@ const Franchise = () => {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            1. TOP HERO BANNER (NIGHT CHARGING STATION PHOTO + RIGHT-ALIGNED TEXT)
+            1. TOP HERO BANNER (INDIAN CHARGING STATION PHOTO + RIGHT-ALIGNED TEXT)
            ══════════════════════════════════════════════════════════════════════════ */}
-        <div className="w-full relative min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] flex items-center overflow-hidden border-b border-white/10">
+        <div className="w-full relative min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] flex items-center overflow-hidden border-b border-white/10">
           <div 
             className="absolute inset-0 bg-cover bg-center sm:bg-left bg-no-repeat scale-105 transition-transform duration-1000"
             style={{ backgroundImage: `url("${heroBannerNight}")` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/60 to-[#020403]/95 sm:via-black/70 sm:to-[#020403]" />
+          {/* Balanced gradient: preserves clear visibility of the Indian EV station, Tata Nexon EV, and canopy on left while providing high contrast for text on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-black/55 to-[#020403]/95 sm:via-black/65 sm:to-[#020403]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-transparent to-black/40" />
 
-          <div className="max-w-[1400px] w-full mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-24 relative z-10 flex flex-col items-start lg:items-end text-left lg:text-right">
+          {/* Official Axion Station Branding Plaque on the charging hub (desktop & tablet) */}
+          <div className="hidden md:flex items-center gap-3 absolute top-8 left-8 sm:left-12 lg:left-16 z-20 px-4 py-2.5 rounded-2xl bg-black/80 border border-accent/40 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_20px_rgba(0,255,0,0.25)]">
+            <AxionLogo className="h-6 sm:h-7 w-auto drop-shadow-[0_0_8px_#00FF00]" fill="#00FF00" />
+            <div className="h-4 w-[1px] bg-white/20" />
+            <span className="font-mono text-[0.68rem] uppercase tracking-wider text-gray-300 font-semibold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              Expressway Superhub • India
+            </span>
+          </div>
+
+          <div className="max-w-[1400px] w-full mx-auto px-4 md:px-8 lg:px-16 pt-16 pb-24 relative z-10 flex flex-col items-start lg:items-end text-left lg:text-right">
             <div className="max-w-2xl">
               <motion.div 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent/15 border border-accent/40 mb-4 backdrop-blur-md"
+                className="flex flex-col items-start lg:items-end mb-4"
               >
-                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <span className="text-accent font-mono text-[0.7rem] uppercase tracking-widest font-bold">
-                  B2B Franchise Opportunity
-                </span>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/15 border border-accent/40 backdrop-blur-md">
+                  <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_6px_#00FF00]" />
+                  <span className="text-accent font-mono text-[0.7rem] uppercase tracking-widest font-bold">
+                    B2B Franchise Opportunity
+                  </span>
+                </div>
               </motion.div>
 
               <motion.h1 
