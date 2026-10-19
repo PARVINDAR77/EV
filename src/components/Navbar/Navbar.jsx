@@ -388,20 +388,20 @@ const Navbar = () => {
                     </Link>
                     <span className="text-[0.6rem] font-mono text-gray-400">3.3 kW - 22 kW</span>
                   </div>
-                  <div className="grid grid-cols-5 gap-1">
-                    <Link to="/product/ac-3-3kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 3.3 kW AC">
+                  <div className="grid grid-cols-[1fr_1.1fr_1.5fr_1fr_1fr] gap-1.5">
+                    <Link to="/product/ac-3-3kw" onClick={handleCloseImmediately} className="px-1.5 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all flex items-center justify-center" title="Axion 3.3 kW AC">
                       3.3 kW
                     </Link>
-                    <Link to="/product/ac-7-4kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 7.4 kW AC Pro">
-                      7.4k Pro
+                    <Link to="/product/ac-7-4kw" onClick={handleCloseImmediately} className="px-1.5 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all flex items-center justify-center" title="Axion 7.4 kW AC Pro">
+                      7.4 kW Pro
                     </Link>
-                    <Link to="/product/ac-7-4kw-compact" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-accent/10 hover:bg-accent hover:text-black text-accent text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-accent/40 hover:border-accent transition-all" title="Axion 7.4 kW AC Compact">
-                      7.4k Mini
+                    <Link to="/product/ac-7-4kw-compact" onClick={handleCloseImmediately} className="px-1.5 py-1.5 bg-accent/10 hover:bg-accent hover:text-black text-accent text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-accent/40 hover:border-accent transition-all flex items-center justify-center whitespace-nowrap" title="Axion 7.4 kW AC Compact">
+                      7.4 kW Compact
                     </Link>
-                    <Link to="/product/ac-11kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 11 kW AC">
+                    <Link to="/product/ac-11kw" onClick={handleCloseImmediately} className="px-1.5 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all flex items-center justify-center" title="Axion 11 kW AC">
                       11 kW
                     </Link>
-                    <Link to="/product/ac-22kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 22 kW AC">
+                    <Link to="/product/ac-22kw" onClick={handleCloseImmediately} className="px-1.5 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all flex items-center justify-center" title="Axion 22 kW AC">
                       22 kW
                     </Link>
                   </div>
