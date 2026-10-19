@@ -42,7 +42,7 @@ const Loader = ({ onComplete }) => {
 
     let safetyTimer = setTimeout(() => {
       onComplete();
-    }, 4500);
+    }, 2500);
 
     tryPlay();
     video.addEventListener('canplay', tryPlay);
@@ -133,7 +133,7 @@ const Loader = ({ onComplete }) => {
           muted
           playsInline
           preload="auto"
-          className={`w-full h-full object-cover object-center transition-opacity duration-700 ${
+          className={`w-full h-full object-contain object-center transition-opacity duration-700 ${
             videoLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onError={() => {

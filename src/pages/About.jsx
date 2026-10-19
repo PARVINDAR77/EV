@@ -5,11 +5,11 @@ import Footer from '../components/Footer/Footer';
 import { Leaf, Zap, Shield, Globe, Cpu, Wrench, Headphones, Cloud } from 'lucide-react';
 
 // Using local images to guarantee they load perfectly without network blocking
-import heroImg from '../assets/images/why_scalable.webp';
-import hardwareImg from '../assets/images/why_engineered.webp';
-import softwareImg from '../assets/images/why_smarttech.webp';
-import supportImg from '../assets/images/why_support.webp';
-import networkImg from '../assets/images/why_deployment.webp';
+import heroImg from '../assets/images/about_hero_superhub.webp';
+import hardwareImg from '../assets/images/why_engineered_for_india.webp';
+import softwareImg from '../assets/images/Outdoor Axion Charge Dashboard Billboard.webp';
+import supportImg from '../assets/images/why_247_support.webp';
+import networkImg from '../assets/images/why_reliable_deployment.webp';
 
 const About = () => {
   return (
@@ -64,19 +64,30 @@ const About = () => {
             </div>
             
             {/* Right Image Content - Overlapping and Dynamic */}
-            <div className="w-full lg:w-2/5 relative h-[500px] lg:h-[700px] flex items-center justify-center z-10 mt-10 lg:mt-0">
+            <div className="w-full lg:w-2/5 relative h-[460px] sm:h-[520px] lg:h-[580px] flex items-center justify-center z-10 mt-10 lg:mt-0">
               
               <motion.div 
                 initial={{ opacity: 0, x: 50, rotateY: 15 }}
                 animate={{ opacity: 1, x: 0, rotateY: 0 }}
                 transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-                className="w-full h-full relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(var(--color-accent-rgb),0.2)] z-20"
+                className="w-full h-full relative rounded-3xl overflow-hidden bg-[#070A0C] border border-white/15 shadow-[0_0_60px_rgba(var(--color-accent-rgb),0.25)] z-20 group"
                 style={{ transformPerspective: "1000px" }}
               >
-                <img src={heroImg} alt="Future of Mobility" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-transform duration-1000" />
-                <div className="absolute bottom-8 left-8 flex flex-col">
-                  <div className="w-12 h-[2px] bg-accent mb-3" />
-                  <span className="text-accent font-mono text-xs uppercase tracking-widest">Global Infrastructure</span>
+                <img 
+                  src={heroImg} 
+                  alt="Axion Charge National Superhub" 
+                  loading="eager"
+                  className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105" 
+                />
+                
+                {/* Ambient Bottom Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020403]/80 via-transparent to-transparent pointer-events-none" />
+
+                {/* Glassmorphic Infrastructure Badge */}
+                <div className="absolute bottom-6 left-6 flex flex-col z-20 bg-black/60 backdrop-blur-md px-4 py-3 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="w-8 h-[2px] bg-accent mb-2" />
+                  <span className="text-accent font-mono text-[0.7rem] uppercase tracking-widest font-bold">Global Infrastructure</span>
+                  <span className="text-white text-xs font-sans font-medium mt-0.5">High-Speed Transit Superhub</span>
                 </div>
               </motion.div>
 
@@ -111,8 +122,8 @@ const About = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="flex flex-col lg:flex-row items-center gap-16"
               >
-                <div className="w-full lg:w-1/2 relative h-[400px] rounded-3xl overflow-hidden border border-white/5 hover:border-accent/30 transition-all duration-500 group">
-                  <img src={hardwareImg} alt="Proprietary Hardware" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-all duration-700" />
+                <div className="w-full lg:w-1/2 relative aspect-[16/7.5] rounded-3xl overflow-hidden bg-[#070A0C] border border-white/10 hover:border-accent/40 shadow-xl transition-all duration-500 group">
+                  <img src={hardwareImg} alt="Proprietary Hardware" loading="lazy" decoding="async" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="w-full lg:w-1/2">
                   <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center mb-6">
@@ -135,8 +146,8 @@ const About = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="flex flex-col lg:flex-row-reverse items-center gap-16"
               >
-                <div className="w-full lg:w-1/2 relative h-[400px] rounded-3xl overflow-hidden border border-white/5 hover:border-accent/30 transition-all duration-500 group">
-                  <img src={softwareImg} alt="Intelligent Software" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-all duration-700" />
+                <div className="w-full lg:w-1/2 relative aspect-[16/7.5] rounded-3xl overflow-hidden bg-[#070A0C] border border-white/10 hover:border-accent/40 shadow-xl transition-all duration-500 group">
+                  <img src={softwareImg} alt="Intelligent Software" loading="lazy" decoding="async" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="w-full lg:w-1/2">
                   <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center mb-6">
@@ -159,8 +170,8 @@ const About = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="flex flex-col lg:flex-row items-center gap-16"
               >
-                <div className="w-full lg:w-1/2 relative h-[400px] rounded-3xl overflow-hidden border border-white/5 hover:border-accent/30 transition-all duration-500 group">
-                  <img src={supportImg} alt="Installation and Support" className="w-full h-full object-cover opacity-100 hover:scale-105 transition-all duration-700" />
+                <div className="w-full lg:w-1/2 relative aspect-[16/7.5] rounded-3xl overflow-hidden bg-[#070A0C] border border-white/10 hover:border-accent/40 shadow-xl transition-all duration-500 group">
+                  <img src={supportImg} alt="Installation and Support" loading="lazy" decoding="async" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="w-full lg:w-1/2">
                   <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center mb-6">

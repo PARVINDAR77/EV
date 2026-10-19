@@ -3,16 +3,16 @@ import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
-import { ArrowRight, CheckCircle2, FileText, X, Download, ShieldCheck, Zap } from 'lucide-react';
-import acImage from '../../assets/images/Modern Home EV Charging Showcase.webp';
-import dcImage from '../../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
+import { ArrowRight, CheckCircle2, FileText, X, ShieldCheck, Zap } from 'lucide-react';
+import acImage from '../../assets/images/solution_residential_nexon.webp';
+import dcImage from '../../assets/images/solution_commercial_phoenix.webp';
 import accImage from '../../assets/images/AXION Charge Logistics Hub.webp';
 
 // AC Images
-import ac3kwImg from '../../assets/images/Modern Green EV Charger Garage Display.webp';
-import ac7kwImg from '../../assets/images/Black Axion Logo on White EV Charger-2.webp';
-import ac11kwImg from '../../assets/images/Black AXION logo on white charger-3.webp';
-import ac22kwImg from '../../assets/images/22 kW EV charger, black AXION logo-4.webp';
+import ac3kwImg from '../../assets/images/product_ac_2wheeler_3_3kw.webp';
+import ac7kwImg from '../../assets/images/product_ac_7_4kw.webp';
+import ac11kwImg from '../../assets/images/product_ac_11kw.webp';
+import ac22kwImg from '../../assets/images/product_ac_22kw.webp';
 
 // DC Images
 import dc30kwImg from '../../assets/images/AXION DC charger with black cables-1.webp';
@@ -33,6 +33,7 @@ const PRODUCT_DB = {
   'ac-3-3kw': {
     title: 'Axion 3.3 kW AC (AXION 3)',
     category: 'AC Wallboxes',
+    price: '₹14,900',
     description: 'AXION 3 EV Charger is a compact AC Slow charger with 3 sockets for all Indian cars, 3-wheelers, and 2-wheelers. Rapid deployment with OCPP v1.6 support.',
     image: ac3kwImg,
     features: [
@@ -47,6 +48,7 @@ const PRODUCT_DB = {
       modelBadge: '3',
       model: 'AXION 3',
       powerRating: '3.3 KW',
+      price: '₹14,900',
       overview: 'AXION 3 EV Charger is a compact AC Slow charger. Those variants have three Sockets for all Indian cars, three wheelers and two wheelers. It can deploy charging network rapidly and effectively, providing high-power charging service for electric vehicles.',
       featuresList: [
         'Compact and rugged design',
@@ -68,6 +70,7 @@ const PRODUCT_DB = {
   'ac-7-4kw': {
     title: 'Axion 7.4 kW AC',
     category: 'AC Wallboxes',
+    price: '₹59,900',
     description: 'The standard for home use. Delivers a full overnight charge for most EVs on a single-phase connection.',
     image: ac7kwImg,
     features: [
@@ -79,6 +82,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'AXION 7.4',
       powerRating: '7.4 KW',
+      price: '₹59,900',
       overview: 'AXION 7.4 is the benchmark smart AC home and commercial charger, delivering fast overnight charging speeds with dynamic load balancing on single-phase power.',
       featuresList: [
         'Compact and rugged architectural design',
@@ -102,6 +106,7 @@ const PRODUCT_DB = {
   'ac-11kw': {
     title: 'Axion 11 kW AC',
     category: 'AC Wallboxes',
+    price: '₹74,900',
     description: 'Faster 3-phase charging perfect for workplaces, fleet depots, and multi-unit dwellings.',
     image: ac11kwImg,
     features: [
@@ -113,6 +118,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'AXION 11',
       powerRating: '11 KW',
+      price: '₹74,900',
       overview: 'AXION 11 delivers rapid 3-phase AC power designed for commercial workplaces, fleet depots, and high-density residential buildings.',
       featuresList: [
         'Compact and rugged commercial-grade enclosure',
@@ -136,6 +142,7 @@ const PRODUCT_DB = {
   'ac-22kw': {
     title: 'Axion 22 kW AC',
     category: 'AC Wallboxes',
+    price: '₹89,900',
     description: 'Maximum AC charging speed. Designed for destination charging at hotels, malls, and public parking.',
     image: ac22kwImg,
     features: [
@@ -147,6 +154,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'FOCAL 22',
       powerRating: '22 KW',
+      price: '₹89,900',
       overview: 'FOCAL 22 is an AC Charging station for use at offices and other commercial Locations. This charger comes with AC type 2 gun for all Indian cars. Its system is simple and featured with small footprint, convenient installation an easy operation.',
       featuresList: [
         'Compact and rugged design',
@@ -170,6 +178,7 @@ const PRODUCT_DB = {
   'dc-30kw': {
     title: 'Axion DC 30kW',
     category: 'DC Fast Chargers',
+    price: '₹4,99,900',
     description: 'Compact DC charging for car dealerships, quick-service retail, and urban fleet depots.',
     image: dc30kwImg,
     features: [
@@ -181,6 +190,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'AXION DC 30',
       powerRating: '30 KW',
+      price: '₹4,99,900',
       overview: 'AXION DC 30 is a compact high-efficiency DC fast charger designed for dealerships, commercial fleets, and urban commercial hubs with rapid turnaround times.',
       featuresList: [
         'Compact footprint (<0.3 sq.m) with rugged all-weather casing',
@@ -204,6 +214,7 @@ const PRODUCT_DB = {
   'dc-60kw': {
     title: 'Axion DC 60kW',
     category: 'DC Fast Chargers',
+    price: '₹6,99,900',
     description: 'Versatile fast charging for commercial parking, hospitality, and longer stops.',
     image: dc60kwImg,
     features: [
@@ -215,6 +226,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'AXION DC 60',
       powerRating: '60 KW',
+      price: '₹6,99,900',
       overview: 'AXION DC 60 is a commercial dual-gun DC fast charging station engineered for highways, fuel stations, and fleet depots with intelligent dynamic power sharing.',
       featuresList: [
         'Rugged industrial IP55 & IK10 vandal-resistant construction',
@@ -238,6 +250,7 @@ const PRODUCT_DB = {
   'dc-120kw': {
     title: 'Axion DC 120kW',
     category: 'DC Fast Chargers',
+    price: '₹9,99,900',
     description: 'High-power dual-charging solution engineered for highway corridors and rapid transit.',
     image: dc120kwImg,
     features: [
@@ -249,6 +262,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'AXION DC 120',
       powerRating: '120 KW',
+      price: '₹9,99,900',
       overview: 'AXION DC 120 is engineered for highway corridors and rapid transit, delivering up to 150+ km of EV driving range in under 15 minutes of charging.',
       featuresList: [
         'Heavy-duty industrial architecture with SiC high-efficiency power modules (>96%)',
@@ -272,6 +286,7 @@ const PRODUCT_DB = {
   'dc-240kw': {
     title: 'Axion DC 240kW',
     category: 'DC Fast Chargers',
+    price: '₹18,99,900',
     description: 'Ultra-fast hyper-charging for heavy-duty fleets and next-generation EVs.',
     image: dc240kwImg,
     features: [
@@ -283,6 +298,7 @@ const PRODUCT_DB = {
     datasheet: {
       model: 'AXION DC 240',
       powerRating: '240 KW',
+      price: '₹18,99,900',
       overview: 'AXION DC 240 is the pinnacle of hyper-fast charging, engineered for 800V architectures, commercial electric buses, heavy trucks, and high-turnover corridors.',
       featuresList: [
         'Native 800V & 1000V high-voltage power conversion',
@@ -416,8 +432,8 @@ const ProductPage = (props) => {
   const [isDatasheetOpen, setIsDatasheetOpen] = useState(false);
   const datasheetRef = useRef(null);
   
-  // Resolve product
-  const product = props.title ? props : (PRODUCT_DB[id] || {
+  // Resolve base product
+  const baseProduct = props.title ? props : (PRODUCT_DB[id] || {
     title: 'Product Not Found',
     category: 'Error',
     description: 'The requested product could not be found.',
@@ -425,20 +441,54 @@ const ProductPage = (props) => {
     features: []
   });
 
-  const { title, category, description, image, features } = product;
+  const isAcCategory = (
+    (id && id.startsWith('ac-')) ||
+    baseProduct.title?.toLowerCase().includes('ac') ||
+    baseProduct.category?.toLowerCase().includes('ac')
+  );
+  const isDcCategory = (
+    (id && id.startsWith('dc-')) ||
+    baseProduct.title?.toLowerCase().includes('dc') ||
+    baseProduct.category?.toLowerCase().includes('dc')
+  );
 
-  // Determine active datasheet
-  const defaultKey = id && PRODUCT_DB[id]?.datasheet 
+  const acModels = [
+    { key: 'ac-3-3kw', label: '3.3 kW' },
+    { key: 'ac-7-4kw', label: '7.4 kW' },
+    { key: 'ac-11kw', label: '11 kW' },
+    { key: 'ac-22kw', label: '22 kW' }
+  ];
+
+  const dcModels = [
+    { key: 'dc-30kw', label: '30 kW' },
+    { key: 'dc-60kw', label: '60 kW' },
+    { key: 'dc-120kw', label: '120 kW' },
+    { key: 'dc-240kw', label: '240 kW' }
+  ];
+
+  const activeSwitcherModels = isAcCategory ? acModels : (isDcCategory ? dcModels : []);
+
+  // Determine active datasheet & variant model key
+  const defaultKey = (id && PRODUCT_DB[id]) 
     ? id 
-    : (title?.toLowerCase().includes('dc') ? 'dc-60kw' : 'ac-3-3kw');
+    : (isDcCategory ? 'dc-60kw' : (isAcCategory ? 'ac-3-3kw' : (id || '')));
 
   const [selectedModelKey, setSelectedModelKey] = useState(defaultKey);
   const activeKey = selectedModelKey || defaultKey;
-  const activeDatasheet = PRODUCT_DB[activeKey]?.datasheet || PRODUCT_DB['ac-3-3kw'].datasheet;
+
+  // Active product resolved from activeKey so all upper data updates dynamically!
+  const activeProduct = (activeKey && PRODUCT_DB[activeKey]) ? PRODUCT_DB[activeKey] : baseProduct;
+  const title = activeProduct.title || baseProduct.title;
+  const category = activeProduct.category || baseProduct.category;
+  const description = activeProduct.description || baseProduct.description;
+  const image = activeProduct.image || baseProduct.image;
+  const features = (activeProduct.features && activeProduct.features.length > 0) ? activeProduct.features : (baseProduct.features || []);
+  const price = activeProduct.price || baseProduct.price || PRODUCT_DB[activeKey]?.datasheet?.price;
+  const activeDatasheet = activeProduct.datasheet || PRODUCT_DB[activeKey]?.datasheet || PRODUCT_DB['ac-3-3kw'].datasheet;
 
   // Sync state if route id changes
   useEffect(() => {
-    if (id && PRODUCT_DB[id]?.datasheet) {
+    if (id && PRODUCT_DB[id]) {
       setSelectedModelKey(id);
     }
   }, [id]);
@@ -465,7 +515,7 @@ const ProductPage = (props) => {
         type: 'quote',
         product: title,
         category: category,
-        productId: id || activeKey,
+        productId: activeKey || id,
         source: 'product_page'
       }
     });
@@ -484,29 +534,12 @@ const ProductPage = (props) => {
     }, 150);
   };
 
-  // Model switchers for Category overview pages
-  const isCategoryPage = !id || !PRODUCT_DB[id];
-  const isAcCategory = title?.toLowerCase().includes('ac');
-  const isDcCategory = title?.toLowerCase().includes('dc');
-
-  const acModels = [
-    { key: 'ac-3-3kw', label: '3.3 kW' },
-    { key: 'ac-7-4kw', label: '7.4 kW' },
-    { key: 'ac-11kw', label: '11 kW' },
-    { key: 'ac-22kw', label: '22 kW' }
-  ];
-
-  const dcModels = [
-    { key: 'dc-30kw', label: '30 kW' },
-    { key: 'dc-60kw', label: '60 kW' },
-    { key: 'dc-120kw', label: '120 kW' },
-    { key: 'dc-240kw', label: '240 kW' }
-  ];
-
-  const activeSwitcherModels = isAcCategory ? acModels : (isDcCategory ? dcModels : []);
+  const handleSelectModel = (modelKey) => {
+    setSelectedModelKey(modelKey);
+  };
 
   return (
-    <PageTransition locationKey={`product-${title}`}>
+    <PageTransition locationKey={props.title || id || 'product-page'}>
       <main className="w-full min-h-screen bg-[#020403] pt-48 overflow-hidden relative">
         
         {/* Background ambient glow */}
@@ -515,15 +548,40 @@ const ProductPage = (props) => {
 
         <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-10 pb-24 relative z-10">
           
-          {/* Top category label */}
+          {/* Top category label & Upper Variant Selector */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-8"
+            className="flex flex-wrap items-center justify-between gap-4 mb-8"
           >
-            <div className="w-12 h-[1px] bg-accent" />
-            <span className="text-accent font-mono text-[0.8rem] uppercase tracking-[0.3em] font-bold">{category}</span>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-[1px] bg-accent" />
+              <span className="text-accent font-mono text-[0.8rem] uppercase tracking-[0.3em] font-bold">{category}</span>
+            </div>
+
+            {/* Upper Variant Selector Pills */}
+            {activeSwitcherModels.length > 0 && (
+              <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md">
+                <span className="text-xs font-mono text-white/40 uppercase tracking-wider px-2 hidden sm:inline-block">
+                  Variants:
+                </span>
+                {activeSwitcherModels.map((m) => (
+                  <button
+                    key={m.key}
+                    type="button"
+                    onClick={() => handleSelectModel(m.key)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
+                      activeKey === m.key
+                        ? 'bg-accent text-black font-bold shadow-[0_0_12px_rgba(var(--color-accent-rgb),0.5)]'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </motion.div>
 
           <div className="flex flex-col-reverse lg:flex-row items-center gap-16 lg:gap-24">
@@ -531,18 +589,35 @@ const ProductPage = (props) => {
             {/* Left Content (Text & Features) */}
             <div className="w-full lg:w-1/2 flex flex-col items-start">
               <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
+                key={`title-${activeKey}`}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-5xl lg:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 uppercase tracking-tight mb-6 leading-[1.1] drop-shadow-lg"
+                transition={{ duration: 0.4 }}
+                className="text-5xl lg:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 uppercase tracking-tight mb-4 leading-[1.1] drop-shadow-lg"
               >
                 {title}
               </motion.h1>
+
+              {/* Official Price Badge */}
+              {price && (
+                <motion.div
+                  key={`price-${activeKey}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent font-mono text-sm font-bold mb-6 shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.1)]"
+                >
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_6px_var(--color-accent)]" />
+                  <span>Official Price: {price}</span>
+                  <span className="text-white/40 font-normal text-xs ml-1 font-sans">| Excl. GST</span>
+                </motion.div>
+              )}
               
               <motion.p 
-                initial={{ opacity: 0, y: 30 }}
+                key={`desc-${activeKey}`}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.4 }}
                 className="text-lg lg:text-xl text-[#A0A0A0] font-sans mb-10 max-w-xl leading-relaxed tracking-wide"
               >
                 {description}
@@ -551,9 +626,10 @@ const ProductPage = (props) => {
               {/* Feature Grid */}
               {features.length > 0 && (
                 <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
+                  key={`features-${activeKey}`}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
+                  transition={{ duration: 0.4 }}
                   className="w-full grid grid-cols-1 md:grid-cols-2 gap-5 mb-12"
                 >
                   {features.map((feature, idx) => {
@@ -590,7 +666,7 @@ const ProductPage = (props) => {
                 </motion.div>
               )}
 
-              {/* Action Buttons: Get Quote & Download Datasheet */}
+              {/* Action Buttons: Get Quote, Download Datasheet & Calculate ROI */}
               <div className="flex flex-wrap items-center gap-4">
                 <motion.button 
                   type="button"
@@ -620,21 +696,36 @@ const ProductPage = (props) => {
                     <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
                   </span>
                 </motion.button>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.45 }}
+                >
+                  <Link
+                    to={activeKey ? `/calculator?model=${activeKey}` : '/calculator'}
+                    className="relative overflow-hidden flex items-center gap-2 px-7 py-4 border border-accent/40 text-accent hover:bg-accent hover:text-black font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 group cursor-pointer"
+                  >
+                    <Zap size={16} />
+                    <span>CALCULATE ROI</span>
+                  </Link>
+                </motion.div>
               </div>
             </div>
 
             {/* Right Content (Image) */}
             <div className="w-full lg:w-1/2 relative flex items-center justify-center">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                key={`img-${activeKey}`}
+                initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.5 }}
                 className="w-full relative z-10 rounded-2xl overflow-hidden shadow-2xl bg-black/20"
               >
                 <img 
                   src={image} 
                   alt={title} 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain transition-all duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
               </motion.div>
@@ -684,14 +775,14 @@ const ProductPage = (props) => {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    {/* Model Switcher Pills for Category Pages */}
+                    {/* Model Switcher Pills for Category & Product Pages */}
                     {activeSwitcherModels.length > 0 && (
                       <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-xl">
                         {activeSwitcherModels.map((m) => (
                           <button
                             key={m.key}
                             type="button"
-                            onClick={() => setSelectedModelKey(m.key)}
+                            onClick={() => handleSelectModel(m.key)}
                             className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
                               activeKey === m.key
                                 ? 'bg-accent text-black font-bold shadow-[0_0_10px_rgba(var(--color-accent-rgb),0.4)]'
@@ -706,18 +797,8 @@ const ProductPage = (props) => {
 
                     <button
                       type="button"
-                      onClick={() => window.print()}
-                      className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-accent text-black hover:bg-white text-xs font-mono font-bold transition-all cursor-pointer shadow-md"
-                      title="Print or Save PDF"
-                    >
-                      <Download size={15} />
-                      Print / Save PDF
-                    </button>
-
-                    <button
-                      type="button"
                       onClick={() => setIsDatasheetOpen(false)}
-                      className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white text-xs font-mono transition-colors cursor-pointer border border-white/10"
+                      className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white text-xs font-mono transition-colors cursor-pointer border border-white/10"
                       title="Close Datasheet"
                     >
                       <X size={16} />

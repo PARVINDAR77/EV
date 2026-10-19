@@ -6,11 +6,11 @@ import Footer from '../../components/Footer/Footer';
 import { ArrowRight, SkipForward, Zap } from 'lucide-react';
 
 // Static imports — Vite bundles these correctly
-import imgResidential from '../../assets/images/Modern Home EV Charging Showcase.webp';
+import imgResidential from '../../assets/images/solution_residential_nexon.webp';
 import imgWorkplace   from '../../assets/images/AXION Ecocharge Station 01 (2).webp';
-import imgCommercial  from '../../assets/images/Phoenix Marketcity EV Charging Plaza.webp';
+import imgCommercial  from '../../assets/images/solution_commercial_phoenix.webp';
 import imgFleet       from '../../assets/images/AXION Charge Logistics Hub.webp';
-import imgHighway     from '../../assets/images/Axion Charge Highway Stop.webp';
+import imgHighway     from '../../assets/images/solution_highway_expressway.webp';
 
 import resVideo from '../../assets/images/EV_charging_at_night_20260929123844_gwr_video_mvp.mp4';
 import workVideo from '../../assets/images/EV_charging_at_corporate_office_20260929124509_gwr_video_mvp.mp4';
@@ -185,54 +185,60 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+            className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center overflow-hidden"
           >
-            <video
-              key={id}
-              ref={videoRef}
-              poster={heroImage}
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              onEnded={handleVideoEnd}
-              onError={handleVideoError}
-              className="w-full h-full object-cover"
-              src={currentVideo}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50 pointer-events-none" />
+            {/* Ambient subtle cyber glow behind video */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,0,0.12)_0%,transparent_75%)] pointer-events-none" />
+
+            {/* Video Player: 16:9 widescreen orientation horizontally without edge clipping */}
+            <div className="relative w-full max-w-6xl aspect-video max-h-screen flex items-center justify-center">
+              <video
+                key={id}
+                ref={videoRef}
+                poster={heroImage}
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                onEnded={handleVideoEnd}
+                onError={handleVideoError}
+                className="w-full h-full object-contain object-center"
+                src={currentVideo}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
+            </div>
 
             {/* Bottom-left title overlay */}
-            <div className="absolute bottom-12 md:bottom-16 left-6 md:left-20 z-10 pointer-events-none">
+            <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-5 sm:left-6 md:left-20 z-10 pointer-events-none">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="flex items-center gap-3 mb-4"
+                className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-4"
               >
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--color-accent)]" />
-                <span className="text-accent font-mono text-xs uppercase tracking-[0.25em]">{data.badge}</span>
+                <span className="text-accent font-mono text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] font-bold">{data.badge}</span>
               </motion.div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-white tracking-widest uppercase"
+                className="text-2xl sm:text-4xl md:text-6xl font-display font-bold text-white tracking-widest uppercase drop-shadow-md"
               >
                 {title}
               </motion.h2>
               <motion.div
                 initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: '100px' }}
+                animate={{ opacity: 1, width: '80px' }}
                 transition={{ delay: 0.8, duration: 1 }}
-                className="h-[2px] bg-accent mt-4 shadow-[0_0_10px_var(--color-accent)]"
+                className="h-[2px] bg-accent mt-2 sm:mt-4 shadow-[0_0_10px_var(--color-accent)]"
               />
             </div>
 
             {/* Skip button */}
             <button
               onClick={handleVideoEnd}
-              className="absolute top-8 right-4 md:right-8 z-20 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white/80 hover:text-white transition-all text-[0.7rem] md:text-sm font-mono tracking-widest border border-white/10 cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+              className="absolute top-6 sm:top-8 right-4 sm:right-6 md:right-8 z-20 flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full text-white/90 hover:text-white transition-all text-[0.7rem] sm:text-xs font-mono tracking-widest border border-white/20 hover:border-accent cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.6)]"
             >
               SKIP <SkipForward size={14} />
             </button>
@@ -317,27 +323,31 @@ const SolutionTemplate = ({ title, subtitle, description, id }) => {
               </motion.button>
             </div>
 
-            {/* Right – Hero Image */}
+            {/* Right – Hero Visual */}
             <div className={`w-full ${id === 'highway' ? 'lg:w-7/12' : 'lg:w-1/2'} relative flex items-center justify-center mt-6 lg:mt-0`}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className={`relative w-full ${
-                  id === 'highway' 
-                    ? 'aspect-video max-h-[500px]' 
-                    : 'aspect-square max-h-[500px]'
-                } rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 hover:border-accent/40 shadow-[0_0_50px_rgba(var(--color-accent-rgb),0.2)] z-10 bg-[#0B0F12] group transition-colors duration-300`}
-                style={{ aspectRatio: id === 'highway' ? '16 / 9' : '1 / 1' }}
+                className="relative w-full aspect-video max-h-[520px] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 hover:border-accent/40 shadow-[0_0_50px_rgba(var(--color-accent-rgb),0.2)] z-10 bg-[#0B0F12] group transition-colors duration-300 cursor-pointer"
+                onClick={() => currentVideo && setShowVideo(true)}
               >
                 <img 
                   src={heroImage} 
                   alt={title} 
                   loading="eager"
                   decoding="async"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" 
+                  className="w-full h-full object-contain md:object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+                {/* Optional Replay Video Button Overlay */}
+                {currentVideo && (
+                  <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md border border-accent/40 text-accent hover:text-white transition-all text-xs font-mono tracking-wider shadow-lg">
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                    <span>WATCH VIDEO</span>
+                  </div>
+                )}
               </motion.div>
 
               {/* Decorative floating rings */}

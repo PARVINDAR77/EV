@@ -123,8 +123,8 @@ const EcosystemSection = () => {
           </motion.div>
         </div>
 
-        {/* Diagram Container - Fixed aspect ratio 5/2 so SVG and HTML perfectly align everywhere. Margin removed so it doesn't overlap header */}
-        <div className="relative w-full max-w-[1000px] mx-auto aspect-[5/2] z-20 hidden md:block">
+        {/* Diagram Container (screens >= 1024px where ample width prevents node collision) */}
+        <div className="relative w-full max-w-[1000px] mx-auto aspect-[5/2] z-20 hidden lg:block">
           
           <ConnectionLines />
 
@@ -134,15 +134,15 @@ const EcosystemSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, type: "spring", bounce: 0.5 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160px] h-[160px] md:w-[220px] md:h-[220px] rounded-full border-2 border-accent bg-[#0A0D10]/90 backdrop-blur-md flex flex-col items-center justify-center shadow-[0_0_60px_rgba(var(--color-accent-rgb),0.5)] z-30 group cursor-crosshair"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] rounded-full border-2 border-accent bg-[#0A0D10]/90 backdrop-blur-md flex flex-col items-center justify-center shadow-[0_0_60px_rgba(var(--color-accent-rgb),0.5)] z-30 group cursor-crosshair"
           >
             {/* Spinning orbital rings */}
-            <div className="absolute inset-[-15px] md:inset-[-20px] rounded-full border-t-2 border-l-2 border-transparent border-r-[var(--color-accent)]/50 border-b-[var(--color-accent)]/50 animate-[spin_5s_linear_infinite]" />
-            <div className="absolute inset-[-30px] md:inset-[-40px] rounded-full border-2 border-white/5 border-dashed animate-[spin_15s_linear_infinite_reverse]" />
+            <div className="absolute inset-[-20px] rounded-full border-t-2 border-l-2 border-transparent border-r-[var(--color-accent)]/50 border-b-[var(--color-accent)]/50 animate-[spin_5s_linear_infinite]" />
+            <div className="absolute inset-[-40px] rounded-full border-2 border-white/5 border-dashed animate-[spin_15s_linear_infinite_reverse]" />
             
-            <span className="text-accent font-display font-bold text-[1.5rem] md:text-[2.2rem] tracking-widest uppercase">AXION</span>
-            <span className="text-white font-sans text-[0.6rem] md:text-[0.9rem] tracking-[0.4em] mt-1">CHARGE</span>
-            <span className="text-accent/80 font-sans text-[0.35rem] md:text-[0.5rem] tracking-[0.2em] mt-3 bg-accent/10 px-2 py-0.5 rounded-full border border-accent/20">ENERGY EVOLVED</span>
+            <span className="text-accent font-display font-bold text-[2.2rem] tracking-widest uppercase">AXION</span>
+            <span className="text-white font-sans text-[0.9rem] tracking-[0.4em] mt-1">CHARGE</span>
+            <span className="text-accent/80 font-sans text-[0.5rem] tracking-[0.2em] mt-3 bg-accent/10 px-2 py-0.5 rounded-full border border-accent/20">ENERGY EVOLVED</span>
             
             {/* Pulsing core glow */}
             <div className="absolute inset-0 bg-accent/10 rounded-full blur-[20px] group-hover:bg-accent/30 group-hover:scale-125 transition-all duration-500" />
@@ -170,21 +170,21 @@ const EcosystemSection = () => {
 
         </div>
 
-        {/* Mobile fallback grid */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-6 md:hidden mt-4">
+        {/* Mobile & Tablet Responsive Grid (screens < 1024px) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:hidden mt-6">
           {[
-            { icon: Home, title: 'HOME', description: 'Charging at your home' },
-            { icon: Truck, title: 'FLEET', description: 'Keeping fleets moving' },
-            { icon: Building2, title: 'BUSINESS', description: 'Powering enterprises' },
-            { icon: Navigation, title: 'HIGHWAY', description: 'Enabling long journeys' },
+            { icon: Home, title: 'HOME', description: 'Smart charging for personal vehicles and residential towers' },
+            { icon: Truck, title: 'FLEET', description: 'Depot fast-charging to keep enterprise logistics running' },
+            { icon: Building2, title: 'BUSINESS', description: 'Commercial turnkeys for malls, hotels, and workspaces' },
+            { icon: Navigation, title: 'HIGHWAY', description: 'Ultra-fast corridor transit hubs for cross-country EVs' },
           ].map(({ icon: Icon, title, description }) => (
-            <div key={title} className="flex flex-col items-center text-center gap-3 p-4 border border-accent/20 rounded-xl">
-              <div className="w-12 h-12 rounded-full border-2 border-accent bg-black/80 flex items-center justify-center">
-                <Icon className="text-accent w-5 h-5" strokeWidth={1.5} />
+            <div key={title} className="flex flex-col items-center text-center gap-3 p-5 sm:p-6 bg-[#0A0D10]/80 border border-accent/20 rounded-2xl backdrop-blur-md shadow-lg hover:border-accent/50 transition-all duration-300">
+              <div className="w-14 h-14 rounded-full border-2 border-accent bg-black/90 flex items-center justify-center shadow-[0_0_15px_rgba(var(--color-accent-rgb),0.3)]">
+                <Icon className="text-accent w-6 h-6" strokeWidth={1.5} />
               </div>
               <div>
-                <h3 className="text-white font-display font-bold text-[0.85rem] uppercase mb-0.5">{title}</h3>
-                <p className="text-gray-400 font-sans text-[0.7rem]">{description}</p>
+                <h3 className="text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider mb-1">{title}</h3>
+                <p className="text-gray-400 font-sans text-xs leading-relaxed">{description}</p>
               </div>
             </div>
           ))}

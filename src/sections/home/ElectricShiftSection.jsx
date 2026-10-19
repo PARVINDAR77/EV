@@ -41,28 +41,28 @@ const ElectricShiftSection = () => {
 
         </div>
 
-        {/* Right Content - Framed Angled Image (Hidden on mobile) */}
+        {/* Right Content - Framed Angled Image (Responsive across all screens) */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95, x: 30 }}
+          initial={{ opacity: 0, scale: 0.95, x: 20 }}
           whileInView={{ opacity: 1, scale: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          className="relative w-full h-[350px] sm:h-[450px] md:h-[600px] hidden lg:flex justify-end items-center"
+          className="relative w-full h-[260px] sm:h-[360px] md:h-[460px] lg:h-[580px] flex justify-center lg:justify-end items-center mt-4 lg:mt-0"
         >
           {/* Glowing Green Backdrop shape */}
           <div 
-             className="absolute w-[85%] h-[90%] bg-accent right-0 opacity-20 blur-[20px]"
-             style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+             className="absolute w-[95%] sm:w-[90%] lg:w-[85%] h-[90%] bg-accent right-0 opacity-20 blur-[20px]"
+             style={{ clipPath: "polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           />
 
           {/* The Actual Image Container with thick green border */}
           <div 
-             className="relative w-[85%] h-[90%] z-10 p-[2px] right-0 bg-accent shadow-[0_0_35px_rgba(var(--color-accent-rgb),0.6)]"
-             style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+             className="relative w-[95%] sm:w-[90%] lg:w-[85%] h-[90%] z-10 p-[2px] right-0 bg-accent shadow-[0_0_35px_rgba(var(--color-accent-rgb),0.6)]"
+             style={{ clipPath: "polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           >
             <div 
               className="relative w-full h-full overflow-hidden bg-[#050806]"
-              style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+              style={{ clipPath: "polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
             >
               <img 
                 src={electricShiftCar} 
@@ -72,7 +72,7 @@ const ElectricShiftSection = () => {
                 decoding="async"
               />
               {/* Subtle ambient gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
         </motion.div>

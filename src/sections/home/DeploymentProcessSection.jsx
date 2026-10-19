@@ -40,7 +40,7 @@ const ProcessStep = ({ step, index, total }) => {
         className="text-center"
       >
         <h4 className="text-white font-sans font-bold text-[0.7rem] md:text-[0.85rem] uppercase tracking-wider mb-1">{step.title}</h4>
-        <p className="text-gray-400 font-sans text-[0.6rem] md:text-[0.7rem] whitespace-nowrap">{step.desc}</p>
+        <p className="text-gray-400 font-sans text-[0.65rem] md:text-[0.75rem] leading-tight max-w-[140px] mx-auto">{step.desc}</p>
       </motion.div>
 
     </div>
@@ -83,11 +83,11 @@ const DeploymentProcessSection = () => {
           </motion.p>
         </div>
 
-        {/* Process Steps */}
-        <div className="relative w-full grid grid-cols-2 gap-y-12 gap-x-4 sm:flex sm:flex-row items-start sm:items-start justify-between sm:gap-0">
+        {/* Process Steps: 2-col on mobile, 3-col on tablet, 6-in-a-row on desktop */}
+        <div className="relative w-full grid grid-cols-2 gap-y-10 gap-x-4 md:grid-cols-3 lg:flex lg:flex-row items-start justify-between md:gap-y-12 lg:gap-0">
           
-          {/* Horizontal Connecting Line */}
-          <div className="hidden sm:block absolute top-8 md:top-10 left-10 right-10 h-[2px] bg-white/10 z-0">
+          {/* Horizontal Connecting Line (desktop only >= 1024px) */}
+          <div className="hidden lg:block absolute top-8 md:top-10 left-10 right-10 h-[2px] bg-white/10 z-0">
             <motion.div 
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}

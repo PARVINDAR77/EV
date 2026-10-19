@@ -53,7 +53,7 @@ const CyberHoloEarth = ({ onFocusIndia }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const width = 500;
+    const width = Math.min(typeof window !== 'undefined' ? window.innerWidth - 48 : 500, 500);
 
     globe = createGlobe(canvas, {
       devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),

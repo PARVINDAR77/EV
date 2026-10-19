@@ -120,8 +120,8 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Center Nav: Home -> Growth -> System -> Network -> ROI Calculator -> Why Us */}
-        <div className="hidden md:flex items-center space-x-9 lg:space-x-11">
+        {/* Center Nav: Home -> Growth -> System -> Network -> ROI Calculator -> Why Us (screens >= 1024px) */}
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-10">
 
           {/* 1. Home */}
           <Link 
@@ -225,16 +225,16 @@ const Navbar = () => {
           <Link 
             to="/contact" 
             onClick={handleCloseImmediately}
-            className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-accent text-black font-sans text-[0.7rem] font-bold uppercase rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.6)] group"
+            className="hidden lg:flex items-center gap-2 px-6 py-2.5 bg-accent text-black font-sans text-[0.7rem] font-bold uppercase rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.6)] group"
           >
             GET A QUOTE
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          {/* Hamburger Menu Icon (Mobile Only) */}
+          {/* Hamburger Menu Icon (Mobile & Tablet < 1024px) */}
           <button 
             type="button"
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 z-[60]"
+            className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 z-[60] cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -704,7 +704,7 @@ const Navbar = () => {
          ======================================================== */}
       <div 
         data-lenis-prevent="true"
-        className={`fixed inset-0 bg-[#020403] z-40 transition-transform duration-500 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden flex flex-col pt-28 px-7 overflow-y-auto pb-12 h-[100dvh]`}
+        className={`fixed inset-0 bg-[#020403] z-40 transition-transform duration-500 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden flex flex-col pt-28 px-7 overflow-y-auto pb-12 h-[100dvh]`}
       >
         <div className="flex flex-col gap-5 text-lg font-display uppercase tracking-wider text-white min-h-max">
           

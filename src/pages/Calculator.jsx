@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, Zap, TrendingUp, IndianRupee, ShieldCheck, ArrowRight, Minus, Plus } from 'lucide-react';
 import PageTransition from '../components/PageTransition/PageTransition';
@@ -11,29 +11,45 @@ const CHARGER_MODELS = [
     id: 'ac-3-3kw',
     name: 'Axion 3.3 kW AC (AXION 3 Multi-Socket)',
     category: 'AC Chargers',
-    price: 18000,
-    defaultKwh: 5,
+    powerKw: 3.3,
+    price: 14900,
+    defaultKwh: 20,
+    defaultSessions: 6,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
   {
     id: 'ac-7-4kw',
     name: 'Axion 7.4 kW AC (Axion Pro)',
     category: 'AC Chargers',
-    price: 24999,
-    defaultKwh: 10,
+    powerKw: 7.4,
+    price: 59900,
+    defaultKwh: 20,
+    defaultSessions: 6,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
   {
     id: 'ac-11kw',
     name: 'Axion 11 kW AC (Commercial 3-Phase)',
     category: 'AC Chargers',
-    price: 38000,
-    defaultKwh: 15,
+    powerKw: 11,
+    price: 74900,
+    defaultKwh: 20,
+    defaultSessions: 7,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
   {
     id: 'ac-22kw',
     name: 'Axion 22 kW AC (Axion Ultra)',
     category: 'AC Chargers',
-    price: 45000,
+    powerKw: 22,
+    price: 89900,
     defaultKwh: 20,
+    defaultSessions: 8,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
 
   // ── DC Fast Chargers ──
@@ -41,49 +57,88 @@ const CHARGER_MODELS = [
     id: 'dc-30kw',
     name: 'Axion DC Fast (30kW)',
     category: 'DC Fast Chargers',
-    price: 350000,
-    defaultKwh: 25,
+    powerKw: 30,
+    price: 499900,
+    defaultKwh: 20,
+    defaultSessions: 10,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
   {
     id: 'dc-60kw',
     name: 'Axion DC Fast (60kW Dual Gun)',
     category: 'DC Fast Chargers',
-    price: 650000,
-    defaultKwh: 35,
+    powerKw: 60,
+    price: 699900,
+    defaultKwh: 20,
+    defaultSessions: 14,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
   {
     id: 'dc-120kw',
     name: 'Axion DC Ultra-Fast (120kW Highway Dual)',
     category: 'DC Fast Chargers',
-    price: 1200000,
-    defaultKwh: 50,
+    powerKw: 120,
+    price: 999900,
+    defaultKwh: 20,
+    defaultSessions: 18,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
   {
     id: 'dc-240kw',
     name: 'Axion DC Hyper-Fast (240kW Heavy Duty)',
     category: 'DC Fast Chargers',
-    price: 2200000,
-    defaultKwh: 70,
+    powerKw: 240,
+    price: 1899900,
+    defaultKwh: 20,
+    defaultSessions: 20,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
   },
 ];
 
 const Calculator = () => {
-  const [selectedCharger, setSelectedCharger] = useState(CHARGER_MODELS[1]); // Default to Axion 7.4kW Pro
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const initialModelId = searchParams.get('model') || searchParams.get('charger');
+  const initialCharger = CHARGER_MODELS.find(c => c.id === initialModelId) || CHARGER_MODELS[0];
+
+  const [selectedCharger, setSelectedCharger] = useState(initialCharger);
   const [chargerQuantity, setChargerQuantity] = useState(1);
-  const [vehiclesPerDay, setVehiclesPerDay] = useState(15);
+  const [vehiclesPerDay, setVehiclesPerDay] = useState(initialCharger.defaultSessions || 6);
   const [timeHorizon, setTimeHorizon] = useState('monthly'); // 'daily' | 'monthly' | 'yearly'
   const [breakEvenUnit, setBreakEvenUnit] = useState('months'); // 'months' | 'years'
   
-  // Assumptions
-  const [tariff, setTariff] = useState(18); // ₹/kWh
-  const [powerCost, setPowerCost] = useState(8); // ₹/kWh
-  const [kwhPerVehicle, setKwhPerVehicle] = useState(selectedCharger.defaultKwh);
-  const [chargerPrice, setChargerPrice] = useState(selectedCharger.price);
+  // Assumptions: Box 1 = 20 (Tariff), Box 2 = 10 (Power Cost), Box 3 = 20 (kWh), Box 4 = Charger Price
+  const [tariff, setTariff] = useState(20); // ₹/kWh
+  const [powerCost, setPowerCost] = useState(10); // ₹/kWh
+  const [kwhPerVehicle, setKwhPerVehicle] = useState(20); // kWh
+  const [chargerPrice, setChargerPrice] = useState(initialCharger.price); // ₹
 
-  // Update assumptions when charger changes
+  // Sync if URL search param changes
   useEffect(() => {
-    setKwhPerVehicle(selectedCharger.defaultKwh);
+    const params = new URLSearchParams(location.search);
+    const modelId = params.get('model') || params.get('charger');
+    if (modelId) {
+      const match = CHARGER_MODELS.find(c => c.id === modelId);
+      if (match && match.id !== selectedCharger.id) {
+        setSelectedCharger(match);
+      }
+    }
+  }, [location.search]);
+
+  // Update assumptions when charger model changes:
+  // First box = 20, Second box = 10, Third box = 20, Fourth box = charger price
+  useEffect(() => {
+    setTariff(selectedCharger.defaultTariff ?? 20);
+    setPowerCost(selectedCharger.defaultPowerCost ?? 10);
+    setKwhPerVehicle(selectedCharger.defaultKwh ?? 20);
     setChargerPrice(selectedCharger.price);
+    if (selectedCharger.defaultSessions) {
+      setVehiclesPerDay(selectedCharger.defaultSessions);
+    }
   }, [selectedCharger]);
 
   const numTariff = Number(tariff) || 0;
@@ -284,15 +339,15 @@ const Calculator = () => {
                     >
                       <optgroup label="⚡ AC Charging Stations (Home & Workplace)" className="bg-[#050A07] text-accent font-bold py-2">
                         {CHARGER_MODELS.filter(m => m.category === 'AC Chargers').map(model => (
-                          <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2">
-                            {model.name}
+                          <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2 font-medium">
+                            {model.name} — ₹{model.price.toLocaleString('en-IN')}
                           </option>
                         ))}
                       </optgroup>
                       <optgroup label="⚡ DC Fast Charging Stations (Highway & Commercial Hubs)" className="bg-[#050A07] text-accent font-bold py-2">
                         {CHARGER_MODELS.filter(m => m.category === 'DC Fast Chargers').map(model => (
-                          <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2">
-                            {model.name}
+                          <option key={model.id} value={model.id} className="bg-[#0b140e] text-white py-2 font-medium">
+                            {model.name} — ₹{model.price.toLocaleString('en-IN')}
                           </option>
                         ))}
                       </optgroup>
@@ -671,7 +726,7 @@ const Calculator = () => {
                 </div>
 
                 <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                  <table className="w-full text-left font-mono text-xs">
+                  <table className="w-full min-w-[460px] text-left font-mono text-xs">
                     <thead>
                       <tr className="border-b border-white/10 text-white/50 text-[0.68rem] sm:text-[0.72rem] uppercase tracking-wider font-bold">
                         <th className="py-2.5 px-1.5 sm:px-2 w-[34%]">Metric</th>

@@ -1187,21 +1187,23 @@ const Franchise = () => {
           </section>
 
           {/* ── BRAND & FLEET PARTNERS MARQUEE ── */}
-          <section className="mb-32 text-center">
-            <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Trusted Across the Industry</span>
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white uppercase mt-2 mb-8">
-              Ecosystem & Fleet Partners
-            </h2>
+          <section className="mb-24 sm:mb-32 text-center overflow-hidden">
+            <div className="px-4">
+              <span className="text-accent font-mono text-xs uppercase tracking-widest font-bold">Trusted Across the Industry</span>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white uppercase mt-2 mb-8">
+                Ecosystem & Fleet Partners
+              </h2>
+            </div>
 
-            <div className="w-full overflow-hidden relative py-4">
-              <div className="flex gap-4 animate-marquee whitespace-nowrap">
-                {[...BRAND_PARTNERS, ...BRAND_PARTNERS].map((brand, idx) => (
+            <div className="w-full overflow-hidden relative py-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+              <div className="flex gap-3 sm:gap-4 animate-marquee whitespace-nowrap">
+                {[...BRAND_PARTNERS, ...BRAND_PARTNERS, ...BRAND_PARTNERS, ...BRAND_PARTNERS].map((brand, idx) => (
                   <div 
                     key={idx}
-                    className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-accent/30 text-gray-300 font-sans text-sm font-semibold tracking-wider hover:text-white transition-all shadow-sm"
+                    className="inline-flex items-center gap-2.5 sm:gap-3 px-4 py-2.5 sm:px-6 sm:py-3.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-accent/40 text-gray-300 font-sans text-xs sm:text-sm font-semibold tracking-wider hover:text-white transition-all shadow-sm flex-shrink-0 cursor-default select-none"
                   >
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                    {brand}
+                    <div className="w-2 h-2 rounded-full bg-accent shadow-[0_0_8px_var(--color-accent)] animate-pulse flex-shrink-0" />
+                    <span>{brand}</span>
                   </div>
                 ))}
               </div>
