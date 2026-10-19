@@ -12,15 +12,9 @@ export async function handleEmailRequest(req, res) {
     return;
   }
 
-  let body = '';
-  req.on('data', chunk => {
-    body += chunk.toString();
-  });
-
-  req.on('end', async () => {
+  const processPayload = async (payload) => {
     try {
-      const parsed = JSON.parse(body || '{}');
-      const { type, data } = parsed;
+      const { type, data } = payload || {};
 
       if (!type || !data) {
         res.statusCode = 400;
@@ -38,6 +32,28 @@ export async function handleEmailRequest(req, res) {
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ success: false, error: error.message || 'Failed to send email' }));
+    }
+  };
+
+  // If req.body is already parsed (e.g., in Express or Vercel serverless functions)
+  if (req.body) {
+    const payload = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body;
+    return await processPayload(payload);
+  }
+
+  let body = '';
+  req.on('data', chunk => {
+    body += chunk.toString();
+  });
+
+  req.on('end', async () => {
+    try {
+      const parsed = JSON.parse(body || '{}');
+      await processPayload(parsed);
+    } catch {
+      res.statusCode = 400;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify({ success: false, error: 'Invalid JSON payload' }));
     }
   });
 }
