@@ -11,6 +11,7 @@ import accImage from '../../assets/images/AXION Charge Logistics Hub.webp';
 // AC Images
 import ac3kwImg from '../../assets/images/product_ac_2wheeler_3_3kw.webp';
 import ac7kwImg from '../../assets/images/product_ac_7_4kw.webp';
+import ac7kwCompactImg from '../../assets/images/product_ac_7_4kw_compact.webp';
 import ac11kwImg from '../../assets/images/product_ac_11kw.webp';
 import ac22kwImg from '../../assets/images/product_ac_22kw.webp';
 
@@ -67,8 +68,46 @@ const PRODUCT_DB = {
       }
     }
   },
+  'ac-7-4kw-compact': {
+    title: 'Axion 7.4 kW AC Compact',
+    category: 'AC Wallboxes',
+    price: '₹49,900',
+    description: 'Ultra-slim minimalist wallbox designed for urban homes and private garages. 30% smaller footprint with fast 7.4 kW smart charging.',
+    image: ac7kwCompactImg,
+    features: [
+      { title: "Ultra-Slim Profile", desc: "Minimalist space-saving enclosure engineered for compact parking bays and modern garage aesthetics." },
+      { title: "Smart App Control", desc: "Seamless remote monitoring, scheduled off-peak charging, and Bluetooth 5.2 / Wi-Fi telemetry." },
+      { title: "Solar Divert Ready", desc: "Intelligent integration with rooftop solar PV systems to charge exclusively on clean solar surplus." },
+      { title: "Weatherproof IP65", desc: "Industrial-grade water & dust protection built to withstand extreme Indian heat, rain, and humidity." }
+    ],
+    datasheet: {
+      model: 'AXION 7.4 COMPACT',
+      powerRating: '7.4 KW',
+      price: '₹49,900',
+      overview: 'AXION 7.4 Compact is the next-generation slimline residential smart charger, combining an ultra-small wall footprint with 32A high-speed single-phase charging, dynamic load management, and smartphone automation.',
+      featuresList: [
+        '30% smaller footprint with sleek Frost White & Brushed Silver finish',
+        'Direct plug-and-play installation for urban villas, apartments & private driveways',
+        'Smart Bluetooth 5.2 & Wi-Fi app-based charging session scheduling',
+        'Integrated 5m Type 2 Tethered Gun with magnetic dock',
+        'Comprehensive 8-point electrical safety protection & IP65 enclosure'
+      ],
+      specs: {
+        'Input Power': '1-Phase 230 VAC ± 10%, 50Hz',
+        'Output': '7.4 kW @ 32A',
+        'Display': 'LED Status Halo & Touch-Sense Start/Stop',
+        'Gun': 'Type 2 Tethered Gun (5m Flexible Cable)',
+        'Dimensions': '260 mm × 160 mm × 85 mm',
+        'Weight': 'Approx. 4.2 kg',
+        'Connectivity': 'Wi-Fi 802.11 b/g/n + Bluetooth 5.2 + BLE App',
+        'Mounting': 'Wall Mounted / Slim Pedestal Pillar',
+        'Emergency Switch': 'Available (Side Button)',
+        'Protection': 'Over Voltage, Under Voltage, Over Current, Short Circuit, Ground Fault, Residual Current (Type A + 6mA DC), IP65 Weatherproof'
+      }
+    }
+  },
   'ac-7-4kw': {
-    title: 'Axion 7.4 kW AC',
+    title: 'Axion 7.4 kW AC Pro',
     category: 'AC Wallboxes',
     price: '₹59,900',
     description: 'The standard for home use. Delivers a full overnight charge for most EVs on a single-phase connection.',
@@ -433,7 +472,8 @@ const ProductPage = (props) => {
   const datasheetRef = useRef(null);
   
   // Resolve base product
-  const baseProduct = props.title ? props : (PRODUCT_DB[id] || {
+  const resolvedId = id === 'ac-7kw-compact' ? 'ac-7-4kw-compact' : (id === 'ac-7kw' ? 'ac-7-4kw' : id);
+  const baseProduct = props.title ? props : (PRODUCT_DB[resolvedId] || {
     title: 'Product Not Found',
     category: 'Error',
     description: 'The requested product could not be found.',
@@ -442,19 +482,20 @@ const ProductPage = (props) => {
   });
 
   const isAcCategory = (
-    (id && id.startsWith('ac-')) ||
+    (resolvedId && resolvedId.startsWith('ac-')) ||
     baseProduct.title?.toLowerCase().includes('ac') ||
     baseProduct.category?.toLowerCase().includes('ac')
   );
   const isDcCategory = (
-    (id && id.startsWith('dc-')) ||
+    (resolvedId && resolvedId.startsWith('dc-')) ||
     baseProduct.title?.toLowerCase().includes('dc') ||
     baseProduct.category?.toLowerCase().includes('dc')
   );
 
   const acModels = [
     { key: 'ac-3-3kw', label: '3.3 kW' },
-    { key: 'ac-7-4kw', label: '7.4 kW' },
+    { key: 'ac-7-4kw-compact', label: '7.4 kW Compact' },
+    { key: 'ac-7-4kw', label: '7.4 kW Pro' },
     { key: 'ac-11kw', label: '11 kW' },
     { key: 'ac-22kw', label: '22 kW' }
   ];
@@ -469,9 +510,9 @@ const ProductPage = (props) => {
   const activeSwitcherModels = isAcCategory ? acModels : (isDcCategory ? dcModels : []);
 
   // Determine active datasheet & variant model key
-  const defaultKey = (id && PRODUCT_DB[id]) 
-    ? id 
-    : (isDcCategory ? 'dc-60kw' : (isAcCategory ? 'ac-3-3kw' : (id || '')));
+  const defaultKey = (resolvedId && PRODUCT_DB[resolvedId]) 
+    ? resolvedId 
+    : (isDcCategory ? 'dc-60kw' : (isAcCategory ? 'ac-3-3kw' : (resolvedId || '')));
 
   const [selectedModelKey, setSelectedModelKey] = useState(defaultKey);
   const activeKey = selectedModelKey || defaultKey;
@@ -488,10 +529,10 @@ const ProductPage = (props) => {
 
   // Sync state if route id changes
   useEffect(() => {
-    if (id && PRODUCT_DB[id]) {
-      setSelectedModelKey(id);
+    if (resolvedId && PRODUCT_DB[resolvedId]) {
+      setSelectedModelKey(resolvedId);
     }
-  }, [id]);
+  }, [resolvedId]);
 
   // Support direct hash #datasheet or query parameter
   useEffect(() => {

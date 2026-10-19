@@ -1,59 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Zap, Cpu, ArrowRight, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 import ac3kwImg from '../../assets/images/product_ac_2wheeler_3_3kw.webp';
 import ac7kwImg from '../../assets/images/product_ac_7_4kw.webp';
+import ac7kwCompactImg from '../../assets/images/product_ac_7_4kw_compact.webp';
 import ac11kwImg from '../../assets/images/product_ac_11kw.webp';
 import ac22kwImg from '../../assets/images/product_ac_22kw.webp';
 import dcChargerImg from '../../assets/images/AXION DC charger with black cables-1.webp';
 import softwareImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.webp';
 
-const acChargersList = [
-  {
-    id: "ac-3kw",
-    name: "Axion AC 3.3 kW",
-    badge: "AXION 3",
-    power: "3.3 kW",
-    tag: "3 Sockets · 2W/3W/4W",
-    price: "₹14,900",
-    image: ac3kwImg,
-    link: "/product/ac-3kw",
-  },
-  {
-    id: "ac-7kw",
-    name: "Axion AC 7.4 kW",
-    badge: "Axion Pro",
-    power: "7.4 kW",
-    tag: "Home & Apartment",
-    price: "₹59,900",
-    image: ac7kwImg,
-    link: "/product/ac-7kw",
-  },
-  {
-    id: "ac-11kw",
-    name: "Axion AC 11 kW",
-    badge: "Commercial",
-    power: "11 kW",
-    tag: "3-Phase Workplace",
-    price: "₹74,900",
-    image: ac11kwImg,
-    link: "/product/ac-11kw",
-  },
-  {
-    id: "ac-22kw",
-    name: "Axion AC 22 kW",
-    badge: "Dual-Gun",
-    power: "22 kW",
-    tag: "Fast Fleet & Retail",
-    price: "₹89,900",
-    image: ac22kwImg,
-    link: "/product/ac-22kw",
-  },
-];
-
 const EngineeredToChargeSection = () => {
+  const [variant7kw, setVariant7kw] = useState('pro'); // 'pro' | 'compact'
+
+  const acChargersList = [
+    {
+      id: "ac-3kw",
+      name: "Axion AC 3.3 kW",
+      badge: "AXION 3",
+      power: "3.3 kW",
+      tag: "3 Sockets · 2W/3W/4W",
+      price: "₹14,900",
+      image: ac3kwImg,
+      link: "/product/ac-3kw",
+    },
+    {
+      id: "ac-7kw",
+      name: "Axion AC 7.4 kW",
+      badge: variant7kw === 'compact' ? "Compact" : "Axion Pro",
+      power: "7.4 kW",
+      tag: variant7kw === 'compact' ? "Ultra-Slim Home Wallbox" : "Home & Apartment Pro",
+      price: variant7kw === 'compact' ? "₹49,900" : "₹59,900",
+      image: variant7kw === 'compact' ? ac7kwCompactImg : ac7kwImg,
+      link: variant7kw === 'compact' ? "/product/ac-7-4kw-compact" : "/product/ac-7kw",
+    },
+    {
+      id: "ac-11kw",
+      name: "Axion AC 11 kW",
+      badge: "Commercial",
+      power: "11 kW",
+      tag: "3-Phase Workplace",
+      price: "₹74,900",
+      image: ac11kwImg,
+      link: "/product/ac-11kw",
+    },
+    {
+      id: "ac-22kw",
+      name: "Axion AC 22 kW",
+      badge: "Dual-Gun",
+      power: "22 kW",
+      tag: "Fast Fleet & Retail",
+      price: "₹89,900",
+      image: ac22kwImg,
+      link: "/product/ac-22kw",
+    },
+  ];
   return (
     <section className="relative w-full bg-[#050708] py-24 md:py-32 z-20 overflow-hidden border-t border-white/5">
       
@@ -134,10 +136,52 @@ const EngineeredToChargeSection = () => {
                   className="group/card relative rounded-2xl overflow-hidden bg-[#060809] border border-white/10 hover:border-accent/60 p-3 sm:p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_25px_rgba(var(--color-accent-rgb),0.18)] hover:-translate-y-1"
                 >
                   {/* Top bar of mini box */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-xs sm:text-sm font-display font-bold text-white/95 truncate">
-                      {charger.name}
-                    </span>
+                  <div className="flex items-center justify-between gap-1.5 mb-2">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className="text-xs sm:text-sm font-display font-bold text-white/95 truncate">
+                        {charger.name}
+                      </span>
+                      {charger.id === "ac-7kw" && (
+                        <div 
+                          className="flex items-center gap-0.5 bg-black/70 p-0.5 rounded-full border border-white/15 text-[0.55rem] font-mono flex-shrink-0"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }}
+                        >
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setVariant7kw('pro');
+                            }}
+                            className={`px-1.5 py-0.5 rounded-full transition-all cursor-pointer ${
+                              variant7kw === 'pro' 
+                                ? 'bg-accent text-black font-bold shadow-[0_0_8px_rgba(0,255,0,0.4)]' 
+                                : 'text-white/60 hover:text-white'
+                            }`}
+                          >
+                            PRO
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setVariant7kw('compact');
+                            }}
+                            className={`px-1.5 py-0.5 rounded-full transition-all cursor-pointer ${
+                              variant7kw === 'compact' 
+                                ? 'bg-white text-black font-bold shadow-[0_0_8px_rgba(255,255,255,0.4)]' 
+                                : 'text-white/60 hover:text-white'
+                            }`}
+                          >
+                            COMPACT
+                          </button>
+                        </div>
+                      )}
+                    </div>
                     <span className="text-[0.6rem] sm:text-[0.65rem] font-mono px-2 py-0.5 rounded-full bg-accent/15 text-accent font-bold border border-accent/30 whitespace-nowrap shadow-[0_0_8px_rgba(var(--color-accent-rgb),0.2)]">
                       {charger.power}
                     </span>
@@ -146,6 +190,7 @@ const EngineeredToChargeSection = () => {
                   {/* Image thumbnail */}
                   <div className="relative w-full aspect-[16/9.5] rounded-xl overflow-hidden bg-black/60 border border-white/5 my-1">
                     <img 
+                      key={`${charger.id}-${charger.image}`}
                       src={charger.image} 
                       alt={charger.name}
                       loading="lazy"

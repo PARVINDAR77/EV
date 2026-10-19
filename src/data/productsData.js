@@ -1,5 +1,6 @@
 import ac3kwImg from '../assets/images/product_ac_2wheeler_3_3kw.webp';
 import ac7kwImg from '../assets/images/product_ac_7_4kw.webp';
+import ac7kwCompactImg from '../assets/images/product_ac_7_4kw_compact.webp';
 import ac11kwImg from '../assets/images/product_ac_11kw.webp';
 import ac22kwImg from '../assets/images/product_ac_22kw.webp';
 import dc30kwImg from '../assets/images/AXION DC charger with black cables-1.webp';
@@ -23,6 +24,24 @@ export const productsData = [
       current: "16A Max",
       connector: "3-Pin Universal",
       protection: "Over Voltage, Short Circuit, Ground Fault, Emergency Cutoff"
+    }
+  },
+  {
+    id: "ac-7kw-compact",
+    category: "ac",
+    name: "Axion AC 7.4kW Compact",
+    tagline: "Ultra-Slim. Modern. Space-Saving.",
+    description: "Minimalist ultra-compact single-phase smart wallbox designed for urban homes and private garages with 30% smaller footprint and plug-and-play app control.",
+    image: ac7kwCompactImg,
+    price: "₹49,900",
+    priceNumber: 49900,
+    features: ["Ultra-Slim Minimalist Profile", "Wi-Fi & Bluetooth 5.2", "Solar PV Divert Ready", "Integrated 5m Type 2 Gun"],
+    specs: {
+      power: "7.4 kW",
+      inputVoltage: "230V AC ± 10%, 50Hz",
+      current: "32A",
+      connector: "Type 2 Tethered",
+      protection: "IP65 Weatherproof, Over/Under Voltage, Type A RCD + 6mA DC"
     }
   },
   {

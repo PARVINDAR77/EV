@@ -30,6 +30,17 @@ const CHARGER_MODELS = [
     defaultPowerCost: 10,
   },
   {
+    id: 'ac-7-4kw-compact',
+    name: 'Axion 7.4 kW AC (Axion Compact)',
+    category: 'AC Chargers',
+    powerKw: 7.4,
+    price: 49900,
+    defaultKwh: 20,
+    defaultSessions: 6,
+    defaultTariff: 20,
+    defaultPowerCost: 10,
+  },
+  {
     id: 'ac-11kw',
     name: 'Axion 11 kW AC (Commercial 3-Phase)',
     category: 'AC Chargers',
@@ -99,10 +110,19 @@ const CHARGER_MODELS = [
   },
 ];
 
+const normalizeModelId = (id) => {
+  if (!id) return null;
+  if (id === 'ac-7kw-compact') return 'ac-7-4kw-compact';
+  if (id === 'ac-7kw') return 'ac-7-4kw';
+  if (id === 'ac-3kw') return 'ac-3-3kw';
+  return id;
+};
+
 const Calculator = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const initialModelId = searchParams.get('model') || searchParams.get('charger');
+  const rawModelId = searchParams.get('model') || searchParams.get('charger');
+  const initialModelId = normalizeModelId(rawModelId);
   const initialCharger = CHARGER_MODELS.find(c => c.id === initialModelId) || CHARGER_MODELS[0];
 
   const [selectedCharger, setSelectedCharger] = useState(initialCharger);
@@ -120,7 +140,8 @@ const Calculator = () => {
   // Sync if URL search param changes
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const modelId = params.get('model') || params.get('charger');
+    const rawId = params.get('model') || params.get('charger');
+    const modelId = normalizeModelId(rawId);
     if (modelId) {
       const match = CHARGER_MODELS.find(c => c.id === modelId);
       if (match && match.id !== selectedCharger.id) {

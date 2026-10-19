@@ -388,17 +388,20 @@ const Navbar = () => {
                     </Link>
                     <span className="text-[0.6rem] font-mono text-gray-400">3.3 kW - 22 kW</span>
                   </div>
-                  <div className="grid grid-cols-4 gap-1.5">
-                    <Link to="/product/ac-3-3kw" onClick={handleCloseImmediately} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all">
+                  <div className="grid grid-cols-5 gap-1">
+                    <Link to="/product/ac-3-3kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 3.3 kW AC">
                       3.3 kW
                     </Link>
-                    <Link to="/product/ac-7-4kw" onClick={handleCloseImmediately} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all">
-                      7.4 kW
+                    <Link to="/product/ac-7-4kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 7.4 kW AC Pro">
+                      7.4k Pro
                     </Link>
-                    <Link to="/product/ac-11kw" onClick={handleCloseImmediately} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all">
+                    <Link to="/product/ac-7-4kw-compact" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-accent/10 hover:bg-accent hover:text-black text-accent text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-accent/40 hover:border-accent transition-all" title="Axion 7.4 kW AC Compact">
+                      7.4k Mini
+                    </Link>
+                    <Link to="/product/ac-11kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 11 kW AC">
                       11 kW
                     </Link>
-                    <Link to="/product/ac-22kw" onClick={handleCloseImmediately} className="px-2 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.68rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all">
+                    <Link to="/product/ac-22kw" onClick={handleCloseImmediately} className="px-1 py-1.5 bg-black/40 hover:bg-accent hover:text-black text-gray-300 text-[0.66rem] font-mono font-semibold rounded-lg text-center border border-white/5 hover:border-accent transition-all" title="Axion 22 kW AC">
                       22 kW
                     </Link>
                   </div>
@@ -566,7 +569,11 @@ const Navbar = () => {
                   >
                     <div className="bg-[#020403]/98 backdrop-blur-2xl border border-white/15 rounded-xl py-2 px-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-1">
                       <Link to="/product/ac-3-3kw" onClick={handleCloseImmediately} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 3.3 kW AC</Link>
-                      <Link to="/product/ac-7-4kw" onClick={handleCloseImmediately} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 7.4 kW AC</Link>
+                      <Link to="/product/ac-7-4kw" onClick={handleCloseImmediately} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 7.4 kW AC (Pro)</Link>
+                      <Link to="/product/ac-7-4kw-compact" onClick={handleCloseImmediately} className="flex items-center justify-between px-3 py-2 text-xs text-accent hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                        <span>Axion 7.4 kW Compact</span>
+                        <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-mono font-semibold">New</span>
+                      </Link>
                       <Link to="/product/ac-11kw" onClick={handleCloseImmediately} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 11 kW AC</Link>
                       <Link to="/product/ac-22kw" onClick={handleCloseImmediately} className="block px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Axion 22 kW AC</Link>
                     </div>
@@ -735,6 +742,10 @@ const Navbar = () => {
             <div className="flex flex-col gap-2.5 pl-3 text-sm text-white/70">
               <span className="text-[0.7rem] text-accent/80 font-mono tracking-widest uppercase">Hardware:</span>
               <Link to="/products/ac-chargers" onClick={handleCloseImmediately} className="hover:text-white pl-2">AC Wallboxes</Link>
+              <Link to="/product/ac-7-4kw-compact" onClick={handleCloseImmediately} className="hover:text-accent pl-4 text-xs flex items-center justify-between text-accent/90">
+                <span>↳ 7.4 kW Compact</span>
+                <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-mono">New</span>
+              </Link>
               <Link to="/products/dc-chargers" onClick={handleCloseImmediately} className="hover:text-white pl-2">DC Fast Chargers</Link>
               <Link to="/products/accessories" onClick={handleCloseImmediately} className="hover:text-white pl-2">Cables & Accessories</Link>
 
