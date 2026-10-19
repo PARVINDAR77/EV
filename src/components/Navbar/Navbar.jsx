@@ -87,7 +87,7 @@ const Navbar = () => {
   const isGrowthActive = path.startsWith('/solutions');
   const isSystemActive = path.startsWith('/products') || path.startsWith('/product') || path.startsWith('/services');
   const isNetworkActive = path === '/franchise' || path === '/contact';
-  const isCalculatorActive = path === '/calculator';
+  const isCalculatorActive = path === '/calculator' || path.startsWith('/planner') || path === '/ac-charger-planner';
   const isWhyUsActive = path === '/about';
 
   const linkClass = (active, isMenuOpen = false) =>
@@ -501,8 +501,17 @@ const Navbar = () => {
                   className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-black font-sans text-xs font-bold uppercase rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.35)] cursor-pointer"
                 >
                   <Calculator size={13} />
-                  Calculate Returns
+                  ROI Calculator
                   <ArrowRight size={12} />
+                </Link>
+
+                <Link 
+                  to="/planner/ac-investment" 
+                  onClick={handleCloseImmediately} 
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-sans text-xs font-semibold rounded-full border border-white/10 hover:border-accent/40 transition-all cursor-pointer"
+                >
+                  <TrendingUp size={13} className="text-accent" />
+                  AC Investment Planner (12M)
                 </Link>
 
                 <Link 
@@ -733,6 +742,10 @@ const Navbar = () => {
 
               <span className="text-[0.7rem] text-accent/80 font-mono tracking-widest uppercase mt-2">Tools:</span>
               <Link to="/calculator" onClick={handleCloseImmediately} className="hover:text-white pl-2 font-bold text-accent">ROI Calculator</Link>
+              <Link to="/planner/ac-investment" onClick={handleCloseImmediately} className="hover:text-accent pl-4 text-xs flex items-center justify-between text-white/90">
+                <span>↳ AC Investment Planner</span>
+                <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-mono">12M Forecast</span>
+              </Link>
             </div>
           </div>
 

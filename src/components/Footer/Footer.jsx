@@ -165,12 +165,12 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col">
-            <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-accent pl-3">Hardware</h5>
+            <h5 className="text-white font-mono font-bold text-[0.8rem] uppercase tracking-widest mb-6 border-l-2 border-accent pl-3">Hardware & Tools</h5>
             <ul className="flex flex-col gap-4 text-white/80 font-sans text-sm font-medium">
               <li><Link to="/products/ac-chargers" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> AC Wallboxes</Link></li>
               <li><Link to="/products/dc-chargers" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> DC Fast Chargers</Link></li>
-              <li><Link to="/solutions/fleet" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Fleet Hubs</Link></li>
-              <li><Link to="/products/accessories" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Accessories</Link></li>
+              <li><Link to="/calculator" className="hover:text-accent transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> Station ROI Calculator</Link></li>
+              <li><Link to="/planner/ac-investment" className="hover:text-accent transition-colors flex items-center gap-2 group text-accent font-semibold"><ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"/> AC Investment Planner</Link></li>
             </ul>
           </div>
 
