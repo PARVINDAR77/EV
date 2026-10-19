@@ -12,7 +12,7 @@ import dcChargerImg from '../../assets/images/AXION DC charger with black cables
 import softwareImg from '../../assets/images/Outdoor Axion Charge Dashboard Billboard.webp';
 
 const EngineeredToChargeSection = () => {
-  const [variant7kw, setVariant7kw] = useState('pro'); // 'pro' | 'compact'
+  const [variant7kw, setVariant7kw] = useState('compact'); // 'compact' | 'pro'
 
   const acChargersList = [
     {
@@ -27,7 +27,7 @@ const EngineeredToChargeSection = () => {
     },
     {
       id: "ac-7kw",
-      name: "Axion AC 7.4 kW",
+      name: variant7kw === 'compact' ? "Axion 7.4 kW Compact" : "Axion 7.4 kW Pro",
       badge: variant7kw === 'compact' ? "Compact" : "Axion Pro",
       power: "7.4 kW",
       tag: variant7kw === 'compact' ? "Ultra-Slim Home Wallbox" : "Home & Apartment Pro",
@@ -154,30 +154,30 @@ const EngineeredToChargeSection = () => {
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              setVariant7kw('pro');
+                              setVariant7kw('compact');
                             }}
-                            className={`px-1.5 py-0.5 rounded-full transition-all cursor-pointer ${
-                              variant7kw === 'pro' 
+                            className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+                              variant7kw === 'compact' 
                                 ? 'bg-accent text-black font-bold shadow-[0_0_8px_rgba(0,255,0,0.4)]' 
                                 : 'text-white/60 hover:text-white'
                             }`}
                           >
-                            PRO
+                            COMPACT
                           </button>
                           <button
                             type="button"
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              setVariant7kw('compact');
+                              setVariant7kw('pro');
                             }}
-                            className={`px-1.5 py-0.5 rounded-full transition-all cursor-pointer ${
-                              variant7kw === 'compact' 
-                                ? 'bg-white text-black font-bold shadow-[0_0_8px_rgba(255,255,255,0.4)]' 
+                            className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+                              variant7kw === 'pro' 
+                                ? 'bg-accent text-black font-bold shadow-[0_0_8px_rgba(0,255,0,0.4)]' 
                                 : 'text-white/60 hover:text-white'
                             }`}
                           >
-                            COMPACT
+                            PRO
                           </button>
                         </div>
                       )}
