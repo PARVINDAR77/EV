@@ -87,7 +87,9 @@ const Navbar = () => {
   const isGrowthActive = path.startsWith('/solutions');
   const isSystemActive = path.startsWith('/products') || path.startsWith('/product') || path.startsWith('/services');
   const isNetworkActive = path === '/franchise' || path === '/contact';
-  const isCalculatorActive = path === '/calculator' || path.startsWith('/planner') || path === '/ac-charger-planner';
+  const isCalculatorActive = path === '/calculator';
+  const isMultiCalculatorActive = path.startsWith('/calculator/multi-charger') || path === '/multi-charger-calculator' || path === '/calculator-hub';
+  const isPlannerActive = path.startsWith('/planner') || path === '/ac-charger-planner' || path === '/dc-charger-planner';
   const isWhyUsActive = path === '/about';
 
   const linkClass = (active, isMenuOpen = false) =>
@@ -196,7 +198,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* 5. ROI Calculator (Standalone Direct Link) */}
+          {/* 5A. ROI Calculator (Single Model) */}
           <Link 
             to="/calculator" 
             className={linkClass(isCalculatorActive)} 
@@ -205,6 +207,22 @@ const Navbar = () => {
           >
             ROI Calculator
             <span className={underlineClass(isCalculatorActive)}></span>
+          </Link>
+
+          {/* 5B. Multi-Charger Hub ROI (Station Mix) */}
+          <Link 
+            to="/calculator/multi-charger" 
+            className={linkClass(isMultiCalculatorActive)} 
+            onMouseEnter={() => handleMouseEnter(null)}
+            onClick={handleCloseImmediately}
+          >
+            <span className="flex items-center gap-1.5">
+              Multi-Charger ROI
+              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-bold">
+                Hub Mix
+              </span>
+            </span>
+            <span className={underlineClass(isMultiCalculatorActive)}></span>
           </Link>
 
           {/* 6. Why Us (Company Mission, Growth Trajectory & Engineering Advantage) */}
@@ -501,8 +519,18 @@ const Navbar = () => {
                   className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-black font-sans text-xs font-bold uppercase rounded-full hover:bg-white hover:text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.35)] cursor-pointer"
                 >
                   <Calculator size={13} />
-                  ROI Calculator
+                  Single ROI Calculator
                   <ArrowRight size={12} />
+                </Link>
+
+                <Link 
+                  to="/calculator/multi-charger" 
+                  onClick={handleCloseImmediately} 
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-accent/20 hover:bg-accent text-white hover:text-black font-sans text-xs font-bold rounded-full border border-accent/40 hover:border-accent transition-all cursor-pointer group"
+                >
+                  <Layers size={13} className="text-accent group-hover:text-black" />
+                  Multi-Charger Hub ROI
+                  <span className="text-[9px] uppercase font-mono px-1.5 py-0.5 rounded bg-black/40 text-accent group-hover:bg-black group-hover:text-accent font-bold">Mix</span>
                 </Link>
 
                 <Link 
@@ -741,7 +769,11 @@ const Navbar = () => {
               <Link to="/solutions/highway" onClick={handleCloseImmediately} className="hover:text-white pl-2">Highway Hubs</Link>
 
               <span className="text-[0.7rem] text-accent/80 font-mono tracking-widest uppercase mt-2">Tools:</span>
-              <Link to="/calculator" onClick={handleCloseImmediately} className="hover:text-white pl-2 font-bold text-accent">ROI Calculator</Link>
+              <Link to="/calculator" onClick={handleCloseImmediately} className="hover:text-white pl-2 font-bold text-accent">Single ROI Calculator</Link>
+              <Link to="/calculator/multi-charger" onClick={handleCloseImmediately} className="hover:text-accent pl-4 text-xs flex items-center justify-between text-white/90">
+                <span>↳ Multi-Charger Hub ROI</span>
+                <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-mono">Hub Mix</span>
+              </Link>
               <Link to="/planner/dc-investment" onClick={handleCloseImmediately} className="hover:text-accent pl-4 text-xs flex items-center justify-between text-white/90">
                 <span>↳ DC Fast Charger Planner</span>
                 <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-mono">12M Forecast</span>
