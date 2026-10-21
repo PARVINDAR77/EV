@@ -21,7 +21,8 @@ const DCChargers = lazy(() => import('./pages/products/DCChargers'));
 const Software = lazy(() => import('./pages/products/Software'));
 const Accessories = lazy(() => import('./pages/products/Accessories'));
 const Calculator = lazy(() => import('./pages/Calculator'));
-const ACChargerPlanner = lazy(() => import('./pages/ACChargerPlanner'));
+const DCChargerPlanner = lazy(() => import('./pages/DCChargerPlanner'));
+const ACChargerPlanner = DCChargerPlanner;
 const ProductPage = lazy(() => import('./pages/products/ProductPage'));
 const Installation = lazy(() => import('./pages/services/Installation'));
 const Maintenance = lazy(() => import('./pages/services/Maintenance'));
@@ -80,8 +81,10 @@ const AnimatedRoutes = () => {
           <Route path="/services/maintenance" element={<Maintenance />} />
 
           <Route path="/calculator" element={<Calculator />} />
-          <Route path="/planner/ac-investment" element={<ACChargerPlanner />} />
-          <Route path="/ac-charger-planner" element={<Navigate to="/planner/ac-investment" replace />} />
+          <Route path="/planner/dc-investment" element={<DCChargerPlanner />} />
+          <Route path="/dc-charger-planner" element={<Navigate to="/planner/dc-investment" replace />} />
+          <Route path="/planner/ac-investment" element={<Navigate to="/planner/dc-investment" replace />} />
+          <Route path="/ac-charger-planner" element={<Navigate to="/planner/dc-investment" replace />} />
         </Routes>
       </Suspense>
     </AnimatePresence>

@@ -506,12 +506,12 @@ const Navbar = () => {
                 </Link>
 
                 <Link 
-                  to="/planner/ac-investment" 
+                  to="/planner/dc-investment" 
                   onClick={handleCloseImmediately} 
                   className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-sans text-xs font-semibold rounded-full border border-white/10 hover:border-accent/40 transition-all cursor-pointer"
                 >
                   <TrendingUp size={13} className="text-accent" />
-                  AC Investment Planner (12M)
+                  DC Fast Charger Planner (12M)
                 </Link>
 
                 <Link 
@@ -742,8 +742,8 @@ const Navbar = () => {
 
               <span className="text-[0.7rem] text-accent/80 font-mono tracking-widest uppercase mt-2">Tools:</span>
               <Link to="/calculator" onClick={handleCloseImmediately} className="hover:text-white pl-2 font-bold text-accent">ROI Calculator</Link>
-              <Link to="/planner/ac-investment" onClick={handleCloseImmediately} className="hover:text-accent pl-4 text-xs flex items-center justify-between text-white/90">
-                <span>↳ AC Investment Planner</span>
+              <Link to="/planner/dc-investment" onClick={handleCloseImmediately} className="hover:text-accent pl-4 text-xs flex items-center justify-between text-white/90">
+                <span>↳ DC Fast Charger Planner</span>
                 <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-accent/20 text-accent font-mono">12M Forecast</span>
               </Link>
             </div>

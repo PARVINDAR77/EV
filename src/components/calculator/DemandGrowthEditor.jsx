@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import { Calendar, Car, Sliders, BatteryCharging, Zap, Info, RotateCcw } from 'lucide-react';
-import { formatNumberIN } from '../../services/financialCalculator';
+import { formatNumberIN, DC_VEHICLE_ENERGY_PRESETS } from '../../services/financialCalculator';
 
-export const VEHICLE_ENERGY_PRESETS = [
-  { label: '2W / 3W (3.5 kWh)', kwh: 3.5, desc: 'Scooters & E-Rickshaws' },
-  { label: 'City 4W (20 kWh)', kwh: 20.0, desc: 'Tiago / Punch / Nexon standard top-up' },
-  { label: 'Fleet Cab (30 kWh)', kwh: 30.0, desc: 'Commercial taxi depot charge' },
-  { label: 'Long Range (45 kWh)', kwh: 45.0, desc: 'Full overnight battery refill' }
-];
+export { DC_VEHICLE_ENERGY_PRESETS };
+export const VEHICLE_ENERGY_PRESETS = DC_VEHICLE_ENERGY_PRESETS;
 
-export const DEFAULT_QUARTERLY_RAMP = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4];
+export const DEFAULT_QUARTERLY_RAMP = [4, 4, 4, 8, 8, 8, 12, 12, 12, 16, 16, 16];
 
 const DemandGrowthEditor = ({
   demandConfig,
   onChange,
-  chargerQuantity = 2
+  chargerQuantity = 1
 }) => {
   const [scheduleMode, setScheduleMode] = useState('quarterly'); // 'quarterly' | 'monthly'
 
@@ -52,10 +48,10 @@ const DemandGrowthEditor = ({
   // Quick stats
   const totalAnnualSessions = schedule.reduce((sum, daily) => {
     const effDaily = isSiteWide ? daily : daily * chargerQuantity;
-    return sum + (effDaily * (demandConfig.operatingDays || 30) * ((demandConfig.uptimePct || 98) / 100));
+    return sum + (effDaily * (demandConfig.operatingDays || 30) * ((demandConfig.uptimePct || 96) / 100));
   }, 0);
 
-  const totalAnnualKwh = totalAnnualSessions * (demandConfig.avgKwhPerSession || 20);
+  const totalAnnualKwh = totalAnnualSessions * (demandConfig.avgKwhPerSession || 25);
 
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl border border-gray-150 text-gray-900">
@@ -67,10 +63,10 @@ const DemandGrowthEditor = ({
             Stage 3 of 5
           </span>
           <h2 className="text-xl sm:text-2xl font-display font-bold text-gray-900">
-            Charging Demand & Growth Forecast
+            DC Fast Charging Demand & Growth Forecast
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Forecast expected customer traffic, vehicle battery consumption, and month-by-month adoption ramp.
+            Forecast expected customer traffic, EV vehicle battery top-up requirements, and month-by-month adoption ramp.
           </p>
         </div>
 
@@ -91,23 +87,20 @@ const DemandGrowthEditor = ({
             <div className="flex items-center justify-between mb-2">
               <label className="text-xs font-bold text-gray-900 flex items-center gap-2">
                 <Car className="w-4 h-4 text-[#00A300]" />
-                Demand Counting Method
+                Demand Counting Scope
               </label>
-              <span className={`text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded-full ${
-                isSiteWide ? 'bg-[#00C800]/15 text-[#008800]' : 'bg-blue-100 text-blue-700'
-              }`}>
-                {isSiteWide ? 'Site-Wide (Realistic)' : 'Per-Charger'}
+              <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-gray-200 text-gray-700">
+                {isSiteWide ? 'Hub Total' : 'Per Unit'}
               </span>
             </div>
-
-            <p className="text-[11px] text-gray-500 mb-4 leading-relaxed">
+            <p className="text-xs text-gray-500 mb-4 leading-relaxed">
               {isSiteWide 
-                ? 'Sessions are counted across the entire location regardless of charger count. Recommended because adding 5 chargers does not immediately bring 5x traffic.'
-                : 'Sessions are multiplied by each individual installed charger unit.'}
+                ? 'Site-Wide Hub: Total sessions per day across all installed DC guns.' 
+                : 'Per-Charger: Sessions per day per DC unit (multiplied by total units).'}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 bg-gray-200/60 p-1 rounded-xl">
+          <div className="grid grid-cols-2 gap-2 bg-gray-200/70 p-1 rounded-xl">
             <button
               type="button"
               onClick={() => updateConfig('demandMode', 'site-wide')}
@@ -135,7 +128,7 @@ const DemandGrowthEditor = ({
             <label className="text-xs font-bold text-gray-900 flex items-center justify-between mb-2">
               <span className="flex items-center gap-2">
                 <BatteryCharging className="w-4 h-4 text-[#00A300]" />
-                Average Energy Delivered per Session (kWh)
+                Average Energy Delivered per DC Session (kWh)
               </span>
               <span className="font-mono text-xs font-bold text-[#008800]">
                 {demandConfig.avgKwhPerSession} kWh
@@ -143,7 +136,7 @@ const DemandGrowthEditor = ({
             </label>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-3">
-              {VEHICLE_ENERGY_PRESETS.map((p) => (
+              {DC_VEHICLE_ENERGY_PRESETS.map((p) => (
                 <button
                   key={p.kwh}
                   type="button"
@@ -164,14 +157,14 @@ const DemandGrowthEditor = ({
           <div className="relative">
             <input
               type="number"
-              min="1"
-              max="150"
-              step="0.5"
+              min="5"
+              max="250"
+              step="1"
               value={demandConfig.avgKwhPerSession}
-              onChange={(e) => updateConfig('avgKwhPerSession', Math.max(0.5, parseFloat(e.target.value) || 1))}
+              onChange={(e) => updateConfig('avgKwhPerSession', Math.max(1, parseFloat(e.target.value) || 1))}
               className="w-full px-4 py-2 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
             />
-            <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">kWh / vehicle</span>
+            <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">kWh / vehicle session</span>
           </div>
         </div>
 
@@ -183,7 +176,7 @@ const DemandGrowthEditor = ({
           <label className="text-xs font-bold text-gray-700 block mb-1">
             Operating Days per Month
           </label>
-          <p className="text-[11px] text-gray-500 mb-2">Days station is operational each month</p>
+          <p className="text-[11px] text-gray-500 mb-2">Days DC charging station is operational each month</p>
           <div className="relative">
             <input
               type="number"
@@ -201,7 +194,7 @@ const DemandGrowthEditor = ({
           <label className="text-xs font-bold text-gray-700 block mb-1">
             Expected Charger Uptime & Availability (%)
           </label>
-          <p className="text-[11px] text-gray-500 mb-2">Network reliability factoring grid cuts or downtime</p>
+          <p className="text-[11px] text-gray-500 mb-2">Hardware & grid reliability factor (96% standard)</p>
           <div className="relative">
             <input
               type="number"
@@ -209,7 +202,7 @@ const DemandGrowthEditor = ({
               max="100"
               step="0.5"
               value={demandConfig.uptimePct}
-              onChange={(e) => updateConfig('uptimePct', Math.max(50, Math.min(100, parseFloat(e.target.value) || 98)))}
+              onChange={(e) => updateConfig('uptimePct', Math.max(50, Math.min(100, parseFloat(e.target.value) || 96)))}
               className="w-full px-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
             />
             <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">% Uptime</span>
@@ -218,113 +211,110 @@ const DemandGrowthEditor = ({
       </div>
 
       {/* Row 3: 12-Month Demand Growth Schedule */}
-      <div className="border border-gray-200 rounded-2xl p-5 sm:p-6 bg-gray-50/50">
-        
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-200 gap-3 mb-6">
+      <div className="border border-gray-200 rounded-2xl p-5 sm:p-6 bg-gray-50/40 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-200">
           <div>
             <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
               <Calendar className="w-4 h-4 text-[#00A300]" />
-              12-Month Demand Growth Ramp
+              12-Month Non-Linear Adoption Ramp
             </h3>
             <p className="text-xs text-gray-500 mt-0.5">
-              Specify daily charging traffic as your location gains awareness across EV navigation apps.
+              Specify expected charging sessions per day for each month or quarter.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="flex bg-gray-200/70 p-1 rounded-xl text-xs font-medium">
+          <div className="flex items-center gap-3">
+            <div className="flex bg-gray-200 p-0.5 rounded-xl text-xs">
               <button
                 type="button"
                 onClick={() => setScheduleMode('quarterly')}
-                className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-                  scheduleMode === 'quarterly' ? 'bg-white text-gray-900 font-bold shadow-sm' : 'text-gray-600 hover:text-gray-900'
+                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                  scheduleMode === 'quarterly' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600'
                 }`}
               >
-                Quarterly Template
+                Quarterly Ramp
               </button>
               <button
                 type="button"
                 onClick={() => setScheduleMode('monthly')}
-                className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-                  scheduleMode === 'monthly' ? 'bg-white text-gray-900 font-bold shadow-sm' : 'text-gray-600 hover:text-gray-900'
+                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                  scheduleMode === 'monthly' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600'
                 }`}
               >
-                12-Month Granular
+                Monthly Detail
               </button>
             </div>
 
             <button
               type="button"
               onClick={resetToDefaultRamp}
-              className="p-1.5 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
-              title="Reset to default ramp (1 -> 2 -> 3 -> 4 cars/day)"
+              className="p-1.5 text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
+              title="Reset to default DC adoption curve"
             >
               <RotateCcw className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Mode A: Quarterly Template */}
+        {/* Quarterly Mode */}
         {scheduleMode === 'quarterly' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { q: 'Q1 (M1 - M3)', index: 0, val: schedule[0], hint: 'Initial ramp & awareness' },
-              { q: 'Q2 (M4 - M6)', index: 1, val: schedule[3], hint: 'Organic local adoption' },
-              { q: 'Q3 (M7 - M9)', index: 2, val: schedule[6], hint: 'Steady repeat EV drivers' },
-              { q: 'Q4 (M10 - M12)', index: 3, val: schedule[9], hint: 'Peak operational maturity' }
-            ].map((q) => (
-              <div key={q.q} className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                <span className="text-xs font-bold text-gray-700 block mb-0.5">{q.q}</span>
-                <span className="text-[10px] text-gray-400 block mb-2">{q.hint}</span>
-                <div className="relative">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.5"
-                    value={q.val}
-                    onChange={(e) => handleQuarterChange(q.index, e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
-                  />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">cars/day</span>
+            {[0, 1, 2, 3].map((qIndex) => {
+              const qVal = schedule[qIndex * 3] || 0;
+              const qTitles = ['Q1 (Months 1–3)', 'Q2 (Months 4–6)', 'Q3 (Months 7–9)', 'Q4 (Months 10–12)'];
+              const qDescs = ['Opening Ramp', 'Growth Phase', 'Matured Network', 'Peak Utilization'];
+
+              return (
+                <div key={qIndex} className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-xs font-bold text-gray-800">{qTitles[qIndex]}</span>
+                    <span className="text-[10px] font-mono text-gray-400">{qDescs[qIndex]}</span>
+                  </div>
+                  <div className="flex items-center gap-2 mt-3">
+                    <input
+                      type="range"
+                      min="0"
+                      max="40"
+                      step="0.5"
+                      value={qVal}
+                      onChange={(e) => handleQuarterChange(qIndex, e.target.value)}
+                      className="flex-1 accent-[#00C800] cursor-pointer"
+                    />
+                    <span className="font-mono font-bold text-sm text-gray-900 w-12 text-right">
+                      {qVal}
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-gray-400 block mt-1 text-right font-mono">
+                    sessions/day
+                  </span>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
-          /* Mode B: Full 12-Month Table */
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {schedule.map((val, idx) => (
-              <div key={idx} className="bg-white p-3 rounded-xl border border-gray-200 text-center">
-                <span className="text-[11px] font-mono font-bold text-gray-500 block mb-1">
-                  Month {idx + 1}
+          /* Monthly Mode */
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+            {schedule.slice(0, 12).map((dailyVal, mIndex) => (
+              <div key={mIndex} className="bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
+                <span className="text-[11px] font-bold text-gray-700 block mb-1">
+                  Month {mIndex + 1}
                 </span>
                 <input
                   type="number"
                   min="0"
-                  max="100"
+                  max="60"
                   step="0.5"
-                  value={val}
-                  onChange={(e) => handleMonthChange(idx, e.target.value)}
-                  className="w-full py-1 px-2 text-center rounded-lg bg-gray-50 border border-gray-300 font-mono font-bold text-xs text-gray-900 focus:outline-none focus:border-[#00C800]"
+                  value={dailyVal}
+                  onChange={(e) => handleMonthChange(mIndex, e.target.value)}
+                  className="w-full px-2 py-1.5 rounded-lg border border-gray-300 font-mono font-bold text-sm text-gray-900 text-center focus:outline-none focus:border-[#00C800]"
                 />
-                <span className="text-[9px] text-gray-400 font-mono block mt-1">cars/day</span>
+                <span className="text-[9px] text-gray-400 block mt-1 text-center font-mono">
+                  sessions/day
+                </span>
               </div>
             ))}
           </div>
         )}
-
-      </div>
-
-      {/* Footer Notes */}
-      <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-gray-500 font-sans">
-        <div className="flex items-center gap-2">
-          <Info className="w-4 h-4 text-gray-400 flex-shrink-0" />
-          <span>Default quarterly ramp provides an illustrative progression. Adjust values based on your site traffic.</span>
-        </div>
-        <div className="font-mono text-gray-600">
-          Modeled 12-Month Sessions: <strong className="text-gray-900">{formatNumberIN(totalAnnualSessions)}</strong>
-        </div>
       </div>
 
     </div>

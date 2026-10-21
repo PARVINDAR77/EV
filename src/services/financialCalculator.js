@@ -1,14 +1,71 @@
 /**
- * AXION CHARGE — AC Charger Investment & Financial Calculation Engine
+ * AXION CHARGE — DC Fast Charger Investment & Financial Calculation Engine
  * 
  * Pure mathematical functions for:
- * 1. Initial CAPEX and optional debt financing amortization.
- * 2. Real-world deliverable energy upper bounds (capacity validation).
+ * 1. Initial DC CAPEX (Hardware, Civil Plinth, HT Substation/Transformer) and optional debt financing amortization.
+ * 2. Real-world deliverable energy upper bounds (high-power DC capacity validation).
  * 3. 12-Month revenue, variable costs, contribution, fixed OPEX, operating profit.
  * 4. Net cash flow and cumulative cash flow with honest payback detection.
  * 5. Mathematically verified break-even selling price and session volume.
- * 6. Multi-plan comparison and sensitivity scenarios.
+ * 6. Multi-plan DC hub comparison and sensitivity scenarios.
  */
+
+/**
+ * Official AXION DC Fast Charger Hardware Models
+ */
+export const DC_CHARGER_MODELS = [
+  {
+    id: 'dc-30kw',
+    name: 'Axion DC 30 kW',
+    ratingKw: 30,
+    guns: '1 × CCS2',
+    gunsCount: 1,
+    defaultPrice: 499900,
+    tagline: 'Rapid urban DC charger for dealerships, shopping plazas & commercial fleets'
+  },
+  {
+    id: 'dc-60kw',
+    name: 'Axion DC 60 kW Dual-Gun',
+    ratingKw: 60,
+    guns: '2 × CCS2 Dynamic',
+    gunsCount: 2,
+    defaultPrice: 699900,
+    tagline: 'Commercial fast charging hub with dynamic power sharing for malls & depots'
+  },
+  {
+    id: 'dc-120kw',
+    name: 'Axion DC 120 kW High-Power',
+    ratingKw: 120,
+    guns: '2 × CCS2 High-Power',
+    gunsCount: 2,
+    defaultPrice: 999900,
+    tagline: 'Ultra-fast highway corridor transit charging station for rapid turnaround'
+  },
+  {
+    id: 'dc-240kw',
+    name: 'Axion DC 240 kW Hypercharger',
+    ratingKw: 240,
+    guns: '2 × CCS2 Liquid Cooled',
+    gunsCount: 2,
+    defaultPrice: 1899900,
+    tagline: 'Liquid-cooled hypercharger engineered for heavy electric bus fleets & trucks'
+  }
+];
+
+// Backward-compatibility alias
+export const AC_CHARGER_MODELS = DC_CHARGER_MODELS;
+
+/**
+ * Real-world DC Fast Charging Vehicle Energy Presets
+ */
+export const DC_VEHICLE_ENERGY_PRESETS = [
+  { label: 'Passenger EV (22 kWh)', kwh: 22.0, desc: 'Tiago / Nexon EV / Windsor top-up (30-40 min)' },
+  { label: 'Highway SUV (38 kWh)', kwh: 38.0, desc: 'ZS EV / BYD Atto 3 / Ioniq 5 corridor fast turnaround' },
+  { label: 'Fleet Van (32 kWh)', kwh: 32.0, desc: 'Commercial logistics depot fast charge (Tata Ace EV)' },
+  { label: 'Heavy Bus (90 kWh)', kwh: 90.0, desc: 'Electric transit bus / heavy carrier refill' }
+];
+
+export const VEHICLE_ENERGY_PRESETS = DC_VEHICLE_ENERGY_PRESETS;
 
 /**
  * Format number in Indian Rupee format (e.g. ₹1,25,000)
@@ -28,14 +85,14 @@ export const formatNumberIN = (val, maxDecimals = 1) => {
 };
 
 /**
- * Calculate Initial Project Investment and Optional Financing
+ * Calculate Initial DC Project Investment and Optional Financing
  */
 export const calculateInitialInvestment = ({
-  chargerQuantity = 2,
-  costPerCharger = 49900,
-  installationPerCharger = 15000,
-  infrastructureFixed = 25000,
-  otherSetupCosts = 10000,
+  chargerQuantity = 1,
+  costPerCharger = 699900,
+  installationPerCharger = 75000,
+  infrastructureFixed = 250000,
+  otherSetupCosts = 60000,
   contingencyPct = 5,
   financing = {
     enabled: false,
@@ -110,15 +167,15 @@ export const calculateInitialInvestment = ({
  * - Charger power rating (kW)
  * - Number of chargers
  * - Operating hours per day (default 16 or 24)
- * - Charger uptime factor (e.g. 98%)
+ * - Charger uptime factor (e.g. 96%)
  * - Power sharing ratio / diversity factor (default 100%)
  * - Site power limit in kW (e.g. grid connection limit)
  */
 export const calculateCapacityLimits = ({
-  chargerQuantity = 2,
-  chargerRatingKw = 7.4,
+  chargerQuantity = 1,
+  chargerRatingKw = 60,
   operatingHoursPerDay = 16,
-  uptimePct = 98,
+  uptimePct = 96,
   powerSharingRatioPct = 100,
   sitePowerLimitKw = null,
   operatingDaysPerMonth = 30
@@ -126,7 +183,7 @@ export const calculateCapacityLimits = ({
   const qty = Math.max(1, Number(chargerQuantity) || 1);
   const ratingKw = Math.max(0, Number(chargerRatingKw) || 0);
   const hours = Math.min(24, Math.max(1, Number(operatingHoursPerDay) || 16));
-  const uptimeFactor = Math.min(1, Math.max(0, (Number(uptimePct) || 98) / 100));
+  const uptimeFactor = Math.min(1, Math.max(0, (Number(uptimePct) || 96) / 100));
   const sharingFactor = Math.min(1, Math.max(0.1, (Number(powerSharingRatioPct) || 100) / 100));
 
   const theoreticalNameplateKw = qty * ratingKw;
@@ -161,25 +218,25 @@ export const calculateCapacityLimits = ({
  *   C = electricity purchase cost + per-kWh platform fee
  *   F = fixed monthly operating cost
  *   E = monthly energy delivered in kWh
- *   g = payment gateway fee as decimal (e.g. 0.018 for 1.8%)
+ *   g = payment gateway fee as decimal (e.g. 0.02 for 2%)
  */
 export const calculateMonthlyFinancials = ({
   monthIndex = 1, // 1 to 12
-  dailySessions = 2,
+  dailySessions = 6,
   demandMode = 'site-wide', // 'site-wide' | 'per-charger'
-  chargerQuantity = 2,
+  chargerQuantity = 1,
   operatingDays = 30,
-  avgKwhPerSession = 20,
-  uptimePct = 98,
-  customerSellingPricePerKwh = 20,
-  electricityCostPerKwh = 9.5,
-  platformFeePerKwh = 0.5,
-  paymentGatewayFeePct = 1.8,
-  fixedPlatformFeeMonthly = 500, // per charger or total
+  avgKwhPerSession = 25,
+  uptimePct = 96,
+  customerSellingPricePerKwh = 21.0,
+  electricityCostPerKwh = 8.5,
+  platformFeePerKwh = 1.0,
+  paymentGatewayFeePct = 2.0,
+  fixedPlatformFeeMonthly = 1000, // per charger IoT SIM & connectivity
   fixedPlatformFeePerCharger = true,
-  monthlyMaintenanceCost = 1000,
+  monthlyMaintenanceCost = 6000, // DC AMC maintenance SLA
   siteRentMonthly = 0,
-  otherFixedOpexMonthly = 0,
+  otherFixedOpexMonthly = 5000,
   capacityLimits = null,
   financingEmi = 0
 } = {}) => {
@@ -190,7 +247,7 @@ export const calculateMonthlyFinancials = ({
   // Site-wide mode does NOT multiply by charger quantity!
   const effectiveDailySessions = demandMode === 'per-charger' ? rawDaily * qty : rawDaily;
   
-  const uptimeFactor = Math.min(1, Math.max(0, (Number(uptimePct) || 98) / 100));
+  const uptimeFactor = Math.min(1, Math.max(0, (Number(uptimePct) || 96) / 100));
   const days = Math.max(1, Math.min(31, Number(operatingDays) || 30));
   
   const expectedMonthlySessions = effectiveDailySessions * days * uptimeFactor;
@@ -316,27 +373,27 @@ export const calculateMonthlyFinancials = ({
 /**
  * 12-Month Financial Reconciliation and Cumulative Cash Flow Projection
  * 
- * Default demand schedule:
- * Months 1-3: 1 car/day
- * Months 4-6: 2 cars/day
- * Months 7-9: 3 cars/day
- * Months 10-12: 4 cars/day
+ * Default DC Fast Charging demand schedule (sessions/day):
+ * Months 1-3: 4 sessions/day (Opening ramp)
+ * Months 4-6: 8 sessions/day (Growth)
+ * Months 7-9: 12 sessions/day (Maturity)
+ * Months 10-12: 16 sessions/day (Peak utilization)
  */
 export const calculate12MonthProjection = ({
   investmentConfig = {},
   tariffConfig = {},
-  demandSchedule = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4], // 12 elements
+  demandSchedule = [4, 4, 4, 8, 8, 8, 12, 12, 12, 16, 16, 16],
   demandMode = 'site-wide',
   operatingDays = 30,
-  avgKwhPerSession = 20,
-  uptimePct = 98,
+  avgKwhPerSession = 25,
+  uptimePct = 96,
   operatingHoursPerDay = 16,
   sitePowerLimitKw = null
 } = {}) => {
   const investment = calculateInitialInvestment(investmentConfig);
   const capacityLimits = calculateCapacityLimits({
     chargerQuantity: investment.chargerQuantity,
-    chargerRatingKw: investmentConfig.chargerRatingKw || 7.4,
+    chargerRatingKw: investmentConfig.chargerRatingKw || 60,
     operatingHoursPerDay,
     uptimePct,
     sitePowerLimitKw,
@@ -354,7 +411,7 @@ export const calculate12MonthProjection = ({
 
   for (let m = 0; m < 12; m++) {
     const monthNum = m + 1;
-    const dailySessions = demandSchedule[m] !== undefined ? demandSchedule[m] : 2;
+    const dailySessions = demandSchedule[m] !== undefined ? demandSchedule[m] : 6;
 
     const monthResult = calculateMonthlyFinancials({
       monthIndex: monthNum,
@@ -364,15 +421,15 @@ export const calculate12MonthProjection = ({
       operatingDays,
       avgKwhPerSession,
       uptimePct,
-      customerSellingPricePerKwh: tariffConfig.customerSellingPricePerKwh ?? 20,
-      electricityCostPerKwh: tariffConfig.electricityCostPerKwh ?? 9.5,
-      platformFeePerKwh: tariffConfig.platformFeePerKwh ?? 0.5,
-      paymentGatewayFeePct: tariffConfig.paymentGatewayFeePct ?? 1.8,
-      fixedPlatformFeeMonthly: tariffConfig.fixedPlatformFeeMonthly ?? 500,
+      customerSellingPricePerKwh: tariffConfig.customerSellingPricePerKwh ?? 21.0,
+      electricityCostPerKwh: tariffConfig.electricityCostPerKwh ?? 8.5,
+      platformFeePerKwh: tariffConfig.platformFeePerKwh ?? 1.0,
+      paymentGatewayFeePct: tariffConfig.paymentGatewayFeePct ?? 2.0,
+      fixedPlatformFeeMonthly: tariffConfig.fixedPlatformFeeMonthly ?? 1000,
       fixedPlatformFeePerCharger: tariffConfig.fixedPlatformFeePerCharger ?? true,
-      monthlyMaintenanceCost: tariffConfig.monthlyMaintenanceCost ?? 1000,
+      monthlyMaintenanceCost: tariffConfig.monthlyMaintenanceCost ?? 6000,
       siteRentMonthly: tariffConfig.siteRentMonthly ?? 0,
-      otherFixedOpexMonthly: tariffConfig.otherFixedOpexMonthly ?? 0,
+      otherFixedOpexMonthly: tariffConfig.otherFixedOpexMonthly ?? 5000,
       capacityLimits,
       financingEmi: investment.financing.enabled ? investment.financing.monthlyEmi : 0
     });
@@ -452,10 +509,10 @@ export const calculate12MonthProjection = ({
 /**
  * Three Sensitivity Scenarios (Conservative, Expected, Optimistic)
  */
-export const calculateScenarios = (baseConfig, conservativeMult = 0.7, optimisticMult = 1.3) => {
-  const baseSchedule = baseConfig.demandSchedule || [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4];
+export const calculateScenarios = (baseConfig, conservativeMult = 0.8, optimisticMult = 1.2) => {
+  const baseSchedule = baseConfig.demandSchedule || [4, 4, 4, 8, 8, 8, 12, 12, 12, 16, 16, 16];
   
-  const conservativeSchedule = baseSchedule.map(s => Math.max(0.5, Math.round(s * conservativeMult * 10) / 10));
+  const conservativeSchedule = baseSchedule.map(s => Math.max(1, Math.round(s * conservativeMult * 10) / 10));
   const expectedSchedule = [...baseSchedule];
   const optimisticSchedule = baseSchedule.map(s => Math.round(s * optimisticMult * 10) / 10);
 
@@ -465,17 +522,17 @@ export const calculateScenarios = (baseConfig, conservativeMult = 0.7, optimisti
 
   return {
     conservative: {
-      label: 'Conservative',
+      label: 'Conservative (-20%)',
       multiplier: conservativeMult,
       projection: conservative
     },
     expected: {
-      label: 'Expected',
+      label: 'Expected (Base)',
       multiplier: 1.0,
       projection: expected
     },
     optimistic: {
-      label: 'Optimistic',
+      label: 'Optimistic (+20%)',
       multiplier: optimisticMult,
       projection: optimistic
     }
@@ -483,20 +540,44 @@ export const calculateScenarios = (baseConfig, conservativeMult = 0.7, optimisti
 };
 
 /**
- * Multi-Tier Plan Comparison (Starter 2 units, Growth 5 units, Expansion 10 units)
- * Uses the exact same demand forecast across all plans to demonstrate capacity vs actual utilization.
+ * Multi-Tier DC Fast Charging Plan Comparison
+ * Starter Hub (1 × 60 kW), Highway Hub (2 × 60 kW), Expressway Superhub (2 × 120 kW)
+ * Evaluated under the exact same demand forecast to showcase capacity headroom & capital efficiency.
  */
 export const calculatePlanComparison = (baseConfig) => {
   const plans = [
-    { id: 'starter', name: 'Starter Plan', qty: 2 },
-    { id: 'growth', name: 'Growth Plan', qty: 5 },
-    { id: 'expansion', name: 'Expansion Plan', qty: 10 }
+    { 
+      id: 'starter', 
+      name: 'Starter Hub (1× 60kW)', 
+      qty: 1, 
+      ratingKw: 60, 
+      costPerCharger: 699900,
+      description: '1 × 60 kW Dual-Gun DC Charger (2 Bays)' 
+    },
+    { 
+      id: 'growth', 
+      name: 'Highway Hub (2× 60kW)', 
+      qty: 2, 
+      ratingKw: 60, 
+      costPerCharger: 699900,
+      description: '2 × 60 kW Dual-Gun DC Chargers (4 Bays)' 
+    },
+    { 
+      id: 'expansion', 
+      name: 'Expressway Superhub (2× 120kW)', 
+      qty: 2, 
+      ratingKw: 120, 
+      costPerCharger: 999900,
+      description: '2 × 120 kW Ultra-Fast DC Chargers (4 Bays)' 
+    }
   ];
 
   return plans.map(plan => {
     const planInvestmentConfig = {
       ...baseConfig.investmentConfig,
-      chargerQuantity: plan.qty
+      chargerQuantity: plan.qty,
+      chargerRatingKw: plan.ratingKw,
+      costPerCharger: plan.costPerCharger
     };
 
     const projection = calculate12MonthProjection({
@@ -507,6 +588,7 @@ export const calculatePlanComparison = (baseConfig) => {
     return {
       planId: plan.id,
       planName: plan.name,
+      description: plan.description,
       chargerQuantity: plan.qty,
       totalInvestment: projection.investment.totalProjectInvestment,
       annualRevenue: projection.annualTotals.revenue,

@@ -11,7 +11,7 @@ const ProposalReportModal = ({
   tariffConfig,
   demandConfig
 }) => {
-  const [clientName, setClientName] = useState('Commercial Property / RWA Host');
+  const [clientName, setClientName] = useState('Commercial Property / Highway Fleet Host');
   const [siteLocation, setSiteLocation] = useState('Ahmedabad, Gujarat');
   const [preparedBy, setPreparedBy] = useState('AXION CHARGE Solutions Team');
 
@@ -35,7 +35,7 @@ const ProposalReportModal = ({
           <div className="flex items-center gap-2">
             <FileText className="w-4 h-4 text-accent" />
             <span className="text-sm font-bold font-sans">
-              Client Investment Proposal & Financial Report
+              DC Fast Charging Infrastructure Proposal & Financial Report
             </span>
           </div>
 
@@ -66,7 +66,7 @@ const ProposalReportModal = ({
             <div>
               <AxionLogo className="h-8 sm:h-9 w-auto text-black mb-3" fill="#000000" />
               <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">
-                AC Charger Commercial Infrastructure Proposal
+                DC Fast Charging Commercial Infrastructure Proposal
               </p>
             </div>
 
@@ -116,7 +116,7 @@ const ProposalReportModal = ({
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono mb-4">
               <div className="p-3 bg-gray-50 rounded-xl border border-gray-200">
-                <span className="text-gray-400 block text-[10px]">Chargers Installed</span>
+                <span className="text-gray-400 block text-[10px]">DC Fast Chargers</span>
                 <strong className="text-sm text-gray-900">{investment.chargerQuantity} × {investmentConfig.chargerRatingKw} kW</strong>
               </div>
               <div className="p-3 bg-gray-50 rounded-xl border border-gray-200">
@@ -156,28 +156,28 @@ const ProposalReportModal = ({
                 </thead>
                 <tbody className="divide-y divide-gray-150 font-mono">
                   <tr>
-                    <td className="py-2 px-3 font-sans font-medium">Charger Hardware Equipment</td>
+                    <td className="py-2 px-3 font-sans font-medium">DC Fast Charger Hardware Equipment</td>
                     <td className="py-2 px-3 text-gray-500">{investment.chargerQuantity} units @ {formatINR(investment.costPerCharger)}</td>
                     <td className="py-2 px-3 text-right font-bold">{formatINR(investment.equipmentCost)}</td>
                   </tr>
                   <tr>
-                    <td className="py-2 px-3 font-sans font-medium">Civil Mounting & Commissioning</td>
+                    <td className="py-2 px-3 font-sans font-medium">Civil Plinth & Foundation Works</td>
                     <td className="py-2 px-3 text-gray-500">{investment.chargerQuantity} units @ {formatINR(investmentConfig.installationPerCharger)}</td>
                     <td className="py-2 px-3 text-right font-bold">{formatINR(investment.installationCost)}</td>
                   </tr>
                   <tr>
-                    <td className="py-2 px-3 font-sans font-medium">Electrical Infrastructure & Cabling</td>
-                    <td className="py-2 px-3 text-gray-500">Distribution box, earthing, MCB</td>
+                    <td className="py-2 px-3 font-sans font-medium">HT Substation, Transformer & Cabling</td>
+                    <td className="py-2 px-3 text-gray-500">Step-down transformer, breaker, busbar & earthing</td>
                     <td className="py-2 px-3 text-right font-bold">{formatINR(investment.infrastructureCost)}</td>
                   </tr>
                   <tr>
-                    <td className="py-2 px-3 font-sans font-medium">Signage & Permits</td>
-                    <td className="py-2 px-3 text-gray-500">Bay painting, decals & documentation</td>
+                    <td className="py-2 px-3 font-sans font-medium">Canopy, Illuminated Totem & Signage</td>
+                    <td className="py-2 px-3 text-gray-500">Weather canopy, pylon totem, bay painting & decals</td>
                     <td className="py-2 px-3 text-right font-bold">{formatINR(investment.otherSetupCosts)}</td>
                   </tr>
                   <tr>
                     <td className="py-2 px-3 font-sans font-medium">Contingency Buffer ({investmentConfig.contingencyPct}%)</td>
-                    <td className="py-2 px-3 text-gray-500">Unforeseen electrical/civil variance</td>
+                    <td className="py-2 px-3 text-gray-500">Unforeseen civil/electrical DISCOM variance</td>
                     <td className="py-2 px-3 text-right font-bold">{formatINR(investment.contingencyAmount)}</td>
                   </tr>
                 </tbody>
@@ -253,51 +253,33 @@ const ProposalReportModal = ({
                     </tr>
                   ))}
                 </tbody>
-                <tfoot className="bg-gray-100 font-bold border-t-2 border-gray-300">
+                <tfoot className="bg-gray-50 font-bold border-t border-gray-200 text-gray-900">
                   <tr>
-                    <td className="py-2 px-2">Total</td>
+                    <td className="py-2 px-2 font-bold">12-Mo Total</td>
                     <td className="py-2 px-2 text-right">—</td>
                     <td className="py-2 px-2 text-right">{formatNumberIN(annualTotals.energyKwh, 0)}</td>
                     <td className="py-2 px-2 text-right">{formatINR(annualTotals.revenue)}</td>
                     <td className="py-2 px-2 text-right text-rose-600">-{formatINR(annualTotals.totalOperatingExpenses)}</td>
-                    <td className={`py-2 px-2 text-right ${annualTotals.operatingProfit >= 0 ? 'text-[#008800]' : 'text-rose-600'}`}>
-                      {formatINR(annualTotals.operatingProfit)}
-                    </td>
-                    <td className={`py-2 px-2 text-right ${projectionData.cumulativeCashFlowMonth12 >= 0 ? 'text-[#008800]' : 'text-rose-600'}`}>
-                      {formatINR(projectionData.cumulativeCashFlowMonth12)}
-                    </td>
+                    <td className="py-2 px-2 text-right text-[#008800]">{formatINR(annualTotals.operatingProfit)}</td>
+                    <td className="py-2 px-2 text-right text-gray-900">{formatINR(projectionData.cumulativeCashFlowMonth12)}</td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           </div>
 
-          {/* Section 5: Key Disclaimers & Assumptions */}
-          <div className="p-4 bg-gray-50 border border-gray-200 rounded-2xl text-[11px] text-gray-500 space-y-2 leading-relaxed font-sans">
-            <h5 className="font-bold text-gray-700 uppercase font-mono text-[10px]">
-              Statutory Disclaimers & Model Assumptions
-            </h5>
-            <p>
-              1. <strong>Illustrative Forecast:</strong> All revenue, session, and payback figures presented in this document are analytical projections based on input parameters supplied by the client and do not constitute a commercial or contractual guarantee of charging demand, utilization, or financial returns.
-            </p>
-            <p>
-              2. <strong>Capacity Upper Bound:</strong> Max theoretical equipment throughput for this site is {formatNumberIN(capacityLimits.maxDeliverableEnergyPerDay)} kWh/day ({capacityLimits.chargerQuantity} × {capacityLimits.chargerRatingKw} kW across {capacityLimits.operatingHoursPerDay} hrs/day at {capacityLimits.uptimePct}% uptime). Actual delivered energy depends upon vehicle battery acceptance rates and dwell times.
-            </p>
-            <p>
-              3. <strong>Tariffs & Taxes:</strong> Electricity purchase costs are subject to change by local DISCOM authorities. GST and other applicable local levies on charging services must be accounted for according to statutory tax guidelines.
-            </p>
-          </div>
-
-          {/* Signature Block */}
-          <div className="pt-8 border-t border-gray-200 grid grid-cols-2 gap-8 text-xs font-mono">
-            <div>
-              <span className="text-gray-400 block mb-8">For AXION CHARGE:</span>
-              <div className="border-t border-gray-400 pt-1 text-gray-700">Authorized Technical Representative</div>
+          {/* Section 5: Capacity Safeguards & Legal Disclaimers */}
+          <div className="bg-gray-50 p-4 rounded-2xl border border-gray-200 text-[11px] text-gray-600 space-y-2">
+            <div className="flex items-center gap-2 font-bold text-gray-900">
+              <ShieldCheck className="w-4 h-4 text-[#00A300]" />
+              Physical Capacity Validation & Professional Engineering Standards
             </div>
-            <div>
-              <span className="text-gray-400 block mb-8">Accepted By Client:</span>
-              <div className="border-t border-gray-400 pt-1 text-gray-700">Authorized Signatory</div>
-            </div>
+            <p className="leading-relaxed">
+              Based on the specified hardware configuration of {investment.chargerQuantity} × {investmentConfig.chargerRatingKw} kW DC units operating {capacityLimits.operatingHoursPerDay} hrs/day at {capacityLimits.uptimePct}% uptime, the site deliverable capacity limit is <strong>{formatNumberIN(capacityLimits.maxDeliverableEnergyPerDay)} kWh/day</strong> ({formatNumberIN(capacityLimits.maxDeliverableEnergyPerMonth)} kWh/month). Actual revenue depends on vehicle battery sizes, grid availability, DISCOM sanction load, and local footfall.
+            </p>
+            <p className="text-[10px] text-gray-400">
+              AXION CHARGE commercial proposals are estimates based on user-provided operational assumptions and standard equipment tariffs.
+            </p>
           </div>
 
         </div>

@@ -10,14 +10,14 @@ const PlanComparisonView = ({ baseConfig }) => {
       
       <div className="pb-6 border-b border-gray-150 mb-6">
         <span className="text-[11px] font-mono uppercase tracking-widest text-[#00A300] font-bold block mb-1">
-          Stage 5A · Multi-Tier Sizing Comparison
+          Stage 5A · Multi-Tier DC Fast Charging Hub Sizing
         </span>
         <h3 className="text-base sm:text-lg font-display font-bold text-gray-900 flex items-center gap-2">
           <Layers className="w-5 h-5 text-[#00A300]" />
-          Charger Quantity Investment Comparison
+          DC Fast Charging Infrastructure Sizing Comparison
         </h3>
         <p className="text-xs text-gray-500 mt-0.5">
-          Evaluating Starter (2), Growth (5), and Expansion (10) plans under the <strong>exact same customer traffic</strong> to contrast capacity scaling against capital efficiency.
+          Evaluating Starter Hub (1× 60 kW), Highway Hub (2× 60 kW), and Expressway Superhub (2× 120 kW) under the <strong>exact same customer traffic</strong> to contrast deliverable capacity against capital recovery.
         </p>
       </div>
 
@@ -44,9 +44,15 @@ const PlanComparisonView = ({ baseConfig }) => {
                     {plan.planName}
                   </span>
                   <span className="text-xs font-mono font-bold text-gray-900">
-                    {plan.chargerQuantity} Units
+                    {plan.chargerQuantity} {plan.chargerQuantity === 1 ? 'Unit' : 'Units'}
                   </span>
                 </div>
+
+                {plan.description && (
+                  <p className="text-xs text-gray-600 mb-3 font-sans">
+                    {plan.description}
+                  </p>
+                )}
 
                 <div className="mb-4">
                   <span className="text-[11px] text-gray-500 block">Total Investment (CAPEX)</span>

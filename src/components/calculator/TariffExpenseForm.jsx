@@ -5,7 +5,7 @@ import { formatINR } from '../../services/financialCalculator';
 const TariffExpenseForm = ({
   tariffConfig,
   onChange,
-  chargerQuantity = 2
+  chargerQuantity = 1
 }) => {
   const updateField = (field, val) => {
     onChange({
@@ -39,15 +39,15 @@ const TariffExpenseForm = ({
             Stage 2 of 5
           </span>
           <h2 className="text-xl sm:text-2xl font-display font-bold text-gray-900">
-            Tariffs & Operating Expenses (OPEX)
+            DC Charging Tariffs & Operating Expenses (OPEX)
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Configure customer charging rates, commercial grid electricity costs, variable fees, and fixed monthly OPEX.
+            Configure commercial DC fast charging rates, grid electricity costs, variable platform fees, and fixed monthly OPEX.
           </p>
         </div>
 
         <div className="bg-gray-50 border border-gray-200/80 rounded-2xl px-4 py-2 text-right">
-          <span className="text-[10px] uppercase font-mono text-gray-400 font-bold block">Fixed OPEX</span>
+          <span className="text-[10px] uppercase font-mono text-gray-400 font-bold block">Fixed Monthly OPEX</span>
           <span className="text-lg sm:text-xl font-bold font-mono text-gray-900">
             {formatINR(totalFixedOpex)} <span className="text-xs font-normal text-gray-400">/ mo</span>
           </span>
@@ -70,7 +70,7 @@ const TariffExpenseForm = ({
               <label className="text-xs font-bold text-gray-800 block mb-1">
                 Customer Selling Price (₹/kWh)
               </label>
-              <p className="text-[11px] text-gray-500 mb-2">Price billed to EV drivers per unit</p>
+              <p className="text-[11px] text-gray-500 mb-2">DC fast charging tariff billed to drivers (₹18–₹25)</p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
@@ -91,7 +91,7 @@ const TariffExpenseForm = ({
               <label className="text-xs font-bold text-gray-800 block mb-1">
                 Grid Power Purchase Cost (₹/kWh)
               </label>
-              <p className="text-[11px] text-gray-500 mb-2">DISCOM commercial EV tariff</p>
+              <p className="text-[11px] text-gray-500 mb-2">Commercial DISCOM HT EV tariff</p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
@@ -112,7 +112,7 @@ const TariffExpenseForm = ({
               <label className="text-xs font-bold text-gray-800 block mb-1">
                 Cloud CMS Software Fee (₹/kWh)
               </label>
-              <p className="text-[11px] text-gray-500 mb-2">Per-unit session cloud management</p>
+              <p className="text-[11px] text-gray-500 mb-2">OCPP 1.6J/2.0.1 smart telemetry & billing</p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
@@ -161,13 +161,13 @@ const TariffExpenseForm = ({
               <label className="text-xs font-bold text-gray-800 block mb-1">
                 Monthly Maintenance SLA (₹/mo)
               </label>
-              <p className="text-[11px] text-gray-500 mb-2">Preventive checkup & remote support</p>
+              <p className="text-[11px] text-gray-500 mb-2">DC AMC, filter cleaning, cooling & support</p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
                   type="number"
                   min="0"
-                  step="100"
+                  step="500"
                   value={tariffConfig.monthlyMaintenanceCost}
                   onChange={(e) => updateField('monthlyMaintenanceCost', Math.max(0, parseFloat(e.target.value) || 0))}
                   className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -186,18 +186,18 @@ const TariffExpenseForm = ({
                   onClick={() => updateField('fixedPlatformFeePerCharger', !tariffConfig.fixedPlatformFeePerCharger)}
                   className="text-[10px] font-mono text-[#00A300] hover:underline"
                 >
-                  {tariffConfig.fixedPlatformFeePerCharger ? 'Per Charger' : 'Total Site'}
+                  {tariffConfig.fixedPlatformFeePerCharger ? 'Per Unit' : 'Total Site'}
                 </button>
               </div>
               <p className="text-[11px] text-gray-500 mb-2">
-                4G IoT SIM & static IP ({tariffConfig.fixedPlatformFeePerCharger ? `× ${chargerQuantity} units` : 'flat'})
+                Industrial 4G IoT SIM & static IP ({tariffConfig.fixedPlatformFeePerCharger ? `× ${chargerQuantity} units` : 'flat'})
               </p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
                   type="number"
                   min="0"
-                  step="50"
+                  step="100"
                   value={tariffConfig.fixedPlatformFeeMonthly}
                   onChange={(e) => updateField('fixedPlatformFeeMonthly', Math.max(0, parseFloat(e.target.value) || 0))}
                   className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -210,13 +210,13 @@ const TariffExpenseForm = ({
               <label className="text-xs font-bold text-gray-800 block mb-1">
                 Site Lease / Parking Bay Rent (₹/mo)
               </label>
-              <p className="text-[11px] text-gray-500 mb-2">Optional monthly space rental</p>
+              <p className="text-[11px] text-gray-500 mb-2">Commercial land lease / revenue-share base</p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
                   type="number"
                   min="0"
-                  step="500"
+                  step="1000"
                   value={tariffConfig.siteRentMonthly}
                   onChange={(e) => updateField('siteRentMonthly', Math.max(0, parseFloat(e.target.value) || 0))}
                   className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -227,15 +227,15 @@ const TariffExpenseForm = ({
             {/* Other Fixed Costs */}
             <div className="bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
               <label className="text-xs font-bold text-gray-800 block mb-1">
-                Other Overhead Expenses (₹/mo)
+                Site Operations & Housekeeping (₹/mo)
               </label>
-              <p className="text-[11px] text-gray-500 mb-2">Insurance, cleaning, administrative</p>
+              <p className="text-[11px] text-gray-500 mb-2">Canopy lighting, housekeeping & security</p>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
                 <input
                   type="number"
                   min="0"
-                  step="250"
+                  step="500"
                   value={tariffConfig.otherFixedOpexMonthly}
                   onChange={(e) => updateField('otherFixedOpexMonthly', Math.max(0, parseFloat(e.target.value) || 0))}
                   className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -248,55 +248,57 @@ const TariffExpenseForm = ({
         </div>
 
         {/* Right Column: Real-Time Unit Economics Card (4 Cols) */}
-        <div className="lg:col-span-4 flex flex-col justify-between bg-gradient-to-b from-gray-50 to-gray-100/60 p-6 rounded-2xl border border-gray-200">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-[#00A300]" />
-              <h4 className="text-xs font-bold font-mono uppercase tracking-wider text-gray-900">
-                Unit Economics per kWh
-              </h4>
-            </div>
+        <div className="lg:col-span-4 flex flex-col gap-4">
+          <div className="bg-gradient-to-b from-gray-900 to-black text-white p-6 rounded-3xl border border-white/10 shadow-xl flex-1 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold">
+                  DC Fast Charging Unit Margin
+                </span>
+                <Sparkles className="w-4 h-4 text-accent" />
+              </div>
 
-            <div className="space-y-3 text-xs mb-6">
-              <div className="flex justify-between py-1.5 border-b border-gray-200/80">
-                <span className="text-gray-500">Customer Selling Price:</span>
-                <strong className="font-mono text-gray-900">₹{sellPrice.toFixed(2)}</strong>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-gray-200/80">
-                <span className="text-gray-500">(-) Grid Power Cost:</span>
-                <span className="font-mono text-rose-600">-₹{powerCost.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-gray-200/80">
-                <span className="text-gray-500">(-) Platform CMS Fee:</span>
-                <span className="font-mono text-rose-600">-₹{cmsFee.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-gray-200/80">
-                <span className="text-gray-500">(-) Gateway Fee ({tariffConfig.paymentGatewayFeePct}%):</span>
-                <span className="font-mono text-rose-600">-₹{gatewayAmt.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between py-2 bg-white px-3 rounded-xl border border-gray-200 font-bold">
-                <span className="text-gray-800">Gross Margin per kWh:</span>
-                <span className={`font-mono text-sm ${unitContribution > 0 ? 'text-[#008800]' : 'text-rose-600'}`}>
-                  ₹{unitContribution.toFixed(2)} ({unitMarginPct.toFixed(1)}%)
+              <div className="mb-6">
+                <span className="text-xs text-gray-400 block mb-1">Gross Contribution per kWh:</span>
+                <div className="text-3xl font-display font-bold text-white flex items-baseline gap-2">
+                  <span className={unitContribution >= 0 ? 'text-accent' : 'text-rose-500'}>
+                    {formatINR(unitContribution, 2)}
+                  </span>
+                  <span className="text-xs font-mono text-gray-400 font-normal">/ kWh</span>
+                </div>
+                <span className="text-xs font-mono text-gray-400 block mt-1">
+                  Margin: <strong className="text-white">{unitMarginPct.toFixed(1)}%</strong> of selling tariff
                 </span>
               </div>
+
+              <div className="space-y-3 border-t border-white/10 pt-4 text-xs font-mono">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Driver Selling Tariff:</span>
+                  <strong className="text-white">{formatINR(sellPrice, 2)}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">DISCOM Grid Power:</span>
+                  <span className="text-rose-400">-{formatINR(powerCost, 2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Cloud CMS Platform:</span>
+                  <span className="text-rose-400">-{formatINR(cmsFee, 2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Gateway Fee ({tariffConfig.paymentGatewayFeePct}%):</span>
+                  <span className="text-rose-400">-{formatINR(gatewayAmt, 2)}</span>
+                </div>
+              </div>
             </div>
 
-            {unitContribution <= 0 && (
-              <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 leading-relaxed mb-4 flex items-start gap-2">
-                <ShieldAlert className="w-4 h-4 flex-shrink-0 text-rose-600 mt-0.5" />
+            <div className="mt-6 pt-4 border-t border-white/10 bg-white/5 -mx-6 -mb-6 p-5 rounded-b-3xl">
+              <div className="flex items-center gap-2 text-[11px] text-gray-300">
+                <Info className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>
-                  <strong>Negative Margin Warning:</strong> Your customer selling price (₹{sellPrice}) is lower than the sum of electricity, platform, and payment fees (₹{variableTotal.toFixed(2)}). Increase selling price to achieve positive gross margins.
+                  Fixed OPEX of <strong>{formatINR(totalFixedOpex)}/mo</strong> is distributed across monthly DC sessions.
                 </span>
               </div>
-            )}
-          </div>
-
-          <div className="pt-4 border-t border-gray-200 text-[11px] text-gray-400 font-sans leading-relaxed flex items-start gap-2">
-            <Info className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
-            <span>
-              DISCOM electricity tariffs vary across Indian states (LT-EV vs commercial HT tariffs). Always verify connection slab with local utility.
-            </span>
+            </div>
           </div>
         </div>
 

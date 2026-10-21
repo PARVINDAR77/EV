@@ -1,44 +1,10 @@
 import React, { useState } from 'react';
-import { Cpu, DollarSign, Layers, Plus, Minus, HelpCircle, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react';
-import { formatINR } from '../../services/financialCalculator';
+import { Cpu, DollarSign, Layers, Plus, Minus, HelpCircle, ShieldCheck, ChevronDown, ChevronUp, Zap } from 'lucide-react';
+import { formatINR, DC_CHARGER_MODELS } from '../../services/financialCalculator';
 
-export const AC_CHARGER_MODELS = [
-  {
-    id: 'ac-3kw',
-    name: 'Axion AC 3.3 kW (AXION 3)',
-    ratingKw: 3.3,
-    defaultPrice: 14900,
-    tagline: 'Multi-Socket slow AC for 2W/3W/4W'
-  },
-  {
-    id: 'ac-7kw-compact',
-    name: 'Axion AC 7.4 kW Compact',
-    ratingKw: 7.4,
-    defaultPrice: 49900,
-    tagline: 'Ultra-slim minimalist wallbox for private bays'
-  },
-  {
-    id: 'ac-7kw',
-    name: 'Axion AC 7.4 kW Pro',
-    ratingKw: 7.4,
-    defaultPrice: 59900,
-    tagline: 'High-durability single-phase wallbox'
-  },
-  {
-    id: 'ac-11kw',
-    name: 'Axion AC 11 kW Commercial',
-    ratingKw: 11.0,
-    defaultPrice: 74900,
-    tagline: '3-phase commercial wallbox for workplaces'
-  },
-  {
-    id: 'ac-22kw',
-    name: 'Axion AC 22 kW Ultra',
-    ratingKw: 22.0,
-    defaultPrice: 89900,
-    tagline: 'Dual-speed commercial destination charger'
-  }
-];
+export { DC_CHARGER_MODELS };
+// Backward-compatibility alias
+export const AC_CHARGER_MODELS = DC_CHARGER_MODELS;
 
 const ChargerInvestmentForm = ({
   investmentConfig,
@@ -47,7 +13,7 @@ const ChargerInvestmentForm = ({
 }) => {
   const [showFinancing, setShowFinancing] = useState(investmentConfig?.financing?.enabled || false);
 
-  const selectedModel = AC_CHARGER_MODELS.find(m => m.id === investmentConfig.selectedModelId) || AC_CHARGER_MODELS[1];
+  const selectedModel = DC_CHARGER_MODELS.find(m => m.id === investmentConfig.selectedModelId) || DC_CHARGER_MODELS[1];
 
   const handleModelSelect = (model) => {
     onChange({
@@ -85,41 +51,41 @@ const ChargerInvestmentForm = ({
             Stage 1 of 5
           </span>
           <h2 className="text-xl sm:text-2xl font-display font-bold text-gray-900">
-            Charger Hardware & Initial Investment
+            DC Fast Charger Hardware & Initial CAPEX
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Configure charger units, civil installation, electrical infrastructure, and financing options.
+            Configure DC fast charger units, civil plinth construction, HT electrical substation, and equipment financing options.
           </p>
         </div>
         <div className="bg-gray-50 border border-gray-200/80 rounded-2xl px-4 py-2 text-right">
-          <span className="text-[10px] uppercase font-mono text-gray-400 font-bold block">Total CAPEX</span>
+          <span className="text-[10px] uppercase font-mono text-gray-400 font-bold block">Total Initial CAPEX</span>
           <span className="text-lg sm:text-xl font-bold font-mono text-[#009900]">
             {formatINR(calculatedInvestment?.totalProjectInvestment || 0)}
           </span>
         </div>
       </div>
 
-      {/* Model Selector Cards */}
+      {/* Model Selector Cards (4 DC Models) */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-3">
           <label className="text-xs sm:text-sm font-bold text-gray-800 flex items-center gap-2">
             <Cpu className="w-4 h-4 text-[#00A300]" />
-            Select AXION AC Charger Model
+            Select AXION DC Fast Charger Model
           </label>
           <span className="text-[11px] text-gray-400 font-sans italic">
             *Prices shown are standard baseline MSRP; customizable per project.
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {AC_CHARGER_MODELS.map((model) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {DC_CHARGER_MODELS.map((model) => {
             const isSelected = selectedModel.id === model.id;
             return (
               <button
                 key={model.id}
                 type="button"
                 onClick={() => handleModelSelect(model)}
-                className={`p-4 rounded-2xl text-left border transition-all cursor-pointer flex flex-col justify-between h-full ${
+                className={`p-5 rounded-2xl text-left border transition-all cursor-pointer flex flex-col justify-between h-full ${
                   isSelected 
                     ? 'border-[#00C800] bg-[#00FF00]/5 shadow-[0_0_20px_rgba(0,255,0,0.15)] ring-2 ring-[#00C800]/20' 
                     : 'border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50/80'
@@ -127,25 +93,31 @@ const ChargerInvestmentForm = ({
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-800">
+                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-gray-900 text-accent">
                       {model.ratingKw} kW
                     </span>
-                    {isSelected && (
-                      <span className="w-2 h-2 rounded-full bg-[#00C800] animate-ping" />
-                    )}
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-gray-150 text-gray-700 font-semibold flex items-center gap-1">
+                      <Zap className="w-3 h-3 text-[#00A300]" />
+                      {model.guns}
+                    </span>
                   </div>
-                  <h4 className="text-xs font-bold text-gray-900 leading-snug mb-1">
+                  <h4 className="text-sm font-bold text-gray-900 leading-snug mb-1.5">
                     {model.name}
                   </h4>
-                  <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
                     {model.tagline}
                   </p>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-gray-150/70">
-                  <span className="text-sm font-mono font-bold text-[#008800]">
+                <div className="pt-3.5 mt-3.5 border-t border-gray-150/70 flex items-center justify-between">
+                  <span className="text-sm sm:text-base font-mono font-bold text-[#008800]">
                     {formatINR(model.defaultPrice)}
                   </span>
+                  {isSelected && (
+                    <span className="text-[10px] font-mono font-bold text-[#00A300] bg-[#00A300]/10 px-2 py-0.5 rounded-full">
+                      SELECTED
+                    </span>
+                  )}
                 </div>
               </button>
             );
@@ -159,9 +131,9 @@ const ChargerInvestmentForm = ({
         {/* Number of Chargers */}
         <div className="bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
           <label className="text-xs font-bold text-gray-700 block mb-1">
-            Number of Installed Chargers
+            Number of DC Fast Chargers
           </label>
-          <p className="text-[11px] text-gray-500 mb-3">Total physical units installed at site</p>
+          <p className="text-[11px] text-gray-500 mb-3">Total physical DC charging units at site</p>
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -173,7 +145,7 @@ const ChargerInvestmentForm = ({
             <input
               type="number"
               min="1"
-              max="50"
+              max="20"
               value={investmentConfig.chargerQuantity}
               onChange={(e) => updateField('chargerQuantity', Math.max(1, parseInt(e.target.value) || 1))}
               className="w-20 text-center py-2 px-2 rounded-xl bg-white border border-gray-300 font-mono font-bold text-base text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -191,15 +163,15 @@ const ChargerInvestmentForm = ({
         {/* Cost per Charger */}
         <div className="bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
           <label className="text-xs font-bold text-gray-700 block mb-1">
-            Hardware Cost per Charger (₹)
+            Hardware Cost per DC Unit (₹)
           </label>
-          <p className="text-[11px] text-gray-500 mb-3">Editable unit purchase cost</p>
+          <p className="text-[11px] text-gray-500 mb-3">Unit purchase price (editable)</p>
           <div className="relative">
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
             <input
               type="number"
               min="0"
-              step="500"
+              step="5000"
               value={investmentConfig.costPerCharger}
               onChange={(e) => updateField('costPerCharger', Math.max(0, parseFloat(e.target.value) || 0))}
               className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -212,33 +184,33 @@ const ChargerInvestmentForm = ({
           <label className="text-xs font-bold text-gray-700 block mb-1">
             Charger Power Rating (kW)
           </label>
-          <p className="text-[11px] text-gray-500 mb-3">Power output rating per socket</p>
+          <p className="text-[11px] text-gray-500 mb-3">Rated DC power output per unit</p>
           <div className="relative">
             <input
               type="number"
-              min="1"
-              max="50"
-              step="0.1"
+              min="10"
+              max="500"
+              step="5"
               value={investmentConfig.chargerRatingKw}
-              onChange={(e) => updateField('chargerRatingKw', Math.max(0.1, parseFloat(e.target.value) || 0.1))}
+              onChange={(e) => updateField('chargerRatingKw', Math.max(1, parseFloat(e.target.value) || 1))}
               className="w-full px-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
             />
             <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">kW</span>
           </div>
         </div>
 
-        {/* Installation & Commissioning per unit */}
+        {/* Civil Plinth & Foundation per unit */}
         <div className="bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
           <label className="text-xs font-bold text-gray-700 block mb-1">
-            Civil Installation per Charger (₹)
+            Civil Plinth & Foundation per Unit (₹)
           </label>
-          <p className="text-[11px] text-gray-500 mb-3">Mounting, civil foundation & wiring per unit</p>
+          <p className="text-[11px] text-gray-500 mb-3">RCC pedestal, cable trenches & crash bollards</p>
           <div className="relative">
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
             <input
               type="number"
               min="0"
-              step="500"
+              step="2500"
               value={investmentConfig.installationPerCharger}
               onChange={(e) => updateField('installationPerCharger', Math.max(0, parseFloat(e.target.value) || 0))}
               className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -246,18 +218,18 @@ const ChargerInvestmentForm = ({
           </div>
         </div>
 
-        {/* Electrical Infrastructure */}
+        {/* Electrical Infrastructure / Substation */}
         <div className="bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
           <label className="text-xs font-bold text-gray-700 block mb-1">
-            Electrical Upgrades & Cabling (₹)
+            HT Substation, Transformer & Cabling (₹)
           </label>
-          <p className="text-[11px] text-gray-500 mb-3">Distribution box, MCB, earthing & cabling</p>
+          <p className="text-[11px] text-gray-500 mb-3">HT step-down, breaker panel, earthing & busbars</p>
           <div className="relative">
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono font-bold">₹</span>
             <input
               type="number"
               min="0"
-              step="1000"
+              step="10000"
               value={investmentConfig.infrastructureFixed}
               onChange={(e) => updateField('infrastructureFixed', Math.max(0, parseFloat(e.target.value) || 0))}
               className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-sm text-gray-900 focus:outline-none focus:border-[#00C800]"
@@ -265,22 +237,23 @@ const ChargerInvestmentForm = ({
           </div>
         </div>
 
-        {/* Other Setup / Signage */}
+        {/* Canopy, Signage & Decals */}
         <div className="bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
           <label className="text-xs font-bold text-gray-700 block mb-1">
-            Signage, Permits & Contingency
+            Canopy, Signage & Contingency
           </label>
-          <p className="text-[11px] text-gray-500 mb-3">Branding, decals + {investmentConfig.contingencyPct}% buffer</p>
+          <p className="text-[11px] text-gray-500 mb-3">Illuminated totem, canopy + {investmentConfig.contingencyPct}% buffer</p>
           <div className="flex gap-2">
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">₹</span>
               <input
                 type="number"
                 min="0"
+                step="5000"
                 value={investmentConfig.otherSetupCosts}
                 onChange={(e) => updateField('otherSetupCosts', Math.max(0, parseFloat(e.target.value) || 0))}
                 className="w-full pl-6 pr-2 py-2.5 rounded-xl bg-white border border-gray-300 font-mono font-bold text-xs text-gray-900 focus:outline-none focus:border-[#00C800]"
-                placeholder="Other"
+                placeholder="Canopy / Signage"
               />
             </div>
             <div className="relative w-24">
@@ -318,10 +291,10 @@ const ChargerInvestmentForm = ({
             </div>
             <div>
               <span className="text-sm font-bold text-gray-900 block">
-                Equipment Debt Financing (Optional)
+                DC Infrastructure Debt Financing (Optional)
               </span>
               <span className="text-xs text-gray-500">
-                Model bank loan, interest rates, and upfront equity contribution vs debt
+                Model commercial bank loan, interest rates, and upfront client equity vs debt amortization
               </span>
             </div>
           </div>
@@ -406,15 +379,15 @@ const ChargerInvestmentForm = ({
       <div className="bg-gray-50 rounded-2xl p-5 border border-gray-200/90 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-600">
         <div className="flex items-center gap-6 flex-wrap">
           <div>
-            <span className="text-gray-400 block font-mono">Equipment Cost:</span>
+            <span className="text-gray-400 block font-mono">DC Hardware Cost:</span>
             <strong className="text-gray-800 font-mono">{formatINR(calculatedInvestment?.equipmentCost || 0)}</strong>
           </div>
           <div>
-            <span className="text-gray-400 block font-mono">Civil Installation:</span>
+            <span className="text-gray-400 block font-mono">Civil Plinths:</span>
             <strong className="text-gray-800 font-mono">{formatINR(calculatedInvestment?.installationCost || 0)}</strong>
           </div>
           <div>
-            <span className="text-gray-400 block font-mono">Infrastructure:</span>
+            <span className="text-gray-400 block font-mono">HT Substation:</span>
             <strong className="text-gray-800 font-mono">{formatINR(calculatedInvestment?.infrastructureCost || 0)}</strong>
           </div>
           <div>
@@ -424,7 +397,7 @@ const ChargerInvestmentForm = ({
         </div>
 
         <div className="text-right">
-          <span className="text-gray-400 block font-mono text-[11px]">Upfront Cash Contribution:</span>
+          <span className="text-gray-400 block font-mono text-[11px]">Upfront Cash Outflow:</span>
           <span className="text-base sm:text-lg font-bold font-mono text-gray-900">
             {formatINR(calculatedInvestment?.financing?.enabled ? calculatedInvestment.financing.upfrontEquity : calculatedInvestment?.totalProjectInvestment || 0)}
           </span>
