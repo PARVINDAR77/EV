@@ -57,12 +57,13 @@ const Hero = () => {
         {/* Left Column: Brand Copy & Actions */}
         <div className="w-full md:w-[48%] lg:w-[44%] xl:w-[42%] flex flex-col justify-center py-4 md:py-6 z-10 flex-shrink-0">
 
-          {/* Tagline */}
+          {/* Brand Slogan */}
           <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 md:mb-4">
-            <div className="w-2 h-[10px] bg-accent shadow-[0_0_8px_var(--color-accent)]" />
-            <span className="text-[0.65rem] sm:text-xs font-mono text-accent tracking-[0.25em] uppercase font-bold drop-shadow-md">
-              EV CHARGING INFRASTRUCTURE
+            <span className="w-5 sm:w-8 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
+            <span className="text-[0.7rem] sm:text-xs md:text-sm font-mono text-accent tracking-[0.3em] sm:tracking-[0.35em] uppercase font-bold drop-shadow-[0_0_10px_rgba(0,255,0,0.35)] select-none">
+              ENERGY : EVOLVED
             </span>
+            <span className="w-5 sm:w-8 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
           </div>
 
           {/* Main Headline */}
