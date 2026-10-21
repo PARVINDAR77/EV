@@ -57,18 +57,17 @@ const Hero = () => {
         {/* Left Column: Brand Copy & Actions */}
         <div className="w-full md:w-[48%] lg:w-[44%] xl:w-[42%] flex flex-col justify-center py-4 md:py-6 z-10 flex-shrink-0">
 
-          {/* Brand Slogan */}
+          {/* Tagline */}
           <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 md:mb-4">
-            <span className="w-5 sm:w-8 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
-            <span className="text-[0.7rem] sm:text-xs md:text-sm font-mono text-accent tracking-[0.3em] sm:tracking-[0.35em] uppercase font-bold drop-shadow-[0_0_10px_rgba(0,255,0,0.35)] select-none">
-              ENERGY : EVOLVED
+            <div className="w-2 h-[10px] bg-accent shadow-[0_0_8px_var(--color-accent)]" />
+            <span className="text-[0.65rem] sm:text-xs font-mono text-accent tracking-[0.25em] uppercase font-bold drop-shadow-md">
+              EV CHARGING INFRASTRUCTURE
             </span>
-            <span className="w-5 sm:w-8 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
           </div>
 
           {/* Main Headline */}
           <h1 
-            className="text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.6rem] xl:text-[3.4rem] font-display font-bold leading-[1.12] mb-3 sm:mb-4 md:mb-5 tracking-tight text-white drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]"
+            className="text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.6rem] xl:text-[3.4rem] font-display font-bold leading-[1.12] mb-3 sm:mb-4 tracking-tight text-white drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]"
           >
             <span className="block mb-1 text-white">
               POWERING INDIA'S
@@ -77,6 +76,15 @@ const Hero = () => {
               SUSTAINABLE FUTURE.
             </span>
           </h1>
+
+          {/* Official Brand Slogan */}
+          <div className="flex items-center gap-3 sm:gap-4 my-3 sm:my-4">
+            <span className="w-6 sm:w-10 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
+            <span className="text-xs sm:text-sm md:text-base font-display font-bold tracking-[0.35em] text-white uppercase drop-shadow-[0_0_12px_rgba(0,255,0,0.35)] select-none">
+              ENERGY : EVOLVED
+            </span>
+            <span className="w-6 sm:w-10 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
+          </div>
 
           {/* Subheading */}
           <p 
