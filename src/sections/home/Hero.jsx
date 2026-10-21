@@ -66,13 +66,13 @@ const Hero = () => {
           </div>
 
           {/* Main Headline Statement: ENERGY : EVOLVED */}
-          <div className="my-3 sm:my-4 md:my-5 max-w-full overflow-hidden">
-            <h1 className="inline-flex items-center gap-2 sm:gap-3.5 md:gap-4 whitespace-nowrap select-none">
-              <span className="w-5 sm:w-8 md:w-12 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] flex-shrink-0" />
-              <span className="text-xl sm:text-2xl md:text-[2rem] lg:text-[2.35rem] xl:text-[2.75rem] font-display font-black tracking-[0.16em] sm:tracking-[0.24em] md:tracking-[0.3em] text-white uppercase leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] whitespace-nowrap">
+          <div className="w-full max-w-[460px] my-3 sm:my-4 md:my-5">
+            <h1 className="flex items-center gap-2.5 sm:gap-3.5 md:gap-4 select-none w-full">
+              <span className="h-[2px] flex-1 max-w-[44px] min-w-[16px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block flex-shrink-0" />
+              <span className="text-[1.1rem] sm:text-lg md:text-xl lg:text-[1.55rem] xl:text-[1.85rem] font-display font-black tracking-[0.18em] sm:tracking-[0.24em] md:tracking-[0.28em] text-white uppercase whitespace-nowrap drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] leading-none">
                 ENERGY : EVOLVED
               </span>
-              <span className="w-5 sm:w-8 md:w-12 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] flex-shrink-0" />
+              <span className="h-[2px] flex-1 max-w-[44px] min-w-[16px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block flex-shrink-0" />
             </h1>
           </div>
 
