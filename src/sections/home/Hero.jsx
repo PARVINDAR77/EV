@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Zap, ShieldCheck } from 'lucide-react';
 import heroCarCharger from '../../assets/images/hero_tiago_220kw_showcase.webp';
 import heroBackdrop from '../../assets/images/hero_atmosphere_backdrop.webp';
-import AxionLogo from '../../components/common/AxionLogo';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -66,22 +65,15 @@ const Hero = () => {
             </span>
           </div>
 
-          {/* Main Hero Brand Identity: AXION CHARGE Logo + ENERGY : EVOLVED Slogan */}
-          <div className="mb-5 sm:mb-7">
-            <h1 className="sr-only">AXION CHARGE - Energy : Evolved - Advanced EV Charging Infrastructure</h1>
-            <div className="flex flex-col items-start gap-3 sm:gap-4">
-              <AxionLogo 
-                className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto max-w-full drop-shadow-[0_0_35px_rgba(0,255,0,0.45)]"
-                fill="#00FF00"
-              />
-              <div className="flex items-center gap-3 sm:gap-4 pl-1 sm:pl-1.5">
-                <span className="w-6 sm:w-10 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
-                <span className="text-xs sm:text-sm md:text-base font-display font-bold tracking-[0.35em] sm:tracking-[0.4em] text-white uppercase drop-shadow-[0_0_15px_rgba(0,255,0,0.35)] select-none">
-                  ENERGY : EVOLVED
-                </span>
-                <span className="w-6 sm:w-10 h-[1.5px] bg-accent shadow-[0_0_8px_var(--color-accent)] inline-block" />
-              </div>
-            </div>
+          {/* Main Headline Statement: ENERGY : EVOLVED */}
+          <div className="my-3 sm:my-5 md:my-6">
+            <h1 className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-wrap sm:flex-nowrap">
+              <span className="w-8 sm:w-12 md:w-16 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] inline-block flex-shrink-0" />
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.8rem] xl:text-[3.2rem] font-display font-black tracking-[0.2em] sm:tracking-[0.25em] text-white uppercase leading-tight drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] select-none">
+                ENERGY : EVOLVED
+              </span>
+              <span className="w-8 sm:w-12 md:w-16 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] inline-block flex-shrink-0" />
+            </h1>
           </div>
 
           {/* Subheading */}
