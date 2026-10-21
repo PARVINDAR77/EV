@@ -66,13 +66,13 @@ const Hero = () => {
           </div>
 
           {/* Main Headline Statement: ENERGY : EVOLVED */}
-          <div className="my-3 sm:my-5 md:my-6">
-            <h1 className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-wrap sm:flex-nowrap">
-              <span className="w-8 sm:w-12 md:w-16 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] inline-block flex-shrink-0" />
-              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.8rem] xl:text-[3.2rem] font-display font-black tracking-[0.2em] sm:tracking-[0.25em] text-white uppercase leading-tight drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] select-none">
+          <div className="my-3 sm:my-4 md:my-5 max-w-full overflow-hidden">
+            <h1 className="inline-flex items-center gap-2 sm:gap-3.5 md:gap-4 whitespace-nowrap select-none">
+              <span className="w-5 sm:w-8 md:w-12 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] flex-shrink-0" />
+              <span className="text-xl sm:text-2xl md:text-[2rem] lg:text-[2.35rem] xl:text-[2.75rem] font-display font-black tracking-[0.16em] sm:tracking-[0.24em] md:tracking-[0.3em] text-white uppercase leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] whitespace-nowrap">
                 ENERGY : EVOLVED
               </span>
-              <span className="w-8 sm:w-12 md:w-16 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] inline-block flex-shrink-0" />
+              <span className="w-5 sm:w-8 md:w-12 h-[2px] bg-accent shadow-[0_0_10px_var(--color-accent)] flex-shrink-0" />
             </h1>
           </div>
 
