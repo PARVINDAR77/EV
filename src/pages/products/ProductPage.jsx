@@ -473,7 +473,9 @@ const ProductPage = (props) => {
   
   // Resolve base product
   const resolvedId = id === 'ac-7kw-compact' ? 'ac-7-4kw-compact' : (id === 'ac-7kw' ? 'ac-7-4kw' : id);
-  const baseProduct = props.title ? props : (PRODUCT_DB[resolvedId] || {
+  const isCategoryOverview = Boolean(props.title);
+
+  const baseProduct = isCategoryOverview ? props : (PRODUCT_DB[resolvedId] || {
     title: 'Product Not Found',
     category: 'Error',
     description: 'The requested product could not be found.',
@@ -481,15 +483,13 @@ const ProductPage = (props) => {
     features: []
   });
 
-  const isAcCategory = (
+  const isAcCategory = !isCategoryOverview && Boolean(
     (resolvedId && resolvedId.startsWith('ac-')) ||
-    baseProduct.title?.toLowerCase().includes('ac') ||
-    baseProduct.category?.toLowerCase().includes('ac')
+    (baseProduct.category && /\bac\b/i.test(baseProduct.category))
   );
-  const isDcCategory = (
+  const isDcCategory = !isCategoryOverview && Boolean(
     (resolvedId && resolvedId.startsWith('dc-')) ||
-    baseProduct.title?.toLowerCase().includes('dc') ||
-    baseProduct.category?.toLowerCase().includes('dc')
+    (baseProduct.category && /\bdc\b/i.test(baseProduct.category))
   );
 
   const acModels = [
@@ -510,22 +510,24 @@ const ProductPage = (props) => {
   const activeSwitcherModels = isAcCategory ? acModels : (isDcCategory ? dcModels : []);
 
   // Determine active datasheet & variant model key
-  const defaultKey = (resolvedId && PRODUCT_DB[resolvedId]) 
-    ? resolvedId 
-    : (isDcCategory ? 'dc-60kw' : (isAcCategory ? 'ac-3-3kw' : (resolvedId || '')));
+  const defaultKey = isCategoryOverview 
+    ? '' 
+    : ((resolvedId && PRODUCT_DB[resolvedId]) 
+        ? resolvedId 
+        : (isDcCategory ? 'dc-60kw' : (isAcCategory ? 'ac-3-3kw' : '')));
 
   const [selectedModelKey, setSelectedModelKey] = useState(defaultKey);
-  const activeKey = selectedModelKey || defaultKey;
+  const activeKey = isCategoryOverview ? '' : (selectedModelKey || defaultKey);
 
   // Active product resolved from activeKey so all upper data updates dynamically!
-  const activeProduct = (activeKey && PRODUCT_DB[activeKey]) ? PRODUCT_DB[activeKey] : baseProduct;
+  const activeProduct = (!isCategoryOverview && activeKey && PRODUCT_DB[activeKey]) ? PRODUCT_DB[activeKey] : baseProduct;
   const title = activeProduct.title || baseProduct.title;
   const category = activeProduct.category || baseProduct.category;
   const description = activeProduct.description || baseProduct.description;
   const image = activeProduct.image || baseProduct.image;
   const features = (activeProduct.features && activeProduct.features.length > 0) ? activeProduct.features : (baseProduct.features || []);
   const price = activeProduct.price || baseProduct.price || PRODUCT_DB[activeKey]?.datasheet?.price;
-  const activeDatasheet = activeProduct.datasheet || PRODUCT_DB[activeKey]?.datasheet || PRODUCT_DB['ac-3-3kw'].datasheet;
+  const activeDatasheet = activeProduct.datasheet || PRODUCT_DB[activeKey]?.datasheet || null;
 
   // Sync state if route id changes
   useEffect(() => {
@@ -724,19 +726,21 @@ const ProductPage = (props) => {
                   <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0" />
                 </motion.button>
 
-                <motion.button 
-                  type="button"
-                  onClick={handleDownloadSheetClick}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="relative overflow-hidden flex items-center gap-3 px-8 py-4 border border-white/20 text-white hover:border-accent hover:text-accent font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 bg-white/5 hover:bg-accent/5 group cursor-pointer"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    DOWNLOAD DATASHEET
-                    <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
-                  </span>
-                </motion.button>
+                {activeDatasheet && (
+                  <motion.button 
+                    type="button"
+                    onClick={handleDownloadSheetClick}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="relative overflow-hidden flex items-center gap-3 px-8 py-4 border border-white/20 text-white hover:border-accent hover:text-accent font-sans text-sm font-bold uppercase rounded-full transition-all duration-300 bg-white/5 hover:bg-accent/5 group cursor-pointer"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      DOWNLOAD DATASHEET
+                      <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
+                    </span>
+                  </motion.button>
+                )}
 
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -790,7 +794,7 @@ const ProductPage = (props) => {
               DATASHEET DOCUMENT SECTION (OPENS AT BOTTOM ON BUTTON CLICK)
               ══════════════════════════════════════════════════════════════════════════════════ */}
           <AnimatePresence>
-            {isDatasheetOpen && (
+            {isDatasheetOpen && activeDatasheet && (
               <motion.section
                 ref={datasheetRef}
                 initial={{ opacity: 0, y: 60 }}
