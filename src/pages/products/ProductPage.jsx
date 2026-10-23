@@ -910,7 +910,7 @@ const ProductPage = (props) => {
                     {/* Header with Circuit Line & Node */}
                     <div className="flex items-center gap-4 mb-6">
                       <div className="px-5 py-1.5 bg-[#DDEEEB] border border-[#BCE0D7] rounded-full text-xs sm:text-sm font-black text-[#1F2937] tracking-wider uppercase shadow-xs">
-                        SPECIFICAITON
+                        SPECIFICATION
                       </div>
                       <div className="flex-1 flex items-center">
                         <div className="h-[2px] bg-[#5EA82E] flex-1" />
@@ -939,7 +939,7 @@ const ProductPage = (props) => {
 
                     {/* Document Footnote */}
                     <div className="mt-12 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 text-[0.7rem] text-slate-500 font-mono">
-                      <span>AXION ELECTRIC MOBILITY • OFFICIAL TECHNICAL SPECIFICATION SHEET</span>
+                      <span>AXION CHARGE PRIVATE LIMITED • OFFICIAL TECHNICAL SPECIFICATION SHEET</span>
                       <span className="text-[#5EA82E] font-bold">100% INDIGENOUSLY ENGINEERED IN INDIA</span>
                     </div>
                   </div>
