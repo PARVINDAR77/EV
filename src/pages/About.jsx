@@ -9,7 +9,7 @@ import heroImg from '../assets/images/about_hero_superhub.webp';
 import hardwareImg from '../assets/images/why_engineered_for_india.webp';
 import softwareImg from '../assets/images/Outdoor Axion Charge Dashboard Billboard.webp';
 import supportImg from '../assets/images/why_247_support.webp';
-import networkImg from '../assets/images/why_reliable_deployment.webp';
+import networkImg from '../assets/images/Axion Charge Highway Stop.webp';
 
 const About = () => {
   return (
@@ -254,36 +254,13 @@ const About = () => {
             {/* Top Glowing Edge */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-50" />
             
-            <div className="relative z-10 w-full max-w-5xl">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-20 tracking-tight drop-shadow-xl">
+            <div className="relative z-10 w-full max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-6 tracking-tight drop-shadow-xl">
                 BUILDING THE NETWORK <br/> OF TOMORROW
               </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className="flex flex-col items-center p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300"
-                >
-                  <span className="text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-accent mb-3 drop-shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] px-2 py-1">10k+</span>
-                  <span className="text-white/60 font-mono tracking-[0.2em] uppercase text-xs font-bold">Active Chargers</span>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className="flex flex-col items-center p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300"
-                >
-                  <span className="text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-accent mb-3 drop-shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] px-2 py-1">45M</span>
-                  <span className="text-white/60 font-mono tracking-[0.2em] uppercase text-xs font-bold">Gallons of Gas Saved</span>
-                </motion.div>
-
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className="flex flex-col items-center p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300"
-                >
-                  <span className="text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-accent mb-3 drop-shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.3)] px-2 py-1">99.9%</span>
-                  <span className="text-white/60 font-mono tracking-[0.2em] uppercase text-xs font-bold">Network Uptime</span>
-                </motion.div>
-              </div>
+              <p className="text-base sm:text-lg md:text-xl text-white/70 font-sans max-w-2xl mx-auto leading-relaxed">
+                Empowering India's EV revolution with robust, high-efficiency charging infrastructure engineered for absolute reliability, zero downtime, and nationwide scale.
+              </p>
             </div>
           </motion.div>
 
