@@ -408,16 +408,16 @@ const Franchise = () => {
 
                     {/* 3 Image Cards with Text Overlays matching Screenshot 2 */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                      {/* Photo Card 1: 15000+ Charging Points */}
+                      {/* Photo Card 1: Nationwide Charging Points */}
                       <div className="rounded-2xl overflow-hidden relative h-60 sm:h-64 shadow-lg group border border-white/10 hover:border-accent/40 transition-all">
                         <img 
                           src={evPlugImg} 
-                          alt="15000+ Charging Points Across India" 
+                          alt="Nationwide Charging Points Across India" 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-4">
                           <div className="text-2xl font-display font-extrabold text-accent drop-shadow-[0_0_10px_rgba(0,255,0,0.3)]">
-                            15000+
+                            Nationwide
                           </div>
                           <div className="text-xs text-gray-200 font-sans mt-0.5 leading-snug">
                             Charging Points Across India
