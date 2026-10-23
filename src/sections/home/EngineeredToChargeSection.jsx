@@ -218,14 +218,11 @@ const EngineeredToChargeSection = () => {
             </div>
 
             {/* Footer Bar of Left Big Box */}
-            <div className="relative z-10 pt-4 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[#9CA3AF]">
+            <div className="relative z-10 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs text-[#9CA3AF]">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0" />
-                <span className="text-[0.75rem] sm:text-xs">OCPP 1.6J · IP65 Weatherproof · 3-Year Warranty</span>
+                <span className="text-[0.75rem] sm:text-xs">OCPP 1.6J · IP65 Weatherproof · 1-Year Warranty</span>
               </div>
-              <span className="text-[0.7rem] font-mono uppercase tracking-wider text-accent/90 font-bold">
-                Home · Society · Workplace
-              </span>
             </div>
           </motion.div>
 
