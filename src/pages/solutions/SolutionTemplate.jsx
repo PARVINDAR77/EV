@@ -6,8 +6,8 @@ import Footer from '../../components/Footer/Footer';
 import { ArrowRight, SkipForward, Zap } from 'lucide-react';
 
 // Static imports — Vite bundles these correctly
-import imgResidential from '../../assets/images/solution_residential_nexon.webp';
-import imgWorkplace   from '../../assets/images/AXION Ecocharge Station 01 (2).webp';
+import imgResidential from '../../assets/images/solution_residential.webp';
+import imgWorkplace   from '../../assets/images/solution_workplace.webp';
 import imgCommercial  from '../../assets/images/solution_commercial_phoenix.webp';
 import imgFleet       from '../../assets/images/AXION Charge Logistics Hub.webp';
 import imgHighway     from '../../assets/images/solution_highway_expressway.webp';

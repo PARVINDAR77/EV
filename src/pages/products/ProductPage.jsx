@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import Footer from '../../components/Footer/Footer';
 import { ArrowRight, CheckCircle2, FileText, X, ShieldCheck, Zap } from 'lucide-react';
-import acImage from '../../assets/images/solution_residential_nexon.webp';
+import acImage from '../../assets/images/solution_residential.webp';
 import dcImage from '../../assets/images/solution_commercial_phoenix.webp';
 import accImage from '../../assets/images/AXION Charge Logistics Hub.webp';
 

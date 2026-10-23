@@ -11,8 +11,8 @@ import fleetVideo from '../../assets/images/Electric_fleet_vans_charging_depot_2
 import highVideo from '../../assets/images/Blue_SUV_charging_at_station_20260929134507_gwr_video_mvp.mp4';
 
 // High-resolution still images (displayed cleanly after video completes)
-import resImg from '../../assets/images/solution_residential_nexon.webp';
-import workImg from '../../assets/images/AXION Ecocharge Station 01 (2).webp';
+import resImg from '../../assets/images/solution_residential.webp';
+import workImg from '../../assets/images/solution_workplace.webp';
 import commImg from '../../assets/images/solution_commercial_phoenix.webp';
 import fleetImg from '../../assets/images/AXION Charge Logistics Hub.webp';
 import highImg from '../../assets/images/solution_highway_expressway.webp';
