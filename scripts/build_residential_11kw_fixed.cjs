@@ -7,95 +7,11 @@ async function buildFixedResidential11kW() {
   const targetImgPath = path.join(__dirname, '../src/assets/images/solution_residential_nexon.webp');
   const source9Path = path.join(__dirname, '../src/assets/images/9.png');
 
-  // Load base image (1200 x 800)
-  const { data: baseData, info: baseInfo } = await sharp(baseImgPath)
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  const patchedData = Buffer.from(baseData);
-
-  // 1. Inpaint stone pillar behind old charger
-  // Source stone: y: 35..105, x: 810..1040 (pristine stone wall)
-  const srcX1 = 810, srcX2 = 1040, srcW = srcX2 - srcX1;
-  const srcY1 = 35, srcY2 = 105, srcH = srcY2 - srcY1;
-
-  let seed = 98765;
-  function rnd() {
-    seed = (seed * 9301 + 49297) % 233280;
-    return seed / 233280;
-  }
-
-  // Patch bounds:
-  // Left: 770 (leaves all foliage at x < 770 untouched)
-  // Right: 1065 (leaves wooden frame at x >= 1068 untouched)
-  // Top: 114 (below top stone wall)
-  // Bottom: 476 (above mortar line at 478 and cable connections)
-  const patchLeft = 770;
-  const patchRight = 1065;
-  const patchTop = 114;
-  const patchBottom = 476;
-
-  const patchSize = 28;
-  for (let y = patchTop; y <= patchBottom; y += 14) {
-    for (let x = patchLeft; x <= patchRight; x += 14) {
-      const rx = Math.floor(rnd() * (srcW - patchSize)) + srcX1;
-      const ry = Math.floor(rnd() * (srcH - patchSize)) + srcY1;
-
-      for (let py = 0; py < patchSize; py++) {
-        const dstY = y + py;
-        if (dstY > patchBottom || dstY < patchTop) continue;
-        const sy = ry + py;
-
-        for (let px = 0; px < patchSize; px++) {
-          const dstX = x + px;
-          if (dstX > patchRight || dstX < patchLeft) continue;
-          const sx = rx + px;
-
-          const dstIdx = (dstY * baseInfo.width + dstX) * baseInfo.channels;
-          const srcIdx = (sy * baseInfo.width + sx) * baseInfo.channels;
-
-          // Border feathering at outer margins only
-          let edgeDist = Math.min(dstX - patchLeft, patchRight - dstX, dstY - patchTop, patchBottom - dstY);
-          let w = Math.min(1.0, edgeDist / 4.0);
-
-          patchedData[dstIdx] = Math.round(patchedData[dstIdx] * (1 - w) + baseData[srcIdx] * w);
-          patchedData[dstIdx + 1] = Math.round(patchedData[dstIdx + 1] * (1 - w) + baseData[srcIdx + 1] * w);
-          patchedData[dstIdx + 2] = Math.round(patchedData[dstIdx + 2] * (1 - w) + baseData[srcIdx + 2] * w);
-        }
-      }
-    }
-  }
-
-  // Restore any foliage/sky on the left (x < 780)
-  for (let y = 110; y <= 480; y++) {
-    for (let x = 730; x <= 780; x++) {
-      const idx = (y * baseInfo.width + x) * baseInfo.channels;
-      const r = baseData[idx], g = baseData[idx+1], b = baseData[idx+2];
-      if ((g > r && g > b) || (b > 150 && b > r)) {
-        patchedData[idx] = r;
-        patchedData[idx+1] = g;
-        patchedData[idx+2] = b;
-      }
-    }
-  }
-
-  // Eliminate any lingering rogue green pixels from old charger in patch region
-  for (let y = patchTop; y <= patchBottom + 2; y++) {
-    for (let x = patchLeft; x <= patchRight; x++) {
-      const idx = (y * baseInfo.width + x) * baseInfo.channels;
-      const r = patchedData[idx], g = patchedData[idx+1], b = patchedData[idx+2];
-      if (g > 75 && g > r * 1.25 && g > b * 1.25) {
-        const sx = 820 + (x % 200);
-        const sy = 45 + (y % 50);
-        const sIdx = (sy * baseInfo.width + sx) * baseInfo.channels;
-        patchedData[idx] = baseData[sIdx];
-        patchedData[idx+1] = baseData[sIdx+1];
-        patchedData[idx+2] = baseData[sIdx+2];
-      }
-    }
-  }
-
-  // 2. Extract authentic 11 kW charger unit from 9.png
+  // 1. Extract 11 kW charger unit from 9.png
+  // Top green rim: y = 69
+  // Bottom green rim: y = 560
+  // Left black casing/green rim: x = 18
+  // Right green rim: x = 422
   const rawCrop = await sharp(source9Path)
     .extract({ left: 267, top: 20, width: 572, height: 926 })
     .toBuffer();
@@ -117,18 +33,6 @@ async function buildFixedResidential11kW() {
     L 358,525
     Q 350,548 335,557
     Q 320,560 286,560
-    L 280,560
-    L 280,578
-    Q 280,581 276,581
-    L 254,581
-    Q 250,581 250,578
-    L 250,560
-    L 210,560
-    L 210,578
-    Q 210,581 206,581
-    L 182,581
-    Q 178,581 178,578
-    L 178,560
     L 142,560
     Q 122,560 105,550
     Q 90,538 84,520
@@ -147,22 +51,23 @@ async function buildFixedResidential11kW() {
     .png()
     .toBuffer();
 
-  const originalCharger = await sharp(maskedFull)
-    .extract({ left: 18, top: 68, width: 406, height: 516 })
+  // Extract body only (from y=69 down to y=560, height 491, width 404 from x=18 to 422)
+  const bodyOnly = await sharp(maskedFull)
+    .extract({ left: 18, top: 69, width: 404, height: 491 })
     .png()
     .toBuffer();
 
-  // 3. Mirror charger horizontally (flop)
-  // This changes the 3D perspective to face the Tata Nexon EV on the left,
-  // placing the black wall-mounting casing depth on the right side flush to the pillar wall!
-  const flippedBody = await sharp(originalCharger)
+  // 2. Flip horizontally (flop)
+  // Faces the charger towards the car on the left,
+  // and places the black wall mounting casing depth on the right!
+  const flippedBody = await sharp(bodyOnly)
     .flop()
     .png()
     .toBuffer();
 
-  // 4. Construct un-mirrored authentic faceplate graphics with solid opaque backing
+  // 3. Crisp un-mirrored vector faceplate graphics (404 x 491)
   const faceplateSvg = `
-<svg width="406" height="516" xmlns="http://www.w3.org/2000/svg">
+<svg width="404" height="491" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="lcdGrad" x1="0" y1="0" x2="0.3" y2="1">
       <stop offset="0%" stop-color="#0a325c" />
@@ -178,42 +83,42 @@ async function buildFixedResidential11kW() {
 
   <!-- Complete solid faceplate covering 100% of inner area to green rim -->
   <path d="
-    M 104,36
-    L 290,36
-    Q 310,48 324,80
-    L 354,120
-    Q 358,138 353,160
-    L 336,220
-    L 319,300
-    L 302,380
-    L 289,440
-    Q 285,465 272,468
-    L 102,468
-    Q 88,465 84,440
-    L 70,380
-    L 53,300
-    L 35,220
-    L 23,160
-    Q 20,138 27,115
-    L 61,80
-    Q 75,48 104,36
+    M 104,35
+    L 290,35
+    Q 310,47 324,79
+    L 354,119
+    Q 358,137 353,159
+    L 336,219
+    L 319,299
+    L 302,379
+    L 289,439
+    Q 285,464 272,467
+    L 102,467
+    Q 88,464 84,439
+    L 70,379
+    L 53,299
+    L 35,219
+    L 23,159
+    Q 20,137 27,114
+    L 61,79
+    Q 75,47 104,35
     Z
   " fill="#f4f2ec" />
 
-  <!-- Top Gloss Highlight Reflection matching sunlight from top-left -->
+  <!-- Top Gloss Highlight Reflection -->
   <path d="
-    M 104,36
-    L 290,36
-    Q 310,48 324,80
-    L 354,120
-    Q 240,95 110,165
-    L 61,80
-    Q 75,48 104,36
+    M 104,35
+    L 290,35
+    Q 310,47 324,79
+    L 354,119
+    Q 240,94 110,164
+    L 61,79
+    Q 75,47 104,35
     Z
   " fill="rgba(255, 255, 255, 0.42)" />
 
   <!-- AXION CHARGE LOGO -->
-  <g transform="translate(202, 108)" text-anchor="middle">
+  <g transform="translate(201, 107)" text-anchor="middle">
     <text x="0" y="0" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="34" letter-spacing="4" fill="#141414">AXION</text>
     <polygon points="17,-19 22,-9 18,-9 22,1 16,-6 19,-6" fill="#141414" />
     <line x1="-80" y1="17" x2="-56" y2="17" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
@@ -222,31 +127,31 @@ async function buildFixedResidential11kW() {
   </g>
 
   <!-- Blue LCD Display -->
-  <g transform="translate(142, 168)">
+  <g transform="translate(141, 167)">
     <rect x="-3" y="-3" width="124" height="48" rx="2" fill="#cfccc5" stroke="#bab6ad" stroke-width="1.5" />
     <rect x="0" y="0" width="118" height="42" rx="1.5" fill="url(#lcdGrad)" />
     <polygon points="0,0 80,0 35,42 0,42" fill="rgba(255, 255, 255, 0.14)" />
   </g>
 
   <!-- ENERGY : EVOLVED line -->
-  <g transform="translate(202, 248)" text-anchor="middle">
+  <g transform="translate(201, 247)" text-anchor="middle">
     <line x1="-106" y1="-3" x2="-70" y2="-3" stroke="#68655e" stroke-width="1.6" stroke-linecap="round" />
     <text x="0" y="0" font-family="'Montserrat', 'Arial', sans-serif" font-weight="600" font-size="8.5" letter-spacing="3" fill="#3a3834">ENERGY : EVOLVED</text>
     <line x1="70" y1="-3" x2="106" y2="-3" stroke="#68655e" stroke-width="1.6" stroke-linecap="round" />
   </g>
 
   <!-- Vertical Center Slot / Recess -->
-  <rect x="197" y="296" width="11" height="98" rx="5.5" fill="url(#slotGrad)" />
+  <rect x="196" y="295" width="11" height="98" rx="5.5" fill="url(#slotGrad)" />
 
-  <!-- 11 kW Section (Left of slot, facing towards car) -->
-  <g transform="translate(148, 350)">
+  <!-- 11 kW Section -->
+  <g transform="translate(147, 349)">
     <polygon points="-28,-22 -14,-22 -20,-6 -10,-6 -26,18 -20,2 -26,2" fill="#141414" />
     <text x="-4" y="-3" font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="24" fill="#141414">11</text>
     <text x="-4" y="16" font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="18" fill="#141414">kW</text>
   </g>
 
-  <!-- EV SMART CONNECT Section (Right of slot) -->
-  <g transform="translate(254, 350)">
+  <!-- EV SMART CONNECT Section -->
+  <g transform="translate(253, 349)">
     <rect x="-34" y="-20" width="30" height="20" rx="10" fill="none" stroke="#222" stroke-width="1.8" />
     <text x="-19" y="-6" font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="10.5" text-anchor="middle" fill="#222">EV</text>
     <text x="2" y="-12" font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="10" fill="#222">SMART</text>
@@ -260,24 +165,24 @@ async function buildFixedResidential11kW() {
   </g>
 
   <!-- www.axioncharge.com at bottom -->
-  <text x="202" y="448" font-family="'Montserrat', 'Arial', sans-serif" font-weight="500" font-size="8.5" letter-spacing="1" text-anchor="middle" fill="#5a5750">www.axioncharge.com</text>
+  <text x="201" y="447" font-family="'Montserrat', 'Arial', sans-serif" font-weight="500" font-size="8.5" letter-spacing="1" text-anchor="middle" fill="#5a5750">www.axioncharge.com</text>
 </svg>`;
 
-  const finishedChargerUnit = await sharp(flippedBody)
+  const chargerWithFaceplate = await sharp(flippedBody)
     .composite([{ input: Buffer.from(faceplateSvg), top: 0, left: 0 }])
     .png()
     .toBuffer();
 
-  // 5. Scale charger unit to match residential pillar scale
-  const targetW = 276;
-  const targetH = Math.round(516 * (targetW / 406)); // ~351
+  // Exact scale so height matches from y=128 to 474 (height = 346px)
+  const targetH = 346;
+  const targetW = Math.round(404 * (targetH / 491)); // ~285px
 
-  const resizedCharger = await sharp(finishedChargerUnit)
+  const resizedCharger = await sharp(chargerWithFaceplate)
     .resize(targetW, targetH)
     .png()
     .toBuffer();
 
-  // 6. Ambient contact drop shadow cast naturally towards the right onto stone pillar
+  // Contact shadow on the wall behind charger
   const shadowSvg = `
 <svg width="${targetW + 30}" height="${targetH + 30}" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -295,11 +200,70 @@ async function buildFixedResidential11kW() {
   const shadowPng = await sharp(Buffer.from(shadowSvg)).png().toBuffer();
 
   // Placement:
-  // Left: 775, Top: 122
-  // Aligns gland collars with the cables at y = 478
-  const compLeft = 775;
-  const compTop = 122;
+  // Top: 128
+  // Height: 346 -> Bottom sits at 128 + 346 = 474
+  // Cable collars start at 474 -> Seamless connection with 0 gap!
+  const compLeft = 798;
+  const compTop = 128;
 
+  // Background stone patch:
+  // - x < 804 is never touched -> ALL tree leaves and pillar edge stay 100% pristine!
+  // - y: 118..128 is patched -> old charger's top green rim is completely covered (no top fin)!
+  // - y: 468..474 is patched -> old charger's bottom green rim is completely covered (no bottom sliver)!
+  const { data: baseData, info: baseInfo } = await sharp(baseImgPath)
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const patchedData = Buffer.from(baseData);
+
+  // Source stone: y: 40..105, x: 820..1040
+  const srcX1 = 820, srcX2 = 1040, srcW = srcX2 - srcX1;
+  const srcY1 = 40, srcY2 = 105, srcH = srcY2 - srcY1;
+
+  let seed = 445566;
+  function rnd() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  }
+
+  const patchLeft = 804;
+  const patchRight = 1058;
+  const patchTop = 118;
+  const patchBottom = 474;
+
+  for (let y = patchTop; y <= patchBottom; y += 14) {
+    for (let x = patchLeft; x <= patchRight; x += 14) {
+      const rx = Math.floor(rnd() * (srcW - 24)) + srcX1;
+      const ry = Math.floor(rnd() * (srcH - 24)) + srcY1;
+
+      for (let py = 0; py < 24; py++) {
+        const dstY = y + py;
+        if (dstY > patchBottom || dstY < patchTop) continue;
+        const sy = ry + py;
+
+        for (let px = 0; px < 24; px++) {
+          const dstX = x + px;
+          if (dstX > patchRight || dstX < patchLeft) continue;
+          const sx = rx + px;
+
+          const dstIdx = (dstY * baseInfo.width + dstX) * baseInfo.channels;
+          const srcIdx = (sy * baseInfo.width + sx) * baseInfo.channels;
+
+          let w = 1.0;
+          if (dstX > 1052) w = (1058 - dstX) / 6.0;
+          if (dstX < 808) w = (dstX - 804) / 4.0;
+          if (dstY < 122) w = (dstY - 118) / 4.0;
+          if (dstY > 470) w = (474 - dstY) / 4.0;
+
+          patchedData[dstIdx] = Math.round(patchedData[dstIdx] * (1 - w) + baseData[srcIdx] * w);
+          patchedData[dstIdx + 1] = Math.round(patchedData[dstIdx + 1] * (1 - w) + baseData[srcIdx + 1] * w);
+          patchedData[dstIdx + 2] = Math.round(patchedData[dstIdx + 2] * (1 - w) + baseData[srcIdx + 2] * w);
+        }
+      }
+    }
+  }
+
+  // Composite final
   const patchedPng = await sharp(patchedData, {
     raw: { width: baseInfo.width, height: baseInfo.height, channels: baseInfo.channels }
   }).png().toBuffer();
@@ -314,17 +278,7 @@ async function buildFixedResidential11kW() {
 
   // Write final image to target
   fs.writeFileSync(targetImgPath, finalWebp);
-  console.log('✓ Successfully wrote to:', targetImgPath);
-
-  // Write previews for inspection
-  await sharp(finalWebp)
-    .extract({ left: 700, top: 40, width: 420, height: 560 })
-    .toFile(path.join(__dirname, 'temp_final_facing_car_crop.jpg'));
-  console.log('✓ Saved crop preview');
-
-  await sharp(finalWebp)
-    .toFile(path.join(__dirname, 'temp_final_facing_car_full.jpg'));
-  console.log('✓ Saved full preview');
+  console.log('✓ Successfully wrote final image to:', targetImgPath);
 }
 
 buildFixedResidential11kW().catch(console.error);
