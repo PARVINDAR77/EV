@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition/PageTransition';
 import Footer from '../components/Footer/Footer';
 import { 
-  TrendingUp, MapPin, DollarSign, ArrowRight, ShieldCheck, Zap, 
+  TrendingUp, MapPin, ShieldCheck, 
   Activity, Building, Briefcase, CheckCircle2, AlertCircle, Loader2, 
   ChevronDown, ChevronUp, Layers, Award, Calendar, HelpCircle, 
-  PhoneCall, Users, FileText, Check, ArrowUpRight, Percent, Clock, Landmark, TrendingDown
+  PhoneCall, Users, FileText, Check, ArrowUpRight, Percent
 } from 'lucide-react';
 import { sendFranchiseApplication } from '../services/mailService';
 import AxionLogo from '../components/common/AxionLogo';
@@ -49,7 +49,7 @@ const FAQS = [
   },
   {
     q: "Can I get financing or subsidies?",
-    a: "Yes. Through the National Green Mobility Capital Scheme and our institutional banking consortium, franchise partners can finance up to ~75% of their total setup capital at competitive green concession rates starting as low as 6.7%*. Our team also checks and applies for central PM E-DRIVE and state-specific EV policy capital subsidies on your behalf."
+    a: "Yes. Franchise partners can explore institutional debt financing for setup capital through leading commercial lenders. Our team also assists with applicable central PM E-DRIVE and state-specific EV policy capital subsidies on your behalf."
   },
   {
     q: "What is the setup timeline?",
@@ -63,7 +63,7 @@ const FAQS = [
 
 const BRAND_PARTNERS = [
   "Tata Motors", "Mahindra Electric", "Hyundai", "MG Motor", "BYD", 
-  "Volvo E-Bus", "BluSmart", "Delhivery", "National Green Capital", "Amazon Fleet"
+  "Volvo E-Bus", "BluSmart", "Delhivery", "Schneider Electric", "Amazon Fleet"
 ];
 
 const Franchise = () => {
@@ -1062,129 +1062,9 @@ const Franchise = () => {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════════
-            3. LOWER FULL-WIDTH SECTIONS (SBI FINANCING, BRANDS, WEBINAR, FAQS)
+            3. LOWER FULL-WIDTH SECTIONS (BRANDS, FAQS)
            ══════════════════════════════════════════════════════════════════════════ */}
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 py-24 relative z-10">
-
-          {/* ── GREEN MOBILITY CAPITAL SCHEME FINANCING HUB ── */}
-          <section className="mb-32">
-            <div className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-gradient-to-b from-[#07150C] via-[#040C07] to-[#010502] border border-emerald-500/30 relative overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.85)]">
-              {/* High-tech ambient lighting */}
-              <div className="absolute -top-32 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
-              <div className="absolute -bottom-32 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-[140px] pointer-events-none" />
-              
-              {/* Subtle financial grid pattern overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] pointer-events-none" />
-
-              <div className="text-center max-w-3xl mx-auto mb-14 relative z-10">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-widest font-semibold mb-5 backdrop-blur-md">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34D399]" />
-                  <span>Green Infrastructure Capital</span>
-                </div>
-
-                <h2 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-display font-bold text-white tracking-tight leading-[1.12] mb-4">
-                  Powered by Axion. <br/>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-green-300 drop-shadow-[0_0_30px_rgba(52,211,153,0.3)]">
-                    Enabled by Green Mobility Capital Scheme.
-                  </span>
-                </h2>
-
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-sans">
-                  Whether you're stepping into your first smart investment or looking to scale a commercial charging corridor, Axion franchise partners gain direct access to preferred green debt financing, low concession rates, and central PM E-DRIVE subsidies through our authorized institutional lending consortium.
-                </p>
-
-                <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-emerald-300 font-mono text-xs sm:text-sm font-semibold">
-                  <Zap size={15} className="text-emerald-400 flex-shrink-0" />
-                  <span>Institutional Capital Assistance • Build your station with up to 75% funded debt</span>
-                </div>
-              </div>
-
-              {/* 4 Pillars of Finance */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative z-10">
-                {/* Pillar 1 */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 hover:bg-white/[0.05] transition-all group backdrop-blur-md">
-                  <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
-                    <TrendingDown size={22} />
-                  </div>
-                  <div className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-1.5">
-                    Low Cost Borrowing
-                  </div>
-                  <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">
-                    6.7%*
-                  </div>
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    Special green concession rates under national sustainable lending schemes and clean transport programs.
-                  </p>
-                </div>
-
-                {/* Pillar 2 */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 hover:bg-white/[0.05] transition-all group backdrop-blur-md">
-                  <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
-                    <DollarSign size={22} />
-                  </div>
-                  <div className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-1.5">
-                    Low Equity Required
-                  </div>
-                  <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">
-                    75% Funded
-                  </div>
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    Finance up to 75% of your total project capital, covering DC fast chargers, transformer setup, and turnkey civil works.
-                  </p>
-                </div>
-
-                {/* Pillar 3 */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 hover:bg-white/[0.05] transition-all group backdrop-blur-md">
-                  <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
-                    <Clock size={22} />
-                  </div>
-                  <div className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-1.5">
-                    Flexible Repayment
-                  </div>
-                  <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">
-                    Up to 7 Yrs*
-                  </div>
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    Comfortable loan amortization tenure with progressive grace periods structured to match station revenue ramp-up.
-                  </p>
-                </div>
-
-                {/* Pillar 4 */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 hover:bg-white/[0.05] transition-all group backdrop-blur-md">
-                  <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
-                    <ShieldCheck size={22} />
-                  </div>
-                  <div className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-1.5">
-                    Security Terms
-                  </div>
-                  <div className="text-3xl sm:text-4xl font-display font-black text-white mb-2">
-                    Collateral-Free*
-                  </div>
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    Zero personal collateral or third-party guarantees required for qualifying business entities and verified prime sites.
-                  </p>
-                </div>
-              </div>
-
-              {/* Institutional Consortium & CTA Footer */}
-              <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
-                <div className="flex items-center gap-3 text-xs text-gray-400 text-center sm:text-left">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 flex-shrink-0 animate-ping" />
-                  <span>
-                    <strong className="text-gray-200">Supported Under:</strong> PM E-DRIVE Scheme • National Clean Energy Lending • SIDBI EV52 • Commercial Bank Consortium
-                  </span>
-                </div>
-
-                <button
-                  onClick={() => scrollToForm()}
-                  className="px-8 py-3.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-accent text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:shadow-[0_0_25px_rgba(52,211,153,0.5)] hover:scale-105 transition-all inline-flex items-center gap-2 cursor-pointer shadow-md flex-shrink-0"
-                >
-                  Inquire About Green Capital Financing
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </section>
 
           {/* ── BRAND & FLEET PARTNERS MARQUEE ── */}
           <section className="mb-24 sm:mb-32 text-center overflow-hidden">
