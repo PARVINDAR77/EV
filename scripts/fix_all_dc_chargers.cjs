@@ -21,6 +21,52 @@ async function fixDCChargerImages() {
     }
   ];
 
+  // Exact D vector path:
+  // Top: 301
+  // Bottom: 317
+  // Left: 559
+  // Right: 574.5
+  // Left stem thickness: 3.5px
+  // Outer bow curve: arcing to 574.5 at y=309
+  // Inner cutout: 562.5 to 571.2
+  const dSvgWebp = `
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <path d="
+    M 559,301
+    L 567,301
+    C 572.5,301 574.5,303.8 574.5,309
+    C 574.5,314.2 572.5,317 567,317
+    L 559,317
+    Z
+    M 562.5,304.2
+    L 562.5,313.8
+    L 566.2,313.8
+    C 569.8,313.8 571.2,312 571.2,309
+    C 571.2,306 569.8,304.2 566.2,304.2
+    Z
+  " fill="#FFFFFF" fill-rule="evenodd" />
+</svg>`;
+
+  const dSvgPng = `
+<svg width="1536" height="1024" xmlns="http://www.w3.org/2000/svg">
+  <g transform="scale(1.28)">
+    <path d="
+      M 559,301
+      L 567,301
+      C 572.5,301 574.5,303.8 574.5,309
+      C 574.5,314.2 572.5,317 567,317
+      L 559,317
+      Z
+      M 562.5,304.2
+      L 562.5,313.8
+      L 566.2,313.8
+      C 569.8,313.8 571.2,312 571.2,309
+      C 571.2,306 569.8,304.2 566.2,304.2
+      Z
+    " fill="#FFFFFF" fill-rule="evenodd" />
+  </g>
+</svg>`;
+
   for (const item of images) {
     console.log(`Processing ${item.name}...`);
 
@@ -33,7 +79,7 @@ async function fixDCChargerImages() {
 
       const cleaned = Buffer.from(data);
 
-      // Inpaint letter 'A' by copying vertical wood slat from y: 275..297 into y: 298..320
+      // Inpaint letter 'D' area (x: 553 to 578, y: 298 to 320)
       for (let y = 298; y <= 320; y++) {
         const srcY = 275 + (y - 298);
         for (let x = 553; x <= 578; x++) {
@@ -45,30 +91,11 @@ async function fixDCChargerImages() {
         }
       }
 
-      // Draw custom vector letter 'D' matching C and WALLBOX exactly
-      const dSvg = `
-<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
-  <path d="
-    M 560,302
-    L 567,302
-    C 572,302 574,304.5 574,309
-    C 574,313.5 572,316 567,316
-    L 560,316
-    Z
-    M 562.3,304.3
-    L 562.3,313.7
-    L 566.5,313.7
-    C 569.5,313.7 571.5,312 571.5,309
-    C 571.5,306 569.5,304.3 566.5,304.3
-    Z
-  " fill="#FFFFFF" fill-rule="evenodd" />
-</svg>`;
-
       const fixedWebpBuffer = await sharp(cleaned, {
         raw: { width: info.width, height: info.height, channels: info.channels }
       })
-        .composite([{ input: Buffer.from(dSvg), left: 0, top: 0 }])
-        .webp({ quality: 92 })
+        .composite([{ input: Buffer.from(dSvgWebp), left: 0, top: 0 }])
+        .webp({ quality: 94 })
         .toBuffer();
 
       fs.writeFileSync(item.webp, fixedWebpBuffer);
@@ -84,7 +111,7 @@ async function fixDCChargerImages() {
 
       const cleanedPng = Buffer.from(pngData);
 
-      // Inpaint letter 'A' in 1536x1024:
+      // Inpaint letter 'D' in 1536x1024:
       // x: 553 * 1.28 = 708 to 578 * 1.28 = 740
       // y: 298 * 1.28 = 381 to 320 * 1.28 = 410
       for (let y = 381; y <= 410; y++) {
@@ -97,27 +124,6 @@ async function fixDCChargerImages() {
           cleanedPng[dstIdx+2] = pngData[srcIdx+2];
         }
       }
-
-      // Draw custom vector letter 'D' scaled 1.28x
-      const dSvgPng = `
-<svg width="1536" height="1024" xmlns="http://www.w3.org/2000/svg">
-  <g transform="scale(1.28)">
-    <path d="
-      M 560,302
-      L 567,302
-      C 572,302 574,304.5 574,309
-      C 574,313.5 572,316 567,316
-      L 560,316
-      Z
-      M 562.3,304.3
-      L 562.3,313.7
-      L 566.5,313.7
-      C 569.5,313.7 571.5,312 571.5,309
-      C 571.5,306 569.5,304.3 566.5,304.3
-      Z
-    " fill="#FFFFFF" fill-rule="evenodd" />
-  </g>
-</svg>`;
 
       const fixedPngBuffer = await sharp(cleanedPng, {
         raw: { width: pngInfo.width, height: pngInfo.height, channels: pngInfo.channels }
@@ -136,11 +142,11 @@ async function fixDCChargerImages() {
     const item = images[i];
     await sharp(item.webp)
       .extract({ left: 520, top: 280, width: 280, height: 160 })
-      .toFile(`scripts/temp_verified_dc_${i}.jpg`);
-    console.log(`  ✓ Generated preview: scripts/temp_verified_dc_${i}.jpg`);
+      .toFile(`scripts/temp_verified_dc_v2_${i}.jpg`);
+    console.log(`  ✓ Generated preview: scripts/temp_verified_dc_v2_${i}.jpg`);
   }
 
-  console.log('\nAll DC charger images successfully updated from AC WALLBOX to DC WALLBOX!');
+  console.log('\nAll DC charger images successfully updated with matching full-size letter D!');
 }
 
 fixDCChargerImages().catch(console.error);
